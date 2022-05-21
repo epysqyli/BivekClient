@@ -1,8 +1,8 @@
 import "../styles/globals.css";
 import type { ReactElement, ReactNode } from "react";
-import type AppPropsWithLayout from "../types/AppPropsWithLayout";
+import type IAppPropsLayout from "../interfaces/IAppPropsLayout";
 
-const MyApp = ({ Component, pageProps }: AppPropsWithLayout): ReactNode => {
+const MyApp = ({ Component, pageProps }: IAppPropsLayout): ReactNode => {
   const pageWithoutLayout = (page: ReactElement): ReactNode => page;
   const pageWithLayout = Component.getLayout;
   const getPage = pageWithLayout ?? pageWithoutLayout;
