@@ -9,13 +9,6 @@ interface IUserCredential {
   password: string;
 }
 
-interface ILoginResp {
-  data: {
-    token: string;
-    result: boolean;
-  }
-}
-
 const AdminIndex: NextPageLayout = (): ReactElement => {
   const [userData, setUserData] = useState<IUserCredential>({
     username: "",
@@ -33,16 +26,12 @@ const AdminIndex: NextPageLayout = (): ReactElement => {
     e.preventDefault();
 
     const { username, password } = userData;
-    const resp: ILoginResp = await axios({
+    const resp = await axios({
       method: "POST",
       url: "http://localhost:5010/login",
       data: { username: username, password: password },
+      withCredentials: true,
     });
-
-    const result: boolean = resp.data.result;
-    const token: string = resp.data.token;
-    console.log("Result: ", result);
-    console.log("Token: ", token);
   };
 
   return (
