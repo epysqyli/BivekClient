@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import type { ReactElement, ReactNode } from "react";
 
-type NextPageLayout = NextPage & {
+type NextPageLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 

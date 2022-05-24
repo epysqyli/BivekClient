@@ -1,15 +1,27 @@
-import AdminLayout from "../../layout/AdminLayout";
 import type { FormEvent, ReactElement } from "react";
 import type NextPageLayout from "../../types/NextPageLayout";
-import { useState } from "react";
-import axios from "axios";
+import type { GetServerSideProps, GetServerSidePropsContext } from "next";
+import type IAdminProps from "../../interfaces/IAdminProps";
+import AdminLayout from "../../layout/AdminLayout";
+import { login, checkLogin } from "../../lib/Auth";
+import { useState, useEffect } from "react";
 
 interface IUserCredential {
   username: string;
   password: string;
 }
 
-const AdminIndex: NextPageLayout = (): ReactElement => {
+export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const isLogged: boolean = await checkLogin(context);
+  return { props: { isLogged } };
+};
+
+const AdminIndex: NextPageLayout<IAdminProps> = ({
+  isLogged,
+}: IAdminProps): ReactElement => {
+  const [logged, setLogged] = useState<boolean>(isLogged);
   const [userData, setUserData] = useState<IUserCredential>({
     username: "",
     password: "",
@@ -26,13 +38,12 @@ const AdminIndex: NextPageLayout = (): ReactElement => {
     e.preventDefault();
 
     const { username, password } = userData;
-    const resp = await axios({
-      method: "POST",
-      url: "http://localhost:5010/login",
-      data: { username: username, password: password },
-      withCredentials: true,
-    });
+    setLogged(await login(username, password));
   };
+
+  useEffect(() => {}, [logged]);
+
+  if (logged) return <div className="text-center mt-10">Manage all things now</div>;
 
   return (
     <>
