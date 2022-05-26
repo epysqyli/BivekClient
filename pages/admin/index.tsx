@@ -5,6 +5,7 @@ import type IAdminProps from "../../interfaces/IAdminProps";
 import AdminLayout from "../../layouts/AdminLayout";
 import { login, checkLogin } from "../../lib/Auth";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 interface IUserCredential {
   username: string;
@@ -39,7 +40,25 @@ const AdminIndex: NextPageLayout<IAdminProps> = ({ isLogged }: IAdminProps): Rea
 
   useEffect(() => {}, [logged]);
 
-  if (logged) return <div className='text-center mt-10'>Manage all things now</div>;
+  if (logged)
+    return (
+      <>
+        <h1 className='text-xl text-center py-10 border-b underline underline-offset-4'>
+          Manage blog resources
+        </h1>
+        <ul className='my-10 w-4/5 mx-auto list-disc'>
+          <li>
+            <Link href='admin/manage-articles'>articles</Link>
+          </li>
+          <li>
+            <Link href='admin/manage-datasets'>datasets</Link>
+          </li>
+          <li>
+            <Link href='admin/manage-working-papers'>working papers</Link>
+          </li>
+        </ul>
+      </>
+    );
 
   return (
     <>
