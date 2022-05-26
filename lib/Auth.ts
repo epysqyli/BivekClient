@@ -13,22 +13,20 @@ const login = async (username: string, password: string): Promise<boolean> => {
     method: "POST",
     url: "http://localhost:5010/login",
     data: { username: username, password: password },
-    withCredentials: true,
+    withCredentials: true
   });
 
   return resp.status === 200 ? true : false;
 };
 
-const checkLogin = async (
-  context: GetServerSidePropsContext
-): Promise<boolean> => {
+const checkLogin = async (context: GetServerSidePropsContext): Promise<boolean> => {
   const token = getToken(context);
 
   try {
     const resp = await axios({
       method: "GET",
       url: "http://localhost:5010/logged_in",
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token}` }
     });
     return resp.status === 200 ? true : false;
   } catch (error) {
