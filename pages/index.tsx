@@ -9,8 +9,14 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 const Home: NextPageLayout = (): ReactElement => {
   return (
-    <div className='text-justify w-4/5 mx-auto mt-10'>
-      <h1 className='text-center mb-10'>home page</h1>
+    <div>
+      <div className='py-20 bg-slate-100 text-center'>logo/banner/image</div>
+      <nav className='py-10 bg-zinc-400 text-slate-50 text-center'>articles - datasets - working papers</nav>
+      <div className='text-center rounded border my-5 py-20'>
+        <p>welcome info</p>
+        <p>latest resources</p>
+        <p>other stuff - link to linkedin for example</p>
+      </div>
     </div>
   );
 };

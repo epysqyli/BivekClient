@@ -1,6 +1,11 @@
 import "../styles/globals.css";
+import type { AppProps } from "next/app";
 import type { ReactElement, ReactNode } from "react";
-import type IAppPropsLayout from "../interfaces/IAppPropsLayout";
+import NextPageLayout from "../types/NextPageLayout";
+
+interface IAppPropsLayout extends AppProps {
+  Component: NextPageLayout;
+}
 
 const MyApp = ({ Component, pageProps }: IAppPropsLayout): ReactNode => {
   const pageWithoutLayout = (page: ReactElement): ReactNode => page;
