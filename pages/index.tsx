@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import type NextPageLayout from "../types/NextPageLayout";
 import type { GetServerSideProps } from "next";
-import Layout from "../layout/Layout";
+import Layout from "../layouts/Layout";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   return { props: {} };

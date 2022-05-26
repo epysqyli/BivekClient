@@ -4,7 +4,7 @@ import type { Article } from "../interfaces/IArticle";
 import type { AxiosResponse } from "axios";
 import type NextPageLayout from "../types/NextPageLayout";
 import { getArticles } from "../lib/ArticleRepo";
-import Layout from "../layout/Layout";
+import Layout from "../layouts/Layout";
 
 interface ArticlePageProps {
   articles: Array<Article>;

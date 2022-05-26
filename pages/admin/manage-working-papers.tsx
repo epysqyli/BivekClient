@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
 import type NextPageLayout from "../../types/NextPageLayout";
-import AdminLayout from "../../layout/AdminLayout";
+import AdminLayout from "../../layouts/AdminLayout";
 
 const ManageWorkingPapers: NextPageLayout = (): ReactElement => {
   return <div></div>;

@@ -2,7 +2,7 @@ import type { FormEvent, ReactElement } from "react";
 import type NextPageLayout from "../../types/NextPageLayout";
 import type { GetServerSideProps, GetServerSidePropsContext } from "next";
 import type IAdminProps from "../../interfaces/IAdminProps";
-import AdminLayout from "../../layout/AdminLayout";
+import AdminLayout from "../../layouts/AdminLayout";
 import { login, checkLogin } from "../../lib/Auth";
 import { useState, useEffect } from "react";
 
