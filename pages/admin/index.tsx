@@ -13,7 +13,7 @@ export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   if (isLogged === false) {
     return {
       redirect: {
-        destination: "admin/login",
+        destination: "/admin/login",
         permanent: false
       }
     };
