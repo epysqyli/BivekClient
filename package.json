@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "convertapi-js": "^1.0.7",
     "cookies": "^0.8.0",
     "dayjs": "^1.11.2",
     "framer-motion": "^6.3.3",

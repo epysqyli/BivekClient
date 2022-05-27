@@ -795,6 +795,11 @@
   "resolved" "https://registry.npmjs.org/content-type/-/content-type-1.0.4.tgz"
   "version" "1.0.4"
 
+"convertapi-js@^1.0.7":
+  "integrity" "sha512-wR8w1duCK0l2PBK7CNsQRMc9FotZbUa3Rx8pG/Nrk233S/MLFoTluDiKwj3Wtg0UxrFDM2P4OcbT36hM0nh+MA=="
+  "resolved" "https://registry.npmjs.org/convertapi-js/-/convertapi-js-1.0.7.tgz"
+  "version" "1.0.7"
+
 "cookie-signature@1.0.6":
   "integrity" "sha1-4wOogrNCzD7oylE6eZmXNNqzriw="
   "resolved" "https://registry.npmjs.org/cookie-signature/-/cookie-signature-1.0.6.tgz"
