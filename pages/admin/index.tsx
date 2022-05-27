@@ -30,13 +30,13 @@ const AdminIndex: NextPageLayout = (): ReactElement => {
       </h1>
       <ul className='my-10 w-4/5 mx-auto list-disc'>
         <li>
-          <Link href='admin/manage-articles'>articles</Link>
+          <Link href='/admin/manage-articles'>articles</Link>
         </li>
         <li>
-          <Link href='admin/manage-datasets'>datasets</Link>
+          <Link href='/admin/manage-datasets'>datasets</Link>
         </li>
         <li>
-          <Link href='admin/manage-working-papers'>working papers</Link>
+          <Link href='/admin/manage-working-papers'>working papers</Link>
         </li>
       </ul>
     </>
