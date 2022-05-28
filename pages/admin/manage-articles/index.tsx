@@ -27,7 +27,10 @@ const ManageArticles: NextPageLayout = (): ReactElement => {
       <h1 className='text-2xl text-center my-10'>Manage articles</h1>
       <ul className='list-disc w-4/5 mx-auto my-10'>
         <li>
-          <Link href='/admin/manage-articles/create'>create a new article</Link>
+          <Link href='/admin/manage-articles/create'>create a new article from scratch</Link>
+        </li>
+        <li>
+          <Link href='/admin/manage-articles/convert'>convert an article from a word document</Link>
         </li>
         <li>
           <Link href='/admin/manage-articles/edit-or-delete'>edit or delete existing articles</Link>
