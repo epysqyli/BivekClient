@@ -273,6 +273,15 @@
   "resolved" "https://registry.npmjs.org/@tiptap/extension-text/-/extension-text-2.0.0-beta.15.tgz"
   "version" "2.0.0-beta.15"
 
+"@tiptap/html@^2.0.0-beta.175":
+  "integrity" "sha512-qcVuYiapWTDyMYaMfo90KpuvgUhnzpPVh/okGPiuMe9di0RPsagcwoAaoXbnIPsU4w2MuloisS4bqVxEV4wu1g=="
+  "resolved" "https://registry.npmjs.org/@tiptap/html/-/html-2.0.0-beta.175.tgz"
+  "version" "2.0.0-beta.175"
+  dependencies:
+    "@tiptap/core" "^2.0.0-beta.176"
+    "prosemirror-model" "^1.16.1"
+    "zeed-dom" "^0.9.19"
+
 "@tiptap/react@^2.0.0-beta.109":
   "integrity" "sha512-kx/I+9DbiKX+LPFYTQf1Mycbw4U77nRsuztMi5UyGoONnwVwVxOUN6sxdnsNX0uo/H0Rf5ZAtQn8vQBaTWPzsQ=="
   "resolved" "https://registry.npmjs.org/@tiptap/react/-/react-2.0.0-beta.109.tgz"
@@ -1121,6 +1130,11 @@
     "babel-runtime" "6.26.0"
     "node-rsa" "0.4.2"
     "util.promisify" "1.0.0"
+
+"css-what@^6.0.1":
+  "integrity" "sha512-HTUrgRJ7r4dsZKU6GjmpfRK1O76h97Z8MfS1G0FozR+oF2kG6Vfe8JE6zwrkbxigziPHinCJ+gCPjA9EaBDtRw=="
+  "resolved" "https://registry.npmjs.org/css-what/-/css-what-6.1.0.tgz"
+  "version" "6.1.0"
 
 "cssesc@^3.0.0":
   "integrity" "sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg=="
@@ -3855,3 +3869,10 @@
   "integrity" "sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg=="
   "resolved" "https://registry.npmjs.org/yaml/-/yaml-1.10.2.tgz"
   "version" "1.10.2"
+
+"zeed-dom@^0.9.19":
+  "integrity" "sha512-hvJ9KBrZDnE7tcf4oe79fzQTbIS40pDOOUC7i1+kqqzNryj2RLwaCiIhpekCoI6/aJcYeEB5q0vhJPTnAo0aOQ=="
+  "resolved" "https://registry.npmjs.org/zeed-dom/-/zeed-dom-0.9.24.tgz"
+  "version" "0.9.24"
+  dependencies:
+    "css-what" "^6.0.1"
