@@ -7,28 +7,28 @@ import StarterKit from "@tiptap/starter-kit";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const json = {
-    type: 'doc',
+    type: "doc",
     content: [
       {
-        type: 'paragraph',
+        type: "paragraph",
         content: [
           {
-            type: 'text',
-            text: 'Example ',
+            type: "text",
+            text: "Example "
           },
           {
-            type: 'text',
+            type: "text",
             marks: [
               {
-                type: 'bold',
-              },
+                type: "bold"
+              }
             ],
-            text: 'Text',
-          },
-        ],
-      },
-    ],
-  }
+            text: "Text"
+          }
+        ]
+      }
+    ]
+  };
 
   const output = generateHTML(json, [StarterKit]);
 

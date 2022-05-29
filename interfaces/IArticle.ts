@@ -21,6 +21,7 @@ interface Article {
   comments: Array<Comment>;
   createdAt?: string;
   updatedAt?: string;
+  published: boolean;
 }
 
 export type { Tag, Comment, ArticleResp, Article };
