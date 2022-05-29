@@ -15,4 +15,37 @@ const getArticleById = async (id: number): Promise<AxiosResponse<ArticleResp>> =
   });
 };
 
-export { getArticleById, getArticles };
+const createArticle = async (title: string, body: string): Promise<AxiosResponse<ArticleResp>> => {
+  return await axios({
+    method: "POST",
+    url: "http://localhost:5010/articles",
+    data: { title: title, body: body },
+    withCredentials: true
+  });
+};
+
+const patchArticle = async (
+  id: number,
+  path: string,
+  op: string,
+  value: string
+): Promise<AxiosResponse<ArticleResp>> => {
+  const patchData = [{ path: path, op: op, value: value }];
+
+  return await axios({
+    method: "PATCH",
+    url: `http://localhost:5010/articles/${id}`,
+    data: patchData,
+    withCredentials: true
+  });
+};
+
+const deleteArticle = async (id: number) => {
+  return await axios({
+    method: "DELETE",
+    url: `http://localhost:5010/${id}`,
+    withCredentials: true
+  });
+};
+
+export { getArticleById, getArticles, createArticle, patchArticle, deleteArticle };
