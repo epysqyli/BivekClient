@@ -9,10 +9,6 @@ interface Comment {
   content: string;
 }
 
-interface ArticleResp {
-  data: Article;
-}
-
 interface Article {
   id: number;
   title: string;
@@ -24,4 +20,4 @@ interface Article {
   published: boolean;
 }
 
-export type { Tag, Comment, ArticleResp, Article };
+export type { Tag, Comment, Article };

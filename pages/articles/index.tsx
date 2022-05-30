@@ -1,10 +1,12 @@
 import type { GetServerSideProps } from "next";
 import type { ReactElement } from "react";
-import type { Article } from "../interfaces/IArticle";
+import type { Article } from "../../interfaces/IArticle";
 import type { AxiosResponse } from "axios";
-import type NextPageLayout from "../types/NextPageLayout";
-import { getArticles } from "../lib/ArticleRepo";
-import Layout from "../layouts/Layout";
+import type NextPageLayout from "../../types/NextPageLayout";
+import { getArticles } from "../../lib/ArticleRepo";
+import slugify from "slugify";
+import Layout from "../../layouts/Layout";
+import Link from "next/link";
 
 interface ArticlePageProps {
   articles: Array<Article>;
@@ -21,7 +23,18 @@ const Articles: NextPageLayout<ArticlePageProps> = ({ articles }: ArticlePagePro
   return (
     <div className='text-justify w-4/5 mx-auto mt-10'>
       {articles.map((a) => (
-        <p key={a.id}>{a.title}</p>
+        <Link
+          href={{
+            pathname: "/articles/[title]",
+            query: {
+              title: slugify(a.title, { lower: true }),
+              id: a.id
+            }
+          }}
+          key={a.id}
+        >
+          <p>{a.title}</p>
+        </Link>
       ))}
     </div>
   );
