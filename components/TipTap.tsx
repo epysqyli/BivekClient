@@ -1,10 +1,15 @@
-import { useEditor, EditorContent } from "@tiptap/react";
+import { useEditor, EditorContent, JSONContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 
-const TipTap = () => {
+interface Props {
+  updateBody: (content: JSONContent) => void;
+}
+
+const TipTap = ({ updateBody }: Props) => {
   const editor = useEditor({
     extensions: [StarterKit],
-    content: "<p>Start typing here...</p>"
+    content: "",
+    onUpdate: ({ editor }) => updateBody(editor.getJSON())
   });
 
   return <EditorContent editor={editor} />;
