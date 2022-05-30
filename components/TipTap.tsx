@@ -7,6 +7,11 @@ interface Props {
 
 const TipTap = ({ updateBody }: Props) => {
   const editor = useEditor({
+    editorProps: {
+      attributes: {
+        class: "px-5 py-8"
+      }
+    },
     extensions: [StarterKit],
     content: "",
     onUpdate: ({ editor }) => updateBody(editor.getJSON())

@@ -33,7 +33,7 @@ const CreateArticle: NextPageLayout = (): ReactElement => {
       <h1 className='text-2xl text-center my-10'>Create an article from scratch</h1>
       <div className='w-5/6 mx-auto border-2 rounded'>
         <div className='mx-auto text-center border-b py-3'>This is the editor menu</div>
-        <div className='px-5 py-2'>
+        <div className='p-1'>
           <TipTap updateBody={updateBody} />
         </div>
       </div>
