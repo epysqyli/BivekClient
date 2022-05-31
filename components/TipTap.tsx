@@ -15,11 +15,11 @@ import StarterKit from "@tiptap/starter-kit";
 import TextAlign from "@tiptap/extension-text-align";
 import Placeholder from "@tiptap/extension-placeholder";
 
-interface EditorProps {
+interface MenuProps {
   editor: Editor | null;
 }
 
-const MenuBar = ({ editor }: EditorProps) => {
+const MenuBar = ({ editor }: MenuProps) => {
   if (!editor) return null;
 
   const active = "text-white bg-slate-600 px-2 m-1 rounded text-sm";
@@ -145,14 +145,14 @@ const MenuBar = ({ editor }: EditorProps) => {
   );
 };
 
-interface Props {
+interface EditorProps {
   updateBody: (content: JSONContent) => void;
 }
 
-const TipTap = ({ updateBody }: Props) => {
+const TipTap = ({ updateBody }: EditorProps) => {
   const editor = useEditor({
     editorProps: {
-      attributes: { class: "px-2 pt-5 pb-28" }
+      attributes: { class: "px-2 pt-5 pb-28 overflow-y-auto h-50vh" }
     },
     injectCSS: false,
     extensions: [
@@ -174,7 +174,7 @@ const TipTap = ({ updateBody }: Props) => {
       <div className='mt-2 mb-5'>
         <MenuBar editor={editor} />
       </div>
-      <div className='border-2'>
+      <div className='border-2 rounded'>
         <EditorContent editor={editor} />
       </div>
     </>

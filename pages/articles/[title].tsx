@@ -32,7 +32,7 @@ const Article: NextPageLayout<Props> = ({ article, body }: Props): ReactElement 
   return (
     <>
       <h1 className='text-2xl text-center my-5'>{article.title}</h1>
-      <div className='w-11/12 mx-auto'>
+      <div className='w-11/12 md:w-4/5 lg:w-1/2 mx-auto'>
         <div className='ProseMirror' dangerouslySetInnerHTML={{ __html: body }}></div>
       </div>
     </>
