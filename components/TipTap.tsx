@@ -1,10 +1,18 @@
-import { Bold, Italic, List, CornerUpLeft, CornerUpRight } from "react-feather";
+import {
+  Bold,
+  Italic,
+  List,
+  CornerUpLeft,
+  CornerUpRight,
+  Code,
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+  AlignJustify
+} from "react-feather";
 import { useEditor, EditorContent, JSONContent, Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-
-interface Props {
-  updateBody: (content: JSONContent) => void;
-}
+import TextAlign from "@tiptap/extension-text-align";
 
 interface EditorProps {
   editor: Editor | null;
@@ -82,16 +90,16 @@ const MenuBar = ({ editor }: EditorProps) => {
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         className={editor.isActive("orderedList") ? active : notActive}
       >
-        <div className='flex items-center'>
+        <div className='flex items-center gap-x-1'>
           <List size={18} />
-          <span className='text-sm'>123</span>
+          <span className='text-xs'>123</span>
         </div>
       </button>
       <button
         onClick={() => editor.chain().focus().toggleCodeBlock().run()}
         className={editor.isActive("codeBlock") ? active : notActive}
       >
-        code block
+        <Code size={18} />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
@@ -108,17 +116,50 @@ const MenuBar = ({ editor }: EditorProps) => {
       <button onClick={() => editor.chain().focus().redo().run()} className={notActive}>
         <CornerUpRight size={18} />
       </button>
+      <button
+        onClick={() => editor.chain().focus().setTextAlign("left").run()}
+        className={editor.isActive({ textAlign: "left" }) ? active : notActive}
+      >
+        <AlignLeft size={18} />
+      </button>
+      <button
+        onClick={() => editor.chain().focus().setTextAlign("center").run()}
+        className={editor.isActive({ textAlign: "center" }) ? active : notActive}
+      >
+        <AlignCenter size={18} />
+      </button>
+      <button
+        onClick={() => editor.chain().focus().setTextAlign("right").run()}
+        className={editor.isActive({ textAlign: "right" }) ? active : notActive}
+      >
+        <AlignRight size={18} />
+      </button>
+      <button
+        onClick={() => editor.chain().focus().setTextAlign("justify").run()}
+        className={editor.isActive({ textAlign: "justify" }) ? active : notActive}
+      >
+        <AlignJustify size={18} />
+      </button>
     </div>
   );
 };
 
+interface Props {
+  updateBody: (content: JSONContent) => void;
+}
+
 const TipTap = ({ updateBody }: Props) => {
   const editor = useEditor({
     editorProps: {
-      attributes: { class: "px-2 py-5" }
+      attributes: { class: "px-2 pt-5 pb-28" }
     },
     injectCSS: false,
-    extensions: [StarterKit],
+    extensions: [
+      StarterKit,
+      TextAlign.configure({
+        types: ["heading", "paragraph"]
+      })
+    ],
     content: "",
     onUpdate: ({ editor }) => updateBody(editor.getJSON())
   });
@@ -128,7 +169,7 @@ const TipTap = ({ updateBody }: Props) => {
       <div className='mt-2 mb-5'>
         <MenuBar editor={editor} />
       </div>
-      <div className='border-t'>
+      <div className='border-2'>
         <EditorContent editor={editor} />
       </div>
     </>

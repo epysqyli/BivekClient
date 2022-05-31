@@ -31,7 +31,7 @@ const CreateArticle: NextPageLayout = (): ReactElement => {
   return (
     <>
       <h1 className='text-2xl text-center my-10'>Create an article from scratch</h1>
-      <div className='w-11/12 mx-auto border-2 rounded'>
+      <div className='w-11/12 mx-auto rounded'>
         <div className='p-1'>
           <TipTap updateBody={updateBody} />
         </div>
