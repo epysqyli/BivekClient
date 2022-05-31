@@ -37,7 +37,7 @@ const CreateArticle: NextPageLayout = (): ReactElement => {
         </div>
       </div>
       <div
-        onClick={async () => await createArticle("Title size trial", JSON.stringify(body))}
+        onClick={async () => await createArticle("New alignment trial", JSON.stringify(body))}
         className='text-center w-2/5 my-10 border mx-auto rounded cursor-pointer'
       >
         Create article

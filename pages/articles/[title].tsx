@@ -7,6 +7,7 @@ import { getArticleById } from "../../lib/ArticleRepo";
 import Layout from "../../layouts/Layout";
 import { generateHTML } from "@tiptap/html";
 import StarterKit from "@tiptap/starter-kit";
+import TextAlign from "@tiptap/extension-text-align";
 
 interface Props {
   article: Article;
@@ -16,7 +17,12 @@ interface Props {
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const id = Number(context.query.id);
   const resp: AxiosResponse<Article> = await getArticleById(id);
-  let body: string = generateHTML(JSON.parse(resp.data.body), [StarterKit]);
+  let body: string = generateHTML(JSON.parse(resp.data.body), [
+    StarterKit,
+    TextAlign.configure({
+      types: ["heading", "paragraph"]
+    })
+  ]);
   body = body.replaceAll("<p></p>", "<br />");
 
   return { props: { article: resp.data, body: body } };
