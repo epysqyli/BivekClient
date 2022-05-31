@@ -13,6 +13,7 @@ import {
 import { useEditor, EditorContent, JSONContent, Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import TextAlign from "@tiptap/extension-text-align";
+import Placeholder from "@tiptap/extension-placeholder";
 
 interface EditorProps {
   editor: Editor | null;
@@ -158,6 +159,10 @@ const TipTap = ({ updateBody }: Props) => {
       StarterKit,
       TextAlign.configure({
         types: ["heading", "paragraph"]
+      }),
+      Placeholder.configure({
+        emptyEditorClass: "is-editor-empty",
+        placeholder: "Time to say something interesting to the world..."
       })
     ],
     content: "",
