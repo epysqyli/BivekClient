@@ -1,0 +1,57 @@
+.ProseMirror {
+  ul {
+    list-style-type: disc;
+    padding: 1rem;
+  }
+
+  ol {
+    list-style-type: decimal;
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    line-height: 1.1;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+    line-height: 1.1;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    line-height: 1.1;
+  }
+
+  pre {
+    background: #0d0d0d;
+    color: #fff;
+    font-family: "JetBrainsMono", monospace;
+    padding: 0.75rem 1rem;
+    border-radius: 0.3rem;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+
+    code {
+      font-size: 0.75rem;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  blockquote {
+    padding-left: 1rem;
+    border-left: 2px solid rgba(#0d0d0d, 0.1);
+  }
+
+  hr {
+    border: none;
+    border-top: 2px solid rgba(#0d0d0d, 0.1);
+    margin: 2rem 0;
+  }
+}

@@ -26,7 +26,9 @@ const Article: NextPageLayout<Props> = ({ article, body }: Props): ReactElement 
   return (
     <>
       <h1 className='text-2xl text-center my-5'>{article.title}</h1>
-      <div className='text-justify w-4/5 mx-auto mt-10' dangerouslySetInnerHTML={{ __html: body }}></div>
+      <div className='w-11/12 mx-auto'>
+        <div className='ProseMirror' dangerouslySetInnerHTML={{ __html: body }}></div>
+      </div>
     </>
   );
 };

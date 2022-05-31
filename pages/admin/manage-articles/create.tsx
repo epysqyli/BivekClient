@@ -31,14 +31,13 @@ const CreateArticle: NextPageLayout = (): ReactElement => {
   return (
     <>
       <h1 className='text-2xl text-center my-10'>Create an article from scratch</h1>
-      <div className='w-5/6 mx-auto border-2 rounded'>
-        <div className='mx-auto text-center border-b py-3'>This is the editor menu</div>
+      <div className='w-11/12 mx-auto border-2 rounded'>
         <div className='p-1'>
           <TipTap updateBody={updateBody} />
         </div>
       </div>
       <div
-        onClick={async () => await createArticle("New tiptap article", JSON.stringify(body))}
+        onClick={async () => await createArticle("Title size trial", JSON.stringify(body))}
         className='text-center w-2/5 my-10 border mx-auto rounded cursor-pointer'
       >
         Create article
