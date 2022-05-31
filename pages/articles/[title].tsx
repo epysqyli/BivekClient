@@ -8,6 +8,10 @@ import Layout from "../../layouts/Layout";
 import { generateHTML } from "@tiptap/html";
 import StarterKit from "@tiptap/starter-kit";
 import TextAlign from "@tiptap/extension-text-align";
+import Table from "@tiptap/extension-table";
+import TableRow from "@tiptap/extension-table-row";
+import TableCell from "@tiptap/extension-table-cell";
+import TableHeader from "@tiptap/extension-table-header";
 
 interface Props {
   article: Article;
@@ -21,7 +25,13 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     StarterKit,
     TextAlign.configure({
       types: ["heading", "paragraph"]
-    })
+    }),
+    Table.configure({
+      resizable: true
+    }),
+    TableRow,
+    TableHeader,
+    TableCell
   ]);
   body = body.replaceAll("<p></p>", "<br />");
 
