@@ -10,7 +10,7 @@ import {
   AlignRight,
   AlignJustify
 } from "react-feather";
-import { useEditor, EditorContent, JSONContent, Editor, isActive } from "@tiptap/react";
+import { useEditor, EditorContent, JSONContent, Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import TextAlign from "@tiptap/extension-text-align";
 import Placeholder from "@tiptap/extension-placeholder";
@@ -18,6 +18,7 @@ import Table from "@tiptap/extension-table";
 import TableRow from "@tiptap/extension-table-row";
 import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
+import Image from "@tiptap/extension-image";
 import { useState } from "react";
 
 interface MenuProps {
@@ -39,6 +40,14 @@ const MenuBar = ({ editor, showTableMenu, showTable, hideTable }: MenuProps & Ta
 
   const active = "text-white bg-slate-600 px-2 m-1 rounded text-sm";
   const notActive = "border m-1 px-2 rounded text-sm";
+
+  const addImage = () => {
+    const url = window.prompt("URL");
+
+    if (url) {
+      editor.chain().focus().setImage({ src: url }).run();
+    }
+  };
 
   return (
     <div className='flex items-center justify-center flex-wrap'>
@@ -155,6 +164,9 @@ const MenuBar = ({ editor, showTableMenu, showTable, hideTable }: MenuProps & Ta
         className={editor.isActive({ textAlign: "justify" }) ? active : notActive}
       >
         <AlignJustify size={18} />
+      </button>
+      <button onClick={addImage} className={notActive}>
+        add image
       </button>
       {showTableMenu ? (
         <div className={active + " cursor-pointer"} onClick={hideTable}>
@@ -371,7 +383,8 @@ const TipTap = ({ updateBody }: EditorProps) => {
       }),
       TableRow,
       TableHeader,
-      TableCell
+      TableCell,
+      Image
     ],
     content: "",
     onUpdate: ({ editor }) => updateBody(editor.getJSON())
