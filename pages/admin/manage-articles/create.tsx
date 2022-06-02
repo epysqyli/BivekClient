@@ -3,10 +3,10 @@ import type NextPageLayout from "../../../types/NextPageLayout";
 import AdminLayout from "../../../layouts/AdminLayout";
 import { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult, Redirect } from "next";
 import { checkLogin } from "../../../lib/Auth";
-import TipTap from "../../../components/TipTap";
 import { useState } from "react";
 import { JSONContent } from "@tiptap/react";
 import { createArticle } from "../../../lib/ArticleRepo";
+import TipTap from "../../../components/TipTap/TipTap";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
