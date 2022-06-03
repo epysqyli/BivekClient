@@ -15,11 +15,15 @@ const getArticleById = async (id: number): Promise<AxiosResponse<Article>> => {
   });
 };
 
-const createArticle = async (title: string, body: string): Promise<AxiosResponse<Article>> => {
+const createArticle = async (
+  title: string,
+  body: string,
+  isPublished: boolean
+): Promise<AxiosResponse<Article>> => {
   return await axios({
     method: "POST",
     url: "http://localhost:5010/articles",
-    data: { title: title, body: body },
+    data: { title, body, isPublished },
     withCredentials: true
   });
 };
