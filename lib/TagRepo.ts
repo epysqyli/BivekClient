@@ -35,7 +35,7 @@ const patchTag = async (id: number, path: string, op: string, value: string): Pr
   });
 };
 
-const deleteTag = async (id: number) => {
+const deleteTag = async (id: number): Promise<AxiosResponse> => {
   return await axios({
     method: "DELETE",
     url: `http://localhost:5010/tags/${id}`,
