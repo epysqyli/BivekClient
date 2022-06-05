@@ -20,4 +20,9 @@ interface Article {
   published: boolean;
 }
 
-export type { Tag, Comment, Article };
+interface ArticleTag {
+  articleId: number;
+  tagId: number;
+}
+
+export type { Tag, Comment, Article, ArticleTag };
