@@ -12,17 +12,17 @@ const createArticleTagRelation = async (articleTag: ArticleTag): Promise<AxiosRe
   return await axios({
     method: "POST",
     url: "http://localhost:5010/articletags",
-    data: { articleTag },
+    data: { articleId: articleTag.articleId, tagId: articleTag.tagId },
     withCredentials: true
   });
 };
 
-const deleteTag = async (articleId: number, tagId: number): Promise<AxiosResponse> => {
+const deleteArticleTag = async (articleTag: ArticleTag): Promise<AxiosResponse> => {
   return await axios({
     method: "DELETE",
-    url: `http://localhost:5010/articletags/${articleId}-${tagId}`,
+    url: `http://localhost:5010/articletags/${articleTag.articleId}-${articleTag.tagId}`,
     withCredentials: true
   });
 };
 
-export { getArticlesByTagId, createArticleTagRelation, deleteTag };
+export { getArticlesByTagId, createArticleTagRelation, deleteArticleTag };

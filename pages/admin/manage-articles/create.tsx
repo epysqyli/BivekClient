@@ -11,6 +11,8 @@ import { useState } from "react";
 import { createArticle } from "../../../lib/ArticleRepo";
 import { getTags } from "../../../lib/TagRepo";
 import TipTap from "../../../components/TipTap/TipTap";
+import AssignTags from "../../../components/Admin/AssignTags";
+import { createArticleTagRelation, deleteArticleTag } from "../../../lib/ArticleTagRepo";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -35,9 +37,35 @@ interface PageProps {
 }
 
 const CreateArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): ReactElement => {
+  const [id, setId] = useState<number>(0);
   const [title, setTitle] = useState<string>("");
   const [body, setBody] = useState<JSONContent | undefined>(undefined);
   const updateBody = (content: JSONContent) => setBody(content);
+
+  const [allTags, setAllTags] = useState<Array<Tag>>(tags);
+  const [currentTags, setCurrentTags] = useState<Array<Tag>>([]);
+  const [showTagsMenu, setTagsMenu] = useState<boolean>(false);
+
+  const toggleAssignTags = (): void => (showTagsMenu ? setTagsMenu(false) : setTagsMenu(true));
+
+  const handleToggle = async (): Promise<void> => {
+    if (id === 0) {
+      const resp: AxiosResponse<Article> = await createArticle(title, JSON.stringify(body), false);
+      setId(resp.data.id);
+    }
+
+    toggleAssignTags();
+  };
+
+  const addTag = async (tag: Tag): Promise<void> => {
+    await createArticleTagRelation({ articleId: id, tagId: tag.id });
+    setCurrentTags([...currentTags, tag]);
+  };
+
+  const removeTag = async (tag: Tag): Promise<void> => {
+    await deleteArticleTag({ articleId: id, tagId: tag.id });
+    setCurrentTags(currentTags.filter((t) => t !== tag));
+  };
 
   const handleTitleChange = (e: FormEvent<HTMLInputElement>) => setTitle(e.currentTarget.value.trim());
 
@@ -47,7 +75,7 @@ const CreateArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): ReactEle
     publish: boolean
   ): Promise<void> => {
     const resp: AxiosResponse<Article> = await createArticle(title, JSON.stringify(body), publish);
-    console.log(resp.data.id);
+    setId(resp.data.id);
   };
 
   return (
@@ -70,10 +98,16 @@ const CreateArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): ReactEle
       </div>
 
       <div
-        onClick={() => {}}
+        onClick={handleToggle}
         className='text-center w-2/5 my-5 py-2 border mx-auto rounded cursor-pointer bg-slate-100'
       >
         Assign tags
+      </div>
+
+      <div>
+        {showTagsMenu ? (
+          <AssignTags allTags={allTags} currentTags={currentTags} addTag={addTag} removeTag={removeTag} />
+        ) : null}
       </div>
 
       <div
