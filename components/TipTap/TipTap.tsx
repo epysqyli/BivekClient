@@ -12,7 +12,7 @@ import TableMenu from "./TableMenu";
 import MenuBar from "./MenuBar";
 import { useState } from "react";
 
-const TipTap = ({ updateBody }: EditorProps) => {
+const TipTap = ({ updateBody, existingContent }: EditorProps) => {
   const [showTableMenu, setShowTableMenu] = useState<boolean>(false);
   const showTable = (): void => setShowTableMenu(true);
   const hideTable = (): void => setShowTableMenu(false);
@@ -39,7 +39,7 @@ const TipTap = ({ updateBody }: EditorProps) => {
       TableCell,
       Image
     ],
-    content: "",
+    content: existingContent ? existingContent : "",
     onUpdate: ({ editor }) => updateBody(editor.getJSON())
   });
 

@@ -33,7 +33,7 @@ const ManageArticles: NextPageLayout = (): ReactElement => {
           <Link href='/admin/manage-articles/convert'>convert an article from a word document</Link>
         </li>
         <li>
-          <Link href='/admin/manage-articles/edit-or-delete'>edit or delete existing articles</Link>
+          <Link href='/admin/manage-articles/edit'>edit or delete existing articles</Link>
         </li>
         <li>
           <Link href='/admin/manage-articles/tags'>manage article tags</Link>

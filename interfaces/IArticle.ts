@@ -1,3 +1,5 @@
+import { JSONContent } from "@tiptap/react";
+
 interface Tag {
   id: number;
   name: string;
@@ -25,4 +27,10 @@ interface ArticleTag {
   tagId: number;
 }
 
-export type { Tag, Comment, Article, ArticleTag };
+interface ArticlePatch {
+  path: string;
+  op: string;
+  value: string;
+}
+
+export type { Tag, Comment, Article, ArticleTag, ArticlePatch };

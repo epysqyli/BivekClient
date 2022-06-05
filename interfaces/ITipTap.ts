@@ -6,6 +6,7 @@ interface MenuProps {
 
 interface EditorProps {
   updateBody: (content: JSONContent) => void;
+  existingContent?: string;
 }
 
 interface TableProps {

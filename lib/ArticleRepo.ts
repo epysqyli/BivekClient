@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import type { Article } from "../interfaces/IArticle";
+import type { Article, ArticlePatch } from "../interfaces/IArticle";
 
 const getArticles = async (): Promise<AxiosResponse<Array<Article>>> => {
   return await axios({
@@ -28,18 +28,11 @@ const createArticle = async (
   });
 };
 
-const patchArticle = async (
-  id: number,
-  path: string,
-  op: string,
-  value: string
-): Promise<AxiosResponse<Article>> => {
-  const patchData = [{ path: path, op: op, value: value }];
-
+const patchArticle = async (id: number, patches: Array<ArticlePatch>): Promise<AxiosResponse<Article>> => {
   return await axios({
     method: "PATCH",
     url: `http://localhost:5010/articles/${id}`,
-    data: patchData,
+    data: patches,
     withCredentials: true
   });
 };

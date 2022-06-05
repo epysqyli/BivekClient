@@ -1,8 +1,8 @@
 import type { ReactElement } from "react";
-import type NextPageLayout from "../../../types/NextPageLayout";
-import AdminLayout from "../../../layouts/AdminLayout";
+import type NextPageLayout from "../../../../types/NextPageLayout";
+import AdminLayout from "../../../../layouts/AdminLayout";
 import { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult, Redirect } from "next";
-import { checkLogin } from "../../../lib/Auth";
+import { checkLogin } from "../../../../lib/Auth";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -20,10 +20,10 @@ export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   return { props: {} };
 };
 
-const EdirOrDelete: NextPageLayout = (): ReactElement => {
+const EditIndex: NextPageLayout = (): ReactElement => {
   return <></>;
 };
 
-EdirOrDelete.getLayout = (page: ReactElement) => <AdminLayout>{page}</AdminLayout>;
+EditIndex.getLayout = (page: ReactElement) => <AdminLayout>{page}</AdminLayout>;
 
-export default EdirOrDelete;
+export default EditIndex;

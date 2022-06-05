@@ -12,7 +12,7 @@ const AssignTags = ({ allTags, currentTags, addTag, removeTag }: Props): ReactEl
   const base = "border p-2 m-1 rounded text-center w-min";
   const selected = base + " " + "bg-slate-600 text-white";
 
-  const isAssigned = (tag: Tag): boolean => currentTags.includes(tag);
+  const isAssigned = (tag: Tag): boolean => currentTags.map((t) => t.id).includes(tag.id);
   const styleClass = (tag: Tag): string => (isAssigned(tag) ? selected : base);
 
   const handleClick = (tag: Tag) => {
