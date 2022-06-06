@@ -57,16 +57,6 @@ const CreateArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): ReactEle
     toggleAssignTags();
   };
 
-  const addTag = async (tag: Tag): Promise<void> => {
-    await createArticleTagRelation({ articleId: id, tagId: tag.id });
-    setCurrentTags([...currentTags, tag]);
-  };
-
-  const removeTag = async (tag: Tag): Promise<void> => {
-    await deleteArticleTag({ articleId: id, tagId: tag.id });
-    setCurrentTags(currentTags.filter((t) => t !== tag));
-  };
-
   const handleTitleChange = (e: FormEvent<HTMLInputElement>) => setTitle(e.currentTarget.value.trim());
 
   const handleCreateArticle = async (
@@ -106,7 +96,12 @@ const CreateArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): ReactEle
 
       <div>
         {showTagsMenu ? (
-          <AssignTags allTags={allTags} currentTags={currentTags} addTag={addTag} removeTag={removeTag} />
+          <AssignTags
+            allTags={allTags}
+            currentTags={currentTags}
+            setCurrentTags={setCurrentTags}
+            articleId={id}
+          />
         ) : null}
       </div>
 

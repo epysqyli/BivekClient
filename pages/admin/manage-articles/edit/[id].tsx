@@ -84,16 +84,6 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
     return await patchArticle(article.id, [titlePatch, bodyPatch]);
   };
 
-  const addTag = async (tag: Tag): Promise<void> => {
-    await createArticleTagRelation({ articleId: article.id, tagId: tag.id });
-    setCurrentTags([...currentTags, tag]);
-  };
-
-  const removeTag = async (tag: Tag): Promise<void> => {
-    await deleteArticleTag({ articleId: article.id, tagId: tag.id });
-    setCurrentTags(currentTags.filter((t) => t.id !== tag.id));
-  };
-
   const toggleAssignTags = (): void => (showTagsMenu ? setTagsMenu(false) : setTagsMenu(true));
   const handleToggle = (): void => toggleAssignTags();
 
@@ -126,7 +116,12 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
 
       <div>
         {showTagsMenu ? (
-          <AssignTags allTags={allTags} currentTags={currentTags} addTag={addTag} removeTag={removeTag} />
+          <AssignTags
+            allTags={allTags}
+            currentTags={currentTags}
+            setCurrentTags={setCurrentTags}
+            articleId={article.id}
+          />
         ) : null}
       </div>
 

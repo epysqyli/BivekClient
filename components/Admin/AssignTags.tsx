@@ -1,14 +1,15 @@
-import { ReactElement } from "react";
-import { Tag } from "../../interfaces/IArticle";
+import type { Dispatch, ReactElement, SetStateAction } from "react";
+import type { Tag } from "../../interfaces/IArticle";
+import { addTag, removeTag } from "../../lib/TagsMethods";
 
 interface Props {
   allTags: Array<Tag>;
   currentTags: Array<Tag>;
-  addTag: (tag: Tag, currentTags: Array<Tag>) => void;
-  removeTag: (tag: Tag, currentTags: Array<Tag>) => void;
+  setCurrentTags: Dispatch<SetStateAction<Tag[]>>;
+  articleId: number;
 }
 
-const AssignTags = ({ allTags, currentTags, addTag, removeTag }: Props): ReactElement => {
+const AssignTags = ({ allTags, currentTags, setCurrentTags, articleId }: Props): ReactElement => {
   const base = "border p-2 m-1 rounded text-center w-min";
   const selected = base + " " + "bg-slate-600 text-white";
 
@@ -16,7 +17,11 @@ const AssignTags = ({ allTags, currentTags, addTag, removeTag }: Props): ReactEl
   const styleClass = (tag: Tag): string => (isAssigned(tag) ? selected : base);
 
   const handleClick = (tag: Tag) => {
-    isAssigned(tag) ? removeTag(tag, currentTags) : addTag(tag, currentTags);
+    if (isAssigned(tag)) {
+      return removeTag(tag, currentTags, setCurrentTags, articleId);
+    } else {
+      return addTag(tag, currentTags, setCurrentTags, articleId);
+    }
   };
 
   return (
