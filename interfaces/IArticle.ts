@@ -1,5 +1,3 @@
-import { JSONContent } from "@tiptap/react";
-
 interface Tag {
   id: number;
   name: string;

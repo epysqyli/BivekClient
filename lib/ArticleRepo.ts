@@ -23,7 +23,7 @@ const createArticle = async (
   return await axios({
     method: "POST",
     url: "http://localhost:5010/articles",
-    data: { title, body, isPublished },
+    data: { title: title, body: body, published: isPublished },
     withCredentials: true
   });
 };
@@ -37,12 +37,7 @@ const patchArticle = async (id: number, patches: Array<ArticlePatch>): Promise<A
   });
 };
 
-const publishArticle = async (
-  id: number,
-  path: string,
-  op: string,
-  value: string
-): Promise<AxiosResponse<Article>> => {
+const publishArticle = async (id: number): Promise<AxiosResponse<Article>> => {
   const patchData = [{ path: "published", op: "replace", value: "true" }];
 
   return await axios({
@@ -53,12 +48,7 @@ const publishArticle = async (
   });
 };
 
-const hideArticle = async (
-  id: number,
-  path: string,
-  op: string,
-  value: string
-): Promise<AxiosResponse<Article>> => {
+const hideArticle = async (id: number): Promise<AxiosResponse<Article>> => {
   const patchData = [{ path: "published", op: "replace", value: "false" }];
 
   return await axios({

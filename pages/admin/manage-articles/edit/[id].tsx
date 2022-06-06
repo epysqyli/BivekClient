@@ -10,7 +10,7 @@ import { createArticleTagRelation, deleteArticleTag } from "../../../../lib/Arti
 import AssignTags from "../../../../components/Admin/AssignTags";
 import { getTags } from "../../../../lib/TagRepo";
 import AdminLayout from "../../../../layouts/AdminLayout";
-import { getArticleById, patchArticle } from "../../../../lib/ArticleRepo";
+import { getArticleById, hideArticle, patchArticle, publishArticle } from "../../../../lib/ArticleRepo";
 import { checkLogin } from "../../../../lib/Auth";
 import { useState } from "react";
 import TipTap from "../../../../components/TipTap/TipTap";
@@ -88,6 +88,7 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
   const [allTags] = useState<Array<Tag>>(tags);
   const [currentTags, setCurrentTags] = useState<Array<Tag>>(article.tags);
   const [showTagsMenu, setTagsMenu] = useState<boolean>(false);
+  const [isPublished, setIsPublished] = useState<boolean>(article.published);
 
   const handleTitleChange = (e: FormEvent<HTMLInputElement>) => {
     setTitlePatch({ ...titlePatch, value: e.currentTarget.value.trim() });
@@ -100,6 +101,16 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
 
   const toggleAssignTags = (): void => (showTagsMenu ? setTagsMenu(false) : setTagsMenu(true));
   const handleToggle = (): void => toggleAssignTags();
+
+  const togglePublishStatus = async (): Promise<void> => {
+    if (isPublished) {
+      const resp: AxiosResponse<Article> = await hideArticle(article.id);
+      setIsPublished(resp.data.published);
+    } else {
+      const resp: AxiosResponse<Article> = await publishArticle(article.id);
+      setIsPublished(resp.data.published);
+    }
+  };
 
   return (
     <>
@@ -144,6 +155,13 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
         className='text-center w-2/5 my-5 py-2 border mx-auto rounded cursor-pointer bg-slate-100'
       >
         Save changes
+      </div>
+
+      <div
+        onClick={togglePublishStatus}
+        className='text-center w-2/5 my-5 py-2 border mx-auto rounded cursor-pointer bg-slate-100'
+      >
+        {isPublished ? "Hide Article" : "Publish article"}
       </div>
     </>
   );
