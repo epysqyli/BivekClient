@@ -71,7 +71,7 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
     value: article.body
   });
 
-  const [allTags, setAllTags] = useState<Array<Tag>>(tags);
+  const [allTags] = useState<Array<Tag>>(tags);
   const [currentTags, setCurrentTags] = useState<Array<Tag>>(article.tags);
   const [showTagsMenu, setTagsMenu] = useState<boolean>(false);
 

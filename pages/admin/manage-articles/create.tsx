@@ -42,7 +42,7 @@ const CreateArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): ReactEle
   const [body, setBody] = useState<JSONContent | undefined>(undefined);
   const updateBody = (content: JSONContent) => setBody(content);
 
-  const [allTags, setAllTags] = useState<Array<Tag>>(tags);
+  const [allTags] = useState<Array<Tag>>(tags);
   const [currentTags, setCurrentTags] = useState<Array<Tag>>([]);
   const [showTagsMenu, setTagsMenu] = useState<boolean>(false);
 
