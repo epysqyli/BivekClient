@@ -14,7 +14,7 @@ import { getArticleById, patchArticle } from "../../../../lib/ArticleRepo";
 import { checkLogin } from "../../../../lib/Auth";
 import { useState } from "react";
 import TipTap from "../../../../components/TipTap/TipTap";
-import { generateHTML } from "@tiptap/html";
+import { generateHTML, generateJSON } from "@tiptap/html";
 import StarterKit from "@tiptap/starter-kit";
 import TextAlign from "@tiptap/extension-text-align";
 import Table from "@tiptap/extension-table";
@@ -68,7 +68,21 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
   const [bodyPatch, setBodyPatch] = useState<ArticlePatch>({
     path: "body",
     op: "replace",
-    value: article.body
+    value: JSON.stringify(
+      generateJSON(article.body, [
+        StarterKit,
+        TextAlign.configure({
+          types: ["heading", "paragraph"]
+        }),
+        Table.configure({
+          resizable: true
+        }),
+        TableRow,
+        TableHeader,
+        TableCell,
+        Image
+      ])
+    )
   });
 
   const [allTags] = useState<Array<Tag>>(tags);
