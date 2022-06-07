@@ -33,7 +33,7 @@ const AdminIndex: NextPageLayout = (): ReactElement => {
           <Link href='/admin/manage-articles'>articles</Link>
         </li>
         <li>
-          <Link href='/admin/manage-datasets'>datasets</Link>
+          <Link href='/admin/manage-datasets'>datasets and dataset categories</Link>
         </li>
         <li>
           <Link href='/admin/manage-working-papers'>working papers</Link>
