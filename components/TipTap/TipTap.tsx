@@ -39,7 +39,7 @@ const TipTap = ({ updateBody, existingContent }: EditorProps) => {
       TableCell,
       Image
     ],
-    content: existingContent ? existingContent : "",
+    content: existingContent ?? "",
     onUpdate: ({ editor }) => updateBody(editor.getJSON())
   });
 

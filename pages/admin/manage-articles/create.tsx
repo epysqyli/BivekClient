@@ -4,15 +4,14 @@ import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsR
 import type { AxiosResponse } from "axios";
 import type { Article } from "../../../interfaces/IArticle";
 import type { JSONContent } from "@tiptap/react";
-import type { Tag } from "../../../interfaces/IArticle";
+import type { Tag, ArticlePatch } from "../../../interfaces/IArticle";
 import AdminLayout from "../../../layouts/AdminLayout";
 import { checkLogin } from "../../../lib/Auth";
 import { useState } from "react";
-import { createArticle } from "../../../lib/ArticleRepo";
+import { createArticle, patchArticle } from "../../../lib/ArticleRepo";
 import { getTags } from "../../../lib/TagRepo";
 import TipTap from "../../../components/TipTap/TipTap";
 import AssignTags from "../../../components/Admin/AssignTags";
-import { createArticleTagRelation, deleteArticleTag } from "../../../lib/ArticleTagRepo";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -39,8 +38,23 @@ interface PageProps {
 const CreateArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): ReactElement => {
   const [id, setId] = useState<number>(0);
   const [title, setTitle] = useState<string>("");
-  const [body, setBody] = useState<JSONContent | undefined>(undefined);
-  const updateBody = (content: JSONContent) => setBody(content);
+  const [body, setBody] = useState<string>("");
+  const [titlePatch, setTitlePatch] = useState<ArticlePatch>({ path: "title", op: "replace", value: "" });
+  const [bodyPatch, setBodyPatch] = useState<ArticlePatch>({
+    path: "body",
+    op: "replace",
+    value: ""
+  });
+
+  const handleTitleChange = (e: FormEvent<HTMLInputElement>) => {
+    setTitle(e.currentTarget.value.trim());
+    setTitlePatch({ ...titlePatch, value: e.currentTarget.value.trim() });
+  };
+
+  const updateBody = (content: JSONContent) => {
+    setBody(JSON.stringify(content));
+    setBodyPatch({ ...bodyPatch, value: JSON.stringify(content) });
+  };
 
   const [allTags] = useState<Array<Tag>>(tags);
   const [currentTags, setCurrentTags] = useState<Array<Tag>>([]);
@@ -49,23 +63,17 @@ const CreateArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): ReactEle
   const toggleAssignTags = (): void => (showTagsMenu ? setTagsMenu(false) : setTagsMenu(true));
 
   const handleToggle = async (): Promise<void> => {
-    if (id === 0) {
-      const resp: AxiosResponse<Article> = await createArticle(title, JSON.stringify(body), false);
-      setId(resp.data.id);
-    }
-
+    await handleCreateArticle(false);
     toggleAssignTags();
   };
 
-  const handleTitleChange = (e: FormEvent<HTMLInputElement>) => setTitle(e.currentTarget.value.trim());
-
-  const handleCreateArticle = async (
-    title: string,
-    body: JSONContent | undefined,
-    publish: boolean
-  ): Promise<void> => {
-    const resp: AxiosResponse<Article> = await createArticle(title, JSON.stringify(body), publish);
-    setId(resp.data.id);
+  const handleCreateArticle = async (publish: boolean): Promise<void> => {
+    if (id === 0) {
+      const resp: AxiosResponse<Article> = await createArticle(title, body, publish);
+      setId(resp.data.id);
+    } else {
+      await patchArticle(id, [titlePatch, bodyPatch]);
+    }
   };
 
   return (
@@ -106,17 +114,17 @@ const CreateArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): ReactEle
       </div>
 
       <div
-        onClick={async () => await handleCreateArticle(title, body, true)}
+        onClick={async () => await handleCreateArticle(false)}
         className='text-center w-2/5 my-5 py-2 border mx-auto rounded cursor-pointer bg-slate-100'
       >
         Save for later
       </div>
 
       <div
-        onClick={async () => await handleCreateArticle(title, body, false)}
+        onClick={async () => await handleCreateArticle(true)}
         className='text-center w-2/5 my-5 py-2 border mx-auto rounded cursor-pointer bg-slate-100'
       >
-        Publish article
+        Publish immediately
       </div>
     </>
   );
