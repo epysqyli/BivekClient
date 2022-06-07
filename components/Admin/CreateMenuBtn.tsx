@@ -18,7 +18,7 @@ const CreateMenuBtn = ({ text, isArticleValid, handleClick }: Props): ReactEleme
     );
 
   return (
-    <div className='text-center w-2/5 my-5 py-2 border mx-auto rounded cursor-pointer bg-slate-100 text-slate-400'>
+    <div className='text-center w-2/5 my-5 py-2 border mx-auto rounded cursor-pointer bg-slate-100 text-slate-200'>
       {text}
     </div>
   );

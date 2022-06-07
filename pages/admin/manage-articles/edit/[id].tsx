@@ -121,13 +121,13 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
     <>
       <h1 className='text-2xl text-center my-10'>Edit article</h1>
       <div className='block w-5/6 mx-auto'>
-        <label htmlFor='title'>Article title</label>
         <input
           onChange={handleTitleChange}
           defaultValue={article.title}
           type='text'
           name='title'
           id='title'
+          placeholder="title required"
           className='border mx-auto block w-full py-1 px-2'
         />
       </div>
