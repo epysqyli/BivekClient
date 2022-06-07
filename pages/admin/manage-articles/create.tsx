@@ -12,6 +12,8 @@ import { createArticle, patchArticle } from "../../../lib/ArticleRepo";
 import { getTags } from "../../../lib/TagRepo";
 import TipTap from "../../../components/TipTap/TipTap";
 import AssignTags from "../../../components/Admin/AssignTags";
+import CreateMenuBtn from "../../../components/Admin/CreateMenuBtn";
+import { isArticleValid } from "../../../lib/ArticleEditMethods";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -95,12 +97,11 @@ const CreateArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): ReactEle
         </div>
       </div>
 
-      <div
-        onClick={handleToggle}
-        className='text-center w-2/5 my-5 py-2 border mx-auto rounded cursor-pointer bg-slate-100'
-      >
-        Assign tags
-      </div>
+      <CreateMenuBtn
+        text='Assign tags'
+        isArticleValid={isArticleValid(title, body)}
+        handleClick={handleToggle}
+      />
 
       <div>
         {showTagsMenu ? (
@@ -113,19 +114,16 @@ const CreateArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): ReactEle
         ) : null}
       </div>
 
-      <div
-        onClick={async () => await handleCreateArticle(false)}
-        className='text-center w-2/5 my-5 py-2 border mx-auto rounded cursor-pointer bg-slate-100'
-      >
-        Save for later
-      </div>
-
-      <div
-        onClick={async () => await handleCreateArticle(true)}
-        className='text-center w-2/5 my-5 py-2 border mx-auto rounded cursor-pointer bg-slate-100'
-      >
-        Publish immediately
-      </div>
+      <CreateMenuBtn
+        text='Save for later'
+        isArticleValid={isArticleValid(title, body)}
+        handleClick={() => handleCreateArticle(false)}
+      />
+      <CreateMenuBtn
+        text='Publish immediately'
+        isArticleValid={isArticleValid(title, body)}
+        handleClick={() => handleCreateArticle(true)}
+      />
     </>
   );
 };

@@ -6,7 +6,6 @@ import type { JSONContent } from "@tiptap/react";
 import type { FormEvent } from "react";
 import type { ReactElement } from "react";
 import type { Tag } from "../../../../interfaces/IArticle";
-import { createArticleTagRelation, deleteArticleTag } from "../../../../lib/ArticleTagRepo";
 import AssignTags from "../../../../components/Admin/AssignTags";
 import { getTags } from "../../../../lib/TagRepo";
 import AdminLayout from "../../../../layouts/AdminLayout";
@@ -22,6 +21,8 @@ import TableRow from "@tiptap/extension-table-row";
 import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import Image from "@tiptap/extension-image";
+import { isArticleValid } from "../../../../lib/ArticleEditMethods";
+import CreateMenuBtn from "../../../../components/Admin/CreateMenuBtn";
 
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
@@ -64,7 +65,11 @@ interface Props {
 }
 
 const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElement => {
-  const [titlePatch, setTitlePatch] = useState<ArticlePatch>({ path: "title", op: "replace", value: "" });
+  const [titlePatch, setTitlePatch] = useState<ArticlePatch>({
+    path: "title",
+    op: "replace",
+    value: article.title
+  });
   const [bodyPatch, setBodyPatch] = useState<ArticlePatch>({
     path: "body",
     op: "replace",
@@ -95,8 +100,8 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
   };
   const updateBody = (content: JSONContent) => setBodyPatch({ ...bodyPatch, value: JSON.stringify(content) });
 
-  const handlePatchArticle = async (): Promise<AxiosResponse> => {
-    return await patchArticle(article.id, [titlePatch, bodyPatch]);
+  const handlePatchArticle = async (): Promise<void> => {
+    await patchArticle(article.id, [titlePatch, bodyPatch]);
   };
 
   const toggleAssignTags = (): void => (showTagsMenu ? setTagsMenu(false) : setTagsMenu(true));
@@ -132,12 +137,11 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
         </div>
       </div>
 
-      <div
-        onClick={handleToggle}
-        className='text-center w-2/5 my-5 py-2 border mx-auto rounded cursor-pointer bg-slate-100'
-      >
-        Assign tags
-      </div>
+      <CreateMenuBtn
+        text='Assign tags'
+        isArticleValid={isArticleValid(titlePatch.value, bodyPatch.value)}
+        handleClick={handleToggle}
+      />
 
       <div>
         {showTagsMenu ? (
@@ -150,19 +154,25 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
         ) : null}
       </div>
 
-      <div
-        onClick={handlePatchArticle}
-        className='text-center w-2/5 my-5 py-2 border mx-auto rounded cursor-pointer bg-slate-100'
-      >
-        Save changes
-      </div>
+      <CreateMenuBtn
+        text='Save changes'
+        isArticleValid={isArticleValid(titlePatch.value, bodyPatch.value)}
+        handleClick={handlePatchArticle}
+      />
 
-      <div
-        onClick={togglePublishStatus}
-        className='text-center w-2/5 my-5 py-2 border mx-auto rounded cursor-pointer bg-slate-100'
-      >
-        {isPublished ? "Hide Article" : "Publish article"}
-      </div>
+      {isPublished ? (
+        <CreateMenuBtn
+          text='Hide article'
+          isArticleValid={isArticleValid(titlePatch.value, bodyPatch.value)}
+          handleClick={togglePublishStatus}
+        />
+      ) : (
+        <CreateMenuBtn
+          text='Publish article'
+          isArticleValid={isArticleValid(titlePatch.value, bodyPatch.value)}
+          handleClick={togglePublishStatus}
+        />
+      )}
     </>
   );
 };
