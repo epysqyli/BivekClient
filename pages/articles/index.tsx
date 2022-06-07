@@ -3,7 +3,7 @@ import type { ReactElement } from "react";
 import type { Article } from "../../interfaces/IArticle";
 import type { AxiosResponse } from "axios";
 import type NextPageLayout from "../../types/NextPageLayout";
-import { getArticles } from "../../lib/ArticleRepo";
+import { getPublishedArticles } from "../../lib/ArticleRepo";
 import slugify from "slugify";
 import Layout from "../../layouts/Layout";
 import Link from "next/link";
@@ -13,7 +13,7 @@ interface ArticlePageProps {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const resp: AxiosResponse<Array<Article>> = await getArticles();
+  const resp: AxiosResponse<Array<Article>> = await getPublishedArticles();
   const articles: Array<Article> = resp.data;
 
   return { props: { articles } };
