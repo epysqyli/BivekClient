@@ -4,8 +4,9 @@ import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsR
 import type { Redirect } from "next";
 import AdminLayout from "../../layouts/AdminLayout";
 import { checkLogin } from "../../lib/Auth";
-import Link from "next/link";
 import TopElement from "../../components/admin/TopElement";
+import IndexLink from "../../components/admin/IndexLink";
+import { Database, Edit3, FilePlus, Paperclip, Tag } from "react-feather";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -24,26 +25,43 @@ export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
 };
 
 const AdminIndex: NextPageLayout = (): ReactElement => {
+  const iconStyle: string =
+    "text-slate-500 group-hover:text-slate-600 group-active:text-slate-900 group-hover:scale-95 group-active:scale-75 transition-transform";
+
   return (
     <>
       <TopElement text='Manage blog resources' />
-      <ul className='my-10 w-4/5 mx-auto list-disc'>
-        <li>
-          <Link href='/admin/create-new-article'>create a new article from scratch</Link>
-        </li>
-        <li>
-          <Link href='/admin/edit-articles'>edit or delete existing articles</Link>
-        </li>
-        <li>
-          <Link href='/admin/article-tags'>manage article tags</Link>
-        </li>
-        <li>
-          <Link href='/admin/manage-datasets'>datasets and dataset categories</Link>
-        </li>
-        <li>
-          <Link href='/admin/manage-working-papers'>working papers</Link>
-        </li>
-      </ul>
+      <div className='my-10 w-4/5 mx-auto'>
+        <IndexLink
+          text='create a new article from scratch'
+          href='/admin/create-new-article'
+          icon={<FilePlus size={36} strokeWidth={1.25} className={iconStyle} />}
+        />
+
+        <IndexLink
+          href='/admin/edit-articles'
+          text='edit or delete existing articles'
+          icon={<Edit3 size={36} strokeWidth={1.25} className={iconStyle} />}
+        />
+
+        <IndexLink
+          href='/admin/article-tags'
+          text='article tags'
+          icon={<Tag size={36} strokeWidth={1.25} className={iconStyle} />}
+        />
+
+        <IndexLink
+          href='/admin/manage-datasets'
+          text='datasets and dataset categories'
+          icon={<Database size={36} strokeWidth={1.25} className={iconStyle} />}
+        />
+
+        <IndexLink
+          href='/admin/manage-working-papers'
+          text='working papers'
+          icon={<Paperclip size={36} strokeWidth={1.25} className={iconStyle} />}
+        />
+      </div>
     </>
   );
 };
