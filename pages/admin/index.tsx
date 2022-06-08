@@ -5,6 +5,7 @@ import type { Redirect } from "next";
 import AdminLayout from "../../layouts/AdminLayout";
 import { checkLogin } from "../../lib/Auth";
 import Link from "next/link";
+import TopElement from "../../components/Admin/TopElement";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -25,9 +26,7 @@ export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
 const AdminIndex: NextPageLayout = (): ReactElement => {
   return (
     <>
-      <h1 className='text-xl text-center py-10 border-b underline underline-offset-4'>
-        Manage blog resources
-      </h1>
+      <TopElement text='Manage blog resources' />
       <ul className='my-10 w-4/5 mx-auto list-disc'>
         <li>
           <Link href='/admin/manage-articles'>articles</Link>

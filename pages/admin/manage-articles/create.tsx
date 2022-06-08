@@ -14,6 +14,7 @@ import TipTap from "../../../components/TipTap/TipTap";
 import AssignTags from "../../../components/Admin/AssignTags";
 import CreateMenuBtn from "../../../components/Admin/CreateMenuBtn";
 import { isArticleValid } from "../../../lib/ArticleEditMethods";
+import TopElement from "../../../components/Admin/TopElement";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -80,14 +81,14 @@ const CreateArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): ReactEle
 
   return (
     <>
-      <h1 className='text-2xl text-center my-10'>Create an article from scratch</h1>
+      <TopElement text='Create an article from scratch' />
       <div className='block w-5/6 mx-auto'>
         <input
           onChange={handleTitleChange}
           type='text'
           name='title'
           id='title'
-          placeholder="Article title"
+          placeholder='Article title'
           className='border mx-auto block w-full py-1 px-2'
         />
       </div>
