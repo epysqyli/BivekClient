@@ -23,6 +23,7 @@ import TableHeader from "@tiptap/extension-table-header";
 import Image from "@tiptap/extension-image";
 import { isArticleValid } from "../../../../lib/ArticleEditMethods";
 import CreateMenuBtn from "../../../../components/Admin/CreateMenuBtn";
+import TopElement from "../../../../components/Admin/TopElement";
 
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
@@ -119,7 +120,7 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
 
   return (
     <>
-      <h1 className='text-2xl text-center my-10'>Edit article</h1>
+      <TopElement text='Edit article' />
       <div className='block w-5/6 mx-auto'>
         <input
           onChange={handleTitleChange}
@@ -127,7 +128,7 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
           type='text'
           name='title'
           id='title'
-          placeholder="title required"
+          placeholder='title required'
           className='border mx-auto block w-full py-1 px-2'
         />
       </div>

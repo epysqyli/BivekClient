@@ -7,6 +7,7 @@ import { createTag, deleteTag, getTags } from "../../../lib/TagRepo";
 import { Tag } from "../../../interfaces/IArticle";
 import { AxiosResponse } from "axios";
 import { useState } from "react";
+import TopElement from "../../../components/Admin/TopElement";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -51,8 +52,7 @@ const Tags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactElement => {
 
   return (
     <>
-      <h1 className='text-3xl text-center my-5'>Manage tags</h1>
-
+      <TopElement text='Manage tags' />
       <div className='text-lg border w-4/5 mx-auto text-center rounded-md mt-10 mb-16 py-2'>
         <input
           onChange={handleChange}
