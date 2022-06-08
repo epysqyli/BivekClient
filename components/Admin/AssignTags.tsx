@@ -10,7 +10,7 @@ interface Props {
 }
 
 const AssignTags = ({ allTags, currentTags, setCurrentTags, articleId }: Props): ReactElement => {
-  const base = "border p-2 m-1 rounded text-center w-min";
+  const base = "border p-2 m-1 rounded text-center";
   const selected = base + " " + "bg-slate-600 text-white";
 
   const isAssigned = (tag: Tag): boolean => currentTags.map((t) => t.id).includes(tag.id);
