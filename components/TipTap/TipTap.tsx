@@ -19,7 +19,7 @@ const TipTap = ({ updateBody, existingContent }: EditorProps) => {
 
   const editor = useEditor({
     editorProps: {
-      attributes: { class: "px-2 pt-5 pb-28 overflow-y-auto h-50vh" }
+      attributes: { class: "px-2 pt-5 pb-28 overflow-y-auto h-50vh focus:outline-none" }
     },
     injectCSS: false,
     extensions: [

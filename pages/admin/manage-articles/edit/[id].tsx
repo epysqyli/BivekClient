@@ -129,7 +129,7 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
           name='title'
           id='title'
           placeholder='title required'
-          className='border mx-auto block w-full py-1 px-2'
+          className='border-b border-gray-600 focus:border-slate-400 mx-auto text-center text-lg block w-full py-1 px-2 mb-2 focus:outline-none'
         />
       </div>
       <div className='w-11/12 mx-auto rounded'>
