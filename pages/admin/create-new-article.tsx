@@ -10,11 +10,11 @@ import { checkLogin } from "../../lib/Auth";
 import { useState } from "react";
 import { createArticle, patchArticle } from "../../lib/ArticleRepo";
 import { getTags } from "../../lib/TagRepo";
-import TipTap from "../../components/TipTap/TipTap";
-import AssignTags from "../../components/Admin/AssignTags";
-import CreateMenuBtn from "../../components/Admin/CreateMenuBtn";
+import TipTap from "../../components/tiptap/TipTap";
+import AssignTags from "../../components/admin/AssignTags";
+import CreateMenuBtn from "../../components/admin/CreateMenuBtn";
 import { isArticleValid } from "../../lib/ArticleEditMethods";
-import TopElement from "../../components/Admin/TopElement";
+import TopElement from "../../components/admin/TopElement";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext

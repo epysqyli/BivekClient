@@ -7,7 +7,7 @@ import { createTag, deleteTag, getTags } from "../../lib/TagRepo";
 import { Tag } from "../../interfaces/IArticle";
 import { AxiosResponse } from "axios";
 import { useState } from "react";
-import TopElement from "../../components/Admin/TopElement";
+import TopElement from "../../components/admin/TopElement";
 import { Delete, PlusCircle } from "react-feather";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (

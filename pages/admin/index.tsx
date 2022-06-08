@@ -5,7 +5,7 @@ import type { Redirect } from "next";
 import AdminLayout from "../../layouts/AdminLayout";
 import { checkLogin } from "../../lib/Auth";
 import Link from "next/link";
-import TopElement from "../../components/Admin/TopElement";
+import TopElement from "../../components/admin/TopElement";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
