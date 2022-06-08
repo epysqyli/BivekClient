@@ -8,6 +8,7 @@ import { Tag } from "../../../interfaces/IArticle";
 import { AxiosResponse } from "axios";
 import { useState } from "react";
 import TopElement from "../../../components/Admin/TopElement";
+import { Delete, PlusCircle } from "react-feather";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -53,27 +54,36 @@ const Tags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactElement => {
   return (
     <>
       <TopElement text='Manage tags' />
-      <div className='text-lg border w-4/5 mx-auto text-center rounded-md mt-10 mb-16 py-2'>
+      <div className='flex items-end text-lg w-5/6 mx-auto rounded-md mt-10 mb-16'>
+        <div onClick={handleCreateTag} className='w-min mx-auto cursor-pointer group'>
+          <PlusCircle
+            size={42}
+            strokeWidth={1.25}
+            fill='gray'
+            color='white'
+            className='border-gray-400 border-2 rounded-full group-hover:scale-95 group-active:scale-75 transition-transform'
+          />
+        </div>
         <input
           onChange={handleChange}
           type='text'
-          className='border block mx-auto my-2 rounded p-2'
+          className='border-b-2 border-gray-300 block w-4/5 mx-auto py-2 pl-3 text-center focus:outline-none'
           placeholder='Enter tag name'
         />
-        <div onClick={handleCreateTag} className='my-5 border w-3/4 mx-auto rounded-md py-2'>
-          Create tag
-        </div>
       </div>
 
       <div>
         {currentTags.map((tag) => (
           <div
-            className='w-5/6 mx-auto my-3 p-2 border-2 rounded-md flex items-center justify-between'
+            className='w-5/6 mx-auto my-4 pl-2 shadow-sm shadow-slate-500 rounded-md flex items-center justify-between'
             key={tag.id}
           >
-            <div>{tag.name}</div>
-            <div onClick={() => handleDeleteTag(tag.id)} className='text-sm'>
-              delete
+            <div className='py-3'>{tag.name}</div>
+            <div
+              onClick={() => handleDeleteTag(tag.id)}
+              className='flex items-center self-stretch px-5 bg-slate-50 hover:bg-slate-100 transition-colors rounded-br rounded-tr cursor-pointer group'
+            >
+              <Delete className='text-slate-500 group-hover:text-slate-600 group-active:text-slate-900' />
             </div>
           </div>
         ))}
