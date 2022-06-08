@@ -1,20 +1,20 @@
 import type { FormEvent, ReactElement } from "react";
-import type NextPageLayout from "../../../types/NextPageLayout";
+import type NextPageLayout from "../../types/NextPageLayout";
 import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult, Redirect } from "next";
 import type { AxiosResponse } from "axios";
-import type { Article } from "../../../interfaces/IArticle";
+import type { Article } from "../../interfaces/IArticle";
 import type { JSONContent } from "@tiptap/react";
-import type { Tag, ArticlePatch } from "../../../interfaces/IArticle";
-import AdminLayout from "../../../layouts/AdminLayout";
-import { checkLogin } from "../../../lib/Auth";
+import type { Tag, ArticlePatch } from "../../interfaces/IArticle";
+import AdminLayout from "../../layouts/AdminLayout";
+import { checkLogin } from "../../lib/Auth";
 import { useState } from "react";
-import { createArticle, patchArticle } from "../../../lib/ArticleRepo";
-import { getTags } from "../../../lib/TagRepo";
-import TipTap from "../../../components/TipTap/TipTap";
-import AssignTags from "../../../components/Admin/AssignTags";
-import CreateMenuBtn from "../../../components/Admin/CreateMenuBtn";
-import { isArticleValid } from "../../../lib/ArticleEditMethods";
-import TopElement from "../../../components/Admin/TopElement";
+import { createArticle, patchArticle } from "../../lib/ArticleRepo";
+import { getTags } from "../../lib/TagRepo";
+import TipTap from "../../components/TipTap/TipTap";
+import AssignTags from "../../components/Admin/AssignTags";
+import CreateMenuBtn from "../../components/Admin/CreateMenuBtn";
+import { isArticleValid } from "../../lib/ArticleEditMethods";
+import TopElement from "../../components/Admin/TopElement";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -38,7 +38,7 @@ interface PageProps {
   tags: Array<Tag>;
 }
 
-const CreateArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): ReactElement => {
+const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): ReactElement => {
   const [id, setId] = useState<number>(0);
   const [title, setTitle] = useState<string>("");
   const [body, setBody] = useState<string>("");
@@ -129,6 +129,6 @@ const CreateArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): ReactEle
   );
 };
 
-CreateArticle.getLayout = (page: ReactElement) => <AdminLayout>{page}</AdminLayout>;
+CreateNewArticle.getLayout = (page: ReactElement) => <AdminLayout>{page}</AdminLayout>;
 
-export default CreateArticle;
+export default CreateNewArticle;

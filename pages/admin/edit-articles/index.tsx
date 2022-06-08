@@ -1,13 +1,13 @@
 import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult, Redirect } from "next";
 import type { ReactElement } from "react";
-import type NextPageLayout from "../../../../types/NextPageLayout";
-import type { Article } from "../../../../interfaces/IArticle";
+import type NextPageLayout from "../../../types/NextPageLayout";
+import type { Article } from "../../../interfaces/IArticle";
 import type { AxiosResponse } from "axios";
-import AdminLayout from "../../../../layouts/AdminLayout";
-import { checkLogin } from "../../../../lib/Auth";
-import { getArticles } from "../../../../lib/ArticleRepo";
-import EditArticleEntry from "../../../../components/Admin/EditArticleEntry";
-import TopElement from "../../../../components/Admin/TopElement";
+import AdminLayout from "../../../layouts/AdminLayout";
+import { checkLogin } from "../../../lib/Auth";
+import { getArticles } from "../../../lib/ArticleRepo";
+import EditArticleEntry from "../../../components/Admin/EditArticleEntry";
+import TopElement from "../../../components/Admin/TopElement";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext

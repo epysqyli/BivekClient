@@ -1,18 +1,18 @@
-import type NextPageLayout from "../../../../types/NextPageLayout";
-import type { Article, ArticlePatch } from "../../../../interfaces/IArticle";
+import type NextPageLayout from "../../../types/NextPageLayout";
+import type { Article, ArticlePatch } from "../../../interfaces/IArticle";
 import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult, Redirect } from "next";
 import type { AxiosResponse } from "axios";
 import type { JSONContent } from "@tiptap/react";
 import type { FormEvent } from "react";
 import type { ReactElement } from "react";
-import type { Tag } from "../../../../interfaces/IArticle";
-import AssignTags from "../../../../components/Admin/AssignTags";
-import { getTags } from "../../../../lib/TagRepo";
-import AdminLayout from "../../../../layouts/AdminLayout";
-import { getArticleById, hideArticle, patchArticle, publishArticle } from "../../../../lib/ArticleRepo";
-import { checkLogin } from "../../../../lib/Auth";
+import type { Tag } from "../../../interfaces/IArticle";
+import AssignTags from "../../../components/Admin/AssignTags";
+import { getTags } from "../../../lib/TagRepo";
+import AdminLayout from "../../../layouts/AdminLayout";
+import { getArticleById, hideArticle, patchArticle, publishArticle } from "../../../lib/ArticleRepo";
+import { checkLogin } from "../../../lib/Auth";
 import { useState } from "react";
-import TipTap from "../../../../components/TipTap/TipTap";
+import TipTap from "../../../components/TipTap/TipTap";
 import { generateHTML, generateJSON } from "@tiptap/html";
 import StarterKit from "@tiptap/starter-kit";
 import TextAlign from "@tiptap/extension-text-align";
@@ -21,9 +21,9 @@ import TableRow from "@tiptap/extension-table-row";
 import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import Image from "@tiptap/extension-image";
-import { isArticleValid } from "../../../../lib/ArticleEditMethods";
-import CreateMenuBtn from "../../../../components/Admin/CreateMenuBtn";
-import TopElement from "../../../../components/Admin/TopElement";
+import { isArticleValid } from "../../../lib/ArticleEditMethods";
+import CreateMenuBtn from "../../../components/Admin/CreateMenuBtn";
+import TopElement from "../../../components/Admin/TopElement";
 
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext

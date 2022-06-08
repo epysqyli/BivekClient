@@ -1,13 +1,13 @@
 import type { FormEvent, ReactElement } from "react";
-import type NextPageLayout from "../../../types/NextPageLayout";
+import type NextPageLayout from "../../types/NextPageLayout";
 import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult, Redirect } from "next";
-import AdminLayout from "../../../layouts/AdminLayout";
-import { checkLogin } from "../../../lib/Auth";
-import { createTag, deleteTag, getTags } from "../../../lib/TagRepo";
-import { Tag } from "../../../interfaces/IArticle";
+import AdminLayout from "../../layouts/AdminLayout";
+import { checkLogin } from "../../lib/Auth";
+import { createTag, deleteTag, getTags } from "../../lib/TagRepo";
+import { Tag } from "../../interfaces/IArticle";
 import { AxiosResponse } from "axios";
 import { useState } from "react";
-import TopElement from "../../../components/Admin/TopElement";
+import TopElement from "../../components/Admin/TopElement";
 import { Delete, PlusCircle } from "react-feather";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
@@ -32,7 +32,7 @@ interface TagsProps {
   tags: Array<Tag>;
 }
 
-const Tags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactElement => {
+const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactElement => {
   const [currentTags, setCurrentTags] = useState<Array<Tag>>(tags);
   const [newTag, setNewTag] = useState<string>("");
 
@@ -92,6 +92,6 @@ const Tags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactElement => {
   );
 };
 
-Tags.getLayout = (page: ReactElement) => <AdminLayout>{page}</AdminLayout>;
+ArticleTags.getLayout = (page: ReactElement) => <AdminLayout>{page}</AdminLayout>;
 
-export default Tags;
+export default ArticleTags;

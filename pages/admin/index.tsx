@@ -29,7 +29,13 @@ const AdminIndex: NextPageLayout = (): ReactElement => {
       <TopElement text='Manage blog resources' />
       <ul className='my-10 w-4/5 mx-auto list-disc'>
         <li>
-          <Link href='/admin/manage-articles'>articles</Link>
+          <Link href='/admin/create-new-article'>create a new article from scratch</Link>
+        </li>
+        <li>
+          <Link href='/admin/edit-articles'>edit or delete existing articles</Link>
+        </li>
+        <li>
+          <Link href='/admin/article-tags'>manage article tags</Link>
         </li>
         <li>
           <Link href='/admin/manage-datasets'>datasets and dataset categories</Link>
