@@ -1,9 +1,10 @@
+import { AxiosResponse } from "axios";
 import { ReactElement } from "react";
 
 interface Props {
   text: string;
   isArticleValid: boolean;
-  handleClick?: () => Promise<void> | void;
+  handleClick?: () => Promise<AxiosResponse | void> | void;
 }
 
 const CreateMenuBtn = ({ text, isArticleValid, handleClick }: Props): ReactElement => {

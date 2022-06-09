@@ -24,6 +24,7 @@ import Image from "@tiptap/extension-image";
 import { isArticleValid } from "../../../lib/ArticleEditMethods";
 import CreateMenuBtn from "../../../components/admin/CreateMenuBtn";
 import TopElement from "../../../components/admin/TopElement";
+import DeleteConfirmation from "../../../components/admin/DeleteConfirmation";
 
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
@@ -95,10 +96,12 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
   const [currentTags, setCurrentTags] = useState<Array<Tag>>(article.tags);
   const [showTagsMenu, setTagsMenu] = useState<boolean>(false);
   const [isPublished, setIsPublished] = useState<boolean>(article.published);
+  const [showDelete, setShowDelete] = useState<boolean>(false);
 
   const handleTitleChange = (e: FormEvent<HTMLInputElement>) => {
     setTitlePatch({ ...titlePatch, value: e.currentTarget.value.trim() });
   };
+
   const updateBody = (content: JSONContent) => setBodyPatch({ ...bodyPatch, value: JSON.stringify(content) });
 
   const handlePatchArticle = async (): Promise<void> => {
@@ -118,8 +121,11 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
     }
   };
 
+  const showDeleteConfirmation = () => setShowDelete(true);
+  const hideDeleteConfirmation = () => setShowDelete(false);
+
   return (
-    <>
+    <div className='relative'>
       <TopElement text='Edit article' />
       <div className='block w-5/6 mx-auto'>
         <input
@@ -174,7 +180,15 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
           handleClick={togglePublishStatus}
         />
       )}
-    </>
+
+      <CreateMenuBtn
+        text='Delete article'
+        isArticleValid={isArticleValid(titlePatch.value, bodyPatch.value)}
+        handleClick={showDeleteConfirmation}
+      />
+
+      <DeleteConfirmation id={article.id} show={showDelete} hideShow={hideDeleteConfirmation} />
+    </div>
   );
 };
 
