@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ReactElement, ReactNode } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   text: string;

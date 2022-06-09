@@ -10,7 +10,7 @@ interface Props {
 }
 
 const AssignTags = ({ allTags, currentTags, setCurrentTags, articleId }: Props): ReactElement => {
-  const base = "border p-2 m-1 rounded text-center";
+  const base = "p-2 m-1 rounded text-center bg-white";
   const selected = base + " " + "bg-slate-600 text-white";
 
   const isAssigned = (tag: Tag): boolean => currentTags.map((t) => t.id).includes(tag.id);
@@ -25,7 +25,7 @@ const AssignTags = ({ allTags, currentTags, setCurrentTags, articleId }: Props):
   };
 
   return (
-    <div className='w-5/6 mx-auto flex items-start justify-center flex-wrap border-t border-b py-5'>
+    <div className='mx-auto flex items-start justify-center flex-wrap py-5 bg-slate-100'>
       {allTags.map((t) => (
         <div onClick={() => handleClick(t)} className={styleClass(t)} key={t.id}>
           {t.name}

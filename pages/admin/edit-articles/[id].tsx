@@ -25,6 +25,7 @@ import { isArticleValid } from "../../../lib/ArticleEditMethods";
 import CreateMenuBtn from "../../../components/admin/CreateMenuBtn";
 import TopElement from "../../../components/admin/TopElement";
 import DeleteConfirmation from "../../../components/admin/DeleteConfirmation";
+import { Delete, Eye, EyeOff, Save, Tag as TagIcon } from "react-feather";
 
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
@@ -144,13 +145,46 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
         </div>
       </div>
 
-      <CreateMenuBtn
-        text='Assign tags'
-        isArticleValid={isArticleValid(titlePatch.value, bodyPatch.value)}
-        handleClick={handleToggle}
-      />
+      <div className='mt-10 py-2 flex bg-slate-100'>
+        <CreateMenuBtn
+          text='tags'
+          isArticleValid={isArticleValid(titlePatch.value, bodyPatch.value)}
+          handleClick={handleToggle}
+          icon={<TagIcon size={26} className='w-min mx-auto my-2 text-slate-600' />}
+        />
 
-      <div>
+        <CreateMenuBtn
+          text='save'
+          isArticleValid={isArticleValid(titlePatch.value, bodyPatch.value)}
+          handleClick={handlePatchArticle}
+          icon={<Save size={26} className='w-min mx-auto my-2 text-slate-600' />}
+        />
+
+        {isPublished ? (
+          <CreateMenuBtn
+            text='hide'
+            isArticleValid={isArticleValid(titlePatch.value, bodyPatch.value)}
+            handleClick={togglePublishStatus}
+            icon={<EyeOff size={26} className='w-min mx-auto my-2 text-slate-600' />}
+          />
+        ) : (
+          <CreateMenuBtn
+            text='publish'
+            isArticleValid={isArticleValid(titlePatch.value, bodyPatch.value)}
+            handleClick={togglePublishStatus}
+            icon={<Eye size={26} className='w-min mx-auto my-2 text-slate-600' />}
+          />
+        )}
+
+        <CreateMenuBtn
+          text='delete'
+          isArticleValid={isArticleValid(titlePatch.value, bodyPatch.value)}
+          handleClick={showDeleteConfirmation}
+          icon={<Delete size={26} className='w-min mx-auto my-2 text-slate-600' />}
+        />
+      </div>
+
+      <div className="mb-10">
         {showTagsMenu ? (
           <AssignTags
             allTags={allTags}
@@ -160,32 +194,6 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
           />
         ) : null}
       </div>
-
-      <CreateMenuBtn
-        text='Save changes'
-        isArticleValid={isArticleValid(titlePatch.value, bodyPatch.value)}
-        handleClick={handlePatchArticle}
-      />
-
-      {isPublished ? (
-        <CreateMenuBtn
-          text='Hide article'
-          isArticleValid={isArticleValid(titlePatch.value, bodyPatch.value)}
-          handleClick={togglePublishStatus}
-        />
-      ) : (
-        <CreateMenuBtn
-          text='Publish article'
-          isArticleValid={isArticleValid(titlePatch.value, bodyPatch.value)}
-          handleClick={togglePublishStatus}
-        />
-      )}
-
-      <CreateMenuBtn
-        text='Delete article'
-        isArticleValid={isArticleValid(titlePatch.value, bodyPatch.value)}
-        handleClick={showDeleteConfirmation}
-      />
 
       <DeleteConfirmation id={article.id} show={showDelete} hideShow={hideDeleteConfirmation} />
     </div>

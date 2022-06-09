@@ -15,6 +15,7 @@ import AssignTags from "../../components/admin/AssignTags";
 import CreateMenuBtn from "../../components/admin/CreateMenuBtn";
 import { isArticleValid } from "../../lib/ArticleEditMethods";
 import TopElement from "../../components/admin/TopElement";
+import { Eye, Save, Tag as TagIcon } from "react-feather";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -98,12 +99,28 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
         </div>
       </div>
 
-      <CreateMenuBtn
-        text='Assign tags'
-        isArticleValid={isArticleValid(title, body)}
-        handleClick={handleToggle}
-      />
+      <div className='mt-10 py-2 flex bg-slate-100'>
+        <CreateMenuBtn
+          text='tags'
+          isArticleValid={isArticleValid(title, body)}
+          handleClick={handleToggle}
+          icon={<TagIcon size={26} className='w-min mx-auto my-2 text-slate-600' />}
+        />
 
+        <CreateMenuBtn
+          text='save for later'
+          isArticleValid={isArticleValid(title, body)}
+          handleClick={() => handleCreateArticle(false)}
+          icon={<Save size={26} className='w-min mx-auto my-2 text-slate-600' />}
+        />
+        <CreateMenuBtn
+          text='publish'
+          isArticleValid={isArticleValid(title, body)}
+          handleClick={() => handleCreateArticle(true)}
+          icon={<Eye size={26} className='w-min mx-auto my-2 text-slate-600' />}
+        />
+      </div>
+      
       <div>
         {showTagsMenu ? (
           <AssignTags
@@ -114,17 +131,6 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
           />
         ) : null}
       </div>
-
-      <CreateMenuBtn
-        text='Save for later'
-        isArticleValid={isArticleValid(title, body)}
-        handleClick={() => handleCreateArticle(false)}
-      />
-      <CreateMenuBtn
-        text='Publish immediately'
-        isArticleValid={isArticleValid(title, body)}
-        handleClick={() => handleCreateArticle(true)}
-      />
     </>
   );
 };
