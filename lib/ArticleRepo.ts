@@ -1,10 +1,12 @@
 import axios, { AxiosResponse } from "axios";
 import type { Article, ArticlePatch } from "../interfaces/IArticle";
+import type { GetServerSidePropsContext } from "next";
 
-const getArticles = async (): Promise<AxiosResponse<Array<Article>>> => {
+const getArticles = async (context: GetServerSidePropsContext): Promise<AxiosResponse<Array<Article>>> => {
   return await axios({
     method: "GET",
-    url: "http://localhost:5010/articles"
+    url: "http://localhost:5010/articles",
+    headers: context.req.headers.cookie ? { cookie: context.req.headers.cookie } : undefined
   });
 };
 

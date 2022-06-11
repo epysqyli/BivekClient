@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
     };
   }
 
-  const articles: AxiosResponse<Array<Article>> = await getArticles();
+  const articles: AxiosResponse<Array<Article>> = await getArticles(context);
   return { props: { articles: articles.data } };
 };
 
