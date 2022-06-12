@@ -82,7 +82,7 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
 
   return (
     <>
-      <TopElement text='Create an article from scratch' />
+      <TopElement text='Create a new article' />
       <div className='block w-5/6 mx-auto'>
         <input
           onChange={handleTitleChange}
