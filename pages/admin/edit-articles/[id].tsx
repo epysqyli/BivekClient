@@ -1,11 +1,12 @@
 import type NextPageLayout from "../../../types/NextPageLayout";
-import type { Article, ArticlePatch } from "../../../interfaces/IArticle";
+import type IArticle from "../../../interfaces/models/IArticle";
+import type IPatch from "../../../interfaces/models/IPatch";
 import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult, Redirect } from "next";
 import type { AxiosResponse } from "axios";
 import type { JSONContent } from "@tiptap/react";
 import type { FormEvent } from "react";
 import type { ReactElement } from "react";
-import type { Tag } from "../../../interfaces/IArticle";
+import type ITag from "../../../interfaces/models/ITag";
 import AssignTags from "../../../components/admin/AssignTags";
 import { getTags } from "../../../lib/TagRepo";
 import AdminLayout from "../../../layouts/AdminLayout";
@@ -40,8 +41,8 @@ export const getServerSideProps: GetServerSideProps = async (
     };
   }
 
-  const resp: AxiosResponse<Article> = await getArticleById(Number(context.query.id));
-  const article: Article = resp.data;
+  const resp: AxiosResponse<IArticle> = await getArticleById(Number(context.query.id));
+  const article: IArticle = resp.data;
   const body: string = generateHTML(JSON.parse(article.body), [
     StarterKit,
     TextAlign.configure({
@@ -63,17 +64,17 @@ export const getServerSideProps: GetServerSideProps = async (
 };
 
 interface Props {
-  article: Article;
-  tags: Array<Tag>;
+  article: IArticle;
+  tags: Array<ITag>;
 }
 
 const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElement => {
-  const [titlePatch, setTitlePatch] = useState<ArticlePatch>({
+  const [titlePatch, setTitlePatch] = useState<IPatch>({
     path: "title",
     op: "replace",
     value: article.title
   });
-  const [bodyPatch, setBodyPatch] = useState<ArticlePatch>({
+  const [bodyPatch, setBodyPatch] = useState<IPatch>({
     path: "body",
     op: "replace",
     value: JSON.stringify(
@@ -93,8 +94,8 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
     )
   });
 
-  const [allTags] = useState<Array<Tag>>(tags);
-  const [currentTags, setCurrentTags] = useState<Array<Tag>>(article.tags);
+  const [allTags] = useState<Array<ITag>>(tags);
+  const [currentTags, setCurrentTags] = useState<Array<ITag>>(article.tags);
   const [showTagsMenu, setTagsMenu] = useState<boolean>(false);
   const [isPublished, setIsPublished] = useState<boolean>(article.published);
   const [showDelete, setShowDelete] = useState<boolean>(false);
@@ -114,10 +115,10 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
 
   const togglePublishStatus = async (): Promise<void> => {
     if (isPublished) {
-      const resp: AxiosResponse<Article> = await hideArticle(article.id);
+      const resp: AxiosResponse<IArticle> = await hideArticle(article.id);
       setIsPublished(resp.data.published);
     } else {
-      const resp: AxiosResponse<Article> = await publishArticle(article.id);
+      const resp: AxiosResponse<IArticle> = await publishArticle(article.id);
       setIsPublished(resp.data.published);
     }
   };
@@ -184,7 +185,7 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
         />
       </div>
 
-      <div className="mb-10">
+      <div className='mb-10'>
         {showTagsMenu ? (
           <AssignTags
             allTags={allTags}

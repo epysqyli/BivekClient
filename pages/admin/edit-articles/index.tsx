@@ -1,7 +1,7 @@
 import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult, Redirect } from "next";
 import type { ReactElement } from "react";
 import type NextPageLayout from "../../../types/NextPageLayout";
-import type { Article } from "../../../interfaces/IArticle";
+import type IArticle from "../../../interfaces/models/IArticle";
 import type { AxiosResponse } from "axios";
 import AdminLayout from "../../../layouts/AdminLayout";
 import { checkLogin } from "../../../lib/Auth";
@@ -22,12 +22,12 @@ export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
     };
   }
 
-  const articles: AxiosResponse<Array<Article>> = await getArticles(context);
+  const articles: AxiosResponse<Array<IArticle>> = await getArticles(context);
   return { props: { articles: articles.data } };
 };
 
 interface Props {
-  articles: Array<Article>;
+  articles: Array<IArticle>;
 }
 
 const EditIndex: NextPageLayout<Props> = ({ articles }: Props): ReactElement => {

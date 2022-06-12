@@ -1,8 +1,9 @@
 import axios, { AxiosResponse } from "axios";
-import type { Article, ArticlePatch } from "../interfaces/IArticle";
+import type IArticle from "../interfaces/models/IArticle";
+import type IPatch from "../interfaces/models/IPatch";
 import type { GetServerSidePropsContext } from "next";
 
-const getArticles = async (context: GetServerSidePropsContext): Promise<AxiosResponse<Array<Article>>> => {
+const getArticles = async (context: GetServerSidePropsContext): Promise<AxiosResponse<Array<IArticle>>> => {
   return await axios({
     method: "GET",
     url: "http://localhost:5010/articles",
@@ -10,14 +11,14 @@ const getArticles = async (context: GetServerSidePropsContext): Promise<AxiosRes
   });
 };
 
-const getPublishedArticles = async (): Promise<AxiosResponse<Array<Article>>> => {
+const getPublishedArticles = async (): Promise<AxiosResponse<Array<IArticle>>> => {
   return await axios({
     method: "GET",
     url: "http://localhost:5010/articles/published"
   });
 };
 
-const getArticleById = async (id: number): Promise<AxiosResponse<Article>> => {
+const getArticleById = async (id: number): Promise<AxiosResponse<IArticle>> => {
   return await axios({
     method: "GET",
     url: `http://localhost:5010/articles/${id}`
@@ -28,7 +29,7 @@ const createArticle = async (
   title: string,
   body: string,
   isPublished: boolean
-): Promise<AxiosResponse<Article>> => {
+): Promise<AxiosResponse<IArticle>> => {
   return await axios({
     method: "POST",
     url: "http://localhost:5010/articles",
@@ -37,7 +38,7 @@ const createArticle = async (
   });
 };
 
-const patchArticle = async (id: number, patches: Array<ArticlePatch>): Promise<AxiosResponse<Article>> => {
+const patchArticle = async (id: number, patches: Array<IPatch>): Promise<AxiosResponse<IArticle>> => {
   return await axios({
     method: "PATCH",
     url: `http://localhost:5010/articles/${id}`,
@@ -46,7 +47,7 @@ const patchArticle = async (id: number, patches: Array<ArticlePatch>): Promise<A
   });
 };
 
-const publishArticle = async (id: number): Promise<AxiosResponse<Article>> => {
+const publishArticle = async (id: number): Promise<AxiosResponse<IArticle>> => {
   const patchData = [{ path: "published", op: "replace", value: "true" }];
 
   return await axios({
@@ -57,7 +58,7 @@ const publishArticle = async (id: number): Promise<AxiosResponse<Article>> => {
   });
 };
 
-const hideArticle = async (id: number): Promise<AxiosResponse<Article>> => {
+const hideArticle = async (id: number): Promise<AxiosResponse<IArticle>> => {
   const patchData = [{ path: "published", op: "replace", value: "false" }];
 
   return await axios({

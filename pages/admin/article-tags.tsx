@@ -4,7 +4,7 @@ import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsR
 import AdminLayout from "../../layouts/AdminLayout";
 import { checkLogin } from "../../lib/Auth";
 import { createTag, deleteTag, getTags } from "../../lib/TagRepo";
-import { Tag } from "../../interfaces/IArticle";
+import ITag from "../../interfaces/models/ITag";
 import { AxiosResponse } from "axios";
 import { useState } from "react";
 import TopElement from "../../components/admin/TopElement";
@@ -23,17 +23,17 @@ export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
     };
   }
 
-  const tags: AxiosResponse<Array<Tag>> = await getTags();
+  const tags: AxiosResponse<Array<ITag>> = await getTags();
 
   return { props: { tags: tags.data } };
 };
 
 interface TagsProps {
-  tags: Array<Tag>;
+  tags: Array<ITag>;
 }
 
 const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactElement => {
-  const [currentTags, setCurrentTags] = useState<Array<Tag>>(tags);
+  const [currentTags, setCurrentTags] = useState<Array<ITag>>(tags);
   const [newTag, setNewTag] = useState<string>("");
 
   const handleChange = (e: FormEvent<HTMLInputElement>) => setNewTag(e.currentTarget.value.trim());

@@ -2,9 +2,10 @@ import type { FormEvent, ReactElement } from "react";
 import type NextPageLayout from "../../types/NextPageLayout";
 import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult, Redirect } from "next";
 import type { AxiosResponse } from "axios";
-import type { Article } from "../../interfaces/IArticle";
+import type IArticle from "../../interfaces/models/IArticle";
+import type IPatch from "../../interfaces/models/IPatch";
+import type ITag from "../../interfaces/models/ITag";
 import type { JSONContent } from "@tiptap/react";
-import type { Tag, ArticlePatch } from "../../interfaces/IArticle";
 import AdminLayout from "../../layouts/AdminLayout";
 import { checkLogin } from "../../lib/Auth";
 import { useState } from "react";
@@ -36,15 +37,15 @@ export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
 };
 
 interface PageProps {
-  tags: Array<Tag>;
+  tags: Array<ITag>;
 }
 
 const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): ReactElement => {
   const [id, setId] = useState<number>(0);
   const [title, setTitle] = useState<string>("");
   const [body, setBody] = useState<string>("");
-  const [titlePatch, setTitlePatch] = useState<ArticlePatch>({ path: "title", op: "replace", value: "" });
-  const [bodyPatch, setBodyPatch] = useState<ArticlePatch>({
+  const [titlePatch, setTitlePatch] = useState<IPatch>({ path: "title", op: "replace", value: "" });
+  const [bodyPatch, setBodyPatch] = useState<IPatch>({
     path: "body",
     op: "replace",
     value: ""
@@ -60,8 +61,8 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
     setBodyPatch({ ...bodyPatch, value: JSON.stringify(content) });
   };
 
-  const [allTags] = useState<Array<Tag>>(tags);
-  const [currentTags, setCurrentTags] = useState<Array<Tag>>([]);
+  const [allTags] = useState<Array<ITag>>(tags);
+  const [currentTags, setCurrentTags] = useState<Array<ITag>>([]);
   const [showTagsMenu, setTagsMenu] = useState<boolean>(false);
 
   const toggleAssignTags = (): void => (showTagsMenu ? setTagsMenu(false) : setTagsMenu(true));
@@ -73,7 +74,7 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
 
   const handleCreateArticle = async (publish: boolean): Promise<void> => {
     if (id === 0) {
-      const resp: AxiosResponse<Article> = await createArticle(title, body, publish);
+      const resp: AxiosResponse<IArticle> = await createArticle(title, body, publish);
       setId(resp.data.id);
     } else {
       await patchArticle(id, [titlePatch, bodyPatch]);

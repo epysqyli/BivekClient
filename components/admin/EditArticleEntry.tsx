@@ -1,11 +1,11 @@
 import { Edit } from "react-feather";
 import { ReactElement } from "react";
 import Link from "next/link";
-import { Article } from "../../interfaces/IArticle";
+import IArticle from "../../interfaces/models/IArticle";
 import TagElement from "./TagElement";
 
 interface Props {
-  article: Article;
+  article: IArticle;
 }
 
 const EditArticleEntry = ({ article }: Props): ReactElement => {

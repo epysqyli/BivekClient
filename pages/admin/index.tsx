@@ -6,7 +6,7 @@ import AdminLayout from "../../layouts/AdminLayout";
 import { checkLogin } from "../../lib/Auth";
 import TopElement from "../../components/admin/TopElement";
 import IndexLink from "../../components/admin/IndexLink";
-import { Database, Edit3, FilePlus, Paperclip, Tag } from "react-feather";
+import { Database, Edit3, FilePlus, Paperclip, Tag, Server } from "react-feather";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -51,8 +51,14 @@ const AdminIndex: NextPageLayout = (): ReactElement => {
         />
 
         <IndexLink
+          href='/admin/manage-dataset-categories'
+          text='manage dataset categories'
+          icon={<Server size={36} strokeWidth={1.25} className={iconStyle} />}
+        />
+
+        <IndexLink
           href='/admin/manage-datasets'
-          text='datasets and dataset categories'
+          text='add, edit, or delete datasets'
           icon={<Database size={36} strokeWidth={1.25} className={iconStyle} />}
         />
 

@@ -1,6 +1,6 @@
 import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import type { ReactElement } from "react";
-import type { Article } from "../../interfaces/IArticle";
+import type IArticle from "../../interfaces/models/IArticle";
 import type { AxiosResponse } from "axios";
 import type NextPageLayout from "../../types/NextPageLayout";
 import { getArticleById } from "../../lib/ArticleRepo";
@@ -15,13 +15,13 @@ import TableHeader from "@tiptap/extension-table-header";
 import Image from "@tiptap/extension-image";
 
 interface Props {
-  article: Article;
+  article: IArticle;
   body: string;
 }
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const id = Number(context.query.id);
-  const resp: AxiosResponse<Article> = await getArticleById(id);
+  const resp: AxiosResponse<IArticle> = await getArticleById(id);
   let body: string = generateHTML(JSON.parse(resp.data.body), [
     StarterKit,
     TextAlign.configure({

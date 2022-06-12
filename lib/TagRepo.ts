@@ -1,21 +1,22 @@
 import axios, { AxiosResponse } from "axios";
-import type { Tag } from "../interfaces/IArticle";
+import type ITag from "../interfaces/models/ITag";
+import type IPatch from "../interfaces/models/IPatch";
 
-const getTags = async (): Promise<AxiosResponse<Array<Tag>>> => {
+const getTags = async (): Promise<AxiosResponse<Array<ITag>>> => {
   return await axios({
     method: "GET",
     url: "http://localhost:5010/tags"
   });
 };
 
-const getTagById = async (id: number): Promise<AxiosResponse<Tag>> => {
+const getTagById = async (id: number): Promise<AxiosResponse<ITag>> => {
   return await axios({
     method: "GET",
     url: `http://localhost:5010/tags/${id}`
   });
 };
 
-const createTag = async (name: string): Promise<AxiosResponse<Tag>> => {
+const createTag = async (name: string): Promise<AxiosResponse<ITag>> => {
   return await axios({
     method: "POST",
     url: "http://localhost:5010/tags",
@@ -24,13 +25,11 @@ const createTag = async (name: string): Promise<AxiosResponse<Tag>> => {
   });
 };
 
-const patchTag = async (id: number, path: string, op: string, value: string): Promise<AxiosResponse<Tag>> => {
-  const patchData = [{ path: path, op: op, value: value }];
-
+const patchTag = async (id: number, patches: Array<IPatch>): Promise<AxiosResponse<ITag>> => {
   return await axios({
     method: "PATCH",
     url: `http://localhost:5010/tags/${id}`,
-    data: patchData,
+    data: patches,
     withCredentials: true
   });
 };

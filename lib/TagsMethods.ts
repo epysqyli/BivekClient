@@ -1,11 +1,11 @@
 import type { Dispatch, SetStateAction } from "react";
-import type { Tag } from "../interfaces/IArticle";
+import type ITag from "../interfaces/models/ITag";
 import { createArticleTagRelation, deleteArticleTag } from "./ArticleTagRepo";
 
 const addTag = async (
-  tag: Tag,
-  currentTags: Array<Tag>,
-  setCurrentTags: Dispatch<SetStateAction<Tag[]>>,
+  tag: ITag,
+  currentTags: Array<ITag>,
+  setCurrentTags: Dispatch<SetStateAction<ITag[]>>,
   articleId: number
 ): Promise<void> => {
   await createArticleTagRelation({ articleId: articleId, tagId: tag.id });
@@ -13,9 +13,9 @@ const addTag = async (
 };
 
 const removeTag = async (
-  tag: Tag,
-  currentTags: Array<Tag>,
-  setCurrentTags: Dispatch<SetStateAction<Tag[]>>,
+  tag: ITag,
+  currentTags: Array<ITag>,
+  setCurrentTags: Dispatch<SetStateAction<ITag[]>>,
   articleId: number
 ): Promise<void> => {
   await deleteArticleTag({ articleId: articleId, tagId: tag.id });
