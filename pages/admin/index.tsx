@@ -51,14 +51,8 @@ const AdminIndex: NextPageLayout = (): ReactElement => {
         />
 
         <IndexLink
-          href='/admin/manage-dataset-categories'
-          text='manage dataset categories'
-          icon={<Server size={36} strokeWidth={1.25} className={iconStyle} />}
-        />
-
-        <IndexLink
           href='/admin/manage-datasets'
-          text='add, edit, or delete datasets'
+          text='manage datasets'
           icon={<Database size={36} strokeWidth={1.25} className={iconStyle} />}
         />
 

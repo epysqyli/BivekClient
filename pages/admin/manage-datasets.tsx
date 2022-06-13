@@ -1,9 +1,11 @@
 import type { ReactElement } from "react";
 import type NextPageLayout from "../../types/NextPageLayout";
+import type { GetServerSideProps, Redirect, GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import AdminLayout from "../../layouts/AdminLayout";
-
-import { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult, Redirect } from "next";
 import { checkLogin } from "../../lib/Auth";
+import TopElement from "../../components/admin/TopElement";
+import { getDataCategories } from "../../lib/DataCategoryRepo";
+import IDataCategory from "../../interfaces/models/IDataCategory";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -18,13 +20,22 @@ export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
     };
   }
 
-  return { props: {} };
+  const datasets = await getDataCategories();
+  return { props: { datasets: datasets.data } };
 };
 
-const ManageDatasets: NextPageLayout = (): ReactElement => {
-  return <div></div>;
+interface Props {
+  datasets: Array<IDataCategory>;
+}
+
+const DatasetCategories: NextPageLayout<Props> = ({ datasets }: Props): ReactElement => {
+  return (
+    <>
+      <TopElement text='Manage datasets and data categories' />
+    </>
+  );
 };
 
-ManageDatasets.getLayout = (page: ReactElement) => <AdminLayout>{page}</AdminLayout>;
+DatasetCategories.getLayout = (page: ReactElement) => <AdminLayout>{page}</AdminLayout>;
 
-export default ManageDatasets;
+export default DatasetCategories;
