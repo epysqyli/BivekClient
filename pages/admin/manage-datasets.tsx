@@ -6,6 +6,7 @@ import { checkLogin } from "../../lib/Auth";
 import TopElement from "../../components/admin/TopElement";
 import { getDataCategories } from "../../lib/DataCategoryRepo";
 import IDataCategory from "../../interfaces/models/IDataCategory";
+import DatasetCategoryElement from "../../components/admin/DatasetCategoryElement";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -32,6 +33,15 @@ const DatasetCategories: NextPageLayout<Props> = ({ datasets }: Props): ReactEle
   return (
     <>
       <TopElement text='Manage datasets and data categories' />
+      <div>
+        {datasets.map((dataCategory) => {
+          return (
+            <div className='w-11/12 mx-auto border py-2 shadow-md rounded' key={dataCategory.id}>
+              <DatasetCategoryElement dataCategory={dataCategory} />
+            </div>
+          );
+        })}
+      </div>
     </>
   );
 };
