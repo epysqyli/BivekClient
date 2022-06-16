@@ -35,10 +35,17 @@ const DatasetCategories: NextPageLayout<Props> = ({ datasetCategoriesProps }: Pr
   const [categoryName, setCategoryName] = useState<string>("");
   const [datasetCategories, setDatasetCategories] = useState<Array<IDataCategory>>(datasetCategoriesProps);
   const handleCreateCategory = async (): Promise<void> => {
-    const newDataCategory = await createDataCategory(categoryName);
-    setDatasetCategories([...datasetCategories, newDataCategory.data]);
+    if (categoryName.length >= 3) {
+      const newDataCategory = await createDataCategory(categoryName);
+      setDatasetCategories([...datasetCategories, newDataCategory.data]);
+    }
   };
   const handleCategoryChange = (e: FormEvent<HTMLInputElement>) => setCategoryName(e.currentTarget.value);
+
+  const updateStateAfterDelete = (id: number) => {
+    const newDatasetCategories: Array<IDataCategory> = datasetCategories.filter((dC) => dC.id !== id);
+    setDatasetCategories(newDatasetCategories);
+  };
 
   return (
     <>
@@ -65,7 +72,10 @@ const DatasetCategories: NextPageLayout<Props> = ({ datasetCategoriesProps }: Pr
         {datasetCategories.map((dataCategory) => {
           return (
             <div className='w-11/12 mx-auto border py-2 my-10 shadow-md rounded' key={dataCategory.id}>
-              <DatasetCategoryElement dataCategory={dataCategory} />
+              <DatasetCategoryElement
+                dataCategory={dataCategory}
+                updateStateAfterDelete={updateStateAfterDelete}
+              />
             </div>
           );
         })}

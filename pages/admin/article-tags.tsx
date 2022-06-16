@@ -8,7 +8,7 @@ import ITag from "../../interfaces/models/ITag";
 import { AxiosResponse } from "axios";
 import { useState } from "react";
 import TopElement from "../../components/admin/TopElement";
-import { Delete, PlusCircle } from "react-feather";
+import { Trash, PlusCircle } from "react-feather";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -83,7 +83,10 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
               onClick={() => handleDeleteTag(tag.id)}
               className='flex items-center self-stretch px-5 bg-slate-50 hover:bg-slate-100 transition-colors rounded-br rounded-tr cursor-pointer group'
             >
-              <Delete className='text-slate-500 group-hover:text-slate-600 group-active:text-slate-900' />
+              <Trash
+                size={20}
+                className='text-slate-500 group-hover:text-slate-600 group-active:text-slate-900'
+              />
             </div>
           </div>
         ))}
