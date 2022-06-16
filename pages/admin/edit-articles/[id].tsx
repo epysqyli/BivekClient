@@ -10,7 +10,13 @@ import type ITag from "../../../interfaces/models/ITag";
 import AssignTags from "../../../components/admin/AssignTags";
 import { getTags } from "../../../lib/TagRepo";
 import AdminLayout from "../../../layouts/AdminLayout";
-import { getArticleById, hideArticle, patchArticle, publishArticle } from "../../../lib/ArticleRepo";
+import {
+  getArticleById,
+  hideArticle,
+  patchArticle,
+  publishArticle,
+  deleteArticle
+} from "../../../lib/ArticleRepo";
 import { checkLogin } from "../../../lib/Auth";
 import { useState } from "react";
 import TipTap from "../../../components/tiptap/TipTap";
@@ -196,7 +202,14 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
         ) : null}
       </div>
 
-      <DeleteConfirmation id={article.id} show={showDelete} hideShow={hideDeleteConfirmation} />
+      <DeleteConfirmation
+        id={article.id}
+        show={showDelete}
+        resourceType='article'
+        hideShow={hideDeleteConfirmation}
+        deleteItem={deleteArticle}
+        redirectPath='/admin/edit-articles'
+      />
     </div>
   );
 };
