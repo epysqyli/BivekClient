@@ -34,7 +34,7 @@ const DatasetForm = ({ dataCategory, addDatasetToState, hideForm }: Props): Reac
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <div className='w-5/6 mx-auto my-4'>
+        <div className='w-5/6 mx-auto'>
           <input
             type='text'
             name='title'
@@ -60,11 +60,17 @@ const DatasetForm = ({ dataCategory, addDatasetToState, hideForm }: Props): Reac
 
         <button
           type='submit'
-          className='block mx-auto w-fit border p-3 rounded-md bg-white my-10 hover:shadow-md'
+          className='block mx-auto w-fit border px-3 py-2 rounded-md bg-white mt-10 mb-5 hover:shadow-md'
         >
           Add dataset to category
         </button>
       </form>
+      <div
+        onClick={hideForm}
+        className='text-sm text-center mx-auto text-gray-400 mb-4 hover:underline cursor-pointer'
+      >
+        or close form
+      </div>
     </>
   );
 };

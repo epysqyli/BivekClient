@@ -28,11 +28,17 @@ const DatasetCategoryElement = ({ dataCategory, updateStateAfterDelete }: Props)
   };
 
   return (
-    <>
-      <div className='flex items-center justify-between w-5/6 mx-auto'>
-        <h3 className='my-5 text-center text-xl font-bold'>{dataCategory.name}</h3>
-        <Trash onClick={showDeleteConfirmation} className='text-slate-700' />
+    <div className='relative'>
+      <div className='w-5/6 mx-auto text-center'>
+        <h3 className='my-5 text-2xl font-bold text-gray-700 w-4/5'>{dataCategory.name}</h3>
       </div>
+
+      <Trash
+        size={36}
+        onClick={showDeleteConfirmation}
+        strokeWidth={1.75}
+        className='bg-slate-600 text-white rounded-full p-2 absolute -top-4 right-2 cursor-pointer transition-transform hover:scale-95 active:scale-90'
+      />
 
       <DeleteConfirmation
         show={showDelete}
@@ -46,21 +52,28 @@ const DatasetCategoryElement = ({ dataCategory, updateStateAfterDelete }: Props)
         {datasets !== null && datasets.length !== 0 ? (
           datasets.map((dataset) => {
             return (
-              <div className='w-5/6 border rounded mx-auto my-1 px-2 py-2' key={dataset.id}>
+              <div className='w-5/6 border rounded mx-auto my-3 px-2' key={dataset.id}>
                 <DatasetElement dataset={dataset} />
               </div>
             );
           })
         ) : (
-          <div className='w-5/6 border mx-auto px-2 py-2 text-center'>This category is still empty</div>
+          <div className='w-4/6 mx-auto text-sm text-gray-600 my-10 text-center'>
+            click below to add the first dataset for this category
+          </div>
         )}
       </div>
       {showDatasetForm ? (
         <DatasetForm dataCategory={dataCategory} hideForm={hideForm} addDatasetToState={addDatasetToState} />
       ) : (
-        <PlusCircle onClick={showForm} size={32} strokeWidth={1.5} className='w-min mx-auto my-10' />
+        <PlusCircle
+          onClick={showForm}
+          size={30}
+          strokeWidth={1.5}
+          className='w-min mx-auto my-10 cursor-pointer transition-transform hover:scale-95 active:scale-90'
+        />
       )}
-    </>
+    </div>
   );
 };
 

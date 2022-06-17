@@ -8,8 +8,14 @@ interface Props {
 const DatasetElement = ({ dataset }: Props): ReactElement => {
   return (
     <>
-      <div>{dataset.title}</div>
-      <div>{dataset.link}</div>
+      <div className='p-1'>
+        <div className='text-gray-500 text-sm'>title</div>
+        <div className='mt-1 text-sm'>{dataset.title}</div>
+      </div>
+      <div className='p-1'>
+        <div className='text-gray-600 text-sm'>download link</div>
+        <div className='mt-1 text-sm'>{dataset.link}</div>
+      </div>
     </>
   );
 };
