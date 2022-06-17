@@ -1,8 +1,8 @@
 interface IDataset {
-  id: number;
+  id?: number;
   title: string;
   link: string;
-  categoryId: number;
+  dataCategoryId: number;
 }
 
 export default IDataset;

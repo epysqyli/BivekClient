@@ -16,15 +16,12 @@ const getDatasetById = async (id: number): Promise<AxiosResponse<IDataset>> => {
   });
 };
 
-const createDataset = async (
-  title: string,
-  link: string,
-  categoryId: number
-): Promise<AxiosResponse<IDataset>> => {
+const createDataset = async (dataset: IDataset): Promise<AxiosResponse<IDataset>> => {
+  const {title, link, dataCategoryId} = dataset;  
   return await axios({
     method: "POST",
     url: "http://localhost:5010/datasets",
-    data: { title, link, categoryId },
+    data: { title, link, dataCategoryId },
     withCredentials: true
   });
 };
