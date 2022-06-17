@@ -43,24 +43,24 @@ const Login: NextPageLayout = (): ReactElement => {
 
         <form onSubmit={handleSubmit}>
           <div className='w-5/6 mx-auto my-4'>
-            <label htmlFor='email'>Email</label>
             <input
               type='email'
               name='username'
               id='email'
-              className='block mt-2 w-full border border-gray-600 p-3 focus:ring-0 rounded-lg shadow-sm focus:shadow-md'
+              placeholder="email"
+              className='block mt-2 w-full border-b border-gray-400 p-3 focus:ring-0 outline-none'
               onChange={handleChange}
               required
             />
           </div>
 
           <div className='w-5/6 mx-auto my-4'>
-            <label htmlFor='name'>Password</label>
             <input
               type='password'
               name='password'
               id='password'
-              className='block mt-2 w-full border border-gray-600 p-3 focus:ring-0 rounded-lg shadow-sm focus:shadow-md'
+              placeholder="password"
+              className='block mt-2 w-full border-b border-gray-400 p-3 focus:ring-0 outline-none'
               onChange={handleChange}
               required
             />
@@ -68,7 +68,7 @@ const Login: NextPageLayout = (): ReactElement => {
 
           <button
             type='submit'
-            className='block mx-auto w-3/6 border p-5 bg-white my-10 hover:shadow-md focus:bg-gray-200 focus:shadow-md'
+            className='block mx-auto w-fit border px-3 py-2 rounded-md bg-white my-10 hover:shadow-md focus:bg-gray-200'
           >
             login
           </button>
