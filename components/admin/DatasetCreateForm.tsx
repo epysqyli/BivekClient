@@ -3,6 +3,7 @@ import type { FormEvent } from "react";
 import { useState } from "react";
 import IDataCategory from "../../interfaces/models/IDataCategory";
 import IDataset from "../../interfaces/models/IDataset";
+import IDatasetCreate from "../../interfaces/models/IDatasetCreate";
 import { createDataset } from "../../lib/DatasetRepo";
 
 interface Props {
@@ -11,8 +12,8 @@ interface Props {
   addDatasetToState(dataset: IDataset): void;
 }
 
-const DatasetForm = ({ dataCategory, addDatasetToState, hideForm }: Props): ReactElement => {
-  const [dataset, setDataset] = useState<IDataset>({
+const DatasetCreateForm = ({ dataCategory, addDatasetToState, hideForm }: Props): ReactElement => {
+  const [dataset, setDataset] = useState<IDatasetCreate>({
     title: "",
     link: "",
     dataCategoryId: dataCategory.id
@@ -75,4 +76,4 @@ const DatasetForm = ({ dataCategory, addDatasetToState, hideForm }: Props): Reac
   );
 };
 
-export default DatasetForm;
+export default DatasetCreateForm;
