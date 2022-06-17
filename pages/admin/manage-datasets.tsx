@@ -38,6 +38,7 @@ const DatasetCategories: NextPageLayout<Props> = ({ datasetCategoriesProps }: Pr
     if (categoryName.length >= 3) {
       const newDataCategory = await createDataCategory(categoryName);
       setDatasetCategories([...datasetCategories, newDataCategory.data]);
+      setCategoryName("");
     }
   };
   const handleCategoryChange = (e: FormEvent<HTMLInputElement>) => setCategoryName(e.currentTarget.value);
@@ -66,6 +67,7 @@ const DatasetCategories: NextPageLayout<Props> = ({ datasetCategoriesProps }: Pr
           className='border-b-2 border-gray-300 block w-4/5 mx-auto py-2 pl-3 text-center focus:outline-none'
           placeholder='Enter data category name'
           onChange={handleCategoryChange}
+          value={categoryName}
         />
       </div>
       <div>

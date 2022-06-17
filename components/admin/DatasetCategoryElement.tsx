@@ -68,8 +68,8 @@ const DatasetCategoryElement = ({ dataCategory, updateStateAfterDelete }: Props)
       ) : (
         <PlusCircle
           onClick={showForm}
-          size={30}
-          strokeWidth={1.5}
+          size={34}
+          strokeWidth={1.25}
           className='w-min mx-auto my-10 cursor-pointer transition-transform hover:scale-95 active:scale-90'
         />
       )}
