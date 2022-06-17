@@ -1,8 +1,7 @@
-interface IDataset {
-  id: number;
+interface IDatasetCreate {
   title: string;
   link: string;
   dataCategoryId: number;
 }
 
-export default IDataset;
+export default IDatasetCreate;

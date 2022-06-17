@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 import { XCircle } from "react-feather";

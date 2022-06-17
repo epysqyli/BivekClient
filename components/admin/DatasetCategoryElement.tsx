@@ -18,13 +18,16 @@ const DatasetCategoryElement = ({ dataCategory, updateStateAfterDelete }: Props)
   const showDeleteConfirmation = () => setShowDelete(true);
   const hideDeleteConfirmation = () => setShowDelete(false);
 
-  const [showDatasetForm, setShowDatasetForm] = useState<boolean>(false);
-  const showForm = () => setShowDatasetForm(true);
-  const hideForm = () => setShowDatasetForm(false);
+  const [showDatasetCreateForm, setShowDatasetCreateForm] = useState<boolean>(false);
+  const showCreateForm = () => setShowDatasetCreateForm(true);
+  const hideCreateForm = () => setShowDatasetCreateForm(false);
 
   const addDatasetToState = (dataset: IDataset) => setDatasets([...datasets, dataset]);
-  const removeDatasetFromState = (dataset: IDataset) => {
-    setDatasets([...datasets.filter((d) => d.id !== dataset.id)]);
+  const removeDatasetFromState = (id: number) => setDatasets([...datasets.filter((d) => d.id !== id)]);
+  const replaceDatasetsInState = (dataset: IDataset) => {
+    const oldDatasets: Array<IDataset> = datasets.filter((d) => d.id !== dataset.id);
+    const newDatasets: Array<IDataset> = [...oldDatasets, dataset].sort((a, b) => (a.id > b.id ? -1 : 1));
+    setDatasets(newDatasets);
   };
 
   return (
@@ -52,8 +55,12 @@ const DatasetCategoryElement = ({ dataCategory, updateStateAfterDelete }: Props)
         {datasets !== null && datasets.length !== 0 ? (
           datasets.map((dataset) => {
             return (
-              <div className='w-5/6 border rounded mx-auto my-3 px-2' key={dataset.id}>
-                <DatasetElement dataset={dataset} />
+              <div className='w-11/12 relative border rounded mx-auto my-3 px-2 py-1' key={dataset.id}>
+                <DatasetElement
+                  dataset={dataset}
+                  removeDatasetFromState={removeDatasetFromState}
+                  replaceDatasetsInState={replaceDatasetsInState}
+                />
               </div>
             );
           })
@@ -63,15 +70,15 @@ const DatasetCategoryElement = ({ dataCategory, updateStateAfterDelete }: Props)
           </div>
         )}
       </div>
-      {showDatasetForm ? (
+      {showDatasetCreateForm ? (
         <DatasetCreateForm
           dataCategory={dataCategory}
-          hideForm={hideForm}
+          hideForm={hideCreateForm}
           addDatasetToState={addDatasetToState}
         />
       ) : (
         <PlusCircle
-          onClick={showForm}
+          onClick={showCreateForm}
           size={34}
           strokeWidth={1.25}
           className='w-min mx-auto my-10 cursor-pointer transition-transform hover:scale-95 active:scale-90'

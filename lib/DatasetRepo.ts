@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import type IDataset from "../interfaces/models/IDataset";
+import type IDatasetCreate from "../interfaces/models/IDatasetCreate";
 import type IPatch from "../interfaces/models/IPatch";
 
 const getDatasets = async (): Promise<AxiosResponse<Array<IDataset>>> => {
@@ -16,7 +17,7 @@ const getDatasetById = async (id: number): Promise<AxiosResponse<IDataset>> => {
   });
 };
 
-const createDataset = async (dataset: IDataset): Promise<AxiosResponse<IDataset>> => {
+const createDataset = async (dataset: IDatasetCreate): Promise<AxiosResponse<IDataset>> => {
   const {title, link, dataCategoryId} = dataset;  
   return await axios({
     method: "POST",
