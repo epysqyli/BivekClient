@@ -61,7 +61,7 @@ const DatasetCreateForm = ({ dataCategory, addDatasetToState, hideForm }: Props)
 
         <button
           type='submit'
-          className='block mx-auto w-fit border px-3 py-2 rounded-md bg-white mt-10 mb-5 hover:shadow-md'
+          className='block mx-auto text-sm w-fit rounded-md p-2 bg-white mt-10 mb-5 hover:shadow-md active:shadow-inner'
         >
           Add dataset to category
         </button>

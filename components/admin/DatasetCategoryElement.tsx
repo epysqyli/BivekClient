@@ -32,15 +32,15 @@ const DatasetCategoryElement = ({ dataCategory, updateStateAfterDelete }: Props)
 
   return (
     <div className='relative'>
-      <div className='w-5/6 mx-auto text-center'>
-        <h3 className='my-5 text-2xl font-bold text-gray-700 w-4/5'>{dataCategory.name}</h3>
+      <div className='w-5/6 mx-auto'>
+        <h3 className='my-5 text-2xl font-bold text-gray-700'>{dataCategory.name}</h3>
       </div>
 
       <Trash
         size={36}
         onClick={showDeleteConfirmation}
         strokeWidth={1.75}
-        className='bg-slate-600 text-white rounded-full p-2 absolute -top-4 right-2 cursor-pointer transition-transform hover:scale-95 active:scale-90'
+        className='bg-slate-300 hover:bg-amber-700 text-white rounded-full p-2 absolute -top-5 right-2 cursor-pointer transition-transform hover:scale-95 active:scale-90'
       />
 
       <DeleteConfirmation
@@ -55,7 +55,7 @@ const DatasetCategoryElement = ({ dataCategory, updateStateAfterDelete }: Props)
         {datasets !== null && datasets.length !== 0 ? (
           datasets.map((dataset) => {
             return (
-              <div className='w-11/12 relative border rounded mx-auto my-3 px-2 py-1' key={dataset.id}>
+              <div className='w-11/12 relative border-b mx-auto my-5 px-2 py-2' key={dataset.id}>
                 <DatasetElement
                   dataset={dataset}
                   removeDatasetFromState={removeDatasetFromState}
@@ -81,7 +81,7 @@ const DatasetCategoryElement = ({ dataCategory, updateStateAfterDelete }: Props)
           onClick={showCreateForm}
           size={34}
           strokeWidth={1.25}
-          className='w-min mx-auto my-10 cursor-pointer transition-transform hover:scale-95 active:scale-90'
+          className='w-min mx-auto mt-10 mb-5 text-white bg-slate-500 rounded-full cursor-pointer transition-transform hover:scale-95 active:scale-90'
         />
       )}
     </div>

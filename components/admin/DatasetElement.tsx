@@ -33,15 +33,23 @@ const DatasetElement = ({ dataset, removeDatasetFromState, replaceDatasetsInStat
         <>
           <div>
             <div className='text-gray-500 text-sm'>title</div>
-            <div className='text-sm'>{dataset.title}</div>
+            <div className='text-gray-900 text-sm'>{dataset.title}</div>
           </div>
           <div className='mt-2'>
-            <div className='text-gray-600 text-sm'>download link</div>
-            <div className='text-sm'>{dataset.link}</div>
+            <div className='text-gray-500 text-sm'>download link</div>
+            <div className='text-gray-900 text-sm'>{dataset.link}</div>
           </div>
           <div className='absolute top-1 right-1'>
-            <Edit onClick={showEditForm} size={20} />
-            <Trash2 onClick={showDeleteConfirmation} size={20} className='mt-2' />
+            <Edit
+              className='text-gray-500 cursor-pointer transition-transform hover:scale-95 active:scale-90'
+              onClick={showEditForm}
+              size={20}
+            />
+            <Trash2
+              onClick={showDeleteConfirmation}
+              size={20}
+              className='text-gray-500 mt-3 cursor-pointer transition-transform hover:scale-95 active:scale-90'
+            />
           </div>
         </>
       )}

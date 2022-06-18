@@ -54,17 +54,15 @@ const DatasetCategories: NextPageLayout<Props> = ({ datasetCategoriesProps }: Pr
       <div className='flex items-end text-lg w-5/6 mx-auto rounded-md mt-10 mb-16'>
         <div className='w-min mx-auto cursor-pointer group'>
           <PlusCircle
-            size={42}
+            size={36}
             strokeWidth={1.25}
-            fill='gray'
-            color='white'
-            className='border-gray-400 border-2 rounded-full group-hover:scale-95 group-active:scale-75 transition-transform'
+            className='text-white bg-slate-500 rounded-full group-hover:scale-95 group-active:scale-75 transition-transform'
             onClick={handleCreateCategory}
           />
         </div>
         <input
           type='text'
-          className='border-b-2 border-gray-300 block w-4/5 mx-auto py-2 pl-3 text-center focus:outline-none'
+          className='border-b-2 border-gray-300 block w-4/5 mx-auto pb-1 pl-3 text-center focus:outline-none'
           placeholder='Enter data category name'
           onChange={handleCategoryChange}
           value={categoryName}

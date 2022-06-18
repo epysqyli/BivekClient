@@ -66,14 +66,14 @@ const DatasetEditForm = ({ currentDataset, replaceDatasetsInState, hideForm }: P
 
         <button
           type='submit'
-          className='block mx-auto w-fit rounded-md bg-white mt-5 mb-2 hover:shadow-md'
+          className='block mx-auto text-sm w-fit rounded-md p-2 bg-white mt-5 mb-2 hover:shadow-md active:shadow-inner'
         >
           Confirm changes
         </button>
       </form>
       <div
         onClick={hideForm}
-        className='text-sm text-center mx-auto text-gray-400 mb-2 hover:underline cursor-pointer'
+        className='text-sm text-center w-fit mx-auto text-gray-400 mb-2 hover:underline cursor-pointer'
       >
         or keep old values
       </div>
