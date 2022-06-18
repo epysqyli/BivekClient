@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import type IPatch from "../interfaces/models/IPatch";
-import type IWorkingPaper from "../interfaces/IWorkingPaper";
-import IWorkingPaperCreate from "../interfaces/IWorkingPaperCreate";
+import type IWorkingPaper from "../interfaces/models/IWorkingPaper";
+import IWorkingPaperCreate from "../interfaces/models/IWorkingPaperCreate";
 
 const getWorkingPapers = async (): Promise<AxiosResponse<Array<IWorkingPaper>>> => {
   return await axios({

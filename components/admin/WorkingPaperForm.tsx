@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import type { FormEvent } from "react";
-import type IWorkingPaperCreate from "../../interfaces/IWorkingPaperCreate";
-import type IWorkingPaper from "../../interfaces/IWorkingPaper";
+import type IWorkingPaperCreate from "../../interfaces/models/IWorkingPaperCreate";
+import type IWorkingPaper from "../../interfaces/models/IWorkingPaper";
 import type IPatch from "../../interfaces/models/IPatch";
 import { createWorkingPaper, patchWorkingPaper } from "../../lib/WorkingPaperRepo";
 import { useState } from "react";

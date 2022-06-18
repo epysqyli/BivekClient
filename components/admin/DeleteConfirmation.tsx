@@ -37,6 +37,7 @@ const DeleteConfirmation = ({
       setTimeout(redirect, 2000);
     } else {
       if (updateStateAfterDelete) updateStateAfterDelete(id);
+      hideShow();
     }
   };
 

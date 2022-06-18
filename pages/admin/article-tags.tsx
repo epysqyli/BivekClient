@@ -9,6 +9,7 @@ import { AxiosResponse } from "axios";
 import { useState } from "react";
 import TopElement from "../../components/admin/TopElement";
 import { Trash, PlusCircle } from "react-feather";
+import DeleteConfirmation from "../../components/admin/DeleteConfirmation";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -35,6 +36,9 @@ interface TagsProps {
 const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactElement => {
   const [currentTags, setCurrentTags] = useState<Array<ITag>>(tags);
   const [newTag, setNewTag] = useState<string>("");
+  const [showDelete, setShowDelete] = useState<boolean>(false);
+  const showDeleteConfimation = () => setShowDelete(true);
+  const hideDeleteConfirmation = () => setShowDelete(false);
 
   const handleChange = (e: FormEvent<HTMLInputElement>) => setNewTag(e.currentTarget.value.trim());
 
@@ -43,12 +47,12 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
       const newlyAddedTagResp = await createTag(newTag);
       const newlyAddedTag = newlyAddedTagResp.data;
       setCurrentTags([...currentTags, newlyAddedTag]);
+      setNewTag("");
     }
   };
 
   const handleDeleteTag = async (id: number): Promise<void> => {
-    const deleteResp: AxiosResponse = await deleteTag(id);
-    if (deleteResp.status === 204) setCurrentTags(currentTags.filter((tag) => tag.id !== id));
+    setCurrentTags(currentTags.filter((t) => t.id !== id));
   };
 
   return (
@@ -67,6 +71,7 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
         <input
           onChange={handleChange}
           type='text'
+          value={newTag}
           className='border-b-2 border-gray-300 block w-4/5 mx-auto py-2 pl-3 text-center focus:outline-none'
           placeholder='Enter tag name'
         />
@@ -80,7 +85,7 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
           >
             <div className='py-3'>{tag.name}</div>
             <div
-              onClick={() => handleDeleteTag(tag.id)}
+              onClick={showDeleteConfimation}
               className='flex items-center self-stretch px-5 bg-slate-50 hover:bg-slate-100 transition-colors rounded-br rounded-tr cursor-pointer group'
             >
               <Trash
@@ -88,6 +93,16 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
                 className='text-slate-500 group-hover:text-slate-600 group-active:text-slate-900'
               />
             </div>
+            {showDelete ? (
+              <DeleteConfirmation
+                id={tag.id}
+                show={showDelete}
+                resourceType='tag'
+                deleteItem={deleteTag}
+                hideShow={hideDeleteConfirmation}
+                updateStateAfterDelete={handleDeleteTag}
+              />
+            ) : null}
           </div>
         ))}
       </div>

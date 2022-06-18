@@ -1,5 +1,5 @@
 import type { ReactElement } from "react";
-import type IWorkingPaper from "../../interfaces/IWorkingPaper";
+import type IWorkingPaper from "../../interfaces/models/IWorkingPaper";
 import { useState } from "react";
 import { Edit, Trash2 } from "react-feather";
 import DeleteConfirmation from "./DeleteConfirmation";

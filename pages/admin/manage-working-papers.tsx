@@ -3,7 +3,7 @@ import type NextPageLayout from "../../types/NextPageLayout";
 import type { GetServerSideProps, Redirect, GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import type { AxiosResponse } from "axios";
 import { useState } from "react";
-import IWorkingPaper from "../../interfaces/IWorkingPaper";
+import IWorkingPaper from "../../interfaces/models/IWorkingPaper";
 import { checkLogin } from "../../lib/Auth";
 import AdminLayout from "../../layouts/AdminLayout";
 import { getWorkingPapers } from "../../lib/WorkingPaperRepo";
