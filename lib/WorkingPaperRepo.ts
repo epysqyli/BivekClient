@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import type IPatch from "../interfaces/models/IPatch";
 import type IWorkingPaper from "../interfaces/IWorkingPaper";
+import IWorkingPaperCreate from "../interfaces/IWorkingPaperCreate";
 
 const getWorkingPapers = async (): Promise<AxiosResponse<Array<IWorkingPaper>>> => {
   return await axios({
@@ -16,11 +17,14 @@ const getWorkingPaper = async (id: number): Promise<AxiosResponse<IWorkingPaper>
   });
 };
 
-const createWorkingPaper = async (name: string): Promise<AxiosResponse<IWorkingPaper>> => {
+const createWorkingPaper = async (
+  workingPaper: IWorkingPaperCreate
+): Promise<AxiosResponse<IWorkingPaper>> => {
+  const { title, abstract, link } = workingPaper;
   return await axios({
     method: "POST",
     url: "http://localhost:5010/workingpapers",
-    data: { name },
+    data: { title, abstract, link },
     withCredentials: true
   });
 };
