@@ -26,7 +26,7 @@ const DatasetCategoryElement = ({ dataCategory, updateStateAfterDelete }: Props)
   const removeDatasetFromState = (id: number) => setDatasets([...datasets.filter((d) => d.id !== id)]);
   const replaceDatasetsInState = (dataset: IDataset) => {
     const oldDatasets: Array<IDataset> = datasets.filter((d) => d.id !== dataset.id);
-    const newDatasets: Array<IDataset> = [...oldDatasets, dataset].sort((a, b) => (a.id > b.id ? -1 : 1));
+    const newDatasets: Array<IDataset> = [...oldDatasets, dataset].sort((a, b) => (a.id > b.id ? 1 : -1));
     setDatasets(newDatasets);
   };
 
@@ -53,17 +53,19 @@ const DatasetCategoryElement = ({ dataCategory, updateStateAfterDelete }: Props)
       />
       <div className='my-5'>
         {datasets !== null && datasets.length !== 0 ? (
-          datasets.map((dataset) => {
-            return (
-              <div className='w-11/12 relative border-b mx-auto my-5 px-2 py-2' key={dataset.id}>
-                <DatasetElement
-                  dataset={dataset}
-                  removeDatasetFromState={removeDatasetFromState}
-                  replaceDatasetsInState={replaceDatasetsInState}
-                />
-              </div>
-            );
-          })
+          datasets
+            .sort((a, b) => (a.id > b.id ? 1 : -1))
+            .map((dataset) => {
+              return (
+                <div className='w-11/12 relative border-b mx-auto my-5 px-2 py-2 hover:bg-gray-50' key={dataset.id}>
+                  <DatasetElement
+                    dataset={dataset}
+                    removeDatasetFromState={removeDatasetFromState}
+                    replaceDatasetsInState={replaceDatasetsInState}
+                  />
+                </div>
+              );
+            })
         ) : (
           <div className='w-4/6 mx-auto text-sm text-gray-600 my-10 text-center'>
             click below to add the first dataset for this category
