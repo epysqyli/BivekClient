@@ -57,7 +57,7 @@ const DatasetCategoryElement = ({ dataCategory, updateStateAfterDelete }: Props)
             .sort((a, b) => (a.id > b.id ? 1 : -1))
             .map((dataset) => {
               return (
-                <div className='w-11/12 relative border-b mx-auto my-5 px-2 py-2 hover:bg-gray-50' key={dataset.id}>
+                <div className='w-11/12 relative border-b mx-auto my-5 px-2 py-2 hover:bg-slate-50' key={dataset.id}>
                   <DatasetElement
                     dataset={dataset}
                     removeDatasetFromState={removeDatasetFromState}

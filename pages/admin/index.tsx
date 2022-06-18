@@ -35,31 +35,31 @@ const AdminIndex: NextPageLayout = (): ReactElement => {
         <IndexLink
           text='create a new article from scratch'
           href='/admin/create-new-article'
-          icon={<FilePlus size={36} strokeWidth={1.25} className={iconStyle} />}
+          icon={<FilePlus size={32} strokeWidth={1.25} className={iconStyle} />}
         />
 
         <IndexLink
           href='/admin/edit-articles'
           text='edit or delete existing articles'
-          icon={<Edit3 size={36} strokeWidth={1.25} className={iconStyle} />}
+          icon={<Edit3 size={32} strokeWidth={1.25} className={iconStyle} />}
         />
 
         <IndexLink
           href='/admin/article-tags'
           text='article tags'
-          icon={<Tag size={36} strokeWidth={1.25} className={iconStyle} />}
+          icon={<Tag size={32} strokeWidth={1.25} className={iconStyle} />}
         />
 
         <IndexLink
           href='/admin/manage-datasets'
           text='manage datasets'
-          icon={<Database size={36} strokeWidth={1.25} className={iconStyle} />}
+          icon={<Database size={32} strokeWidth={1.25} className={iconStyle} />}
         />
 
         <IndexLink
           href='/admin/manage-working-papers'
           text='working papers'
-          icon={<Paperclip size={36} strokeWidth={1.25} className={iconStyle} />}
+          icon={<Paperclip size={32} strokeWidth={1.25} className={iconStyle} />}
         />
       </div>
     </>
