@@ -65,7 +65,7 @@ const ManageWorkingPapers: NextPageLayout<Props> = ({ workingPaperProps }: Props
       ) : (
         <div
           onClick={showWpForm}
-          className='w-4/5 mx-auto py-2 rounded group cursor-pointer hover:bg-slate-50 hover:shadow'
+          className='w-4/5 mx-auto py-2 rounded-md group cursor-pointer bg-white hover:bg-slate-100 hover:shadow'
         >
           <PlusCircle
             size={36}
@@ -80,7 +80,7 @@ const ManageWorkingPapers: NextPageLayout<Props> = ({ workingPaperProps }: Props
         .sort((a, b) => (a.id > b.id ? 1 : -1))
         .map((wp) => {
           return (
-            <div key={wp.id} className='mx-auto w-11/12 my-10 p-2 border rounded-sm hover:bg-slate-50'>
+            <div key={wp.id} className='mx-auto w-11/12 my-10 p-2 border rounded-sm bg-white hover:bg-slate-50'>
               <WorkingPaperElement
                 workingPaper={wp}
                 replaceWorkingPapersInState={replaceWorkingPapersInState}

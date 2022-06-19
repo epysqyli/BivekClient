@@ -51,7 +51,7 @@ const DatasetCategories: NextPageLayout<Props> = ({ datasetCategoriesProps }: Pr
   return (
     <>
       <TopElement text='Manage datasets and data categories' />
-      <div className='flex items-end text-lg w-5/6 mx-auto rounded-md mt-10 mb-16'>
+      <div className='flex items-center text-lg w-5/6 mx-auto rounded-md mt-10 mb-16'>
         <div className='w-min mx-auto cursor-pointer group'>
           <PlusCircle
             size={36}
@@ -62,7 +62,7 @@ const DatasetCategories: NextPageLayout<Props> = ({ datasetCategoriesProps }: Pr
         </div>
         <input
           type='text'
-          className='border-b-2 border-gray-300 block w-4/5 mx-auto pb-1 pl-3 text-center focus:outline-none'
+          className='border-b-2 border-gray-300 rounded-t block w-4/5 mx-auto py-2 pl-3 text-center focus:outline-none'
           placeholder='Enter data category name'
           onChange={handleCategoryChange}
           onKeyDown={(e) => {
@@ -74,7 +74,7 @@ const DatasetCategories: NextPageLayout<Props> = ({ datasetCategoriesProps }: Pr
       <div>
         {datasetCategories.map((dataCategory) => {
           return (
-            <div className='w-11/12 mx-auto border py-2 my-10 shadow-md rounded' key={dataCategory.id}>
+            <div className='w-11/12 mx-auto border py-2 my-10 shadow-md rounded bg-white' key={dataCategory.id}>
               <DatasetCategoryElement
                 dataCategory={dataCategory}
                 updateStateAfterDelete={updateStateAfterDelete}

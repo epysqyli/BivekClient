@@ -16,7 +16,7 @@ const MenuBar = ({ editor, showTableMenu, showTable, hideTable }: MenuProps & Ta
   if (!editor) return null;
 
   const active = "text-white bg-slate-600 px-2 m-1 rounded text-sm";
-  const notActive = "border m-1 px-2 rounded text-sm";
+  const notActive = "bg-white border m-1 px-2 rounded text-sm";
 
   const addImage = () => {
     const url = window.prompt("URL");

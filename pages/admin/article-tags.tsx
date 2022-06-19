@@ -40,6 +40,7 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
   const [clickedTagId, setClickedTagId] = useState<number>(0);
   const [newTag, setNewTag] = useState<string>("");
   const [showDelete, setShowDelete] = useState<boolean>(false);
+
   const showDeleteConfimation = () => {
     setShowDelete(true);
     showOverlay();
@@ -93,19 +94,19 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
       <div>
         {currentTags.map((tag) => (
           <div
-            className='w-5/6 mx-auto my-4 pl-2 shadow-sm shadow-slate-500 rounded-md flex items-center justify-between'
+            className='w-4/5 mx-auto my-4 pl-2 shadow-sm bg-white shadow-slate-500 rounded-md flex items-center justify-between'
             key={tag.id}
           >
-            <div className='py-3'>{tag.name}</div>
+            <div className='py-4 pl-3 text-lg text-gray-700'>{tag.name}</div>
             <div
               onClick={() => {
                 showDeleteConfimation(), setClickedTagId(tag.id);
               }}
-              className='flex items-center self-stretch px-5 bg-slate-50 hover:bg-slate-100 transition-colors rounded-br rounded-tr cursor-pointer group'
+              className='flex items-center self-stretch px-5 bg-slate-100 transition-colors rounded-br rounded-tr cursor-pointer group'
             >
               <Trash
-                size={20}
-                className='text-slate-500 group-hover:text-slate-600 group-active:text-slate-900'
+                size={24}
+                className='text-slate-500 group-hover:text-red-500 group-active:text-slate-900'
               />
             </div>
           </div>
