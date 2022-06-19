@@ -4,7 +4,8 @@ import type IPatch from "../../../interfaces/models/IPatch";
 import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult, Redirect } from "next";
 import type { AxiosResponse } from "axios";
 import type { JSONContent } from "@tiptap/react";
-import { FormEvent, useContext } from "react";
+import type { FormEvent } from "react";
+import { useContext, useState, useEffect } from "react";
 import type { ReactElement } from "react";
 import type ITag from "../../../interfaces/models/ITag";
 import AssignTags from "../../../components/admin/AssignTags";
@@ -18,7 +19,6 @@ import {
   deleteArticle
 } from "../../../lib/ArticleRepo";
 import { checkLogin } from "../../../lib/Auth";
-import { useState } from "react";
 import TipTap from "../../../components/tiptap/TipTap";
 import { generateHTML, generateJSON } from "@tiptap/html";
 import StarterKit from "@tiptap/starter-kit";
@@ -100,6 +100,11 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
       ])
     )
   });
+  const [isValid, setIsValid] = useState<boolean>(isArticleValid(titlePatch.value, bodyPatch.value));
+  useEffect(
+    () => setIsValid(isArticleValid(titlePatch.value, bodyPatch.value)),
+    [titlePatch.value, bodyPatch.value]
+  );
 
   const [allTags] = useState<Array<ITag>>(tags);
   const [currentTags, setCurrentTags] = useState<Array<ITag>>(article.tags);
@@ -140,6 +145,9 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
     hideOverlay();
   };
 
+  const activeIcon = "w-min mx-auto my-2 text-slate-600";
+  const disabledIcon = "w-min mx-auto my-2 text-slate-300";
+
   return (
     <div className='relative'>
       <TopElement text='Edit article' />
@@ -160,42 +168,42 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
         </div>
       </div>
 
-      <div className='mt-10 py-2 flex bg-slate-100'>
+      <div className='mt-10 py-2 flex'>
         <CreateMenuBtn
           text='tags'
-          isArticleValid={isArticleValid(titlePatch.value, bodyPatch.value)}
+          isArticleValid={isValid}
           handleClick={handleToggle}
-          icon={<TagIcon size={26} className='w-min mx-auto my-2 text-slate-600' />}
+          icon={<TagIcon size={26} className={isValid ? activeIcon : disabledIcon} />}
         />
 
         <CreateMenuBtn
           text='save'
-          isArticleValid={isArticleValid(titlePatch.value, bodyPatch.value)}
+          isArticleValid={isValid}
           handleClick={handlePatchArticle}
-          icon={<Save size={26} className='w-min mx-auto my-2 text-slate-600' />}
+          icon={<Save size={26} className={isValid ? activeIcon : disabledIcon} />}
         />
 
         {isPublished ? (
           <CreateMenuBtn
             text='hide'
-            isArticleValid={isArticleValid(titlePatch.value, bodyPatch.value)}
+            isArticleValid={isValid}
             handleClick={togglePublishStatus}
-            icon={<EyeOff size={26} className='w-min mx-auto my-2 text-slate-600' />}
+            icon={<EyeOff size={26} className={isValid ? activeIcon : disabledIcon} />}
           />
         ) : (
           <CreateMenuBtn
             text='publish'
-            isArticleValid={isArticleValid(titlePatch.value, bodyPatch.value)}
+            isArticleValid={isValid}
             handleClick={togglePublishStatus}
-            icon={<Eye size={26} className='w-min mx-auto my-2 text-slate-600' />}
+            icon={<Eye size={26} className={isValid ? activeIcon : disabledIcon} />}
           />
         )}
 
         <CreateMenuBtn
           text='delete'
-          isArticleValid={isArticleValid(titlePatch.value, bodyPatch.value)}
+          isArticleValid={isValid}
           handleClick={showDeleteConfirmation}
-          icon={<Trash2 size={26} className='w-min mx-auto my-2 text-slate-600' />}
+          icon={<Trash2 size={26} className={isValid ? activeIcon : disabledIcon} />}
         />
       </div>
 

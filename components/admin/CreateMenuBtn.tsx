@@ -13,7 +13,7 @@ const CreateMenuBtn = ({ text, isArticleValid, handleClick, icon }: Props): Reac
     return (
       <div
         onClick={handleClick}
-        className='text-center py-2 mx-auto rounded cursor-pointer bg-slate-100 hover:scale-95 active:scale-75 transition-transform'
+        className='text-center py-2 mx-auto rounded cursor-pointer hover:scale-95 active:scale-75 transition-transform'
       >
         <div>{icon}</div>
         <span>{text}</span>
@@ -21,7 +21,7 @@ const CreateMenuBtn = ({ text, isArticleValid, handleClick, icon }: Props): Reac
     );
 
   return (
-    <div className='text-center py-2 mx-auto rounded bg-slate-100 text-slate-200'>
+    <div className='text-center py-2 mx-auto rounded text-slate-200'>
       <div>{icon}</div>
       <span>{text}</span>
     </div>

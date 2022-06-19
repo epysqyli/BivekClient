@@ -8,7 +8,7 @@ import type ITag from "../../interfaces/models/ITag";
 import type { JSONContent } from "@tiptap/react";
 import AdminLayout from "../../layouts/AdminLayout";
 import { checkLogin } from "../../lib/Auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createArticle, patchArticle } from "../../lib/ArticleRepo";
 import { getTags } from "../../lib/TagRepo";
 import TipTap from "../../components/tiptap/TipTap";
@@ -50,6 +50,7 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
     op: "replace",
     value: ""
   });
+  const [isValid, setIsValid] = useState<boolean>(false);
 
   const handleTitleChange = (e: FormEvent<HTMLInputElement>) => {
     setTitle(e.currentTarget.value.trim());
@@ -81,6 +82,11 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
     }
   };
 
+  const activeIcon = "w-min mx-auto my-2 text-slate-600";
+  const disabledIcon = "w-min mx-auto my-2 text-slate-300";
+
+  useEffect(() => setIsValid(isArticleValid(title, body)), [title, body]);
+
   return (
     <>
       <TopElement text='Create a new article' />
@@ -100,28 +106,28 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
         </div>
       </div>
 
-      <div className='mt-10 py-2 flex bg-slate-100'>
+      <div className='mt-10 py-2 flex'>
         <CreateMenuBtn
           text='tags'
-          isArticleValid={isArticleValid(title, body)}
+          isArticleValid={isValid}
           handleClick={handleToggle}
-          icon={<TagIcon size={26} className='w-min mx-auto my-2 text-slate-600' />}
+          icon={<TagIcon size={26} className={isValid ? activeIcon : disabledIcon} />}
         />
 
         <CreateMenuBtn
           text='save for later'
-          isArticleValid={isArticleValid(title, body)}
+          isArticleValid={isValid}
           handleClick={() => handleCreateArticle(false)}
-          icon={<Save size={26} className='w-min mx-auto my-2 text-slate-600' />}
+          icon={<Save size={26} className={isValid ? activeIcon : disabledIcon} />}
         />
         <CreateMenuBtn
           text='publish'
-          isArticleValid={isArticleValid(title, body)}
+          isArticleValid={isValid}
           handleClick={() => handleCreateArticle(true)}
-          icon={<Eye size={26} className='w-min mx-auto my-2 text-slate-600' />}
+          icon={<Eye size={26} className={isValid ? activeIcon : disabledIcon} />}
         />
       </div>
-      
+
       <div>
         {showTagsMenu ? (
           <AssignTags
