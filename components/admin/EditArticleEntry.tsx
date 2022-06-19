@@ -14,9 +14,9 @@ const EditArticleEntry = ({ article }: Props): ReactElement => {
       <div className='py-2'>
         <div className='mb-3'>{article.title}</div>
         {article.published ? (
-          <div className='text-sm mb-3 text-green-800'>currently visible by guests</div>
+          <div className='text-sm mb-3 text-green-800'>currently visible by readers</div>
         ) : (
-          <div className='text-sm mb-3 text-amber-700'>not yet published</div>
+          <div className='text-sm mb-3 text-amber-700'>hidden to readers</div>
         )}
         <div className='flex items-center flex-wrap gap-x-1'>
           {article.tags.map((t) => (
