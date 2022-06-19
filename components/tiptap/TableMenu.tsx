@@ -2,7 +2,7 @@ import type { MenuProps } from "../../interfaces/ITipTap";
 
 const TableMenu = ({ editor }: MenuProps) => {
   if (!editor) return null;
-  const baseStyle = "border m-1 px-2 rounded text-sm hover:shadow-md transition-shadow active:text-white active:bg-slate-600";
+  const baseStyle = "border m-1 px-2 bg-white rounded text-sm hover:shadow-md transition-shadow active:text-white active:bg-slate-600";
 
   return (
     <div className='flex items-center justify-center flex-wrap border-t-2 border-b-2 py-2'>
