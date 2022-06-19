@@ -25,41 +25,40 @@ export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
 };
 
 const AdminIndex: NextPageLayout = (): ReactElement => {
-  const iconStyle: string =
-    "text-slate-500 group-hover:text-slate-600 group-active:text-slate-900 group-hover:scale-95 group-active:scale-75 transition-transform";
+  const iconStyle: string = "text-slate-50 group-hover:scale-95 group-active:scale-75 transition-transform";
 
   return (
     <>
       <TopElement text='Manage blog resources' />
-      <div className='my-10 w-4/5 mx-auto'>
+      <div className='my-10 w-5/6 mx-auto'>
         <IndexLink
-          text='create a new article from scratch'
+          text='Create a new article'
           href='/admin/create-new-article'
-          icon={<FilePlus size={32} strokeWidth={1.25} className={iconStyle} />}
+          icon={<FilePlus size={32} strokeWidth={1.5} className={iconStyle} />}
         />
 
         <IndexLink
           href='/admin/edit-articles'
-          text='edit or delete existing articles'
-          icon={<Edit3 size={32} strokeWidth={1.25} className={iconStyle} />}
+          text='Manage existing articles'
+          icon={<Edit3 size={32} strokeWidth={1.5} className={iconStyle} />}
         />
 
         <IndexLink
           href='/admin/article-tags'
-          text='article tags'
-          icon={<Tag size={32} strokeWidth={1.25} className={iconStyle} />}
+          text='Article tags'
+          icon={<Tag size={32} strokeWidth={1.5} className={iconStyle} />}
         />
 
         <IndexLink
           href='/admin/manage-datasets'
-          text='manage datasets'
-          icon={<Database size={32} strokeWidth={1.25} className={iconStyle} />}
+          text='Datasets'
+          icon={<Database size={32} strokeWidth={1.5} className={iconStyle} />}
         />
 
         <IndexLink
           href='/admin/manage-working-papers'
-          text='working papers'
-          icon={<Paperclip size={32} strokeWidth={1.25} className={iconStyle} />}
+          text='Working papers'
+          icon={<Paperclip size={32} strokeWidth={1.5} className={iconStyle} />}
         />
       </div>
     </>
