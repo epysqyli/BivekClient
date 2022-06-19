@@ -2,6 +2,7 @@ import type { FormEvent, ReactElement } from "react";
 import type NextPageLayout from "../../types/NextPageLayout";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import AdminLayout from "../../layouts/AdminLayout";
 import { login } from "../../lib/Auth";
 
 interface IUserCredential {
@@ -47,7 +48,7 @@ const Login: NextPageLayout = (): ReactElement => {
               type='email'
               name='username'
               id='email'
-              placeholder="email"
+              placeholder='email'
               className='block mt-2 w-full border-b border-gray-400 p-3 focus:ring-0 outline-none'
               onChange={handleChange}
               required
@@ -59,7 +60,7 @@ const Login: NextPageLayout = (): ReactElement => {
               type='password'
               name='password'
               id='password'
-              placeholder="password"
+              placeholder='password'
               className='block mt-2 w-full border-b border-gray-400 p-3 focus:ring-0 outline-none'
               onChange={handleChange}
               required
@@ -77,5 +78,7 @@ const Login: NextPageLayout = (): ReactElement => {
     </>
   );
 };
+
+Login.getLayout = (page: ReactElement) => <AdminLayout>{page}</AdminLayout>;
 
 export default Login;
