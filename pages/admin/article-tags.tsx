@@ -82,6 +82,9 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
           onChange={handleChange}
           type='text'
           value={newTag}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") handleCreateTag();
+          }}
           className='border-b-2 border-gray-300 block w-4/5 mx-auto py-2 pl-3 text-center focus:outline-none'
           placeholder='Enter tag name'
         />

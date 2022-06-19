@@ -65,6 +65,9 @@ const DatasetCategories: NextPageLayout<Props> = ({ datasetCategoriesProps }: Pr
           className='border-b-2 border-gray-300 block w-4/5 mx-auto pb-1 pl-3 text-center focus:outline-none'
           placeholder='Enter data category name'
           onChange={handleCategoryChange}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") handleCreateCategory();
+          }}
           value={categoryName}
         />
       </div>
