@@ -1,8 +1,8 @@
+import type { ReactElement } from "react";
+import type { AxiosResponse } from "axios";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { ReactElement } from "react";
 import { XCircle } from "react-feather";
-import { AxiosResponse } from "axios";
 
 interface Props {
   id: number;
@@ -43,7 +43,7 @@ const DeleteConfirmation = ({
 
   if (show)
     return (
-      <div className='py-10 px-5 w-2/3 bg-white z-10 mx-auto text-center fixed top-1/3 left-1/2 -translate-x-1/2 shadow-lg shadow-slate-500 rounded-md'>
+      <div className='py-10 px-5 w-2/3 bg-white z-20 mx-auto text-center fixed top-1/3 left-1/2 -translate-x-1/2 shadow-lg shadow-slate-500 rounded-md'>
         <div>Confirm below to permanently delete this {resourceType}</div>
         <div onClick={() => handleDelete(id)}>
           {isDeleted ? (

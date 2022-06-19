@@ -4,7 +4,7 @@ import type IPatch from "../../../interfaces/models/IPatch";
 import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult, Redirect } from "next";
 import type { AxiosResponse } from "axios";
 import type { JSONContent } from "@tiptap/react";
-import type { FormEvent } from "react";
+import { FormEvent, useContext } from "react";
 import type { ReactElement } from "react";
 import type ITag from "../../../interfaces/models/ITag";
 import AssignTags from "../../../components/admin/AssignTags";
@@ -32,7 +32,8 @@ import { isArticleValid } from "../../../lib/ArticleEditMethods";
 import CreateMenuBtn from "../../../components/admin/CreateMenuBtn";
 import TopElement from "../../../components/admin/TopElement";
 import DeleteConfirmation from "../../../components/admin/DeleteConfirmation";
-import { Delete, Eye, EyeOff, Save, Tag as TagIcon } from "react-feather";
+import { Trash2, Eye, EyeOff, Save, Tag as TagIcon } from "react-feather";
+import { OverlayContext } from "../../../hooks/OverlayContext";
 
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
@@ -129,8 +130,15 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
     }
   };
 
-  const showDeleteConfirmation = () => setShowDelete(true);
-  const hideDeleteConfirmation = () => setShowDelete(false);
+  const { showOverlay, hideOverlay } = useContext(OverlayContext);
+  const showDeleteConfirmation = () => {
+    setShowDelete(true);
+    showOverlay();
+  };
+  const hideDeleteConfirmation = () => {
+    setShowDelete(false);
+    hideOverlay();
+  };
 
   return (
     <div className='relative'>
@@ -187,7 +195,7 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
           text='delete'
           isArticleValid={isArticleValid(titlePatch.value, bodyPatch.value)}
           handleClick={showDeleteConfirmation}
-          icon={<Delete size={26} className='w-min mx-auto my-2 text-slate-600' />}
+          icon={<Trash2 size={26} className='w-min mx-auto my-2 text-slate-600' />}
         />
       </div>
 

@@ -1,4 +1,4 @@
-import type { FormEvent, ReactElement } from "react";
+import { FormEvent, ReactElement, useContext } from "react";
 import type NextPageLayout from "../../types/NextPageLayout";
 import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult, Redirect } from "next";
 import AdminLayout from "../../layouts/AdminLayout";
@@ -10,6 +10,7 @@ import { useState } from "react";
 import TopElement from "../../components/admin/TopElement";
 import { Trash, PlusCircle } from "react-feather";
 import DeleteConfirmation from "../../components/admin/DeleteConfirmation";
+import { OverlayContext } from "../../hooks/OverlayContext";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -34,12 +35,20 @@ interface TagsProps {
 }
 
 const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactElement => {
+  const { showOverlay, hideOverlay } = useContext(OverlayContext);
   const [currentTags, setCurrentTags] = useState<Array<ITag>>(tags);
   const [clickedTagId, setClickedTagId] = useState<number>(0);
   const [newTag, setNewTag] = useState<string>("");
   const [showDelete, setShowDelete] = useState<boolean>(false);
-  const showDeleteConfimation = () => setShowDelete(true);
-  const hideDeleteConfirmation = () => setShowDelete(false);
+  const showDeleteConfimation = () => {
+    setShowDelete(true);
+    showOverlay();
+  };
+
+  const hideDeleteConfirmation = () => {
+    setShowDelete(false);
+    hideOverlay();
+  };
 
   const handleChange = (e: FormEvent<HTMLInputElement>) => setNewTag(e.currentTarget.value.trim());
 

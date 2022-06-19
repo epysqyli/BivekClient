@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useContext, useState } from "react";
 import type IDataCategory from "../../interfaces/models/IDataCategory";
 import { deleteDataCategory } from "../../lib/DataCategoryRepo";
 import DeleteConfirmation from "./DeleteConfirmation";
@@ -6,6 +6,7 @@ import { PlusCircle, Trash } from "react-feather";
 import DatasetElement from "./DatasetElement";
 import IDataset from "../../interfaces/models/IDataset";
 import DatasetCreateForm from "./DatasetCreateForm";
+import { OverlayContext } from "../../hooks/OverlayContext";
 
 interface Props {
   dataCategory: IDataCategory;
@@ -15,8 +16,15 @@ interface Props {
 const DatasetCategoryElement = ({ dataCategory, updateStateAfterDelete }: Props): ReactElement => {
   const [datasets, setDatasets] = useState<Array<IDataset>>(dataCategory.datasets || []);
   const [showDelete, setShowDelete] = useState<boolean>(false);
-  const showDeleteConfirmation = () => setShowDelete(true);
-  const hideDeleteConfirmation = () => setShowDelete(false);
+  const { showOverlay, hideOverlay } = useContext(OverlayContext);
+  const showDeleteConfirmation = () => {
+    setShowDelete(true);
+    showOverlay();
+  };
+  const hideDeleteConfirmation = () => {
+    setShowDelete(false);
+    hideOverlay();
+  };
 
   const [showDatasetCreateForm, setShowDatasetCreateForm] = useState<boolean>(false);
   const showCreateForm = () => setShowDatasetCreateForm(true);
@@ -57,7 +65,10 @@ const DatasetCategoryElement = ({ dataCategory, updateStateAfterDelete }: Props)
             .sort((a, b) => (a.id > b.id ? 1 : -1))
             .map((dataset) => {
               return (
-                <div className='w-11/12 relative border-b mx-auto my-5 px-2 py-2 hover:bg-slate-50' key={dataset.id}>
+                <div
+                  className='w-11/12 relative border-b mx-auto my-5 px-2 py-2 hover:bg-slate-50'
+                  key={dataset.id}
+                >
                   <DatasetElement
                     dataset={dataset}
                     removeDatasetFromState={removeDatasetFromState}

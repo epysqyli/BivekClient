@@ -1,10 +1,11 @@
-import type { ReactElement } from "react";
+import { ReactElement, useContext } from "react";
 import type IDataset from "../../interfaces/models/IDataset";
 import { useState } from "react";
 import { deleteDataset } from "../../lib/DatasetRepo";
 import DeleteConfirmation from "./DeleteConfirmation";
 import DatasetEditForm from "./DatasetEditForm";
 import { Edit, Trash2 } from "react-feather";
+import { OverlayContext } from "../../hooks/OverlayContext";
 
 interface Props {
   dataset: IDataset;
@@ -18,8 +19,15 @@ const DatasetElement = ({ dataset, removeDatasetFromState, replaceDatasetsInStat
   const hideEditForm = () => setShowDatasetEditForm(false);
 
   const [showDelete, setShowDelete] = useState<boolean>(false);
-  const showDeleteConfirmation = () => setShowDelete(true);
-  const hideDeleteConfirmation = () => setShowDelete(false);
+  const { showOverlay, hideOverlay } = useContext(OverlayContext);
+  const showDeleteConfirmation = () => {
+    setShowDelete(true);
+    showOverlay();
+  };
+  const hideDeleteConfirmation = () => {
+    setShowDelete(false);
+    hideOverlay();
+  };
 
   return (
     <>

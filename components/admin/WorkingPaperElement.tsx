@@ -1,10 +1,11 @@
-import type { ReactElement } from "react";
+import { ReactElement, useContext } from "react";
 import type IWorkingPaper from "../../interfaces/models/IWorkingPaper";
 import { useState } from "react";
 import { Edit, Trash2 } from "react-feather";
 import DeleteConfirmation from "./DeleteConfirmation";
 import { deleteWorkingPaper } from "../../lib/WorkingPaperRepo";
 import WorkingPaperForm from "./WorkingPaperForm";
+import { OverlayContext } from "../../hooks/OverlayContext";
 
 interface Props {
   workingPaper: IWorkingPaper;
@@ -22,8 +23,15 @@ const WorkingPaperElement = ({
   const hideForm = () => setShowEditForm(false);
 
   const [showDelete, setShowDelete] = useState<boolean>(false);
-  const showDeleteConfirmation = () => setShowDelete(true);
-  const hideDeleteConfirmation = () => setShowDelete(false);
+  const { showOverlay, hideOverlay } = useContext(OverlayContext);
+  const showDeleteConfirmation = () => {
+    setShowDelete(true);
+    showOverlay();
+  };
+  const hideDeleteConfirmation = () => {
+    setShowDelete(false);
+    hideOverlay();
+  };
 
   return (
     <>
