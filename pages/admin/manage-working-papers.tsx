@@ -58,23 +58,23 @@ const ManageWorkingPapers: NextPageLayout<Props> = ({ workingPaperProps }: Props
   return (
     <>
       <TopElement text='Manage working papers' />
-      <div
-        onClick={showWpForm}
-        className='w-4/5 mx-auto py-2 rounded group cursor-pointer hover:bg-slate-50 hover:shadow'
-      >
-        <PlusCircle
-          size={36}
-          strokeWidth={1.5}
-          className='w-fit mx-auto mb-3 text-slate-600 transition-transform group-hover:scale-95 group-active:scale-90'
-        />
-        <h1 className='text-xl text-center text-gray-700'>Add a new working paper</h1>
-      </div>
-
       {showForm ? (
         <div className='my-10'>
           <WorkingPaperForm addWorkingPaperToState={addWorkingPaperToState} hideForm={hideWpForm} />
         </div>
-      ) : null}
+      ) : (
+        <div
+          onClick={showWpForm}
+          className='w-4/5 mx-auto py-2 rounded group cursor-pointer hover:bg-slate-50 hover:shadow'
+        >
+          <PlusCircle
+            size={36}
+            strokeWidth={1.5}
+            className='w-fit mx-auto mb-3 text-slate-600 transition-transform group-hover:scale-95 group-active:scale-90'
+          />
+          <h1 className='text-xl text-center text-gray-700'>Add a new working paper</h1>
+        </div>
+      )}
 
       {workingPapers
         .sort((a, b) => (a.id > b.id ? 1 : -1))
