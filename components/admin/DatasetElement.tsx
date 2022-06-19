@@ -3,9 +3,9 @@ import type IDataset from "../../interfaces/models/IDataset";
 import { useState } from "react";
 import { deleteDataset } from "../../lib/DatasetRepo";
 import DeleteConfirmation from "./DeleteConfirmation";
-import DatasetEditForm from "./DatasetEditForm";
 import { Edit, Trash2 } from "react-feather";
 import { OverlayContext } from "../../hooks/OverlayContext";
+import DatasetForm from "./DatasetForm";
 
 interface Props {
   dataset: IDataset;
@@ -32,8 +32,9 @@ const DatasetElement = ({ dataset, removeDatasetFromState, replaceDatasetsInStat
   return (
     <>
       {showDatasetEditForm ? (
-        <DatasetEditForm
+        <DatasetForm
           currentDataset={dataset}
+          dataCategoryId={dataset.dataCategoryId}
           hideForm={hideEditForm}
           replaceDatasetsInState={replaceDatasetsInState}
         />

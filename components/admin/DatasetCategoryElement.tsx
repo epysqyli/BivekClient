@@ -5,8 +5,8 @@ import DeleteConfirmation from "./DeleteConfirmation";
 import { PlusCircle, Trash } from "react-feather";
 import DatasetElement from "./DatasetElement";
 import IDataset from "../../interfaces/models/IDataset";
-import DatasetCreateForm from "./DatasetCreateForm";
 import { OverlayContext } from "../../hooks/OverlayContext";
+import DatasetForm from "./DatasetForm";
 
 interface Props {
   dataCategory: IDataCategory;
@@ -84,8 +84,8 @@ const DatasetCategoryElement = ({ dataCategory, updateStateAfterDelete }: Props)
         )}
       </div>
       {showDatasetCreateForm ? (
-        <DatasetCreateForm
-          dataCategory={dataCategory}
+        <DatasetForm
+          dataCategoryId={dataCategory.id}
           hideForm={hideCreateForm}
           addDatasetToState={addDatasetToState}
         />
