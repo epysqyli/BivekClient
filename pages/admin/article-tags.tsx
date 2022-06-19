@@ -35,6 +35,7 @@ interface TagsProps {
 
 const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactElement => {
   const [currentTags, setCurrentTags] = useState<Array<ITag>>(tags);
+  const [clickedTagId, setClickedTagId] = useState<number>(0);
   const [newTag, setNewTag] = useState<string>("");
   const [showDelete, setShowDelete] = useState<boolean>(false);
   const showDeleteConfimation = () => setShowDelete(true);
@@ -85,7 +86,9 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
           >
             <div className='py-3'>{tag.name}</div>
             <div
-              onClick={showDeleteConfimation}
+              onClick={() => {
+                showDeleteConfimation(), setClickedTagId(tag.id);
+              }}
               className='flex items-center self-stretch px-5 bg-slate-50 hover:bg-slate-100 transition-colors rounded-br rounded-tr cursor-pointer group'
             >
               <Trash
@@ -93,19 +96,17 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
                 className='text-slate-500 group-hover:text-slate-600 group-active:text-slate-900'
               />
             </div>
-            {showDelete ? (
-              <DeleteConfirmation
-                id={tag.id}
-                show={showDelete}
-                resourceType='tag'
-                deleteItem={deleteTag}
-                hideShow={hideDeleteConfirmation}
-                updateStateAfterDelete={handleDeleteTag}
-              />
-            ) : null}
           </div>
         ))}
       </div>
+      <DeleteConfirmation
+        id={clickedTagId}
+        show={showDelete}
+        resourceType='tag'
+        deleteItem={deleteTag}
+        hideShow={hideDeleteConfirmation}
+        updateStateAfterDelete={handleDeleteTag}
+      />
     </>
   );
 };
