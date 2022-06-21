@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { GetServerSidePropsContext } from "next";
 
 const login = async (username: string, password: string): Promise<boolean> => {
@@ -25,4 +25,12 @@ const checkLogin = async (context: GetServerSidePropsContext): Promise<boolean> 
   }
 };
 
-export { login, checkLogin };
+const logout = async (): Promise<AxiosResponse> => {
+  return await axios({
+    method: "GET",
+    url: "http://localhost:5010/logout",
+    withCredentials: true
+  });
+};
+
+export { login, checkLogin, logout };
