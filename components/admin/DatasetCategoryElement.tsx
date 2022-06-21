@@ -62,7 +62,7 @@ const DatasetCategoryElement = ({ dataCategory, updateStateAfterDelete }: Props)
       <div className='my-5'>
         {datasets !== null && datasets.length !== 0 ? (
           datasets
-            .sort((a, b) => (a.id > b.id ? 1 : -1))
+            .sort((a, b) => (a.id > b.id ? -1 : 1))
             .map((dataset) => {
               return (
                 <div
