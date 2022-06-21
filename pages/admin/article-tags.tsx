@@ -51,7 +51,7 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
     hideOverlay();
   };
 
-  const handleChange = (e: FormEvent<HTMLInputElement>) => setNewTag(e.currentTarget.value.trim());
+  const handleChange = (e: FormEvent<HTMLInputElement>) => setNewTag(e.currentTarget.value);
 
   const handleCreateTag = async (): Promise<void> => {
     if (newTag.length >= 3) {

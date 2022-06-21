@@ -45,6 +45,7 @@ const DeleteConfirmation = ({
         setIsDeleted(false);
       }
     }
+    setIsDeleted(false);
   };
 
   if (show)
