@@ -27,7 +27,10 @@ const DeleteConfirmation = ({
   const router = useRouter();
 
   const redirect = () => {
-    if (redirectPath !== undefined) router.push(redirectPath);
+    if (redirectPath !== undefined) {
+      hideShow();
+      router.push(redirectPath);
+    }
   };
 
   const handleDelete = async (id: number): Promise<void> => {
@@ -36,8 +39,11 @@ const DeleteConfirmation = ({
     if (redirectPath !== undefined) {
       setTimeout(redirect, 2000);
     } else {
-      if (updateStateAfterDelete) updateStateAfterDelete(id);
-      hideShow();
+      if (updateStateAfterDelete) {
+        updateStateAfterDelete(id);
+        hideShow();
+        setIsDeleted(false);
+      }
     }
   };
 
