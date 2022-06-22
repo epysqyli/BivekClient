@@ -26,7 +26,7 @@ const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
           <Menu
             onClick={openSidebar}
             size={40}
-            className='fixed bg-white bottom-12 right-5 p-2 rounded-full shadow-md shadow-slate-400 cursor-pointer transition-transform hover:scale-95 active:scale-90'
+            className='fixed bg-slate-400 text-white bottom-12 right-5 p-2 rounded-full shadow-md shadow-slate-400 cursor-pointer transition-transform hover:scale-95 active:scale-90'
           />
         )}
       </main>
