@@ -1,5 +1,6 @@
 import { ReactElement } from "react";
 import SidebarLink from "./SidebarLink";
+import { motion } from "framer-motion";
 import { Database, Home, Info, Paperclip, Type, X, Youtube } from "react-feather";
 
 interface Props {
@@ -8,7 +9,11 @@ interface Props {
 
 const SideMenu = ({ hideSidebar }: Props): ReactElement => {
   return (
-    <div className='z-20 bg-slate-200 h-full w-full absolute top-0 right-0 pt-10'>
+    <motion.div
+      animate={{ translateY: [150, -30, 0], scaleY: [0.9, 1.05, 1] }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className='z-20 bg-slate-200 h-full w-full absolute top-0 right-0 pt-10'
+    >
       <X
         size={40}
         onClick={hideSidebar}
@@ -28,7 +33,7 @@ const SideMenu = ({ hideSidebar }: Props): ReactElement => {
         icon={<Youtube className='text-slate-500' />}
       />
       <SidebarLink pageLink='/about' item='about' icon={<Info className='text-slate-500' />} />
-    </div>
+    </motion.div>
   );
 };
 
