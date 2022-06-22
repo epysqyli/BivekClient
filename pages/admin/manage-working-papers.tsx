@@ -56,7 +56,7 @@ const ManageWorkingPapers: NextPageLayout<Props> = ({ workingPaperProps }: Props
   };
 
   return (
-    <div className='mx-auto w-5/6 md:w-4/6 lg:w-2/5 xl:w-1/3'>
+    <div className='mx-auto w-11/12 md:w-4/6 lg:w-3/5 xl:w-1/2'>
       <TopElement text='Manage working papers' />
       {showForm ? (
         <div className='my-10'>
