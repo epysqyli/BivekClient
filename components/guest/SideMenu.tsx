@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import SidebarLink from "./SidebarLink";
-import { X } from "react-feather";
+import { Database, Home, Info, Paperclip, Type, X, Youtube } from "react-feather";
 
 interface Props {
   hideSidebar(): void;
@@ -12,13 +12,22 @@ const SideMenu = ({ hideSidebar }: Props): ReactElement => {
       <X
         size={40}
         onClick={hideSidebar}
-        className='absolute bg-white bottom-5 right-5 p-2 rounded-full shadow-md shadow-slate-400 cursor-pointer transition-transform hover:scale-95 active:scale-90'
+        className='fixed bg-white bottom-12 right-5 p-2 rounded-full shadow-md shadow-slate-400 cursor-pointer transition-transform hover:scale-95 active:scale-90'
       />
-      <SidebarLink pageLink='/articles' item='articles' />
-      <SidebarLink pageLink='/datasets' item='datasets' />
-      <SidebarLink pageLink='/working-papers' item='working papers' />
-      <SidebarLink pageLink='/podcast-episodes' item='podcast episodes' />
-      <SidebarLink pageLink='/about' item='about' />
+      <SidebarLink pageLink='/' item='home' icon={<Home className='text-slate-500' />} />
+      <SidebarLink pageLink='/articles' item='articles' icon={<Type className='text-slate-500' />} />
+      <SidebarLink pageLink='/datasets' item='datasets' icon={<Database className='text-slate-500' />} />
+      <SidebarLink
+        pageLink='/working-papers'
+        item='working papers'
+        icon={<Paperclip className='text-slate-500' />}
+      />
+      <SidebarLink
+        pageLink='/podcast-episodes'
+        item='podcast episodes'
+        icon={<Youtube className='text-slate-500' />}
+      />
+      <SidebarLink pageLink='/about' item='about' icon={<Info className='text-slate-500' />} />
     </div>
   );
 };
