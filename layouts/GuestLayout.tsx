@@ -18,21 +18,19 @@ const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
   return (
     <>
       <header className='bg-slate-300 text-center'>HEADER</header>
-      <main className='relative'>
-        <div>{children}</div>
-        <div className='lg:hidden'>
-          {open ? (
-            <SideMenu hideSidebar={hideSidebar} />
-          ) : (
-            <Menu
-              onClick={openSidebar}
-              size={40}
-              className='fixed bg-slate-400 text-white bottom-12 right-5 p-2 rounded-full shadow-md shadow-slate-400 cursor-pointer transition-transform hover:scale-95 active:scale-90'
-            />
-          )}
-        </div>
-      </main>
+      <main className='relative'>{children}</main>
       <footer className='bg-slate-300 text-center'>FOOTER</footer>
+      <div className='lg:hidden'>
+        {open ? (
+          <SideMenu hideSidebar={hideSidebar} />
+        ) : (
+          <Menu
+            onClick={openSidebar}
+            size={40}
+            className='fixed bg-slate-400 text-white bottom-12 right-5 p-2 rounded-full shadow-md shadow-slate-400 cursor-pointer transition-transform hover:scale-95 active:scale-90'
+          />
+        )}
+      </div>
     </>
   );
 };
