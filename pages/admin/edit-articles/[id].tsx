@@ -149,7 +149,7 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
   const disabledIcon = "w-min mx-auto my-2 text-slate-300";
 
   return (
-    <div className='relative'>
+    <div className='relative mx-auto lg:w-4/5 xl:w-2/3 2xl:w-1/2'>
       <TopElement text='Edit article' />
       <div className='block w-5/6 mx-auto'>
         <input

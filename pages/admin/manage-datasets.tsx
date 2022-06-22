@@ -49,7 +49,7 @@ const DatasetCategories: NextPageLayout<Props> = ({ datasetCategoriesProps }: Pr
   };
 
   return (
-    <>
+    <div className='mx-auto w-5/6 md:w-4/6 lg:w-2/5 xl:w-1/3'>
       <TopElement text='Manage datasets and data categories' />
       <div className='flex items-center text-lg w-5/6 mx-auto rounded-md mt-10 mb-16'>
         <div className='w-min mx-auto cursor-pointer group'>
@@ -88,7 +88,7 @@ const DatasetCategories: NextPageLayout<Props> = ({ datasetCategoriesProps }: Pr
             );
           })}
       </div>
-    </>
+    </div>
   );
 };
 

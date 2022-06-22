@@ -67,7 +67,7 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
   };
 
   return (
-    <>
+    <div className='mx-auto w-5/6 md:w-4/6 lg:w-2/5 xl:w-1/3'>
       <TopElement text='Manage tags' />
       <div className='flex items-end text-lg w-5/6 mx-auto rounded-md mt-10 mb-16'>
         <div onClick={handleCreateTag} className='w-min mx-auto cursor-pointer group'>
@@ -120,7 +120,7 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
         hideShow={hideDeleteConfirmation}
         updateStateAfterDelete={handleDeleteTag}
       />
-    </>
+    </div>
   );
 };
 

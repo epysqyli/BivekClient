@@ -88,7 +88,7 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
   useEffect(() => setIsValid(isArticleValid(title, body)), [title, body]);
 
   return (
-    <div className="mx-auto w-5/6 md:w-4/6 lg:w-4/5 xl:w-2/3 2xl:w-1/2">
+    <div className="mx-auto lg:w-4/5 xl:w-2/3 2xl:w-1/2">
       <TopElement text='Create a new article' />
       <div className='block w-5/6 mx-auto'>
         <input
