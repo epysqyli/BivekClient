@@ -1,11 +1,11 @@
 import type { ReactElement } from "react";
 import type NextPageLayout from "../types/NextPageLayout";
-import Layout from "../layouts/Layout";
+import GuestLayout from "../layouts/GuestLayout";
 
 const WorkingPapers: NextPageLayout = (): ReactElement => {
   return <div></div>;
 };
 
-WorkingPapers.getLayout = (page: ReactElement) => <Layout>{page}</Layout>;
+WorkingPapers.getLayout = (page: ReactElement) => <GuestLayout>{page}</GuestLayout>;
 
 export default WorkingPapers;

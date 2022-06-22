@@ -4,7 +4,7 @@ import type IArticle from "../../interfaces/models/IArticle";
 import type { AxiosResponse } from "axios";
 import type NextPageLayout from "../../types/NextPageLayout";
 import { getArticleById } from "../../lib/ArticleRepo";
-import Layout from "../../layouts/Layout";
+import GuestLayout from "../../layouts/GuestLayout";
 import { generateHTML } from "@tiptap/html";
 import StarterKit from "@tiptap/starter-kit";
 import TextAlign from "@tiptap/extension-text-align";
@@ -51,6 +51,6 @@ const Article: NextPageLayout<Props> = ({ article, body }: Props): ReactElement 
   );
 };
 
-Article.getLayout = (page: ReactElement) => <Layout>{page}</Layout>;
+Article.getLayout = (page: ReactElement) => <GuestLayout>{page}</GuestLayout>;
 
 export default Article;

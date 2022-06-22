@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import ILayoutProps from "../interfaces/ILayoutProps";
 
-const Layout = ({ children }: ILayoutProps): ReactElement => {
+const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
   return (
     <>
       <header className="bg-slate-300 text-center">HEADER</header>
@@ -11,4 +11,4 @@ const Layout = ({ children }: ILayoutProps): ReactElement => {
   );
 };
 
-export default Layout;
+export default GuestLayout;

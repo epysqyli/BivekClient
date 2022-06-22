@@ -1,11 +1,11 @@
 import type { ReactElement } from "react";
 import type NextPageLayout from "../types/NextPageLayout";
-import Layout from "../layouts/Layout";
+import GuestLayout from "../layouts/GuestLayout";
 
 const About: NextPageLayout = (): ReactElement => {
   return <div></div>;
 };
 
-About.getLayout = (page: ReactElement) => <Layout>{page}</Layout>;
+About.getLayout = (page: ReactElement) => <GuestLayout>{page}</GuestLayout>;
 
 export default About;

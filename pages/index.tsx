@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import type NextPageLayout from "../types/NextPageLayout";
 import type { GetServerSideProps } from "next";
-import Layout from "../layouts/Layout";
+import GuestLayout from "../layouts/GuestLayout";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   return { props: {} };
@@ -21,6 +21,6 @@ const Home: NextPageLayout = (): ReactElement => {
   );
 };
 
-Home.getLayout = (page: ReactElement) => <Layout>{page}</Layout>;
+Home.getLayout = (page: ReactElement) => <GuestLayout>{page}</GuestLayout>;
 
 export default Home;

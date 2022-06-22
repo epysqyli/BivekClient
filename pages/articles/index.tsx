@@ -5,7 +5,7 @@ import type { AxiosResponse } from "axios";
 import type NextPageLayout from "../../types/NextPageLayout";
 import { getPublishedArticles } from "../../lib/ArticleRepo";
 import slugify from "slugify";
-import Layout from "../../layouts/Layout";
+import GuestLayout from "../../layouts/GuestLayout";
 import Link from "next/link";
 
 interface ArticlePageProps {
@@ -40,6 +40,6 @@ const Articles: NextPageLayout<ArticlePageProps> = ({ articles }: ArticlePagePro
   );
 };
 
-Articles.getLayout = (page: ReactElement) => <Layout>{page}</Layout>;
+Articles.getLayout = (page: ReactElement) => <GuestLayout>{page}</GuestLayout>;
 
 export default Articles;
