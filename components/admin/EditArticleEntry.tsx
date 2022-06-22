@@ -10,7 +10,7 @@ interface Props {
 
 const EditArticleEntry = ({ article }: Props): ReactElement => {
   return (
-    <div className='flex justify-between items-center border bg-white shadow-sm shadow-slate-300 rounded pl-3 my-5'>
+    <div className='flex justify-between items-center border bg-white shadow-sm shadow-slate-300 rounded pl-3'>
       <div className='py-2'>
         <div className='mb-3'>{article.title}</div>
         {article.published ? (
