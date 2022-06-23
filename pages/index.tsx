@@ -3,7 +3,7 @@ import type NextPageLayout from "../types/NextPageLayout";
 import type { GetServerSideProps } from "next";
 import GuestLayout from "../layouts/GuestLayout";
 import IndexLink from "../components/guest/IndexLink";
-import { Database, Info, Paperclip, Type, Youtube } from "react-feather";
+import { Database, Paperclip, Type, Youtube } from "react-feather";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   return { props: {} };
@@ -12,9 +12,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
 const Home: NextPageLayout = (): ReactElement => {
   return (
     <div>
-      <div className='py-20 bg-slate-100 text-center'>logo/banner/image</div>
-      <nav className='py-10 bg-slate-500 text-slate-50 text-center'>
-        <div className='flex items-center justify-around flex-wrap mx-auto gap-x-2 w-11/12'>
+      <div className='py-32 bg-slate-100 text-center'>logo/banner/image</div>
+      <nav className='py-5 bg-slate-500 text-slate-50 text-center'>
+        <div className='flex items-center justify-around flex-wrap mx-auto gap-x-2 w-11/12 lg:w-2/3'>
           <IndexLink
             pageLink='/articles'
             item='articles'
