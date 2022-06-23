@@ -82,7 +82,7 @@ const ManageWorkingPapers: NextPageLayout<Props> = ({ workingPaperProps }: Props
           return (
             <div
               key={wp.id}
-              className='mx-auto w-11/12 my-10 p-2 border rounded-sm bg-white hover:bg-slate-50'
+              className='mx-auto w-11/12 my-10 p-2 border rounded-sm bg-white hover:bg-slate-50 hover:border-slate-300'
             >
               <WorkingPaperElement
                 workingPaper={wp}
