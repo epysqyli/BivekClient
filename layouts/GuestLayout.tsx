@@ -1,5 +1,4 @@
 import { ReactElement, ReactNode, useEffect } from "react";
-import { Menu } from "react-feather";
 import { useState } from "react";
 import ILayoutProps from "../interfaces/ILayoutProps";
 import SideMenuMobile from "../components/guest/SideMenuMobile";
@@ -42,15 +41,7 @@ const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
       {mainComponent(children)}
       <footer className='bg-slate-300 text-center z-10'>FOOTER</footer>
       <div className='lg:hidden'>
-        {open ? (
-          <SideMenuMobile hideSidebar={hideSidebar} />
-        ) : (
-          <Menu
-            onClick={openSidebar}
-            size={40}
-            className='fixed bg-slate-400 text-white bottom-12 right-5 p-2 rounded-full shadow-md shadow-slate-400 cursor-pointer transition-transform hover:scale-95 active:scale-90'
-          />
-        )}
+        <SideMenuMobile isOpen={open} hideSidebar={hideSidebar} openSidebar={openSidebar} />
       </div>
     </>
   );

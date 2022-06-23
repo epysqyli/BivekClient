@@ -1,13 +1,24 @@
 import { ReactElement } from "react";
 import SidebarLink from "./SidebarLink";
 import { motion } from "framer-motion";
-import { Database, Home, Info, Paperclip, Type, X, Youtube } from "react-feather";
+import { Database, Home, Info, Menu, Paperclip, Type, X, Youtube } from "react-feather";
 
 interface Props {
+  isOpen: boolean;
+  openSidebar(): void;
   hideSidebar(): void;
 }
 
-const SideMenu = ({ hideSidebar }: Props): ReactElement => {
+const SideMenu = ({ isOpen, openSidebar, hideSidebar }: Props): ReactElement => {
+  if (isOpen === false)
+    return (
+      <Menu
+        onClick={openSidebar}
+        size={40}
+        className='fixed bg-slate-400 text-white bottom-12 right-5 p-2 rounded-full shadow-md shadow-slate-400 cursor-pointer transition-transform hover:scale-95 active:scale-90'
+      />
+    );
+
   return (
     <motion.div
       animate={{ translateY: [150, -30, 0], scaleY: [0.9, 1.05, 1] }}
