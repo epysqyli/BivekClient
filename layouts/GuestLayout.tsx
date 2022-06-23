@@ -5,6 +5,7 @@ import SideMenuMobile from "../components/guest/SideMenuMobile";
 import SideMenuDesktop from "../components/guest/SideMenuDesktop";
 import { useRouter } from "next/router";
 import { useIsNarrow } from "../hooks/UseMediaQuery";
+import { Menu, X } from "react-feather";
 
 const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
   const [open, setOpen] = useState<boolean>(false);
@@ -18,7 +19,7 @@ const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
     router.events.on("routeChangeComplete", () => hideSidebar());
   }, [router.events]);
 
-  const mainComponent = (children: ReactNode) => {
+  const mainElement = (children: ReactNode) => {
     if (isIndex() === true) return <main>{children}</main>;
 
     if (isIndex() === false && isNarrow === false) {
@@ -38,10 +39,24 @@ const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
   return (
     <>
       <header className='bg-slate-300 text-center z-10'>HEADER</header>
-      {mainComponent(children)}
+      {mainElement(children)}
       <footer className='bg-slate-300 text-center z-10'>FOOTER</footer>
       <div className='lg:hidden'>
-        <SideMenuMobile isOpen={open} hideSidebar={hideSidebar} openSidebar={openSidebar} />
+        {open ? (
+          <X
+            size={40}
+            onClick={hideSidebar}
+            className='fixed bg-white bottom-12 right-5 p-2 rounded-full shadow-md shadow-slate-400 cursor-pointer transition-transform hover:scale-95 active:scale-90 z-30'
+          />
+        ) : (
+          <Menu
+            onClick={openSidebar}
+            size={40}
+            className='fixed bg-slate-400 text-white bottom-12 right-5 p-2 rounded-full shadow-md shadow-slate-400 cursor-pointer transition-transform hover:scale-95 active:scale-90 z-30'
+          />
+        )}
+        <SideMenuMobile open={open} />
+        {open && <SideMenuMobile open={open} />}
       </div>
     </>
   );
