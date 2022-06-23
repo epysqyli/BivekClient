@@ -12,7 +12,7 @@ const SideMenu = ({ hideSidebar }: Props): ReactElement => {
     <motion.div
       animate={{ translateY: [150, -30, 0], scaleY: [0.9, 1.05, 1] }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className='z-20 bg-slate-200 h-full w-full absolute top-0 right-0 pt-10'
+      className='z-20 bg-slate-200 h-full w-full fixed top-0 right-0 pt-10'
     >
       <X
         size={40}
