@@ -4,9 +4,8 @@ import type IArticle from "../../interfaces/models/IArticle";
 import type { AxiosResponse } from "axios";
 import type NextPageLayout from "../../types/NextPageLayout";
 import { getPublishedArticles } from "../../lib/ArticleRepo";
-import slugify from "slugify";
 import GuestLayout from "../../layouts/GuestLayout";
-import Link from "next/link";
+import ArticleLink from "../../components/guest/ArticleLink";
 
 interface ArticlePageProps {
   articles: Array<IArticle>;
@@ -21,20 +20,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 const Articles: NextPageLayout<ArticlePageProps> = ({ articles }: ArticlePageProps): ReactElement => {
   return (
-    <div className='text-justify w-4/5 mx-auto mt-10'>
-      {articles.map((a) => (
-        <Link
-          href={{
-            pathname: "/articles/[title]",
-            query: {
-              title: slugify(a.title, { lower: true }),
-              id: a.id
-            }
-          }}
-          key={a.id}
-        >
-          <p>{a.title}</p>
-        </Link>
+    <div className='text-justify w-11/12 lg:w-2/3 mx-auto mt-10'>
+      {articles.map((article) => (
+        <ArticleLink key={article.id} article={article} />
       ))}
     </div>
   );
