@@ -38,9 +38,9 @@ const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
 
   return (
     <>
-      <header className='bg-slate-300 text-center z-10'>HEADER</header>
+      <header className='bg-neutral-300 text-center z-10'>HEADER</header>
       {mainElement(children)}
-      <footer className='bg-slate-300 text-center z-10'>FOOTER</footer>
+      <footer className='bg-neutral-300 text-center z-10'>FOOTER</footer>
       <div className='lg:hidden'>
         {open ? (
           <X
