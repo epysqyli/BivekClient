@@ -12,7 +12,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 const Home: NextPageLayout = (): ReactElement => {
   return (
     <div>
-      <div className='py-32 bg-neutral-200 text-center'>logo/banner/image</div>
+      <div className='py-32 bg-neutral-200 text-center text-4xl font-medium text-slate-700'>welcome, readers!</div>
       <nav className='py-3 lg:py-5 bg-slate-500 text-slate-50 text-center'>
         <div className='flex items-center justify-around flex-wrap mx-auto gap-x-2 w-11/12 lg:w-2/3'>
           <IndexLink
@@ -38,9 +38,9 @@ const Home: NextPageLayout = (): ReactElement => {
         </div>
       </nav>
       <div className='text-center rounded border my-5 py-20'>
-        <p>welcome info</p>
         <p>latest resources</p>
-        <p>other stuff - link to social networks? (footer)</p>
+        <p>latest resources</p>
+        <p>latest resources</p>
       </div>
     </div>
   );

@@ -40,7 +40,11 @@ const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
     <>
       <header className='bg-neutral-300 text-center z-10'>HEADER</header>
       {mainElement(children)}
-      <footer className='bg-neutral-300 text-center z-10'>FOOTER</footer>
+      <footer className='bg-neutral-300 text-center z-10 text-sm py-5'>
+        <div>some random info</div>
+        <div>link to other websites</div>
+        <div>email address for contact</div>
+      </footer>
       <div className='lg:hidden'>
         {open ? (
           <X
