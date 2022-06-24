@@ -67,7 +67,7 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
   };
 
   return (
-    <div className='mx-auto w-5/6 md:w-4/6 lg:w-2/5 xl:w-1/3'>
+    <div className='mx-auto w-5/6 md:w-1/2 lg:w-4/5 xl:w-3/5 2xl:w-1/2'>
       <TopElement text='Manage tags' />
       <div className='flex items-end text-lg w-5/6 mx-auto rounded-md mt-10 mb-16'>
         <div onClick={handleCreateTag} className='w-min mx-auto cursor-pointer group'>
@@ -91,26 +91,28 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
         />
       </div>
 
-      <div>
-        {currentTags.map((tag) => (
-          <div
-            className='w-4/5 mx-auto my-4 pl-2 shadow-sm bg-white shadow-slate-500 rounded-md flex items-center justify-between'
-            key={tag.id}
-          >
-            <div className='py-4 pl-3 text-lg text-gray-700'>{tag.name}</div>
+      <div className='grid lg:grid-cols-3 gap-x-5 gap-y-4 lg:gap-y-3'>
+        {currentTags
+          .sort((a, b) => (a.id > b.id ? -1 : 1))
+          .map((tag) => (
             <div
-              onClick={() => {
-                showDeleteConfimation(), setClickedTagId(tag.id);
-              }}
-              className='flex items-center self-stretch px-5 bg-slate-100 transition-colors rounded-br rounded-tr cursor-pointer group'
+              className='pl-2 shadow-sm bg-white shadow-slate-400 rounded-md flex items-center justify-between'
+              key={tag.id}
             >
-              <Trash
-                size={24}
-                className='text-slate-500 group-hover:text-red-500 group-active:text-slate-900'
-              />
+              <div className='py-4 pl-3 text-lg text-gray-700'>{tag.name}</div>
+              <div
+                onClick={() => {
+                  showDeleteConfimation(), setClickedTagId(tag.id);
+                }}
+                className='flex items-center self-stretch px-5 bg-slate-100 transition-colors rounded-br rounded-tr cursor-pointer group'
+              >
+                <Trash
+                  size={24}
+                  className='text-slate-500 group-hover:text-red-500 group-active:text-slate-900'
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
       <DeleteConfirmation
         id={clickedTagId}
