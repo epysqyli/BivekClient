@@ -75,6 +75,16 @@ const WorkingPaperElement = ({
             updateStateAfterDelete={removeWorkingPaperFromState}
             resourceType='working paper'
           />
+          {showDelete ?? (
+            <DeleteConfirmation
+              id={workingPaper.id}
+              show={showDelete}
+              hideShow={hideDeleteConfirmation}
+              deleteItem={deleteWorkingPaper}
+              updateStateAfterDelete={removeWorkingPaperFromState}
+              resourceType='working paper'
+            />
+          )}
         </div>
       )}
     </>
