@@ -22,7 +22,7 @@ const AdminLayout = ({ children }: ILayoutProps): ReactElement => {
   return (
     <OverlayProvider value={{ showOverlay, hideOverlay }}>
       <header></header>
-      <main className='pb-10'>{children}</main>
+      <main className='pb-24'>{children}</main>
       <footer className='fixed bottom-0 w-full lg:w-1/2 xl:w-1/3 lg:fixed lg:left-1/2 lg:-translate-x-1/2 lg:bottom-10 lg:shadow lg:rounded-md lg:hover:shadow-md lg:opacity-50 lg:hover:opacity-100 transition-opacity bg-slate-100 py-3 lg:py-5'>
         <div className='flex justify-around items-center w-4/5 mx-auto'>
           <Link href='/'>

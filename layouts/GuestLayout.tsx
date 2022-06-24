@@ -26,7 +26,7 @@ const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
       return (
         <main className='flex'>
           <SideMenuDesktop />
-          <main className='w-4/5'>{children}</main>
+          <main className='w-4/5 pb-20'>{children}</main>
         </main>
       );
     }
