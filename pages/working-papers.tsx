@@ -20,11 +20,11 @@ interface Props {
 
 const WorkingPapers: NextPageLayout<Props> = ({ workingPapers }: Props): ReactElement => {
   return (
-    <>
+    <div className='md:w-5/6 lg:w-2/3 mx-auto'>
       {workingPapers.map((wp) => (
         <WorkingPaperElement workingPaper={wp} key={wp.id} />
       ))}
-    </>
+    </div>
   );
 };
 
