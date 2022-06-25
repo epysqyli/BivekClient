@@ -1,13 +1,14 @@
 import { ReactElement } from "react";
 import SidebarLink from "./SidebarLink";
 import { AnimatePresence, motion } from "framer-motion";
-import { Database, Home, Info, Paperclip, Type, X, Youtube } from "react-feather";
+import { Database, Home, Info, Paperclip, Settings, Type, X, Youtube } from "react-feather";
 
 interface Props {
   open: boolean;
+  isAdmin: boolean;
 }
 
-const SideMenu = ({ open }: Props): ReactElement => (
+const SideMenu = ({ open, isAdmin }: Props): ReactElement => (
   <AnimatePresence>
     {open && (
       <motion.div
@@ -30,6 +31,13 @@ const SideMenu = ({ open }: Props): ReactElement => (
           icon={<Youtube className='text-slate-500' />}
         />
         <SidebarLink pageLink='/about' item='about' icon={<Info className='text-slate-500' />} />
+        {isAdmin ? (
+          <SidebarLink
+            pageLink='/admin'
+            item='admin section'
+            icon={<Settings className='text-slate-500' />}
+          />
+        ) : null}
       </motion.div>
     )}
   </AnimatePresence>

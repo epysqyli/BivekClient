@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
-import { Database, Home, Info, Paperclip, Type, X, Youtube } from "react-feather";
+import { Database, Home, Info, Paperclip, Settings, Type, X, Youtube } from "react-feather";
 import SidebarLink from "./SidebarLink";
 
-const SideMenuDesktop = (): ReactElement => {
+const SideMenuDesktop = ({ isAdmin }: { isAdmin: boolean }): ReactElement => {
   return (
     <div className='hidden lg:block bg-neutral-200 w-1/5 pt-5 relative'>
       <div className='fixed w-1/5'>
@@ -20,6 +20,13 @@ const SideMenuDesktop = (): ReactElement => {
           icon={<Youtube className='text-slate-500' />}
         />
         <SidebarLink pageLink='/about' item='about' icon={<Info className='text-slate-500' />} />
+        {isAdmin ? (
+          <SidebarLink
+            pageLink='/admin'
+            item='admin section'
+            icon={<Settings className='text-slate-500' />}
+          />
+        ) : null}
       </div>
     </div>
   );

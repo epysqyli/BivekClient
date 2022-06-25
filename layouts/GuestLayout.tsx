@@ -6,6 +6,7 @@ import SideMenuDesktop from "../components/guest/SideMenuDesktop";
 import { useRouter } from "next/router";
 import { useIsNarrow } from "../hooks/UseMediaQuery";
 import { Menu, X } from "react-feather";
+import { checkLoginClientSide } from "../lib/Auth";
 
 const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
   const [open, setOpen] = useState<boolean>(false);
@@ -14,6 +15,18 @@ const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
   const router = useRouter();
   const isIndex = (): boolean => (router.pathname === "/" ? true : false);
   const isNarrow = useIsNarrow();
+
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const checkAuth = async () => setIsAdmin(await checkLoginClientSide());
+
+  useEffect(() => {
+    router.events.on("routeChangeStart", () => checkAuth());
+    return () => router.events.off("routeChangeComplete", () => {});
+  }, [router.events]);
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
 
   useEffect(() => {
     router.events.on("routeChangeComplete", () => hideSidebar());
@@ -25,7 +38,7 @@ const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
     if (isIndex() === false && isNarrow === false) {
       return (
         <main className='flex'>
-          <SideMenuDesktop />
+          <SideMenuDesktop isAdmin={isAdmin} />
           <main className='w-4/5 pb-20'>{children}</main>
         </main>
       );
@@ -59,8 +72,8 @@ const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
             className='fixed bg-slate-400 text-white bottom-12 right-5 p-2 rounded-full shadow-md shadow-slate-400 cursor-pointer transition-transform hover:scale-95 active:scale-90 z-30'
           />
         )}
-        <SideMenuMobile open={open} />
-        {open && <SideMenuMobile open={open} />}
+        <SideMenuMobile open={open} isAdmin={isAdmin} />
+        {open && <SideMenuMobile open={open} isAdmin={isAdmin} />}
       </div>
     </>
   );

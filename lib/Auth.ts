@@ -25,6 +25,19 @@ const checkLogin = async (context: GetServerSidePropsContext): Promise<boolean> 
   }
 };
 
+const checkLoginClientSide = async (): Promise<boolean> => {
+  try {
+    const resp = await axios({
+      method: "GET",
+      url: "http://localhost:5010/logged_in",
+      withCredentials: true
+    });
+    return resp.status === 200 ? true : false;
+  } catch (error) {
+    return false;
+  }
+};
+
 const logout = async (): Promise<AxiosResponse> => {
   return await axios({
     method: "GET",
@@ -33,4 +46,4 @@ const logout = async (): Promise<AxiosResponse> => {
   });
 };
 
-export { login, checkLogin, logout };
+export { login, checkLogin, checkLoginClientSide, logout };
