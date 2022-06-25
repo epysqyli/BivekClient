@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useIsNarrow } from "../hooks/UseMediaQuery";
 import { Menu, X } from "react-feather";
 import { checkLoginClientSide } from "../lib/Auth";
+import Link from "next/link";
 
 const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
   const [open, setOpen] = useState<boolean>(false);
@@ -57,6 +58,13 @@ const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
         <div>some random info</div>
         <div>link to other websites</div>
         <div>email address for contact</div>
+        {isAdmin ? (
+          <Link href='/admin'>
+            <span className='block underline underline-offset-2 text-slate-700 my-3 cursor-pointer w-fit mx-auto'>
+              admin section
+            </span>
+          </Link>
+        ) : null}
       </footer>
       <div className='lg:hidden'>
         {open ? (
