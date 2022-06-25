@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
 };
 
 const AdminIndex: NextPageLayout = (): ReactElement => {
-  const iconStyle: string = "text-slate-50 group-hover:scale-95 group-active:scale-75 transition-transform";
+  const iconStyle: string = "text-slate-600 group-hover:text-slate-50 group-hover:scale-95 group-active:scale-75 transition-transform";
 
   return (
     <>
@@ -34,31 +34,31 @@ const AdminIndex: NextPageLayout = (): ReactElement => {
         <IndexLink
           text='Create a new article'
           href='/admin/create-new-article'
-          icon={<FilePlus size={32} strokeWidth={1.5} className={iconStyle} />}
+          icon={<FilePlus size={30} strokeWidth={1.5} className={iconStyle} />}
         />
 
         <IndexLink
           href='/admin/edit-articles'
           text='Manage existing articles'
-          icon={<Edit3 size={32} strokeWidth={1.5} className={iconStyle} />}
+          icon={<Edit3 size={30} strokeWidth={1.5} className={iconStyle} />}
         />
 
         <IndexLink
           href='/admin/article-tags'
           text='Article tags'
-          icon={<Tag size={32} strokeWidth={1.5} className={iconStyle} />}
+          icon={<Tag size={30} strokeWidth={1.5} className={iconStyle} />}
         />
 
         <IndexLink
           href='/admin/manage-datasets'
           text='Datasets'
-          icon={<Database size={32} strokeWidth={1.5} className={iconStyle} />}
+          icon={<Database size={30} strokeWidth={1.5} className={iconStyle} />}
         />
 
         <IndexLink
           href='/admin/manage-working-papers'
           text='Working papers'
-          icon={<Paperclip size={32} strokeWidth={1.5} className={iconStyle} />}
+          icon={<Paperclip size={30} strokeWidth={1.5} className={iconStyle} />}
         />
       </div>
     </>
