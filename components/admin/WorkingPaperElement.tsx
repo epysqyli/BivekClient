@@ -55,6 +55,12 @@ const WorkingPaperElement = ({
             <div className='text-gray-500'>link</div>
             <div className='text-gray-900'>{workingPaper.link}</div>
           </div>
+          {workingPaper.datasetLink ? (
+            <div className='mt-3 text-sm w-5/6'>
+              <div className='text-gray-500'>dataset link</div>
+              <div className='text-gray-900'>{workingPaper.datasetLink}</div>
+            </div>
+          ) : null}
           <div className='absolute top-1 right-1'>
             <Edit
               className='text-gray-500 cursor-pointer transition-transform hover:scale-95 active:scale-90'

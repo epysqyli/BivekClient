@@ -22,7 +22,8 @@ const WorkingPaperForm = ({
   const [newWorkingPaper, setNewWorkingPaper] = useState<IWorkingPaperCreate>({
     title: currentWorkingPaper?.title ?? "",
     abstract: currentWorkingPaper?.abstract ?? "",
-    link: currentWorkingPaper?.link ?? ""
+    link: currentWorkingPaper?.link ?? "",
+    datasetLink: currentWorkingPaper?.datasetLink ?? ""
   });
 
   const handleChange = (e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -41,9 +42,19 @@ const WorkingPaperForm = ({
     const titlePatch: IPatch = { path: "title", op: "replace", value: newWorkingPaper.title };
     const abstractPatch: IPatch = { path: "abstract", op: "replace", value: newWorkingPaper.abstract };
     const linkPatch: IPatch = { path: "link", op: "replace", value: newWorkingPaper.link };
+    const datasetLinkPatch: IPatch = {
+      path: "datasetLink",
+      op: "replace",
+      value: newWorkingPaper.datasetLink ?? ""
+    };
 
     if (currentWorkingPaper && replaceWorkingPapersInState) {
-      const resp = await patchWorkingPaper(currentWorkingPaper?.id, [titlePatch, abstractPatch, linkPatch]);
+      const resp = await patchWorkingPaper(currentWorkingPaper?.id, [
+        titlePatch,
+        abstractPatch,
+        linkPatch,
+        datasetLinkPatch
+      ]);
       replaceWorkingPapersInState(resp.data);
     }
   };
@@ -93,6 +104,17 @@ const WorkingPaperForm = ({
             onChange={handleChange}
             defaultValue={currentWorkingPaper?.link}
             required
+          />
+        </div>
+        <div className='w-5/6 mx-auto my-4'>
+          <input
+            type='text'
+            name='datasetLink'
+            id='datasetLink'
+            placeholder='dataset download link'
+            className='block mt-2 w-full border-b border-gray-400 p-3 outline-none focus:shadow-md text-sm'
+            onChange={handleChange}
+            defaultValue={currentWorkingPaper?.datasetLink}
           />
         </div>
         <button

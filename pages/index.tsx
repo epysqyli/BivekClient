@@ -12,7 +12,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
 const Home: NextPageLayout = (): ReactElement => {
   return (
     <div>
-      <div className='py-32 bg-neutral-200 text-center text-4xl font-medium text-slate-700'>welcome, readers!</div>
+      <div className='py-32 bg-neutral-200 text-center text-4xl font-medium text-slate-700'>
+        welcome, readers!
+      </div>
       <nav className='py-3 lg:py-5 bg-slate-500 text-slate-50 text-center'>
         <div className='flex items-center justify-around flex-wrap mx-auto gap-x-2 w-11/12 lg:w-2/3'>
           <IndexLink
@@ -26,7 +28,7 @@ const Home: NextPageLayout = (): ReactElement => {
             icon={<Database className='text-slate-100 group-active:text-slate-500 w-min mx-auto' />}
           />
           <IndexLink
-            pageLink='/working-papers'
+            pageLink='/research-papers'
             item='papers'
             icon={<Paperclip className='text-slate-100 group-active:text-slate-500 w-min mx-auto' />}
           />
