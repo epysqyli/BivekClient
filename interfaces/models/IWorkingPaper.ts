@@ -4,6 +4,7 @@ interface IWorkingPaper {
   abstract: string;
   link: string;
   datasetLink?: string;
+  createdAt?: string;
 }
 
 export default IWorkingPaper;
