@@ -25,11 +25,6 @@ const SideMenu = ({ open, isAdmin }: Props): ReactElement => (
           item='working papers'
           icon={<Paperclip className='text-slate-500' />}
         />
-        <SidebarLink
-          pageLink='/podcast-episodes'
-          item='podcast episodes'
-          icon={<Youtube className='text-slate-500' />}
-        />
         <SidebarLink pageLink='/about' item='about' icon={<Info className='text-slate-500' />} />
         {isAdmin ? (
           <SidebarLink

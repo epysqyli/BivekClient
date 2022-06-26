@@ -3,7 +3,7 @@ import type NextPageLayout from "../types/NextPageLayout";
 import type { GetServerSideProps } from "next";
 import GuestLayout from "../layouts/GuestLayout";
 import IndexLink from "../components/guest/IndexLink";
-import { Database, Paperclip, Type, Youtube } from "react-feather";
+import { Database, Info, Paperclip, Type } from "react-feather";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   return { props: {} };
@@ -31,9 +31,9 @@ const Home: NextPageLayout = (): ReactElement => {
             icon={<Paperclip className='text-slate-100 group-active:text-slate-500 w-min mx-auto' />}
           />
           <IndexLink
-            pageLink='/podcast-episodes'
-            item='podcast'
-            icon={<Youtube className='text-slate-100 group-active:text-slate-500 w-min mx-auto' />}
+            pageLink='/about'
+            item='About'
+            icon={<Info className='text-slate-100 group-active:text-slate-500 w-min mx-auto' />}
           />
         </div>
       </nav>
