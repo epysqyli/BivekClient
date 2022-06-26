@@ -25,6 +25,14 @@ const getArticleById = async (id: number): Promise<AxiosResponse<IArticle>> => {
   });
 };
 
+const getArticleByTagIds = async (tagIds: Array<number>): Promise<AxiosResponse<Array<IArticle>>> => {
+  return await axios({
+    method: "GET",
+    url: `http://localhost:5010/articles/tags`,
+    data: tagIds
+  });
+};
+
 const createArticle = async (
   title: string,
   body: string,
@@ -81,6 +89,7 @@ export {
   getArticles,
   getPublishedArticles,
   getArticleById,
+  getArticleByTagIds,
   createArticle,
   patchArticle,
   deleteArticle,
