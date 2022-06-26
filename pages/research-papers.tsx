@@ -18,7 +18,7 @@ interface Props {
   workingPapers: Array<IWorkingPaper>;
 }
 
-const WorkingPapers: NextPageLayout<Props> = ({ workingPapers }: Props): ReactElement => {
+const ResearchPapers: NextPageLayout<Props> = ({ workingPapers }: Props): ReactElement => {
   return (
     <div className='md:w-5/6 lg:w-2/3 mx-auto'>
       {workingPapers.map((wp) => (
@@ -28,6 +28,6 @@ const WorkingPapers: NextPageLayout<Props> = ({ workingPapers }: Props): ReactEl
   );
 };
 
-WorkingPapers.getLayout = (page: ReactElement) => <GuestLayout>{page}</GuestLayout>;
+ResearchPapers.getLayout = (page: ReactElement) => <GuestLayout>{page}</GuestLayout>;
 
-export default WorkingPapers;
+export default ResearchPapers;

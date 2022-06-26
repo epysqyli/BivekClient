@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import SidebarLink from "./SidebarLink";
 import { AnimatePresence, motion } from "framer-motion";
-import { Database, Home, Info, Paperclip, Settings, Type, X, Youtube } from "react-feather";
+import { Database, Home, Info, Paperclip, Settings, Type } from "react-feather";
 
 interface Props {
   open: boolean;
@@ -21,8 +21,8 @@ const SideMenu = ({ open, isAdmin }: Props): ReactElement => (
         <SidebarLink pageLink='/articles' item='articles' icon={<Type className='text-slate-500' />} />
         <SidebarLink pageLink='/datasets' item='datasets' icon={<Database className='text-slate-500' />} />
         <SidebarLink
-          pageLink='/working-papers'
-          item='working papers'
+          pageLink='/research-papers'
+          item='research papers'
           icon={<Paperclip className='text-slate-500' />}
         />
         <SidebarLink pageLink='/about' item='about' icon={<Info className='text-slate-500' />} />

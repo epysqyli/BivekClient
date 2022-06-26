@@ -56,8 +56,8 @@ const AdminIndex: NextPageLayout = (): ReactElement => {
         />
 
         <IndexLink
-          href='/admin/manage-working-papers'
-          text='Working papers'
+          href='/admin/manage-research-papers'
+          text='Research papers'
           icon={<Paperclip size={30} strokeWidth={1.5} className={iconStyle} />}
         />
       </div>

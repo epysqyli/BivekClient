@@ -33,7 +33,7 @@ interface Props {
   workingPaperProps: Array<IWorkingPaper>;
 }
 
-const ManageWorkingPapers: NextPageLayout<Props> = ({ workingPaperProps }: Props): ReactElement => {
+const ManageResearchPapers: NextPageLayout<Props> = ({ workingPaperProps }: Props): ReactElement => {
   const [workingPapers, setWorkingPapers] = useState<Array<IWorkingPaper>>(workingPaperProps);
   const [showForm, setShowForm] = useState<boolean>(false);
   const showWpForm = () => setShowForm(true);
@@ -57,7 +57,7 @@ const ManageWorkingPapers: NextPageLayout<Props> = ({ workingPaperProps }: Props
 
   return (
     <div className='mx-auto w-11/12 md:w-4/6 lg:w-3/5 xl:w-1/2'>
-      <TopElement text='Manage working papers' />
+      <TopElement text='Manage research papers' />
       {showForm ? (
         <div className='my-10'>
           <WorkingPaperForm addWorkingPaperToState={addWorkingPaperToState} hideForm={hideWpForm} />
@@ -72,7 +72,7 @@ const ManageWorkingPapers: NextPageLayout<Props> = ({ workingPaperProps }: Props
             strokeWidth={1.5}
             className='w-fit mx-auto mb-3 text-slate-600 transition-transform group-hover:scale-95 group-active:scale-90'
           />
-          <h1 className='text-xl text-center text-gray-700'>Add a new working paper</h1>
+          <h1 className='text-xl text-center text-gray-700'>Add a new paper</h1>
         </div>
       )}
 
@@ -96,6 +96,6 @@ const ManageWorkingPapers: NextPageLayout<Props> = ({ workingPaperProps }: Props
   );
 };
 
-ManageWorkingPapers.getLayout = (page: ReactElement) => <AdminLayout>{page}</AdminLayout>;
+ManageResearchPapers.getLayout = (page: ReactElement) => <AdminLayout>{page}</AdminLayout>;
 
-export default ManageWorkingPapers;
+export default ManageResearchPapers;

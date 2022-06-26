@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { Database, Home, Info, Paperclip, Settings, Type, X, Youtube } from "react-feather";
+import { Database, Home, Info, Paperclip, Settings, Type } from "react-feather";
 import SidebarLink from "./SidebarLink";
 
 const SideMenuDesktop = ({ isAdmin }: { isAdmin: boolean }): ReactElement => {
@@ -10,8 +10,8 @@ const SideMenuDesktop = ({ isAdmin }: { isAdmin: boolean }): ReactElement => {
         <SidebarLink pageLink='/articles' item='articles' icon={<Type className='text-slate-500' />} />
         <SidebarLink pageLink='/datasets' item='datasets' icon={<Database className='text-slate-500' />} />
         <SidebarLink
-          pageLink='/working-papers'
-          item='working papers'
+          pageLink='/research-papers'
+          item='research papers'
           icon={<Paperclip className='text-slate-500' />}
         />
         <SidebarLink pageLink='/about' item='about' icon={<Info className='text-slate-500' />} />
