@@ -52,7 +52,7 @@ const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
 
   return (
     <>
-      <header className='bg-neutral-300 text-center z-10'>HEADER</header>
+      <header></header>
       {mainElement(children)}
       <footer className='bg-neutral-300 text-center z-10 text-sm py-5'>
         <div>some random info</div>

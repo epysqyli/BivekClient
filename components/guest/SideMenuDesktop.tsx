@@ -4,7 +4,7 @@ import SidebarLink from "./SidebarLink";
 
 const SideMenuDesktop = ({ isAdmin }: { isAdmin: boolean }): ReactElement => {
   return (
-    <div className='hidden lg:block bg-neutral-200 w-1/5 pt-5 relative'>
+    <div className='hidden lg:block bg-neutral-200 w-1/5 relative'>
       <div className='fixed w-1/5'>
         <SidebarLink pageLink='/' item='home' icon={<Home className='text-slate-500' />} />
         <SidebarLink pageLink='/articles' item='articles' icon={<Type className='text-slate-500' />} />
