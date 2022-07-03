@@ -40,11 +40,11 @@ const DatasetElement = ({ dataset, removeDatasetFromState, replaceDatasetsInStat
         />
       ) : (
         <>
-          <div>
+          <div className="w-5/6">
             <div className='text-gray-500 text-sm'>title</div>
             <div className='text-gray-900 text-sm'>{dataset.title}</div>
           </div>
-          <div className='mt-2'>
+          <div className='mt-2 w-5/6'>
             <div className='text-gray-500 text-sm'>download link</div>
             <div className='text-gray-900 text-sm'>{dataset.link}</div>
           </div>
