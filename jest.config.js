@@ -1,12 +1,14 @@
 module.exports = {
   roots: ["<rootDir>"],
   transform: {
-    "^.+\\.tsx?$": "ts-jest",
+    "^.+\\.tsx?$": "ts-jest"
   },
-  setupFilesAfterEnv: [
-    // "@testing-library/react/cleanup-after-each",
-    "@testing-library/jest-dom/extend-expect"
-  ],
+  setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
   testEnvironment: "jsdom",
-  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"]
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
+  globals: {
+    "ts-jest": {
+      tsconfig: "tsconfig.test.json"
+    }
+  }
 };

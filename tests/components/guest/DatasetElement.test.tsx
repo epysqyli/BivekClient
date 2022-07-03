@@ -1,8 +1,8 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, RenderResult } from "@testing-library/react";
 
-import IDataset from "../../interfaces/models/IDataset";
-import DatasetElement from "../../components/guest/DatasetElement";
+import IDataset from "../../../interfaces/models/IDataset";
+import DatasetElement from "../../../components/guest/DatasetElement";
 
 const datasetProps: IDataset = {
   id: 1,
