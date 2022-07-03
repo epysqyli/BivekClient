@@ -34,7 +34,7 @@ const Login: NextPageLayout = (): ReactElement => {
   };
 
   useEffect(() => {
-    if (logged === true) router.push("/admin");
+    if (logged === true) router.replace("/admin");
   }, [logged, router]);
 
   return (
