@@ -1,5 +1,5 @@
 import React from "react";
-import { render, RenderResult } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 
 import IDataset from "../../../interfaces/models/IDataset";
 import DatasetElement from "../../../components/guest/DatasetElement";
@@ -11,8 +11,10 @@ const datasetProps: IDataset = {
   dataCategoryId: 1
 };
 
-describe("<DatasetElement />", () => {
-  test("should display dataset title and download link", () => {
+describe("Guest DatasetElement", () => {
+  test("should display dataset title", async () => {
     render(<DatasetElement dataset={datasetProps} />);
+    const datasetTitle = await screen.findByText("Dataset title");
+    expect(datasetTitle.textContent).toBe(datasetProps.title);
   });
 });
