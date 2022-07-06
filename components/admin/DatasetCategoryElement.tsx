@@ -48,6 +48,8 @@ const DatasetCategoryElement = ({ dataCategory, updateStateAfterDelete }: Props)
         size={36}
         onClick={showDeleteConfirmation}
         strokeWidth={1.75}
+        role='button'
+        aria-label='show-delete-category-button'
         className='bg-slate-300 hover:bg-amber-700 text-white rounded-full p-2 absolute -top-5 right-2 cursor-pointer transition-transform hover:scale-95 active:scale-90'
       />
 

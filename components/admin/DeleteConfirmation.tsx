@@ -25,6 +25,7 @@ const DeleteConfirmation = ({
   updateStateAfterDelete
 }: Props): ReactElement => {
   const [isDeleted, setIsDeleted] = useState<boolean>(false);
+  const [currentId] = useState<number>(id);
   const router = useRouter();
 
   const redirect = () => {
@@ -34,18 +35,20 @@ const DeleteConfirmation = ({
     }
   };
 
-  const handleDelete = async (id: number): Promise<void> => {
-    await deleteItem(id);
+  const handleDelete = async (): Promise<void> => {
+    await deleteItem(currentId);
     setIsDeleted(true);
+
     if (redirectPath !== undefined) {
       setTimeout(redirect, 2000);
     } else {
       if (updateStateAfterDelete) {
-        updateStateAfterDelete(id);
+        updateStateAfterDelete(currentId);
         hideShow();
         setIsDeleted(false);
       }
     }
+
     setIsDeleted(false);
   };
 
@@ -60,25 +63,27 @@ const DeleteConfirmation = ({
           className='py-10 px-5 w-2/3 md:w-1/2 lg:w-1/3 xl:w-1/4 bg-white z-20 mx-auto text-center shadow-lg shadow-slate-500 rounded-md'
         >
           <div>Confirm below to permanently delete this {resourceType}</div>
-          <div onClick={() => handleDelete(id)}>
+          <div onClick={handleDelete}>
             {isDeleted ? (
               <div className='bg-amber-700 text-white py-2 mt-5 w-4/5 mx-auto rounded border border-transparent'>
                 <p>Gone forever!</p>
                 <p className='text-sm mt-2 text-gray-100'>redirecting ... </p>
               </div>
             ) : (
-              <div className='bg-white text-amber-700 py-2 mt-5 w-4/5 mx-auto rounded border border-amber-700 cursor-pointer hover:text-white hover:bg-amber-700 active:bg-amber-900'>
+              <div
+                className='bg-white text-amber-700 py-2 mt-5 w-4/5 mx-auto rounded border border-amber-700 cursor-pointer hover:text-white hover:bg-amber-700 active:bg-amber-900'
+              >
                 delete
               </div>
             )}
           </div>
-          <div>
-            <XCircle
-              strokeWidth={1.5}
-              onClick={hideShow}
-              className='absolute top-0 right-0 m-2 text-slate-600 cursor-pointer hover:scale-95 active:scale-75'
-            />
-          </div>
+          <XCircle
+            strokeWidth={1.5}
+            onClick={hideShow}
+            className='absolute top-0 right-0 m-2 text-slate-600 cursor-pointer hover:scale-95 active:scale-75'
+            role='button'
+            aria-label='close-delete-button'
+          />
         </motion.div>
       )}
     </AnimatePresence>
