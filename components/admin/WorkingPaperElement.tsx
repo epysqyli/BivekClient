@@ -71,6 +71,8 @@ const WorkingPaperElement = ({
               onClick={showDeleteConfirmation}
               size={20}
               className='text-gray-500 mt-3 cursor-pointer transition-transform hover:scale-95 active:scale-90'
+              role='button'
+              aria-label='show-delete-research-paper-button'
             />
           </div>
           <DeleteConfirmation

@@ -12,11 +12,11 @@ const baseWorkingPaper: IWorkingPaper = {
 };
 
 const fullWorkingPaper: IWorkingPaper = {
-  id: 1,
-  title: "First working paper",
-  abstract: "First abstract",
-  link: "https://first-link.com",
-  datasetLink: "https://first-download-link.com"
+  id: 2,
+  title: "Second working paper",
+  abstract: "Second abstract",
+  link: "https://second-link.com",
+  datasetLink: "https://second-download-link.com"
 };
 
 const replaceWorkingPapersInState = jest.fn();
@@ -48,11 +48,11 @@ describe("Working paper element", () => {
       />
     );
 
-    const { title, abstract, link, createdAt, datasetLink } = baseWorkingPaper;
-    expect(screen.getByText(title).textContent).toEqual(baseWorkingPaper.title);
-    expect(screen.getByText(abstract).textContent).toEqual(baseWorkingPaper.abstract);
-    expect(screen.getByText(link).textContent).toEqual(baseWorkingPaper.link);
-    if (createdAt) expect(screen.getByText(createdAt).textContent).toEqual(baseWorkingPaper.createdAt);
-    if (datasetLink) expect(screen.getByText(datasetLink).textContent).toEqual(baseWorkingPaper.datasetLink);
+    const { title, abstract, link, createdAt, datasetLink } = fullWorkingPaper;
+    expect(screen.getByText(title).textContent).toEqual(fullWorkingPaper.title);
+    expect(screen.getByText(abstract).textContent).toEqual(fullWorkingPaper.abstract);
+    expect(screen.getByText(link).textContent).toEqual(fullWorkingPaper.link);
+    if (createdAt) expect(screen.getByText(createdAt).textContent).toEqual(fullWorkingPaper.createdAt);
+    if (datasetLink) expect(screen.getByText(datasetLink).textContent).toEqual(fullWorkingPaper.datasetLink);
   });
 });
