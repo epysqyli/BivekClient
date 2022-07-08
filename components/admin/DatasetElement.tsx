@@ -40,7 +40,7 @@ const DatasetElement = ({ dataset, removeDatasetFromState, replaceDatasetsInStat
         />
       ) : (
         <>
-          <div className="w-5/6">
+          <div className='w-5/6'>
             <div className='text-gray-500 text-sm'>title</div>
             <div className='text-gray-900 text-sm'>{dataset.title}</div>
           </div>

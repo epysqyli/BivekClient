@@ -8,9 +8,10 @@ import ITag from "../../interfaces/models/ITag";
 import { AxiosResponse } from "axios";
 import { useState } from "react";
 import TopElement from "../../components/admin/TopElement";
-import { Trash, PlusCircle } from "react-feather";
+import { PlusCircle } from "react-feather";
 import DeleteConfirmation from "../../components/admin/DeleteConfirmation";
 import { OverlayContext } from "../../hooks/OverlayContext";
+import TagItem from "../../components/admin/TagItem";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -35,13 +36,13 @@ interface TagsProps {
 }
 
 const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactElement => {
-  const { showOverlay, hideOverlay } = useContext(OverlayContext);
   const [currentTags, setCurrentTags] = useState<Array<ITag>>(tags);
   const [clickedTagId, setClickedTagId] = useState<number>(0);
   const [newTag, setNewTag] = useState<string>("");
   const [showDelete, setShowDelete] = useState<boolean>(false);
+  const { showOverlay, hideOverlay } = useContext(OverlayContext);
 
-  const showDeleteConfimation = () => {
+  const showDeleteConfirmation = () => {
     setShowDelete(true);
     showOverlay();
   };
@@ -96,21 +97,14 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
           .sort((a, b) => (a.id > b.id ? -1 : 1))
           .map((tag) => (
             <div
-              className='pl-2 shadow-sm bg-white shadow-slate-400 rounded-md flex items-center justify-between'
               key={tag.id}
+              className='pl-2 shadow-sm bg-white shadow-slate-400 rounded-md flex items-center justify-between'
             >
-              <div className='py-4 pl-3 text-lg text-gray-700'>{tag.name}</div>
-              <div
-                onClick={() => {
-                  showDeleteConfimation(), setClickedTagId(tag.id);
-                }}
-                className='flex items-center self-stretch px-5 bg-slate-100 transition-colors rounded-br rounded-tr cursor-pointer group'
-              >
-                <Trash
-                  size={24}
-                  className='text-slate-500 group-hover:text-red-500 group-active:text-slate-900'
-                />
-              </div>
+              <TagItem
+                tag={tag}
+                showDeleteConfirmation={showDeleteConfirmation}
+                setClickedTagId={setClickedTagId}
+              />
             </div>
           ))}
       </div>

@@ -1,6 +1,5 @@
 import type { ReactElement } from "react";
 import type { AxiosResponse } from "axios";
-import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { XCircle } from "react-feather";
@@ -24,8 +23,6 @@ const DeleteConfirmation = ({
   redirectPath,
   updateStateAfterDelete
 }: Props): ReactElement => {
-  const [isDeleted, setIsDeleted] = useState<boolean>(false);
-  const [currentId] = useState<number>(id);
   const router = useRouter();
 
   const redirect = () => {
@@ -36,20 +33,16 @@ const DeleteConfirmation = ({
   };
 
   const handleDelete = async (): Promise<void> => {
-    await deleteItem(currentId);
-    setIsDeleted(true);
+    await deleteItem(id);
 
     if (redirectPath !== undefined) {
       redirect();
     } else {
       if (updateStateAfterDelete) {
-        updateStateAfterDelete(currentId);
+        updateStateAfterDelete(id);
         hideShow();
-        setIsDeleted(false);
       }
     }
-
-    setIsDeleted(false);
   };
 
   return (
@@ -63,17 +56,11 @@ const DeleteConfirmation = ({
           className='py-10 px-5 w-2/3 md:w-1/2 lg:w-1/3 xl:w-1/4 bg-white z-20 mx-auto text-center shadow-lg shadow-slate-500 rounded-md'
         >
           <div>Confirm below to permanently delete this {resourceType}</div>
-          <div onClick={handleDelete}>
-            {isDeleted ? (
-              <div className='bg-amber-700 text-white py-2 mt-5 w-4/5 mx-auto rounded border border-transparent'>
-                <p>Gone forever!</p>
-                <p className='text-sm mt-2 text-gray-100'>redirecting ... </p>
-              </div>
-            ) : (
-              <div className='bg-white text-amber-700 py-2 mt-5 w-4/5 mx-auto rounded border border-amber-700 cursor-pointer hover:text-white hover:bg-amber-700 active:bg-amber-900'>
-                delete
-              </div>
-            )}
+          <div
+            onClick={handleDelete}
+            className='bg-white text-amber-700 py-2 mt-5 w-4/5 mx-auto rounded border border-amber-700 cursor-pointer hover:text-white hover:bg-amber-700 active:bg-amber-900'
+          >
+            delete
           </div>
           <XCircle
             strokeWidth={1.5}
