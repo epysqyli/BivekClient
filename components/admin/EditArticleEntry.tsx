@@ -2,7 +2,7 @@ import { Edit } from "react-feather";
 import { ReactElement } from "react";
 import Link from "next/link";
 import IArticle from "../../interfaces/models/IArticle";
-import TagElement from "./TagElement";
+import ArticleTag from "./ArticleTag";
 
 interface Props {
   article: IArticle;
@@ -20,7 +20,7 @@ const EditArticleEntry = ({ article }: Props): ReactElement => {
         )}
         <div className='flex items-center flex-wrap gap-x-1'>
           {article.tags.map((t) => (
-            <TagElement key={t.id} tagName={t.name} />
+            <ArticleTag key={t.id} tagName={t.name} />
           ))}
         </div>
       </div>
