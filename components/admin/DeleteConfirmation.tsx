@@ -40,7 +40,7 @@ const DeleteConfirmation = ({
     setIsDeleted(true);
 
     if (redirectPath !== undefined) {
-      setTimeout(redirect, 2000);
+      redirect();
     } else {
       if (updateStateAfterDelete) {
         updateStateAfterDelete(currentId);
@@ -70,9 +70,7 @@ const DeleteConfirmation = ({
                 <p className='text-sm mt-2 text-gray-100'>redirecting ... </p>
               </div>
             ) : (
-              <div
-                className='bg-white text-amber-700 py-2 mt-5 w-4/5 mx-auto rounded border border-amber-700 cursor-pointer hover:text-white hover:bg-amber-700 active:bg-amber-900'
-              >
+              <div className='bg-white text-amber-700 py-2 mt-5 w-4/5 mx-auto rounded border border-amber-700 cursor-pointer hover:text-white hover:bg-amber-700 active:bg-amber-900'>
                 delete
               </div>
             )}
