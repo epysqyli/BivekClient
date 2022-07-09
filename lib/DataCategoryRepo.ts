@@ -5,7 +5,14 @@ import type IPatch from "../interfaces/models/IPatch";
 const getDataCategories = async (): Promise<AxiosResponse<Array<IDataCategory>>> => {
   return await axios({
     method: "GET",
-    url: "http://localhost:5010/datacategories"
+    url: "http://localhost:5010/datacategories",
+  });
+};
+
+const getNonEmptyDataCategories = async (): Promise<AxiosResponse<Array<IDataCategory>>> => {
+  return await axios({
+    method: "GET",
+    url: "http://localhost:5010/datacategories/non-empty"
   });
 };
 
@@ -45,4 +52,11 @@ const deleteDataCategory = async (id: number): Promise<AxiosResponse> => {
   });
 };
 
-export { getDataCategories, getDataCategoryById, createDataCategory, patchDataCategory, deleteDataCategory };
+export {
+  getDataCategories,
+  getNonEmptyDataCategories,
+  getDataCategoryById,
+  createDataCategory,
+  patchDataCategory,
+  deleteDataCategory
+};
