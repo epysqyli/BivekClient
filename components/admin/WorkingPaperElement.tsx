@@ -1,46 +1,34 @@
-import { ReactElement, useContext } from "react";
+import { Dispatch, ReactElement, SetStateAction, useContext } from "react";
 import type IWorkingPaper from "../../interfaces/models/IWorkingPaper";
 import { useState } from "react";
 import { Edit, Trash2 } from "react-feather";
-import DeleteConfirmation from "./DeleteConfirmation";
-import { deleteWorkingPaper } from "../../lib/WorkingPaperRepo";
 import WorkingPaperForm from "./WorkingPaperForm";
-import { OverlayContext } from "../../hooks/OverlayContext";
 
 interface Props {
   workingPaper: IWorkingPaper;
+  setCurrentWorkingPaperId: Dispatch<SetStateAction<number>>;
   replaceWorkingPapersInState(workingPaper: IWorkingPaper): void;
-  removeWorkingPaperFromState(id: number): void;
+  showDeleteConfirmation(): void;
 }
 
 const WorkingPaperElement = ({
   workingPaper,
-  replaceWorkingPapersInState,
-  removeWorkingPaperFromState
+  setCurrentWorkingPaperId,
+  showDeleteConfirmation
 }: Props): ReactElement => {
   const [showEditform, setShowEditForm] = useState<boolean>(false);
   const showForm = () => setShowEditForm(true);
   const hideForm = () => setShowEditForm(false);
 
-  const [showDelete, setShowDelete] = useState<boolean>(false);
-  const { showOverlay, hideOverlay } = useContext(OverlayContext);
-  const showDeleteConfirmation = () => {
-    setShowDelete(true);
-    showOverlay();
-  };
-  const hideDeleteConfirmation = () => {
-    setShowDelete(false);
-    hideOverlay();
+  const handleClick = () => {
+    setCurrentWorkingPaperId(workingPaper.id);
+    showDeleteConfirmation();
   };
 
   return (
     <>
       {showEditform ? (
-        <WorkingPaperForm
-          currentWorkingPaper={workingPaper}
-          hideForm={hideForm}
-          replaceWorkingPapersInState={replaceWorkingPapersInState}
-        />
+        <WorkingPaperForm currentWorkingPaper={workingPaper} hideForm={hideForm} />
       ) : (
         <div className='relative ml-2'>
           <div className='text-sm w-5/6'>
@@ -68,31 +56,13 @@ const WorkingPaperElement = ({
               size={20}
             />
             <Trash2
-              onClick={showDeleteConfirmation}
+              onClick={handleClick}
               size={20}
               className='text-gray-500 mt-3 cursor-pointer transition-transform hover:scale-95 active:scale-90'
               role='button'
               aria-label='show-delete-research-paper-button'
             />
           </div>
-          <DeleteConfirmation
-            id={workingPaper.id}
-            show={showDelete}
-            hideShow={hideDeleteConfirmation}
-            deleteItem={deleteWorkingPaper}
-            updateStateAfterDelete={removeWorkingPaperFromState}
-            resourceType='working paper'
-          />
-          {showDelete ?? (
-            <DeleteConfirmation
-              id={workingPaper.id}
-              show={showDelete}
-              hideShow={hideDeleteConfirmation}
-              deleteItem={deleteWorkingPaper}
-              updateStateAfterDelete={removeWorkingPaperFromState}
-              resourceType='working paper'
-            />
-          )}
         </div>
       )}
     </>

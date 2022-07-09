@@ -27,7 +27,7 @@ describe("Guest research paper page", () => {
   const page = render(<ResearchPapers workingPapers={researchPapers} />);
 
   test("should display the correct amount of research paper elements", async () => {
-    const workingPaperElementsCount = await page.getAllByTestId("working-paper-element").length;
+    const workingPaperElementsCount = page.getAllByText(/working paper title/).length;
     expect(workingPaperElementsCount).toBe(2);
   });
 });

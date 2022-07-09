@@ -20,15 +20,17 @@ const fullWorkingPaper: IWorkingPaper = {
 };
 
 const replaceWorkingPapersInState = jest.fn();
-const removeWorkingPaperFromState = jest.fn();
+const setCurrentWorkingPaperId = jest.fn();
+const showDeleteConfirmation = jest.fn();
 
 describe("Working paper element", () => {
   test("should display title, abstract, link, createdAt", async () => {
     render(
       <WorkingPaperElement
         workingPaper={baseWorkingPaper}
-        removeWorkingPaperFromState={removeWorkingPaperFromState}
         replaceWorkingPapersInState={replaceWorkingPapersInState}
+        setCurrentWorkingPaperId={setCurrentWorkingPaperId}
+        showDeleteConfirmation={showDeleteConfirmation}
       />
     );
 
@@ -43,8 +45,9 @@ describe("Working paper element", () => {
     render(
       <WorkingPaperElement
         workingPaper={fullWorkingPaper}
-        removeWorkingPaperFromState={removeWorkingPaperFromState}
         replaceWorkingPapersInState={replaceWorkingPapersInState}
+        setCurrentWorkingPaperId={setCurrentWorkingPaperId}
+        showDeleteConfirmation={showDeleteConfirmation}
       />
     );
 

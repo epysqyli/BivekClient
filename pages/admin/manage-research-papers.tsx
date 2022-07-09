@@ -1,4 +1,4 @@
-import type { ReactElement } from "react";
+import { ReactElement, useContext } from "react";
 import type NextPageLayout from "../../types/NextPageLayout";
 import type { GetServerSideProps, Redirect, GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import type { AxiosResponse } from "axios";
@@ -6,11 +6,13 @@ import { useState } from "react";
 import IWorkingPaper from "../../interfaces/models/IWorkingPaper";
 import { checkLogin } from "../../lib/Auth";
 import AdminLayout from "../../layouts/AdminLayout";
-import { getWorkingPapers } from "../../lib/WorkingPaperRepo";
+import { deleteWorkingPaper, getWorkingPapers } from "../../lib/WorkingPaperRepo";
 import TopElement from "../../components/admin/TopElement";
 import WorkingPaperForm from "../../components/admin/WorkingPaperForm";
 import { PlusCircle } from "react-feather";
 import WorkingPaperElement from "../../components/admin/WorkingPaperElement";
+import { OverlayContext } from "../../hooks/OverlayContext";
+import DeleteConfirmation from "../../components/admin/DeleteConfirmation";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -35,9 +37,21 @@ interface Props {
 
 const ManageResearchPapers: NextPageLayout<Props> = ({ workingPaperProps }: Props): ReactElement => {
   const [workingPapers, setWorkingPapers] = useState<Array<IWorkingPaper>>(workingPaperProps);
+  const [currentWorkingPaperId, setCurrentWorkingPaperId] = useState<number>(0);
   const [showForm, setShowForm] = useState<boolean>(false);
   const showWpForm = () => setShowForm(true);
   const hideWpForm = () => setShowForm(false);
+
+  const [showDelete, setShowDelete] = useState<boolean>(false);
+  const { showOverlay, hideOverlay } = useContext(OverlayContext);
+  const showDeleteConfirmation = () => {
+    setShowDelete(true);
+    showOverlay();
+  };
+  const hideDeleteConfirmation = () => {
+    setShowDelete(false);
+    hideOverlay();
+  };
 
   const addWorkingPaperToState = (workingPaper: IWorkingPaper) => {
     setWorkingPapers([...workingPapers, workingPaper]);
@@ -86,12 +100,22 @@ const ManageResearchPapers: NextPageLayout<Props> = ({ workingPaperProps }: Prop
             >
               <WorkingPaperElement
                 workingPaper={wp}
+                setCurrentWorkingPaperId={setCurrentWorkingPaperId}
+                showDeleteConfirmation={showDeleteConfirmation}
                 replaceWorkingPapersInState={replaceWorkingPapersInState}
-                removeWorkingPaperFromState={removeWorkingPaperFromState}
               />
             </div>
           );
         })}
+
+      <DeleteConfirmation
+        id={currentWorkingPaperId}
+        show={showDelete}
+        hideShow={hideDeleteConfirmation}
+        deleteItem={deleteWorkingPaper}
+        updateStateAfterDelete={removeWorkingPaperFromState}
+        resourceType='working paper'
+      />
     </div>
   );
 };
