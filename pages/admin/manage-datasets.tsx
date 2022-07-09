@@ -1,14 +1,16 @@
 import type { FormEvent, ReactElement } from "react";
 import type NextPageLayout from "../../types/NextPageLayout";
 import type { GetServerSideProps, Redirect, GetServerSidePropsContext, GetServerSidePropsResult } from "next";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import AdminLayout from "../../layouts/AdminLayout";
 import { checkLogin } from "../../lib/Auth";
 import TopElement from "../../components/admin/TopElement";
-import { createDataCategory, getDataCategories } from "../../lib/DataCategoryRepo";
+import { createDataCategory, deleteDataCategory, getDataCategories } from "../../lib/DataCategoryRepo";
 import IDataCategory from "../../interfaces/models/IDataCategory";
 import DatasetCategoryElement from "../../components/admin/DatasetCategoryElement";
 import { PlusCircle } from "react-feather";
+import DeleteConfirmation from "../../components/admin/DeleteConfirmation";
+import { OverlayContext } from "../../hooks/OverlayContext";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -34,6 +36,18 @@ interface Props {
 const DatasetCategories: NextPageLayout<Props> = ({ datasetCategoriesProps }: Props): ReactElement => {
   const [categoryName, setCategoryName] = useState<string>("");
   const [datasetCategories, setDatasetCategories] = useState<Array<IDataCategory>>(datasetCategoriesProps);
+  const [currentDataCategoryId, setCurrentDataCategoryId] = useState<number>(0);
+  const [showDelete, setShowDelete] = useState<boolean>(false);
+  const { showOverlay, hideOverlay } = useContext(OverlayContext);
+  const showDeleteConfirmation = () => {
+    setShowDelete(true);
+    showOverlay();
+  };
+  const hideDeleteConfirmation = () => {
+    setShowDelete(false);
+    hideOverlay();
+  };
+
   const handleCreateCategory = async (): Promise<void> => {
     if (categoryName.length >= 3) {
       const newDataCategory = await createDataCategory(categoryName);
@@ -82,12 +96,21 @@ const DatasetCategories: NextPageLayout<Props> = ({ datasetCategoriesProps }: Pr
               >
                 <DatasetCategoryElement
                   dataCategory={dataCategory}
-                  updateStateAfterDelete={updateStateAfterDelete}
+                  setCurrentDataCategoryId={setCurrentDataCategoryId}
+                  showDataCategoryDeleteConfirmation={showDeleteConfirmation}
                 />
               </div>
             );
           })}
       </div>
+      <DeleteConfirmation
+        show={showDelete}
+        hideShow={hideDeleteConfirmation}
+        id={currentDataCategoryId}
+        resourceType='dataset category'
+        deleteItem={deleteDataCategory}
+        updateStateAfterDelete={updateStateAfterDelete}
+      />
     </div>
   );
 };

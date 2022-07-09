@@ -1,6 +1,6 @@
-import { ReactElement, useContext, useState } from "react";
+import { Dispatch, ReactElement, SetStateAction, useContext, useState } from "react";
 import type IDataCategory from "../../interfaces/models/IDataCategory";
-import { deleteDataCategory } from "../../lib/DataCategoryRepo";
+import { deleteDataset } from "../../lib/DatasetRepo";
 import DeleteConfirmation from "./DeleteConfirmation";
 import { PlusCircle, Trash } from "react-feather";
 import DatasetElement from "./DatasetElement";
@@ -10,11 +10,17 @@ import DatasetForm from "./DatasetForm";
 
 interface Props {
   dataCategory: IDataCategory;
-  updateStateAfterDelete: (id: number) => void;
+  setCurrentDataCategoryId: Dispatch<SetStateAction<number>>;
+  showDataCategoryDeleteConfirmation(): void;
 }
 
-const DatasetCategoryElement = ({ dataCategory, updateStateAfterDelete }: Props): ReactElement => {
+const DatasetCategoryElement = ({
+  dataCategory,
+  setCurrentDataCategoryId,
+  showDataCategoryDeleteConfirmation
+}: Props): ReactElement => {
   const [datasets, setDatasets] = useState<Array<IDataset>>(dataCategory.datasets || []);
+  const [currentDatasetId, setCurrentDatasetId] = useState<number>(0);
   const [showDelete, setShowDelete] = useState<boolean>(false);
   const { showOverlay, hideOverlay } = useContext(OverlayContext);
   const showDeleteConfirmation = () => {
@@ -24,6 +30,11 @@ const DatasetCategoryElement = ({ dataCategory, updateStateAfterDelete }: Props)
   const hideDeleteConfirmation = () => {
     setShowDelete(false);
     hideOverlay();
+  };
+
+  const handleClick = () => {
+    setCurrentDataCategoryId(dataCategory.id);
+    showDataCategoryDeleteConfirmation();
   };
 
   const [showDatasetCreateForm, setShowDatasetCreateForm] = useState<boolean>(false);
@@ -46,7 +57,7 @@ const DatasetCategoryElement = ({ dataCategory, updateStateAfterDelete }: Props)
 
       <Trash
         size={36}
-        onClick={showDeleteConfirmation}
+        onClick={handleClick}
         strokeWidth={1.75}
         role='button'
         aria-label='show-delete-category-button'
@@ -56,10 +67,10 @@ const DatasetCategoryElement = ({ dataCategory, updateStateAfterDelete }: Props)
       <DeleteConfirmation
         show={showDelete}
         hideShow={hideDeleteConfirmation}
-        id={dataCategory.id}
-        resourceType='dataset category'
-        deleteItem={deleteDataCategory}
-        updateStateAfterDelete={updateStateAfterDelete}
+        id={currentDatasetId}
+        resourceType='dataset'
+        deleteItem={deleteDataset}
+        updateStateAfterDelete={removeDatasetFromState}
       />
       <div className='my-5'>
         {datasets !== null && datasets.length !== 0 ? (
@@ -73,8 +84,9 @@ const DatasetCategoryElement = ({ dataCategory, updateStateAfterDelete }: Props)
                 >
                   <DatasetElement
                     dataset={dataset}
-                    removeDatasetFromState={removeDatasetFromState}
+                    setCurrentDatasetId={setCurrentDatasetId}
                     replaceDatasetsInState={replaceDatasetsInState}
+                    showDeleteConfirmation={showDeleteConfirmation}
                   />
                 </div>
               );

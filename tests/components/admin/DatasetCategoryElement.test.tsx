@@ -25,18 +25,16 @@ const datasetCategory: IDataCategory = {
   datasets: [firstDataset, secondDataset]
 };
 
-const updateStateAfterDelete = jest.fn();
-const overlayFunctions = {
-  showOverlay: jest.fn(),
-  hideOverlay: jest.fn()
-};
+const setCurrentDataCategoryId = jest.fn();
+const showDataCategoryDeleteConfirmation = jest.fn();
 
 describe("Admin dataset category element", () => {
   test("should display two datasets within one category", () => {
     render(
       <DatasetCategoryElement
         dataCategory={datasetCategory}
-        updateStateAfterDelete={updateStateAfterDelete}
+        setCurrentDataCategoryId={setCurrentDataCategoryId}
+        showDataCategoryDeleteConfirmation={showDataCategoryDeleteConfirmation}
       />
     );
     const firstDatasetOnScreen = screen.getByText("First dataset");

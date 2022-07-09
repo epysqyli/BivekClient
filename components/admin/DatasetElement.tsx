@@ -1,32 +1,29 @@
-import { ReactElement, useContext } from "react";
+import type { Dispatch, ReactElement, SetStateAction } from "react";
 import type IDataset from "../../interfaces/models/IDataset";
 import { useState } from "react";
-import { deleteDataset } from "../../lib/DatasetRepo";
-import DeleteConfirmation from "./DeleteConfirmation";
 import { Edit, Trash2 } from "react-feather";
-import { OverlayContext } from "../../hooks/OverlayContext";
 import DatasetForm from "./DatasetForm";
 
 interface Props {
   dataset: IDataset;
-  removeDatasetFromState(id: number): void;
+  setCurrentDatasetId: Dispatch<SetStateAction<number>>;
   replaceDatasetsInState(dataset: IDataset): void;
+  showDeleteConfirmation(): void;
 }
 
-const DatasetElement = ({ dataset, removeDatasetFromState, replaceDatasetsInState }: Props): ReactElement => {
+const DatasetElement = ({
+  dataset,
+  setCurrentDatasetId,
+  replaceDatasetsInState,
+  showDeleteConfirmation
+}: Props): ReactElement => {
   const [showDatasetEditForm, setShowDatasetEditForm] = useState<boolean>(false);
   const showEditForm = () => setShowDatasetEditForm(true);
   const hideEditForm = () => setShowDatasetEditForm(false);
 
-  const [showDelete, setShowDelete] = useState<boolean>(false);
-  const { showOverlay, hideOverlay } = useContext(OverlayContext);
-  const showDeleteConfirmation = () => {
-    setShowDelete(true);
-    showOverlay();
-  };
-  const hideDeleteConfirmation = () => {
-    setShowDelete(false);
-    hideOverlay();
+  const handleClick = () => {
+    setCurrentDatasetId(dataset.id);
+    showDeleteConfirmation();
   };
 
   return (
@@ -55,21 +52,13 @@ const DatasetElement = ({ dataset, removeDatasetFromState, replaceDatasetsInStat
               size={20}
             />
             <Trash2
-              onClick={showDeleteConfirmation}
+              onClick={handleClick}
               size={20}
               className='text-gray-500 mt-3 cursor-pointer transition-transform hover:scale-95 active:scale-90'
             />
           </div>
         </>
       )}
-      <DeleteConfirmation
-        id={dataset.id}
-        show={showDelete}
-        hideShow={hideDeleteConfirmation}
-        deleteItem={deleteDataset}
-        updateStateAfterDelete={removeDatasetFromState}
-        resourceType='dataset'
-      />
     </>
   );
 };
