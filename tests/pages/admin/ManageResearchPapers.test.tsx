@@ -1,12 +1,13 @@
 import React from "react";
-import axios from "axios";
 import { render, screen, fireEvent, waitForElementToBeRemoved } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import server from "../../server";
 
 import IWorkingPaper from "../../../interfaces/models/IWorkingPaper";
 import ManageResearchPapers from "../../../pages/admin/manage-research-papers";
 import { OverlayProvider } from "../../../hooks/OverlayContext";
 import { act } from "react-dom/test-utils";
+import { getWorkingPaper } from "../../../lib/WorkingPaperRepo";
 
 const baseWorkingPaper: IWorkingPaper = {
   id: 1,
@@ -28,7 +29,17 @@ const overlayFunctions = {
   hideOverlay: jest.fn()
 };
 
+beforeAll(() => server.listen());
+afterEach(() => server.restoreHandlers());
+afterAll(() => server.close());
+
 describe("Manage research papers", () => {
+  test("should get and display a specific research paper", async () => {
+    const mockPaper = await getWorkingPaper(1);
+    render(<ManageResearchPapers workingPaperProps={[mockPaper.data]} />);
+    expect(screen.queryByText(/Working paper title/)).toBeInTheDocument();
+  });
+
   test("should display two research papers", () => {
     render(<ManageResearchPapers workingPaperProps={[baseWorkingPaper, fullWorkingPaper]} />);
 
