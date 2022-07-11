@@ -31,7 +31,11 @@ const WorkingPaperForm = ({
   };
 
   const handleCreateWorkingPaper = async (): Promise<void> => {
+    console.log(newWorkingPaper);
+    
     const resp = await createWorkingPaper(newWorkingPaper);
+    console.log(resp);
+    
     if (resp.status === 201) {
       if (addWorkingPaperToState !== undefined) addWorkingPaperToState(resp.data);
       hideForm();
@@ -67,12 +71,13 @@ const WorkingPaperForm = ({
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form aria-label='working-paper-form' onSubmit={handleSubmit}>
         <div className='w-5/6 mx-auto'>
           <input
             type='text'
             name='title'
             id='title'
+            aria-label="input-title"
             placeholder='Working paper title'
             className='block mt-2 w-full border-b border-gray-400 p-3 outline-none focus:shadow-md text-sm'
             onChange={handleChange}
@@ -85,6 +90,7 @@ const WorkingPaperForm = ({
           <textarea
             name='abstract'
             id='abstract'
+            aria-label="input-abstract"
             placeholder='abstract'
             rows={5}
             className='block mt-2 w-full border-b border-gray-400 p-3 outline-none focus:shadow-md text-sm'
@@ -99,6 +105,7 @@ const WorkingPaperForm = ({
             type='text'
             name='link'
             id='link'
+            aria-label="input-link"
             placeholder='download link'
             className='block mt-2 w-full border-b border-gray-400 p-3 outline-none focus:shadow-md text-sm'
             onChange={handleChange}
@@ -111,6 +118,7 @@ const WorkingPaperForm = ({
             type='text'
             name='datasetLink'
             id='datasetLink'
+            aria-label="input-dataset-link"
             placeholder='dataset download link'
             className='block mt-2 w-full border-b border-gray-400 p-3 outline-none focus:shadow-md text-sm'
             onChange={handleChange}

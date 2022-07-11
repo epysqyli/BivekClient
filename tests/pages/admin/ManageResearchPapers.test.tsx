@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { render, screen, fireEvent, waitForElementToBeRemoved } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 import IWorkingPaper from "../../../interfaces/models/IWorkingPaper";
 import ManageResearchPapers from "../../../pages/admin/manage-research-papers";
@@ -14,11 +15,6 @@ const baseWorkingPaper: IWorkingPaper = {
   link: "https://first-link.com"
 };
 
-const overlayFunctions = {
-  showOverlay: jest.fn(),
-  hideOverlay: jest.fn()
-};
-
 const fullWorkingPaper: IWorkingPaper = {
   id: 2,
   title: "Second working paper",
@@ -27,9 +23,10 @@ const fullWorkingPaper: IWorkingPaper = {
   datasetLink: "https://second-download-link.com"
 };
 
-jest.mock("axios");
-const axiosMock = axios as jest.Mocked<typeof axios>;
-axiosMock.get.mockResolvedValue({ status: 204 });
+const overlayFunctions = {
+  showOverlay: jest.fn(),
+  hideOverlay: jest.fn()
+};
 
 describe("Manage research papers", () => {
   test("should display two research papers", () => {
@@ -38,7 +35,29 @@ describe("Manage research papers", () => {
     expect(screen.getAllByText(/working paper/)).toHaveLength(2);
   });
 
-  test("should delete research paper", async () => {
+  xtest("should create new research paper", async () => {
+    const user = userEvent.setup();
+    render(
+      <OverlayProvider value={overlayFunctions}>
+        <ManageResearchPapers workingPaperProps={[]} />
+      </OverlayProvider>
+    );
+
+    await user.click(screen.getByRole("button", { name: /add-working-paper/ }));
+    expect(screen.getByRole("form", { name: /working-paper-form/ })).toBeInTheDocument();
+
+    const titleInput = screen.getByLabelText(/input-title/);
+    const abstractInput = screen.getByLabelText(/input-abstract/);
+    const linkInput = screen.getByLabelText(/input-link/);
+    await user.type(titleInput, "New research paper");
+    await user.type(abstractInput, "Some paper abstract");
+    await user.type(linkInput, "https://download-link.com");
+
+    await user.click(screen.getByRole("button"));
+    await waitForElementToBeRemoved(screen.queryByRole("form", { name: /working-paper-form/ }));
+  });
+
+  xtest("should delete research paper", async () => {
     render(
       <OverlayProvider value={overlayFunctions}>
         <ManageResearchPapers workingPaperProps={[baseWorkingPaper, fullWorkingPaper]} />
@@ -46,16 +65,16 @@ describe("Manage research papers", () => {
     );
 
     act(() => {
-      const delBtn = screen.getAllByRole("button", { name: /show-delete-research-paper-button/ })[1];
-      fireEvent.click(delBtn);
+      const delBtns = screen.getAllByRole("button", { name: /show-delete-research-paper-button/ });
+      fireEvent.click(delBtns[0]); // papers are ranked in desc order by createdAt
     });
     fireEvent.click(await screen.findByText("delete", { exact: true }));
     await waitForElementToBeRemoved([
-      screen.queryByText(baseWorkingPaper.title, { exact: true }),
+      screen.queryByText(fullWorkingPaper.title, { exact: true }),
       screen.queryByText("delete", { exact: true })
     ]);
 
     expect(screen.queryByText("delete", { exact: true })).not.toBeInTheDocument();
-    expect(screen.queryByText(baseWorkingPaper.title, { exact: true })).not.toBeInTheDocument();
+    expect(screen.queryByText(fullWorkingPaper.title, { exact: true })).not.toBeInTheDocument();
   });
 });
