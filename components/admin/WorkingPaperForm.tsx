@@ -30,12 +30,8 @@ const WorkingPaperForm = ({
     setNewWorkingPaper({ ...newWorkingPaper, [e.currentTarget.name]: e.currentTarget.value });
   };
 
-  const handleCreateWorkingPaper = async (): Promise<void> => {
-    console.log(newWorkingPaper);
-    
+  const handleCreateWorkingPaper = async (): Promise<void> => {   
     const resp = await createWorkingPaper(newWorkingPaper);
-    console.log(resp);
-    
     if (resp.status === 201) {
       if (addWorkingPaperToState !== undefined) addWorkingPaperToState(resp.data);
       hideForm();

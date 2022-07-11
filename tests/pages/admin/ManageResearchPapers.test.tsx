@@ -1,28 +1,12 @@
 import React from "react";
 import { render, screen, fireEvent, waitForElementToBeRemoved } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import server from "../../server";
 
-import IWorkingPaper from "../../../interfaces/models/IWorkingPaper";
 import ManageResearchPapers from "../../../pages/admin/manage-research-papers";
 import { OverlayProvider } from "../../../hooks/OverlayContext";
 import { act } from "react-dom/test-utils";
 import { getWorkingPaper } from "../../../lib/WorkingPaperRepo";
-
-const baseWorkingPaper: IWorkingPaper = {
-  id: 1,
-  title: "First working paper",
-  abstract: "First abstract",
-  link: "https://first-link.com"
-};
-
-const fullWorkingPaper: IWorkingPaper = {
-  id: 2,
-  title: "Second working paper",
-  abstract: "Second abstract",
-  link: "https://second-link.com",
-  datasetLink: "https://second-download-link.com"
-};
+import server from "../../network-handlers/workingPaperHandlers";
 
 const overlayFunctions = {
   showOverlay: jest.fn(),
@@ -35,18 +19,12 @@ afterAll(() => server.close());
 
 describe("Manage research papers", () => {
   test("should get and display a specific research paper", async () => {
-    const mockPaper = await getWorkingPaper(1);
-    render(<ManageResearchPapers workingPaperProps={[mockPaper.data]} />);
+    const mockPaperResp = await getWorkingPaper(1);
+    render(<ManageResearchPapers workingPaperProps={[mockPaperResp.data]} />);
     expect(screen.queryByText(/Working paper title/)).toBeInTheDocument();
   });
 
-  test("should display two research papers", () => {
-    render(<ManageResearchPapers workingPaperProps={[baseWorkingPaper, fullWorkingPaper]} />);
-
-    expect(screen.getAllByText(/working paper/)).toHaveLength(2);
-  });
-
-  xtest("should create new research paper", async () => {
+  test("should create new research paper", async () => {
     const user = userEvent.setup();
     render(
       <OverlayProvider value={overlayFunctions}>
@@ -57,21 +35,19 @@ describe("Manage research papers", () => {
     await user.click(screen.getByRole("button", { name: /add-working-paper/ }));
     expect(screen.getByRole("form", { name: /working-paper-form/ })).toBeInTheDocument();
 
-    const titleInput = screen.getByLabelText(/input-title/);
-    const abstractInput = screen.getByLabelText(/input-abstract/);
-    const linkInput = screen.getByLabelText(/input-link/);
-    await user.type(titleInput, "New research paper");
-    await user.type(abstractInput, "Some paper abstract");
-    await user.type(linkInput, "https://download-link.com");
+    await user.type(screen.getByLabelText(/input-title/), "New research paper");
+    await user.type(screen.getByLabelText(/input-abstract/), "Some paper abstract");
+    await user.type(screen.getByLabelText(/input-link/), "https://download-link.com");
 
     await user.click(screen.getByRole("button"));
     await waitForElementToBeRemoved(screen.queryByRole("form", { name: /working-paper-form/ }));
   });
 
-  xtest("should delete research paper", async () => {
+  test("should delete research paper", async () => {
+    const mockPaperResp = await getWorkingPaper(1);
     render(
       <OverlayProvider value={overlayFunctions}>
-        <ManageResearchPapers workingPaperProps={[baseWorkingPaper, fullWorkingPaper]} />
+        <ManageResearchPapers workingPaperProps={[mockPaperResp.data]} />
       </OverlayProvider>
     );
 
@@ -81,11 +57,11 @@ describe("Manage research papers", () => {
     });
     fireEvent.click(await screen.findByText("delete", { exact: true }));
     await waitForElementToBeRemoved([
-      screen.queryByText(fullWorkingPaper.title, { exact: true }),
+      screen.queryByText(mockPaperResp.data.title, { exact: true }),
       screen.queryByText("delete", { exact: true })
     ]);
 
     expect(screen.queryByText("delete", { exact: true })).not.toBeInTheDocument();
-    expect(screen.queryByText(fullWorkingPaper.title, { exact: true })).not.toBeInTheDocument();
+    expect(screen.queryByText(mockPaperResp.data.title, { exact: true })).not.toBeInTheDocument();
   });
 });

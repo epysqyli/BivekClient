@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "tests/handlers.js",
+    "tests/workingPaperHandlers.js",
     "jest.config.js"
   ],
   "exclude": [

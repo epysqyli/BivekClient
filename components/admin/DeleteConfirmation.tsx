@@ -33,9 +33,7 @@ const DeleteConfirmation = ({
   };
 
   const handleDelete = async (): Promise<void> => {
-    const resp = await deleteItem(id);
-    console.log(resp);
-    
+    const resp = await deleteItem(id);    
 
     if (redirectPath !== undefined) {
       redirect();
