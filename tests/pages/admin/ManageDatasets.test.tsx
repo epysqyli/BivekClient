@@ -1,51 +1,48 @@
 import React from "react";
-import axios from "axios";
 import { render, screen, fireEvent, waitForElementToBeRemoved } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
-import IDataset from "../../../interfaces/models/IDataset";
-import IDataCategory from "../../../interfaces/models/IDataCategory";
 import DatasetCategories from "../../../pages/admin/manage-datasets";
 import { OverlayProvider } from "../../../hooks/OverlayContext";
-
-const firstDataset: IDataset = {
-  id: 1,
-  title: "First dataset",
-  link: "https://first-link.com",
-  dataCategoryId: 1
-};
-
-const secondDataset: IDataset = {
-  id: 2,
-  title: "Second dataset",
-  link: "https://second-link.com",
-  dataCategoryId: 1
-};
-
-const datasetCategory: IDataCategory = {
-  id: 1,
-  name: "First dataset category",
-  datasets: [firstDataset, secondDataset]
-};
+import server from "../../network-handlers/datasetCategoriesHandlers";
+import { getDataCategoryById } from "../../../lib/DataCategoryRepo";
 
 const overlayFunctions = {
   showOverlay: jest.fn(),
   hideOverlay: jest.fn()
 };
 
-jest.mock("axios");
-const axiosMock = axios as jest.Mocked<typeof axios>;
-axiosMock.get.mockResolvedValue({ status: 204 });
+beforeAll(() => server.listen());
+afterEach(() => server.restoreHandlers());
+afterAll(() => server.close());
 
-describe("Manage datasets page", () => {
-  test("should display one dataset category with two datasets", () => {
+describe("Manage datasets", () => {
+  test("should display one dataset category with one dataset", async () => {
+    const datasetCategoryResp = await getDataCategoryById(1);
+    const datasetCategory = datasetCategoryResp.data;
     render(<DatasetCategories datasetCategoriesProps={[datasetCategory]} />);
 
-    expect(screen.getByText("First dataset category")).toBeInTheDocument();
-    expect(screen.getByText("First dataset")).toBeInTheDocument();
-    expect(screen.getByText("Second dataset")).toBeInTheDocument();
+    expect(screen.getByText(/Random dataset category/)).toBeInTheDocument();
+    expect(screen.getByText(/First random dataset/)).toBeInTheDocument();
+  });
+
+  test("should create a new dataset category", async () => {
+    const user = userEvent.setup();
+    render(
+      <OverlayProvider value={overlayFunctions}>
+        <DatasetCategories datasetCategoriesProps={[]} />
+      </OverlayProvider>
+    );
+
+    await user.type(screen.getByLabelText(/input-name/), "Random dataset category");
+    await user.click(screen.getByRole("button", { name: /create-dataset-category/ }));
+
+    expect(await screen.findByText(/Random dataset category/)).toBeInTheDocument();
   });
 
   test("should display and hide delete confirmation button", async () => {
+    const datasetCategoryResp = await getDataCategoryById(1);
+    const datasetCategory = datasetCategoryResp.data;
     render(
       <OverlayProvider value={overlayFunctions}>
         <DatasetCategories datasetCategoriesProps={[datasetCategory]} />
@@ -63,6 +60,8 @@ describe("Manage datasets page", () => {
   });
 
   test("should delete dataset category", async () => {
+    const datasetCategoryResp = await getDataCategoryById(1);
+    const datasetCategory = datasetCategoryResp.data;
     render(
       <OverlayProvider value={overlayFunctions}>
         <DatasetCategories datasetCategoriesProps={[datasetCategory]} />

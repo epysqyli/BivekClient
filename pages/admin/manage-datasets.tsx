@@ -72,11 +72,14 @@ const DatasetCategories: NextPageLayout<Props> = ({ datasetCategoriesProps }: Pr
             strokeWidth={1.25}
             className='text-white bg-slate-500 rounded-full group-hover:scale-95 group-active:scale-75 transition-transform'
             onClick={handleCreateCategory}
+            aria-label='create-dataset-category'
+            role='button'
           />
         </div>
         <input
           type='text'
           className='border-b-2 border-gray-300 rounded-t block w-4/5 mx-auto py-2 pl-3 text-center focus:outline-none'
+          aria-label='input-name'
           placeholder='Enter data category name'
           onChange={handleCategoryChange}
           onKeyDown={(e) => {
