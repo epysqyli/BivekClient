@@ -26,6 +26,18 @@ const datasetHandlers = [
     );
   }),
 
+  rest.patch("http://localhost:5010/datasets/1", async (req, res, ctx) => {
+    return res(
+      ctx.status(201),
+      ctx.json({
+        id: 1,
+        title: "A different dataset",
+        link: "https://some-different-download-link.com",
+        dataCategoryId: 1
+      })
+    );
+  }),
+
   rest.delete("http://localhost:5010/datasets/1", async (req, res, ctx) => {
     return res(ctx.status(204), ctx.json({}));
   })

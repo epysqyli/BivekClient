@@ -53,7 +53,7 @@ const DatasetForm = ({
 
   return (
     <>
-      <form aria-label='new-dataset-form' onSubmit={handleSubmit}>
+      <form aria-label='dataset-form' onSubmit={handleSubmit}>
         <div className='w-5/6 mx-auto'>
           <input
             type='text'

@@ -50,11 +50,15 @@ const DatasetElement = ({
               className='text-gray-500 cursor-pointer transition-transform hover:scale-95 active:scale-90'
               onClick={showEditForm}
               size={20}
+              aria-label='show-edit-dataset-form'
+              role='button'
             />
             <Trash2
               onClick={handleClick}
               size={20}
               className='text-gray-500 mt-3 cursor-pointer transition-transform hover:scale-95 active:scale-90'
+              aria-label='delete-dataset'
+              role='button'
             />
           </div>
         </>

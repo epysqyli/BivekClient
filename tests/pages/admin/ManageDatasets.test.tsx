@@ -89,17 +89,39 @@ describe("Manage datasets", () => {
       </OverlayProvider>
     );
 
-    await user.click(screen.getByRole("button", { name: /show-create-dataset-form/ }));
-    expect(screen.getByRole("form", { name: /new-dataset-form/ })).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: /show-new-dataset-form/ }));
+    expect(screen.getByRole("form", { name: /dataset-form/ })).toBeInTheDocument();
 
     await user.type(screen.getByLabelText(/input-title/), "Some dataset");
     await user.type(screen.getByLabelText(/input-link/), "https://some-download-link.com");
     await user.click(screen.getByRole("button", { name: /Add dataset to category/ }));
 
-    expect(await screen.queryByRole("form", { name: /new-dataset-form/ })).not.toBeInTheDocument();
+    expect(screen.queryByRole("form", { name: /dataset-form/ })).not.toBeInTheDocument();
     expect(await screen.findByText(/Some dataset/)).toBeInTheDocument();
     expect(await screen.findByText("https://some-download-link.com")).toBeInTheDocument();
   });
 
-  xtest("should delete a single dataset", () => {});
+  test("should edit an existing dataset", async () => {
+    const user = userEvent.setup();
+    const datasetCategoryResp = await getDataCategoryById(1);
+    const datasetCategory = datasetCategoryResp.data;
+    render(
+      <OverlayProvider value={overlayFunctions}>
+        <DatasetCategories datasetCategoriesProps={[datasetCategory]} />
+      </OverlayProvider>
+    );
+
+    await user.click(screen.getAllByRole("button", { name: /show-edit-dataset-form/ })[1]);
+    expect(screen.getByRole("form", { name: /dataset-form/ })).toBeInTheDocument();
+
+    await user.type(screen.getByLabelText(/input-title/), "A different dataset");
+    await user.type(screen.getByLabelText(/input-link/), "https://some-different-download-link.com");
+    await user.click(screen.getByRole("button", { name: /Confirm changes/ }));
+
+    expect(screen.queryByRole("form", { name: /dataset-form/ })).not.toBeInTheDocument();
+    expect(await screen.findByText(/A different dataset/)).toBeInTheDocument();
+    expect(await screen.findByText("https://some-different-download-link.com")).toBeInTheDocument();
+  });
+
+  xtest("should delete a dataset", () => {});
 });
