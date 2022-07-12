@@ -123,5 +123,25 @@ describe("Manage datasets", () => {
     expect(await screen.findByText("https://some-different-download-link.com")).toBeInTheDocument();
   });
 
-  xtest("should delete a dataset", () => {});
+  test("should delete a dataset", async () => {
+    const user = userEvent.setup();
+    const datasetCategoryResp = await getDataCategoryById(1);
+    const datasetCategory = datasetCategoryResp.data;
+    render(
+      <OverlayProvider value={overlayFunctions}>
+        <DatasetCategories datasetCategoriesProps={[datasetCategory]} />
+      </OverlayProvider>
+    );
+
+    await user.click(screen.getAllByRole("button", { name: /delete-dataset/ })[1]);
+    await user.click(await screen.findByText("delete", { exact: true }));
+
+    await waitForElementToBeRemoved([
+      screen.queryByText(datasetCategory.datasets[1].title, { exact: true }),
+      screen.queryByText("delete", { exact: true })
+    ]);
+
+    expect(screen.queryByText("delete", { exact: true })).not.toBeInTheDocument();
+    expect(screen.queryByText(datasetCategory.datasets[1].title, { exact: true })).not.toBeInTheDocument();
+  });
 });
