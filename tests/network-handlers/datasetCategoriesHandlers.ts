@@ -18,7 +18,7 @@ const datasetHandlers = [
     return res(
       ctx.status(201),
       ctx.json({
-        id: 1,
+        id: 3,
         title: "Some dataset",
         link: "https://some-download-link.com",
         dataCategoryId: 1

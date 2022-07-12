@@ -53,13 +53,14 @@ const DatasetForm = ({
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form aria-label='new-dataset-form' onSubmit={handleSubmit}>
         <div className='w-5/6 mx-auto'>
           <input
             type='text'
             name='title'
             id='title'
             placeholder='name for the new dataset'
+            aria-label="input-title"
             className='block mt-2 w-full border-b border-gray-400 p-3 outline-none focus:shadow-md text-sm'
             onChange={handleChange}
             defaultValue={currentDataset?.title}
@@ -73,6 +74,7 @@ const DatasetForm = ({
             name='link'
             id='link'
             placeholder='download link'
+            aria-label="input-link"
             className='block mt-2 w-full border-b border-gray-400 p-3 outline-none focus:shadow-md text-sm'
             onChange={handleChange}
             defaultValue={currentDataset?.link}
@@ -84,7 +86,7 @@ const DatasetForm = ({
           type='submit'
           className='block mx-auto text-sm w-fit rounded-md p-2 bg-white mt-10 mb-5 hover:shadow-md active:shadow-inner'
         >
-          {currentDataset ?  "Confirm changes" : "Add dataset to category"}
+          {currentDataset ? "Confirm changes" : "Add dataset to category"}
         </button>
       </form>
       <div

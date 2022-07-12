@@ -59,7 +59,7 @@ describe("Manage datasets", () => {
     expect(screen.queryByText("delete", { exact: true })).not.toBeInTheDocument();
   });
 
-  test("should delete dataset category", async () => {
+  test("should delete a dataset category", async () => {
     const datasetCategoryResp = await getDataCategoryById(1);
     const datasetCategory = datasetCategoryResp.data;
     render(
@@ -78,4 +78,28 @@ describe("Manage datasets", () => {
     expect(screen.queryByText("delete", { exact: true })).not.toBeInTheDocument();
     expect(screen.queryByText(datasetCategory.name, { exact: true })).not.toBeInTheDocument();
   });
+
+  test("should create a new dataset", async () => {
+    const user = userEvent.setup();
+    const datasetCategoryResp = await getDataCategoryById(1);
+    const datasetCategory = datasetCategoryResp.data;
+    render(
+      <OverlayProvider value={overlayFunctions}>
+        <DatasetCategories datasetCategoriesProps={[datasetCategory]} />
+      </OverlayProvider>
+    );
+
+    await user.click(screen.getByRole("button", { name: /show-create-dataset-form/ }));
+    expect(screen.getByRole("form", { name: /new-dataset-form/ })).toBeInTheDocument();
+
+    await user.type(screen.getByLabelText(/input-title/), "Some dataset");
+    await user.type(screen.getByLabelText(/input-link/), "https://some-download-link.com");
+    await user.click(screen.getByRole("button", { name: /Add dataset to category/ }));
+
+    expect(await screen.queryByRole("form", { name: /new-dataset-form/ })).not.toBeInTheDocument();
+    expect(await screen.findByText(/Some dataset/)).toBeInTheDocument();
+    expect(await screen.findByText("https://some-download-link.com")).toBeInTheDocument();
+  });
+
+  xtest("should delete a single dataset", () => {});
 });

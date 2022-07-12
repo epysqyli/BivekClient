@@ -109,6 +109,8 @@ const DatasetCategoryElement = ({
           size={34}
           strokeWidth={1.25}
           className='w-min mx-auto mt-10 mb-5 text-white bg-slate-500 rounded-full cursor-pointer transition-transform hover:scale-95 active:scale-90'
+          aria-label='show-create-dataset-form'
+          role='button'
         />
       )}
     </div>
