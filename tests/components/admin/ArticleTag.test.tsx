@@ -12,6 +12,6 @@ const tag: ITag = {
 describe("Tag element", () => {
   test("should diplay tag name", () => {
     render(<ArticleTag tagName={tag.name} />);
-    expect(screen.getByText(/tag name/)).toBeInTheDocument();
+    expect(screen.getByText("tag name")).toBeInTheDocument();
   });
 });
