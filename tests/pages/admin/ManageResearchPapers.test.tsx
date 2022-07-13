@@ -35,12 +35,38 @@ describe("Manage research papers", () => {
     await user.click(screen.getByRole("button", { name: /add-working-paper/ }));
     expect(screen.getByRole("form", { name: /working-paper-form/ })).toBeInTheDocument();
 
-    await user.type(screen.getByLabelText(/input-title/), "New research paper");
-    await user.type(screen.getByLabelText(/input-abstract/), "Some paper abstract");
-    await user.type(screen.getByLabelText(/input-link/), "https://download-link.com");
-
+    await user.type(screen.getByLabelText(/input-title/), "New working paper title");
+    await user.type(screen.getByLabelText(/input-abstract/), "Abstract of the new working paper");
+    await user.type(screen.getByLabelText(/input-link/), "link.com");
     await user.click(screen.getByRole("button"));
+
     await waitForElementToBeRemoved(screen.queryByRole("form", { name: /working-paper-form/ }));
+    expect(await screen.findByText(/New working paper title/)).toBeInTheDocument();
+    expect(await screen.findByText(/Abstract of the new working paper/)).toBeInTheDocument();
+    expect(await screen.findByText(/link.com/)).toBeInTheDocument();
+  });
+
+  test("should edit research paper", async () => {
+    const user = userEvent.setup();
+    const mockPaperResp = await getWorkingPaper(1);
+    render(
+      <OverlayProvider value={overlayFunctions}>
+        <ManageResearchPapers workingPaperProps={[mockPaperResp.data]} />
+      </OverlayProvider>
+    );
+
+    await user.click(screen.getByRole("button", { name: /edit-working-paper/ }));
+    expect(screen.getByRole("form", { name: /working-paper-form/ })).toBeInTheDocument();
+
+    await user.clear(screen.getByLabelText(/input-title/));
+    await user.type(screen.getByLabelText(/input-title/), "Edited working paper title");
+    await user.clear(screen.getByLabelText(/input-abstract/));
+    await user.type(screen.getByLabelText(/input-abstract/), "Abstract of the edited working paper");
+    await user.clear(screen.getByLabelText(/input-link/));
+    await user.type(screen.getByLabelText(/input-link/), "https://edited-link.com");
+    await user.click(screen.getByRole("button", { name: /submit-form/ }));
+
+    // expect(await screen.findByText(/Edited working paper title/)).toBeInTheDocument();
   });
 
   test("should delete research paper", async () => {
@@ -52,7 +78,7 @@ describe("Manage research papers", () => {
     );
 
     act(() => {
-      const delBtns = screen.getAllByRole("button", { name: /show-delete-research-paper-button/ });
+      const delBtns = screen.getAllByRole("button", { name: /show-delete-working-paper-button/ });
       fireEvent.click(delBtns[0]); // papers are ranked in desc order by createdAt
     });
     fireEvent.click(await screen.findByText("delete", { exact: true }));

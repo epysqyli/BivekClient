@@ -54,13 +54,15 @@ const WorkingPaperElement = ({
               className='text-gray-500 cursor-pointer transition-transform hover:scale-95 active:scale-90'
               onClick={showForm}
               size={20}
+              role='button'
+              aria-label='edit-working-paper'
             />
             <Trash2
               onClick={handleClick}
               size={20}
               className='text-gray-500 mt-3 cursor-pointer transition-transform hover:scale-95 active:scale-90'
               role='button'
-              aria-label='show-delete-research-paper-button'
+              aria-label='show-delete-working-paper-button'
             />
           </div>
         </div>
