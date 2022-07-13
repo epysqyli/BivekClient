@@ -14,7 +14,8 @@ interface Props {
 const WorkingPaperElement = ({
   workingPaper,
   setCurrentWorkingPaperId,
-  showDeleteConfirmation
+  showDeleteConfirmation,
+  replaceWorkingPapersInState
 }: Props): ReactElement => {
   const [showEditform, setShowEditForm] = useState<boolean>(false);
   const showForm = () => setShowEditForm(true);
@@ -28,7 +29,11 @@ const WorkingPaperElement = ({
   return (
     <>
       {showEditform ? (
-        <WorkingPaperForm currentWorkingPaper={workingPaper} hideForm={hideForm} />
+        <WorkingPaperForm
+          currentWorkingPaper={workingPaper}
+          replaceWorkingPapersInState={replaceWorkingPapersInState}
+          hideForm={hideForm}
+        />
       ) : (
         <div className='relative ml-2'>
           <div className='text-sm w-5/6'>

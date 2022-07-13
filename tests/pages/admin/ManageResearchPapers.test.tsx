@@ -64,9 +64,12 @@ describe("Manage research papers", () => {
     await user.type(screen.getByLabelText(/input-abstract/), "Abstract of the edited working paper");
     await user.clear(screen.getByLabelText(/input-link/));
     await user.type(screen.getByLabelText(/input-link/), "https://edited-link.com");
-    await user.click(screen.getByRole("button", { name: /submit-form/ }));
+    await user.click(await screen.findByRole("button", { name: /submit-form/ }));
 
-    // expect(await screen.findByText(/Edited working paper title/)).toBeInTheDocument();
+    await waitForElementToBeRemoved(screen.queryByRole("form", { name: /working-paper-form/ }));
+    expect(await screen.findByText(/Edited working paper title/)).toBeInTheDocument();
+    expect(await screen.findByText(/Abstract of the edited working paper/)).toBeInTheDocument();
+    expect(await screen.findByText("https://edited-link.com")).toBeInTheDocument();
   });
 
   test("should delete research paper", async () => {
