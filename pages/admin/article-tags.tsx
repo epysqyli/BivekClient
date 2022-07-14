@@ -68,55 +68,58 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
   };
 
   return (
-    <div className='mx-auto w-5/6 md:w-1/2 lg:w-4/5 xl:w-3/5 2xl:w-1/2'>
-      <TopElement text='Manage tags' />
-      <div className='flex items-end text-lg w-5/6 mx-auto rounded-md mt-10 mb-16'>
-        <div onClick={handleCreateTag} className='w-min mx-auto cursor-pointer group'>
-          <PlusCircle
-            size={42}
-            strokeWidth={1.25}
-            fill='gray'
-            color='white'
-            className='border-gray-400 border-2 rounded-full group-hover:scale-95 group-active:scale-75 transition-transform'
+    <>
+      <div className='mx-auto w-11/12 md:w-4/6 lg:w-3/5 xl:w-1/2'>
+        <TopElement text='Manage tags' />
+        <div className='flex items-end text-lg w-5/6 mx-auto rounded-md mt-10 mb-16'>
+          <div onClick={handleCreateTag} className='w-min mx-auto cursor-pointer group'>
+            <PlusCircle
+              size={42}
+              strokeWidth={1.25}
+              fill='gray'
+              color='white'
+              className='border-gray-400 border-2 rounded-full group-hover:scale-95 group-active:scale-75 transition-transform'
+            />
+          </div>
+          <input
+            onChange={handleChange}
+            type='text'
+            value={newTag}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleCreateTag();
+            }}
+            className='border-b-2 border-gray-300 block w-4/5 mx-auto py-2 pl-3 text-center focus:outline-none'
+            placeholder='Enter tag name'
           />
         </div>
-        <input
-          onChange={handleChange}
-          type='text'
-          value={newTag}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") handleCreateTag();
-          }}
-          className='border-b-2 border-gray-300 block w-4/5 mx-auto py-2 pl-3 text-center focus:outline-none'
-          placeholder='Enter tag name'
+      </div>
+      <div className='mx-auto w-5/6 md:w-1/2 lg:w-4/5 xl:w-3/5 2xl:w-1/2'>
+        <div className='grid lg:grid-cols-3 gap-x-5 gap-y-4 lg:gap-y-3'>
+          {currentTags
+            .sort((a, b) => (a.id > b.id ? -1 : 1))
+            .map((tag) => (
+              <div
+                key={tag.id}
+                className='pl-2 shadow-sm bg-white shadow-slate-400 rounded-md flex items-center justify-between'
+              >
+                <TagItem
+                  tag={tag}
+                  showDeleteConfirmation={showDeleteConfirmation}
+                  setClickedTagId={setClickedTagId}
+                />
+              </div>
+            ))}
+        </div>
+        <DeleteConfirmation
+          id={clickedTagId}
+          show={showDelete}
+          resourceType='tag'
+          deleteItem={deleteTag}
+          hideShow={hideDeleteConfirmation}
+          updateStateAfterDelete={handleDeleteTag}
         />
       </div>
-
-      <div className='grid lg:grid-cols-3 gap-x-5 gap-y-4 lg:gap-y-3'>
-        {currentTags
-          .sort((a, b) => (a.id > b.id ? -1 : 1))
-          .map((tag) => (
-            <div
-              key={tag.id}
-              className='pl-2 shadow-sm bg-white shadow-slate-400 rounded-md flex items-center justify-between'
-            >
-              <TagItem
-                tag={tag}
-                showDeleteConfirmation={showDeleteConfirmation}
-                setClickedTagId={setClickedTagId}
-              />
-            </div>
-          ))}
-      </div>
-      <DeleteConfirmation
-        id={clickedTagId}
-        show={showDelete}
-        resourceType='tag'
-        deleteItem={deleteTag}
-        hideShow={hideDeleteConfirmation}
-        updateStateAfterDelete={handleDeleteTag}
-      />
-    </div>
+    </>
   );
 };
 

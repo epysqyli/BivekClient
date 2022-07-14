@@ -30,7 +30,7 @@ const AdminIndex: NextPageLayout = (): ReactElement => {
   return (
     <>
       <TopElement text='Manage blog resources' />
-      <div className='my-10 mx-auto w-4/6 lg:w-3/5 xl:w-1/2 grid md:grid-cols-2 gap-y-5 md:gap-5'>
+      <div className='my-10 mx-auto w-5/6 lg:w-3/5 xl:w-1/2 grid md:grid-cols-2 gap-y-5 md:gap-5'>
         <IndexLink
           text='Create a new article'
           href='/admin/create-new-article'
