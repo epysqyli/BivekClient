@@ -3,24 +3,23 @@ import { Database, Home, Info, Paperclip, Settings, Type } from "react-feather";
 import SidebarLink from "./SidebarLink";
 
 const SideMenuDesktop = ({ isAdmin }: { isAdmin: boolean }): ReactElement => {
+  const iconStyle =
+    "text-slate-500 group-hover:text-amber-700 group-hover:scale-105 transition-all group-active:scale-110";
+
   return (
     <div className='hidden lg:block bg-neutral-200 w-1/5 relative'>
       <div className='fixed w-1/5'>
-        <SidebarLink pageLink='/' item='home' icon={<Home className='text-slate-500' />} />
-        <SidebarLink pageLink='/articles' item='articles' icon={<Type className='text-slate-500' />} />
-        <SidebarLink pageLink='/datasets' item='datasets' icon={<Database className='text-slate-500' />} />
+        <SidebarLink pageLink='/' item='home' icon={<Home className={iconStyle} />} />
+        <SidebarLink pageLink='/articles' item='articles' icon={<Type className={iconStyle} />} />
+        <SidebarLink pageLink='/datasets' item='datasets' icon={<Database className={iconStyle} />} />
         <SidebarLink
           pageLink='/research-papers'
           item='research papers'
-          icon={<Paperclip className='text-slate-500' />}
+          icon={<Paperclip className={iconStyle} />}
         />
-        <SidebarLink pageLink='/about' item='about' icon={<Info className='text-slate-500' />} />
+        <SidebarLink pageLink='/about' item='about' icon={<Info className={iconStyle} />} />
         {isAdmin ? (
-          <SidebarLink
-            pageLink='/admin'
-            item='admin section'
-            icon={<Settings className='text-slate-500' />}
-          />
+          <SidebarLink pageLink='/admin' item='admin section' icon={<Settings className={iconStyle} />} />
         ) : null}
       </div>
     </div>
