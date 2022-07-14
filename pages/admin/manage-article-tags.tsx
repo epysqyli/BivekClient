@@ -84,6 +84,7 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
           <input
             onChange={handleChange}
             type='text'
+            aria-label='input-tag-name'
             value={newTag}
             onKeyDown={(e) => {
               if (e.key === "Enter") handleCreateTag();

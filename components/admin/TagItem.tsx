@@ -21,7 +21,12 @@ const TagItem = ({ tag, showDeleteConfirmation, setClickedTagId }: Props): React
         onClick={handleClick}
         className='flex items-center self-stretch px-5 bg-slate-100 transition-colors rounded-br rounded-tr cursor-pointer group'
       >
-        <Trash size={24} className='text-slate-500 group-hover:text-red-500 group-active:text-slate-900' />
+        <Trash
+          size={24}
+          role='button'
+          aria-label='show-delete-tag-button'
+          className='text-slate-500 group-hover:text-red-500 group-active:text-slate-900'
+        />
       </div>
     </>
   );
