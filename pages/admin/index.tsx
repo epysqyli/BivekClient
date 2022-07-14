@@ -44,7 +44,7 @@ const AdminIndex: NextPageLayout = (): ReactElement => {
         />
 
         <IndexLink
-          href='/admin/article-tags'
+          href='/admin/manage-article-tags'
           text='Article tags'
           icon={<Tag size={32} strokeWidth={1.5} className={iconStyle} />}
         />
