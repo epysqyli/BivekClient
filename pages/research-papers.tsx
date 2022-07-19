@@ -6,6 +6,7 @@ import GuestLayout from "../layouts/GuestLayout";
 import IWorkingPaper from "../interfaces/models/IWorkingPaper";
 import { getWorkingPapers } from "../lib/WorkingPaperRepo";
 import WorkingPaperElement from "../components/guest/WorkingPaperElement";
+import SectionHeader from "../components/SectionHeader";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const resp: AxiosResponse<Array<IWorkingPaper>> = await getWorkingPapers();
@@ -20,11 +21,14 @@ interface Props {
 
 const ResearchPapers: NextPageLayout<Props> = ({ workingPapers }: Props): ReactElement => {
   return (
-    <div className='md:w-5/6 lg:w-2/3 mx-auto'>
-      {workingPapers.map((wp) => (
-        <WorkingPaperElement workingPaper={wp} key={wp.id} />
-      ))}
-    </div>
+    <>
+      <SectionHeader resource='research' text='Research papers' />
+      <div className='w-11/12 lg:w-2/3 mx-auto mt-10'>
+        {workingPapers.map((wp) => (
+          <WorkingPaperElement workingPaper={wp} key={wp.id} />
+        ))}
+      </div>
+    </>
   );
 };
 

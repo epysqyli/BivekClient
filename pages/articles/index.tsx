@@ -6,6 +6,7 @@ import type NextPageLayout from "../../types/NextPageLayout";
 import { getPublishedArticles } from "../../lib/ArticleRepo";
 import GuestLayout from "../../layouts/GuestLayout";
 import ArticleLink from "../../components/guest/ArticleLink";
+import SectionHeader from "../../components/SectionHeader";
 
 interface ArticlePageProps {
   articles: Array<IArticle>;
@@ -20,11 +21,14 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 const Articles: NextPageLayout<ArticlePageProps> = ({ articles }: ArticlePageProps): ReactElement => {
   return (
-    <div className='text-justify w-11/12 lg:w-2/3 mx-auto mt-10'>
-      {articles.map((article) => (
-        <ArticleLink key={article.id} article={article} />
-      ))}
-    </div>
+    <>
+      <SectionHeader resource='article' text='articles' />
+      <div className='w-11/12 lg:w-2/3 mx-auto mt-10'>
+        {articles.map((article) => (
+          <ArticleLink key={article.id} article={article} />
+        ))}
+      </div>
+    </>
   );
 };
 
