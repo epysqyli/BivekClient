@@ -3,7 +3,7 @@ import type { ReactElement } from "react";
 import type IArticle from "../../interfaces/models/IArticle";
 import type { AxiosResponse } from "axios";
 import type NextPageLayout from "../../types/NextPageLayout";
-import { getArticleById, getArticleByTagIds } from "../../lib/ArticleRepo";
+import { getArticleById } from "../../lib/ArticleRepo";
 import GuestLayout from "../../layouts/GuestLayout";
 import { generateHTML } from "@tiptap/html";
 import StarterKit from "@tiptap/starter-kit";
@@ -14,6 +14,7 @@ import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import Image from "@tiptap/extension-image";
 import ArticleLink from "../../components/guest/ArticleLink";
+import { filterMaxArticles, getFurtherReading } from "../../lib/ArticleMethods";
 
 interface Props {
   article: IArticle;
@@ -39,8 +40,8 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   ]);
   body = body.replaceAll("<p></p>", "<br />");
 
-  const similarArticlesResp = await getArticleByTagIds(articleResp.data.tags.map((tag) => tag.id));
-  const similarArticles = similarArticlesResp.data.filter((a) => a.id !== articleResp.data.id);
+  const similarArticlesResp = await getFurtherReading(articleResp.data.tags.map((tag) => tag.id));
+  const similarArticles = filterMaxArticles(similarArticlesResp.data, articleResp.data.id, 3);
   return { props: { article: articleResp.data, body: body, similarArticles: similarArticles } };
 };
 
@@ -52,7 +53,9 @@ const Article: NextPageLayout<Props> = ({ article, body, similarArticles }: Prop
         <div className='ProseMirror pb-10' dangerouslySetInnerHTML={{ __html: body }}></div>
       </div>
       <div className='text-justify w-11/12 lg:w-2/3 mx-auto mt-20'>
-        <h3 className="text-4xl text-center font-medium text-slate-700 mb-10 border-b pb-3">Further reading</h3>
+        <h3 className='text-4xl text-center font-medium text-slate-700 mb-10 border-b pb-3'>
+          Further reading
+        </h3>
         {similarArticles.map((article) => (
           <ArticleLink key={article.id} article={article} />
         ))}
