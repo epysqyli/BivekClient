@@ -5,7 +5,7 @@ import type { Redirect } from "next";
 import AdminLayout from "../../layouts/AdminLayout";
 import { checkLogin } from "../../lib/Auth";
 import IndexLink from "../../components/admin/IndexLink";
-import { Database, Edit3, FilePlus, Paperclip, Tag, Server } from "react-feather";
+import { Database, Edit, Paperclip, Tag, PlusCircle } from "react-feather";
 import SectionHeader from "../../components/SectionHeader";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
@@ -26,7 +26,7 @@ export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
 
 const AdminIndex: NextPageLayout = (): ReactElement => {
   const iconStyle: string =
-    "text-amber-700 group-hover:text-slate-50 group-hover:scale-95 group-active:scale-75 transition-transform mx-auto";
+    "text-amber-800 group-hover:text-slate-50 group-hover:scale-95 group-active:scale-90 transition-transform mx-auto";
 
   return (
     <>
@@ -35,13 +35,13 @@ const AdminIndex: NextPageLayout = (): ReactElement => {
         <IndexLink
           text='Create a new article'
           href='/admin/create-new-article'
-          icon={<FilePlus size={32} strokeWidth={1.5} className={iconStyle} />}
+          icon={<PlusCircle size={32} strokeWidth={1.5} className={iconStyle} />}
         />
 
         <IndexLink
           href='/admin/edit-articles'
           text='Manage existing articles'
-          icon={<Edit3 size={32} strokeWidth={1.5} className={iconStyle} />}
+          icon={<Edit size={32} strokeWidth={1.5} className={iconStyle} />}
         />
 
         <IndexLink
