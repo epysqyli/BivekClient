@@ -10,7 +10,8 @@ module.exports = {
         article: "url('/images/article-section.jpg')",
         dataset: "url('/images/dataset-section.jpg')",
         research: "url('/images/research-section.jpg')",
-        about: "url('/images/about-section.jpg')"
+        about: "url('/images/about-section.jpg')",
+        homepage: "url('/images/random-homepage-picture.jpg')"
       },
       height: {
         112: "28rem",

@@ -4,6 +4,7 @@ import type { GetServerSideProps } from "next";
 import GuestLayout from "../layouts/GuestLayout";
 import IndexLink from "../components/guest/IndexLink";
 import { Database, Info, Paperclip, Type } from "react-feather";
+import SectionHeader from "../components/SectionHeader";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   return { props: {} };
@@ -11,11 +12,11 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 const Home: NextPageLayout = (): ReactElement => {
   return (
-    <div>
-      <div className='py-32 bg-neutral-200 text-center text-4xl font-medium text-slate-700'>
-        welcome, readers!
+    <>
+      <div className='lg:my-10'>
+        <SectionHeader resource='homepage' text='Blog title' />
       </div>
-      <nav className='py-3 lg:py-5 bg-slate-500 text-slate-50 text-center'>
+      <nav className='py-3 lg:py-5 bg-slate-500 text-slate-50'>
         <div className='flex items-center justify-around flex-wrap mx-auto gap-x-2 w-11/12 lg:w-2/3'>
           <IndexLink
             pageLink='/articles'
@@ -44,7 +45,7 @@ const Home: NextPageLayout = (): ReactElement => {
         <p>latest resources</p>
         <p>latest resources</p>
       </div>
-    </div>
+    </>
   );
 };
 
