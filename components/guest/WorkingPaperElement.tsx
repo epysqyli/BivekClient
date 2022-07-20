@@ -9,7 +9,7 @@ interface Props {
 
 const WorkingPaperElement = ({ workingPaper }: Props): ReactElement => {
   return (
-    <div className='my-10 py-6 px-2 w-5/6 mx-auto border-b-2 hover:bg-slate-200 active:bg-slate-300'>
+    <div className='my-10 py-6 px-2 w-11/12 mx-auto border-b-2 hover:bg-slate-200 active:bg-slate-300'>
       <h2 className='text-2xl text-center mb-5 font-medium text-slate-700'>{workingPaper.title}</h2>
       <div className='text-xl text-center mb-10 text-slate-600'>{workingPaper.createdAt}</div>
       <div className='text-slate-700 w-5/6 mx-auto text-justify'>{workingPaper.abstract}</div>
