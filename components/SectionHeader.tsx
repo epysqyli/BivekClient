@@ -26,6 +26,9 @@ const SectionHeader = ({ resource, text }: Props): ReactElement => {
     case "homepage":
       completeStyle = baseStyle + " bg-homepage";
       break;
+    case "admin":
+      completeStyle = baseStyle + " bg-admin";
+      break;
   }
 
   return (

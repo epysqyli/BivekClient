@@ -4,9 +4,9 @@ import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsR
 import type { Redirect } from "next";
 import AdminLayout from "../../layouts/AdminLayout";
 import { checkLogin } from "../../lib/Auth";
-import TopElement from "../../components/admin/TopElement";
 import IndexLink from "../../components/admin/IndexLink";
 import { Database, Edit3, FilePlus, Paperclip, Tag, Server } from "react-feather";
+import SectionHeader from "../../components/SectionHeader";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -25,12 +25,13 @@ export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
 };
 
 const AdminIndex: NextPageLayout = (): ReactElement => {
-  const iconStyle: string = "text-amber-700 group-hover:text-slate-50 group-hover:scale-95 group-active:scale-75 transition-transform mx-auto";
+  const iconStyle: string =
+    "text-amber-700 group-hover:text-slate-50 group-hover:scale-95 group-active:scale-75 transition-transform mx-auto";
 
   return (
     <>
-      <TopElement text='Manage blog resources' />
-      <div className='my-10 mx-auto w-5/6 lg:w-3/5 xl:w-1/2 grid md:grid-cols-2 gap-y-5 md:gap-5'>
+      <SectionHeader resource='admin' text='Manage blog resources' />
+      <div className='my-20 mx-auto w-5/6 lg:w-3/5 xl:w-1/2 grid md:grid-cols-2 gap-y-5 md:gap-5'>
         <IndexLink
           text='Create a new article'
           href='/admin/create-new-article'
