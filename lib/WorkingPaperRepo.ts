@@ -20,11 +20,11 @@ const getWorkingPaper = async (id: number): Promise<AxiosResponse<IWorkingPaper>
 const createWorkingPaper = async (
   workingPaper: IWorkingPaperCreate
 ): Promise<AxiosResponse<IWorkingPaper>> => {
-  const { title, abstract, link } = workingPaper;
+  const { title, abstract, link, datasetLink } = workingPaper;
   return await axios({
     method: "POST",
     url: "http://localhost:5010/workingpapers",
-    data: { title, abstract, link },
+    data: { title, abstract, link, datasetLink },
     withCredentials: true
   });
 };
