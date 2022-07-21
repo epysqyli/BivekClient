@@ -53,9 +53,11 @@ const Home: NextPageLayout<Props> = ({ latestArticle }: Props): ReactElement => 
           />
         </div>
       </nav>
+
       <div className='my-16 md:w-5/6 mx-auto lg:w-2/3 xl:w-1/2'>
-        <LatestArticle article={latestArticle} ArticleLink={ArticleLink} />
+        {latestArticle !== null ? <LatestArticle article={latestArticle} ArticleLink={ArticleLink} /> : null}
       </div>
+
       <Link href='/articles'>
         <div className='my-10 lg:my-20 flex items-center justify-center md:justify-center gap-x-5 hover:gap-x-7 md:gap-x-10 md:hover:gap-x-12 lg:gap-x-16 lg:hover:gap-x-20 transition-transform cursor-pointer mx-auto w-5/6 lg:w-3/5 text-slate-700'>
           <ChevronsLeft className='text-slate-700' />
@@ -63,6 +65,7 @@ const Home: NextPageLayout<Props> = ({ latestArticle }: Props): ReactElement => 
           <ChevronsRight className='text-slate-700' />
         </div>
       </Link>
+
       <div className='text-center text-xl w-11/12 md:w-5/6 lg:w-3/5 mx-auto rounded-md border border-slate-400 px-5 py-10'>
         <p className='text-slate-800'>
           Welcome to my blog! Where I write about this and that because I like writing about this and that.
