@@ -12,7 +12,8 @@ module.exports = {
         research: "url('/images/research-section.jpg')",
         about: "url('/images/about-section.jpg')",
         homepage: "url('/images/random-homepage-picture.jpg')",
-        admin: "url('/images/admin-section.jpg')"
+        admin: "url('/images/admin-section.jpg')",
+        tag: "url('/images/tag-section.jpg')"
       },
       height: {
         112: "28rem",

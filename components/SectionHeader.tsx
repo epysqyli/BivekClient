@@ -29,6 +29,9 @@ const SectionHeader = ({ resource, text }: Props): ReactElement => {
     case "admin":
       completeStyle = baseStyle + " bg-admin";
       break;
+    case "tag":
+      completeStyle = baseStyle + " bg-tag";
+      break;
   }
 
   return (
