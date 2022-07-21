@@ -9,6 +9,7 @@ import LatestArticle from "../components/guest/LatestArticle";
 import { getLatestArticle } from "../lib/ArticleRepo";
 import IArticle from "../interfaces/models/IArticle";
 import ArticleLink from "../components/guest/ArticleLink";
+import Link from "next/link";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const latestArticleResp = await getLatestArticle();
@@ -54,6 +55,17 @@ const Home: NextPageLayout<Props> = ({ latestArticle }: Props): ReactElement => 
       </nav>
       <div className='my-16 md:w-5/6 mx-auto lg:w-2/3 xl:w-1/2'>
         <LatestArticle article={latestArticle} ArticleLink={ArticleLink} />
+      </div>
+      <div className='text-center text-xl w-11/12 md:w-5/6 lg:w-3/5 mx-auto border rounded-md border-slate-300 px-5 py-10'>
+        <p className='text-slate-800'>
+          Welcome to my blog! Where I write about this and that because I like writing about this and that.
+          Enjoy the stay
+        </p>
+        <Link href='/about'>
+          <span className='cursor-pointer mt-10 block underline underline-offset-2 text-slate-600 hover:text-slate-800 active:text-slate-300'>
+            Find more about me
+          </span>
+        </Link>
       </div>
     </>
   );
