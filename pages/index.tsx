@@ -5,12 +5,22 @@ import GuestLayout from "../layouts/GuestLayout";
 import IndexLink from "../components/guest/IndexLink";
 import { Database, Info, Paperclip, Type } from "react-feather";
 import SectionHeader from "../components/SectionHeader";
+import LatestArticle from "../components/guest/LatestArticle";
+import { getLatestArticle } from "../lib/ArticleRepo";
+import IArticle from "../interfaces/models/IArticle";
+import ArticleLink from "../components/guest/ArticleLink";
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  return { props: {} };
+  const latestArticleResp = await getLatestArticle();
+
+  return { props: { latestArticle: latestArticleResp.data } };
 };
 
-const Home: NextPageLayout = (): ReactElement => {
+interface Props {
+  latestArticle: IArticle;
+}
+
+const Home: NextPageLayout<Props> = ({ latestArticle }: Props): ReactElement => {
   return (
     <>
       <div className='lg:my-10'>
@@ -42,10 +52,8 @@ const Home: NextPageLayout = (): ReactElement => {
           />
         </div>
       </nav>
-      <div className='text-center rounded border my-5 py-20'>
-        <p>latest resources</p>
-        <p>latest resources</p>
-        <p>latest resources</p>
+      <div className='my-16 md:w-5/6 mx-auto lg:w-2/3 xl:w-1/2'>
+        <LatestArticle article={latestArticle} ArticleLink={ArticleLink} />
       </div>
     </>
   );
