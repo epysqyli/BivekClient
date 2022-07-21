@@ -3,7 +3,7 @@ import type NextPageLayout from "../types/NextPageLayout";
 import type { GetServerSideProps } from "next";
 import GuestLayout from "../layouts/GuestLayout";
 import IndexLink from "../components/guest/IndexLink";
-import { Database, Info, Paperclip, Type } from "react-feather";
+import { ChevronsLeft, ChevronsRight, Database, Info, Paperclip, Type } from "react-feather";
 import SectionHeader from "../components/SectionHeader";
 import LatestArticle from "../components/guest/LatestArticle";
 import { getLatestArticle } from "../lib/ArticleRepo";
@@ -56,7 +56,14 @@ const Home: NextPageLayout<Props> = ({ latestArticle }: Props): ReactElement => 
       <div className='my-16 md:w-5/6 mx-auto lg:w-2/3 xl:w-1/2'>
         <LatestArticle article={latestArticle} ArticleLink={ArticleLink} />
       </div>
-      <div className='text-center text-xl w-11/12 md:w-5/6 lg:w-3/5 mx-auto border rounded-md border-slate-300 px-5 py-10'>
+      <Link href='/articles'>
+        <div className='my-10 lg:my-20 flex items-center justify-center md:justify-center gap-x-5 hover:gap-x-7 md:gap-x-10 md:hover:gap-x-12 lg:gap-x-16 lg:hover:gap-x-20 transition-transform cursor-pointer mx-auto w-5/6 lg:w-3/5 text-slate-700'>
+          <ChevronsLeft className='text-slate-700' />
+          <span className='text-xl'>Check all the articles</span>
+          <ChevronsRight className='text-slate-700' />
+        </div>
+      </Link>
+      <div className='text-center text-xl w-11/12 md:w-5/6 lg:w-3/5 mx-auto rounded-md border border-slate-400 px-5 py-10'>
         <p className='text-slate-800'>
           Welcome to my blog! Where I write about this and that because I like writing about this and that.
           Enjoy the stay
