@@ -28,7 +28,7 @@ const DeleteConfirmation = ({
   const redirect = () => {
     if (redirectPath !== undefined) {
       hideShow();
-      router.push(redirectPath);
+      router.replace(redirectPath);
     }
   };
 
