@@ -27,7 +27,7 @@ const Home: NextPageLayout<Props> = ({ latestArticle }: Props): ReactElement => 
       <div className='lg:my-10'>
         <SectionHeader resource='homepage' text='Blog title' />
       </div>
-      <nav className='py-5 bg-slate-500 text-slate-50 lg:text-xl'>
+      <nav className='py-3 bg-slate-500 text-slate-50 lg:text-xl'>
         <div className='flex items-center justify-around flex-wrap mx-auto gap-x-2 w-11/12 lg:w-2/3'>
           <IndexLink
             pageLink='/articles'
