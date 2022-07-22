@@ -8,7 +8,7 @@ interface Props {
   isAdmin: boolean;
 }
 
-const SideMenu = ({ open, isAdmin }: Props): ReactElement => (
+const MobileMenu = ({ open, isAdmin }: Props): ReactElement => (
   <AnimatePresence>
     {open && (
       <motion.div
@@ -38,4 +38,4 @@ const SideMenu = ({ open, isAdmin }: Props): ReactElement => (
   </AnimatePresence>
 );
 
-export default SideMenu;
+export default MobileMenu;

@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import { Database, Home, Info, Paperclip, Settings, Type } from "react-feather";
 import SidebarLink from "./SidebarLink";
 
-const SideMenuDesktop = ({ isAdmin }: { isAdmin: boolean }): ReactElement => {
+const DesktopMenu = ({ isAdmin }: { isAdmin: boolean }): ReactElement => {
   const iconStyle =
     "text-slate-500 group-hover:text-amber-700 group-hover:scale-105 transition-all group-active:scale-110";
 
@@ -26,4 +26,4 @@ const SideMenuDesktop = ({ isAdmin }: { isAdmin: boolean }): ReactElement => {
   );
 };
 
-export default SideMenuDesktop;
+export default DesktopMenu;

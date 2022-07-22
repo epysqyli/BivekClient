@@ -1,8 +1,8 @@
 import { ReactElement, ReactNode, useEffect } from "react";
 import { useState } from "react";
 import ILayoutProps from "../interfaces/ILayoutProps";
-import SideMenuMobile from "../components/guest/SideMenuMobile";
-import SideMenuDesktop from "../components/guest/SideMenuDesktop";
+import MobileMenu from "../components/guest/MobileMenu";
+import DesktopMenu from "../components/guest/DesktopMenu";
 import { useRouter } from "next/router";
 import { useIsNarrow } from "../hooks/UseMediaQuery";
 import { Menu, X } from "react-feather";
@@ -39,7 +39,7 @@ const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
     if (isIndex() === false && isNarrow === false) {
       return (
         <main className='flex'>
-          <SideMenuDesktop isAdmin={isAdmin} />
+          <DesktopMenu isAdmin={isAdmin} />
           <main className='w-4/5 pb-20'>{children}</main>
         </main>
       );
@@ -80,8 +80,8 @@ const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
             className='fixed bg-slate-400 text-white bottom-12 right-5 p-2 rounded-full shadow-md shadow-slate-400 cursor-pointer transition-transform hover:scale-95 active:scale-90 z-30'
           />
         )}
-        <SideMenuMobile open={open} isAdmin={isAdmin} />
-        {open && <SideMenuMobile open={open} isAdmin={isAdmin} />}
+        <MobileMenu open={open} isAdmin={isAdmin} />
+        {open && <MobileMenu open={open} isAdmin={isAdmin} />}
       </div>
     </>
   );
