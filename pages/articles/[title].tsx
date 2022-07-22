@@ -48,7 +48,8 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 const Article: NextPageLayout<Props> = ({ article, body, similarArticles }: Props): ReactElement => {
   return (
     <>
-      <h1 className='text-4xl font-semibold text-gray-700 text-center mt-8 mb-10'>{article.title}</h1>
+      <h1 className='text-4xl font-semibold text-slate-700 text-center mt-8 mb-10'>{article.title}</h1>
+      <h2 className='text-xl text-slate-600 text-center my-7'>{article.createdAt}</h2>
       <div className='w-11/12 md:w-4/5 lg:w-3/4 xl:w-3/5 mx-auto'>
         <div className='ProseMirror pb-10' dangerouslySetInnerHTML={{ __html: body }}></div>
       </div>
