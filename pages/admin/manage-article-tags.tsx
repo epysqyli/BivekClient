@@ -5,13 +5,14 @@ import AdminLayout from "../../layouts/AdminLayout";
 import { checkLogin } from "../../lib/Auth";
 import { createTag, deleteTag, getTags } from "../../lib/TagRepo";
 import ITag from "../../interfaces/models/ITag";
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import { useState } from "react";
 import TopElement from "../../components/admin/TopElement";
 import { PlusCircle } from "react-feather";
 import DeleteConfirmation from "../../components/admin/DeleteConfirmation";
 import { OverlayContext } from "../../hooks/OverlayContext";
 import TagItem from "../../components/admin/TagItem";
+import { motion } from "framer-motion";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -40,6 +41,7 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
   const [clickedTagId, setClickedTagId] = useState<number>(0);
   const [newTag, setNewTag] = useState<string>("");
   const [showDelete, setShowDelete] = useState<boolean>(false);
+  const [creationError, setCreationError] = useState<string>("");
   const { showOverlay, hideOverlay } = useContext(OverlayContext);
 
   const showDeleteConfirmation = () => {
@@ -56,16 +58,27 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
 
   const handleCreateTag = async (): Promise<void> => {
     if (newTag.length >= 3) {
-      const newlyAddedTagResp = await createTag(newTag);
-      const newlyAddedTag = newlyAddedTagResp.data;
-      setCurrentTags([...currentTags, newlyAddedTag]);
-      setNewTag("");
+      try {
+        const newlyAddedTagResp = await createTag(newTag);
+        const newlyAddedTag = newlyAddedTagResp.data;
+        setCurrentTags([...currentTags, newlyAddedTag]);
+        setCreationError("");
+        setNewTag("");
+      } catch (error) {
+        const errorWrapper = error as AxiosError;
+        const errorData = errorWrapper.response!.data as { errors: { Name: Array<string> } };
+        setCreationError(errorData.errors.Name[0]);
+      }
     }
   };
 
   const handleDeleteTag = async (id: number): Promise<void> => {
     setCurrentTags(currentTags.filter((t) => t.id !== id));
   };
+
+  const baseInputStyle = "block w-4/5 mx-auto py-2 pl-3 text-center focus:outline-none";
+  const successInputStyle = "border-b-2 border-gray-300";
+  const errorInputStyle = "border-2 border-red-300";
 
   return (
     <>
@@ -89,7 +102,11 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
             onKeyDown={(e) => {
               if (e.key === "Enter") handleCreateTag();
             }}
-            className='border-b-2 border-gray-300 block w-4/5 mx-auto py-2 pl-3 text-center focus:outline-none'
+            className={
+              creationError.length === 0
+                ? `${baseInputStyle} ${successInputStyle}`
+                : `${baseInputStyle} ${errorInputStyle}`
+            }
             placeholder='Enter tag name'
           />
         </div>
