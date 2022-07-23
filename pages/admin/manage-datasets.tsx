@@ -94,7 +94,7 @@ const DatasetCategories: NextPageLayout<Props> = ({ datasetCategoriesProps }: Pr
           .map((dataCategory) => {
             return (
               <div
-                className='w-11/12 mx-auto border py-2 my-10 shadow-md rounded bg-white'
+                className='mx-auto border py-2 my-10 shadow-md rounded bg-white'
                 key={dataCategory.id}
               >
                 <DatasetCategoryElement
