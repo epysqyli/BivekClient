@@ -12,7 +12,7 @@ import { PlusCircle } from "react-feather";
 import DeleteConfirmation from "../../components/admin/DeleteConfirmation";
 import { OverlayContext } from "../../hooks/OverlayContext";
 import TagItem from "../../components/admin/TagItem";
-import { motion } from "framer-motion";
+import type IValidationError from "../../interfaces/IValidationError";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -66,7 +66,7 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
         setNewTag("");
       } catch (error) {
         const errorWrapper = error as AxiosError;
-        const errorData = errorWrapper.response!.data as { errors: { Name: Array<string> } };
+        const errorData = errorWrapper.response!.data as IValidationError;
         setCreationError(errorData.errors.Name[0]);
       }
     }
