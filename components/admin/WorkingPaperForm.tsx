@@ -5,6 +5,8 @@ import type IWorkingPaper from "../../interfaces/models/IWorkingPaper";
 import type IPatch from "../../interfaces/models/IPatch";
 import { createWorkingPaper, patchWorkingPaper } from "../../lib/WorkingPaperRepo";
 import { useState } from "react";
+import { AxiosError } from "axios";
+import IValidationError from "../../interfaces/IValidationError";
 
 interface Props {
   currentWorkingPaper?: IWorkingPaper;
@@ -25,16 +27,24 @@ const WorkingPaperForm = ({
     link: currentWorkingPaper?.link ?? "",
     datasetLink: currentWorkingPaper?.datasetLink ?? ""
   });
+  const [creationError, setCreationError] = useState<string>("");
 
   const handleChange = (e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setNewWorkingPaper({ ...newWorkingPaper, [e.currentTarget.name]: e.currentTarget.value });
   };
 
   const handleCreateWorkingPaper = async (): Promise<void> => {
-    const resp = await createWorkingPaper(newWorkingPaper);
-    if (resp.status === 201) {
-      if (addWorkingPaperToState !== undefined) addWorkingPaperToState(resp.data);
-      hideForm();
+    try {
+      const resp = await createWorkingPaper(newWorkingPaper);
+      if (resp.status === 201) {
+        if (addWorkingPaperToState !== undefined) addWorkingPaperToState(resp.data);
+        setCreationError("");
+        hideForm();
+      }
+    } catch (error) {
+      const errorWrapper = error as AxiosError;
+      const errorData = errorWrapper.response!.data as IValidationError;
+      setCreationError(errorData.errors.Title![0]);
     }
   };
 
@@ -56,6 +66,7 @@ const WorkingPaperForm = ({
         datasetLinkPatch
       ]);
       replaceWorkingPapersInState(resp.data);
+      hideForm();
     }
   };
 
@@ -66,8 +77,11 @@ const WorkingPaperForm = ({
     } else {
       await handleCreateWorkingPaper();
     }
-    hideForm();
   };
+
+  const baseInputStyle =
+    "block mt-2 w-full border-b border-gray-400 p-3 outline-none focus:shadow-md text-sm";
+  const errorInputStyle = baseInputStyle + " text-red-600 bg-red-100 border-red-400 animate-pulse";
 
   return (
     <>
@@ -79,7 +93,7 @@ const WorkingPaperForm = ({
             id='title'
             aria-label='input-title'
             placeholder='Working paper title'
-            className='block mt-2 w-full border-b border-gray-400 p-3 outline-none focus:shadow-md text-sm'
+            className={creationError.length === 0 ? baseInputStyle : errorInputStyle}
             onChange={handleChange}
             defaultValue={currentWorkingPaper?.title}
             required

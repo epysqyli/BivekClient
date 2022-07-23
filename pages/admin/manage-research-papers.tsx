@@ -79,7 +79,7 @@ const ManageResearchPapers: NextPageLayout<Props> = ({ workingPaperProps }: Prop
       ) : (
         <div
           onClick={showWpForm}
-          className='w-4/5 mx-auto py-2 rounded-md group cursor-pointer bg-white hover:bg-slate-100 hover:shadow active:shadow-inner'
+          className='w-11/12 mx-auto py-2 rounded-md group cursor-pointer bg-white hover:bg-slate-100 hover:shadow active:shadow-inner'
         >
           <PlusCircle
             size={36}
@@ -98,7 +98,7 @@ const ManageResearchPapers: NextPageLayout<Props> = ({ workingPaperProps }: Prop
           return (
             <div
               key={wp.id}
-              className='mx-auto w-11/12 my-10 p-2 border rounded-sm bg-white hover:bg-slate-50 hover:border-slate-300'
+              className='mx-auto my-10 p-2 border rounded-sm bg-white hover:bg-slate-50 hover:border-slate-300'
             >
               <WorkingPaperElement
                 workingPaper={wp}
