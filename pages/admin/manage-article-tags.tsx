@@ -76,9 +76,9 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
     setCurrentTags(currentTags.filter((t) => t.id !== id));
   };
 
-  const baseInputStyle = "block w-4/5 mx-auto py-2 pl-3 text-center focus:outline-none";
-  const successInputStyle = "border-b-2 border-gray-300";
-  const errorInputStyle = "border-2 border-red-300";
+  const baseInputStyle = "block w-4/5 mx-auto py-2 pl-3 border-b-2 text-center focus:outline-none";
+  const successInputStyle = baseInputStyle + " border-gray-300";
+  const errorInputStyle = baseInputStyle + " text-red-600 bg-red-100 border-red-400 animate-pulse";
 
   return (
     <>
@@ -102,11 +102,7 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
             onKeyDown={(e) => {
               if (e.key === "Enter") handleCreateTag();
             }}
-            className={
-              creationError.length === 0
-                ? `${baseInputStyle} ${successInputStyle}`
-                : `${baseInputStyle} ${errorInputStyle}`
-            }
+            className={creationError.length === 0 ? successInputStyle : errorInputStyle}
             placeholder='Enter tag name'
           />
         </div>
