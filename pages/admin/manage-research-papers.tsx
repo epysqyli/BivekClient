@@ -79,16 +79,16 @@ const ManageResearchPapers: NextPageLayout<Props> = ({ workingPaperProps }: Prop
       ) : (
         <div
           onClick={showWpForm}
-          className='w-11/12 mx-auto py-2 rounded-md group cursor-pointer bg-white hover:bg-slate-100 hover:shadow active:shadow-inner'
+          className='w-11/12 mx-auto py-2 rounded-md group cursor-pointer'
         >
           <PlusCircle
-            size={36}
-            strokeWidth={1.5}
-            className='w-fit mx-auto mb-3 text-slate-600 transition-transform group-hover:scale-95 group-active:scale-90'
+            size={50}
+            fill="white"
+            strokeWidth={1.25}
+            className='w-fit mx-auto text-amber-600 transition-transform group-hover:scale-95 group-active:scale-90'
             aria-label='add-working-paper'
             role='button'
           />
-          <h1 className='text-xl text-center text-gray-700'>Add a new paper</h1>
         </div>
       )}
 
