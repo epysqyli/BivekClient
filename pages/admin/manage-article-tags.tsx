@@ -67,7 +67,7 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
       } catch (error) {
         const errorWrapper = error as AxiosError;
         const errorData = errorWrapper.response!.data as IValidationError;
-        setCreationError(errorData.errors.Name[0]);
+        setCreationError(errorData.errors.Name![0]);
       }
     }
   };

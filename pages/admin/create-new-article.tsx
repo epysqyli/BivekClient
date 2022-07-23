@@ -1,7 +1,7 @@
 import type { FormEvent, ReactElement } from "react";
 import type NextPageLayout from "../../types/NextPageLayout";
 import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult, Redirect } from "next";
-import type { AxiosResponse } from "axios";
+import type { AxiosError, AxiosResponse } from "axios";
 import type IArticle from "../../interfaces/models/IArticle";
 import type IPatch from "../../interfaces/models/IPatch";
 import type ITag from "../../interfaces/models/ITag";
@@ -17,6 +17,7 @@ import CreateMenuBtn from "../../components/admin/CreateMenuBtn";
 import { isArticleValid } from "../../lib/ArticleEditMethods";
 import TopElement from "../../components/admin/TopElement";
 import { Eye, Save, Tag as TagIcon } from "react-feather";
+import IValidationError from "../../interfaces/IValidationError";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -51,6 +52,7 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
     value: ""
   });
   const [isValid, setIsValid] = useState<boolean>(false);
+  const [creationError, setCreationError] = useState<string>("");
 
   const handleTitleChange = (e: FormEvent<HTMLInputElement>) => {
     setTitle(e.currentTarget.value.trim());
@@ -75,8 +77,15 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
 
   const handleCreateArticle = async (publish: boolean): Promise<void> => {
     if (id === 0) {
-      const resp: AxiosResponse<IArticle> = await createArticle(title, body, publish);
-      setId(resp.data.id);
+      try {
+        const resp: AxiosResponse<IArticle> = await createArticle(title, body, publish);
+        setId(resp.data.id);
+        setCreationError("");
+      } catch (error) {
+        const errorWrapper = error as AxiosError;
+        const errorData = errorWrapper.response!.data as IValidationError;
+        setCreationError(errorData.errors.Title![0]);
+      }
     } else {
       await patchArticle(id, [titlePatch, bodyPatch]);
     }
@@ -85,10 +94,14 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
   const activeIcon = "w-min mx-auto my-2 text-slate-600";
   const disabledIcon = "w-min mx-auto my-2 text-slate-300";
 
+  const baseTitleStyle =
+    "border-b border-gray-300 bg-transparent focus:border-slate-400 mx-auto text-center text-xl block w-full py-1 px-2 mb-2 focus:outline-none";
+  const errorTytleStyle = baseTitleStyle + " text-red-600 bg-red-100 border-red-400 animate-pulse";
+
   useEffect(() => setIsValid(isArticleValid(title, body)), [title, body]);
 
   return (
-    <div className="mx-auto lg:w-4/5 xl:w-2/3 2xl:w-1/2">
+    <div className='mx-auto lg:w-4/5 xl:w-2/3 2xl:w-1/2'>
       <TopElement text='Create a new article' />
       <div className='block w-5/6 mx-auto'>
         <input
@@ -97,7 +110,7 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
           name='title'
           id='title'
           placeholder='Article title'
-          className='border-b border-gray-300 bg-transparent focus:border-slate-400 mx-auto text-center text-xl block w-full py-1 px-2 mb-2 focus:outline-none'
+          className={creationError.length === 0 ? baseTitleStyle : errorTytleStyle}
         />
       </div>
       <div className='w-11/12 mx-auto rounded'>
