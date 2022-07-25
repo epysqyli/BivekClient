@@ -65,12 +65,12 @@ const Home: NextPageLayout<Props> = ({ latestArticle, tags }: Props): ReactEleme
       </div>
 
       <Link href='/articles'>
-        <div className='my-20 lg:my-32 flex items-center justify-center md:justify-center gap-x-5 hover:gap-x-7 md:gap-x-10 md:hover:gap-x-12 lg:gap-x-16 lg:hover:gap-x-20 transition-all cursor-pointer mx-auto w-fit text-slate-700'>
-          <ChevronsLeft className='text-amber-700' />
-          <span className='text-xl lg:text-2xl hover:underline hover:underline-offset-2'>
+        <div className='my-20 lg:my-32 flex items-center justify-center md:justify-center gap-x-5 hover:gap-x-7 md:gap-x-10 md:hover:gap-x-12 lg:gap-x-16 lg:hover:gap-x-20 transition-all cursor-pointer mx-auto w-fit group'>
+          <ChevronsLeft className='text-amber-700 group-hover:scale-125' />
+          <span className='text-xl lg:text-2xl hover:underline hover:underline-offset-2 text-amber-900'>
             Check all the articles
           </span>
-          <ChevronsRight className='text-amber-700' />
+          <ChevronsRight className='text-amber-700 group-hover:scale-125' />
         </div>
       </Link>
 
