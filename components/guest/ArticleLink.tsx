@@ -15,14 +15,14 @@ const ArticleLink = ({ article }: { article: IArticle }): ReactElement => {
         }
       }}
     >
-      <div className='relative px-5 py-3 my-8 lg:my-14 lg:py-7 lg:px-5 border-b-2 mx-auto hover:bg-slate-200 active:bg-neutral-300 cursor-pointer group'>
+      <div className='relative px-5 py-3 my-8 lg:my-14 lg:py-7 lg:px-5 border-b-2 border-slate-300 mx-auto hover:bg-slate-200 active:bg-slate-300 cursor-pointer group hover:rounded-tr hover:rounded-tl hover:rounded-bl'>
         <div className='text-2xl lg:text-3xl text-slate-600 font-bold mx-auto'>{article.title}</div>
         <div className='w-3/5 mt-3 py-3 flex items-center flex-wrap gap-x-4'>
           {article.tags.map((tag) => (
             <ArticleTag tag={tag} key={tag.id} />
           ))}
         </div>
-        <div className='absolute bottom-0 right-0 w-fit text-neutral-600 border-t border-l border-r border-neutral-300 text-sm p-1 group-hover:border-neutral-50 group-hover:bg-neutral-50'>
+        <div className='absolute bottom-0 right-0 w-fit text-neutral-600 bg-white border-t border-l border-r border-slate-400 border-opacity-75 text-sm p-1 group-hover:border-neutral-50 group-hover:bg-neutral-50 rounded-tr rounded-tl'>
           {article.createdAt}
         </div>
       </div>
