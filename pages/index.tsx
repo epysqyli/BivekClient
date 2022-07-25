@@ -67,7 +67,9 @@ const Home: NextPageLayout<Props> = ({ latestArticle, tags }: Props): ReactEleme
       <Link href='/articles'>
         <div className='my-20 lg:my-32 flex items-center justify-center md:justify-center gap-x-5 hover:gap-x-7 md:gap-x-10 md:hover:gap-x-12 lg:gap-x-16 lg:hover:gap-x-20 transition-all cursor-pointer mx-auto w-fit text-slate-700'>
           <ChevronsLeft className='text-amber-700' />
-          <span className='text-xl lg:text-2xl hover:underline hover:underline-offset-2'>Check all the articles</span>
+          <span className='text-xl lg:text-2xl hover:underline hover:underline-offset-2'>
+            Check all the articles
+          </span>
           <ChevronsRight className='text-amber-700' />
         </div>
       </Link>
@@ -82,8 +84,10 @@ const Home: NextPageLayout<Props> = ({ latestArticle, tags }: Props): ReactEleme
 
       <div className='text-center text-xl w-11/12 md:w-5/6 lg:w-3/5 mx-auto rounded-md border border-slate-400 px-5 py-10 my-16'>
         <p className='text-slate-800'>
-          Welcome to my blog! Where I write about this and that because I like writing about this and that.
-          Enjoy the stay
+          Barbara had been waiting at the table for twenty minutes. it had been twenty long and excruciating
+          minutes. David had promised that he would be on time today. He never was, but he had promised this
+          one time. She had made him repeat the promise multiple times over the last week until she had believed
+          his promise. Now she was paying the price.
         </p>
         <Link href='/about'>
           <span className='cursor-pointer mt-10 block underline underline-offset-2 text-slate-600 hover:text-slate-800 active:text-slate-300'>
