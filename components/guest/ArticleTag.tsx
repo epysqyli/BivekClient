@@ -15,7 +15,7 @@ const ArticleTag = ({ tag }: { tag: ITag }): ReactElement => {
 
   return (
     <div
-      className='text-sm text-center my-1 rounded-md px-2 py-1 text-neutral-600 bg-slate-200 group-hover:border-neutral-50 group-hover:bg-neutral-50 hover:bg-slate-300 active:bg-slate-400 active:text-white border border-amber-500 cursor-pointer'
+      className='text-sm text-center my-1 rounded-md px-3 py-2 border-2 border-amber-500 bg-slate-300 text-slate-700 hover:bg-slate-400 hover:text-white active:bg-amber-500 cursor-pointer select-none'
       onClick={handleClick}
     >
       {tag.name}
