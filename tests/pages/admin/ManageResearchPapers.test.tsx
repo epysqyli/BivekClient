@@ -38,12 +38,14 @@ describe("Manage research papers", () => {
     await user.type(screen.getByLabelText("input-title"), "New working paper title");
     await user.type(screen.getByLabelText("input-abstract"), "Abstract of the new working paper");
     await user.type(screen.getByLabelText("input-link"), "link.com");
+    await user.type(screen.getByLabelText("input-dataset-link"), "dataset-link.com");
     await user.click(screen.getByRole("button"));
 
     await waitForElementToBeRemoved(screen.queryByRole("form", { name: "working-paper-form" }));
     expect(await screen.findByText("New working paper title")).toBeInTheDocument();
     expect(await screen.findByText("Abstract of the new working paper")).toBeInTheDocument();
     expect(await screen.findByText("link.com")).toBeInTheDocument();
+    expect(await screen.findByText("dataset-link.com")).toBeInTheDocument();
   });
 
   test("should edit research paper", async () => {

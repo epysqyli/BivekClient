@@ -24,7 +24,7 @@ const handlers = [
         title: "New working paper title",
         abstract: "Abstract of the new working paper",
         link: "link.com",
-        datasetLink: null,
+        datasetLink: "dataset-link.com",
         createdAt: "09 July, 2022"
       })
     );
