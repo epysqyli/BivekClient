@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 const Articles: NextPageLayout<ArticlePageProps> = ({ articles }: ArticlePageProps): ReactElement => {
   return (
     <>
-      <SectionHeader resource='article' text='articles' />
+      <SectionHeader resource='article' text='Articles' />
       <div className='w-11/12 lg:w-2/3 mx-auto mt-10'>
         {articles.map((article) => (
           <ArticleLink key={article.id} article={article} />

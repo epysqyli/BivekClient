@@ -22,7 +22,7 @@ interface Props {
 const Datasets: NextPageLayout<Props> = ({ datasetCategories }: Props): ReactElement => {
   return (
     <>
-      <SectionHeader resource='dataset' text='datasets' />
+      <SectionHeader resource='dataset' text='Datasets' />
       <div className='lg:w-2/3 mx-auto mt-10'>
         {datasetCategories.map((dc) => (
           <DatasetCategoryElement key={dc.id} datasetCategory={dc} />
