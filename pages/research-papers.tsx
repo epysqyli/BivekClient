@@ -23,7 +23,7 @@ const ResearchPapers: NextPageLayout<Props> = ({ workingPapers }: Props): ReactE
   return (
     <>
       <SectionHeader resource='research' text='Research papers' />
-      <div className='w-11/12 lg:w-2/3 mx-auto mt-10'>
+      <div className='lg:w-2/3 mx-auto mt-10'>
         {workingPapers.map((wp) => (
           <WorkingPaperElement workingPaper={wp} key={wp.id} />
         ))}

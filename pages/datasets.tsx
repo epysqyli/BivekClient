@@ -23,7 +23,7 @@ const Datasets: NextPageLayout<Props> = ({ datasetCategories }: Props): ReactEle
   return (
     <>
       <SectionHeader resource='dataset' text='datasets' />
-      <div className='w-11/12 lg:w-2/3 mx-auto mt-10'>
+      <div className='lg:w-2/3 mx-auto mt-10'>
         {datasetCategories.map((dc) => (
           <DatasetCategoryElement key={dc.id} datasetCategory={dc} />
         ))}
