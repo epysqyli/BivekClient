@@ -4,10 +4,10 @@ import SidebarLink from "./SidebarLink";
 
 const DesktopMenu = ({ isAdmin }: { isAdmin: boolean }): ReactElement => {
   const iconStyle =
-    "text-slate-500 group-hover:text-amber-700 group-hover:scale-105 transition-all group-active:scale-110";
+    "text-slate-500 group-hover:text-amber-600 lg:text-white group-hover:scale-105 transition-all group-active:scale-110";
 
   return (
-    <div className='hidden lg:block bg-neutral-200 w-1/5 relative'>
+    <div className='hidden lg:block bg-slate-500 w-1/5 relative'>
       <div className='fixed w-1/5'>
         <SidebarLink pageLink='/' item='home' icon={<Home className={iconStyle} />} />
         <SidebarLink pageLink='/articles' item='articles' icon={<Type className={iconStyle} />} />
