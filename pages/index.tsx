@@ -10,23 +10,29 @@ import { getLatestArticle } from "../lib/ArticleRepo";
 import IArticle from "../interfaces/models/IArticle";
 import ArticleLink from "../components/guest/ArticleLink";
 import Link from "next/link";
+import ITag from "../interfaces/models/ITag";
+import { getTags } from "../lib/TagRepo";
+import ArticleTag from "../components/guest/ArticleTag";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const latestArticleResp = await getLatestArticle();
+  const tagsResp = await getTags();
 
-  return { props: { latestArticle: latestArticleResp.data } };
+  return { props: { latestArticle: latestArticleResp.data, tags: tagsResp.data } };
 };
 
 interface Props {
   latestArticle: IArticle;
+  tags: Array<ITag>;
 }
 
-const Home: NextPageLayout<Props> = ({ latestArticle }: Props): ReactElement => {
+const Home: NextPageLayout<Props> = ({ latestArticle, tags }: Props): ReactElement => {
   return (
     <>
       <div className='lg:my-10'>
         <SectionHeader resource='homepage' text='Blog title' />
       </div>
+
       <nav className='py-3 bg-slate-500 text-slate-50 lg:text-xl'>
         <div className='flex items-center justify-around flex-wrap mx-auto gap-x-2 w-11/12 lg:w-2/3'>
           <IndexLink
@@ -59,12 +65,20 @@ const Home: NextPageLayout<Props> = ({ latestArticle }: Props): ReactElement => 
       </div>
 
       <Link href='/articles'>
-        <div className='my-10 lg:my-20 flex items-center justify-center md:justify-center gap-x-5 hover:gap-x-7 md:gap-x-10 md:hover:gap-x-12 lg:gap-x-16 lg:hover:gap-x-20 transition-all cursor-pointer mx-auto w-fit text-slate-700'>
+        <div className='my-20 lg:my-32 flex items-center justify-center md:justify-center gap-x-5 hover:gap-x-7 md:gap-x-10 md:hover:gap-x-12 lg:gap-x-16 lg:hover:gap-x-20 transition-all cursor-pointer mx-auto w-fit text-slate-700'>
           <ChevronsLeft className='text-amber-700' />
           <span className='text-xl hover:underline hover:underline-offset-2'>Check all the articles</span>
           <ChevronsRight className='text-amber-700' />
         </div>
       </Link>
+
+      <div className='my-16 w-11/12 lg:w-3/5 mx-auto grid grid-cols-3 lg:grid-cols-4 gap-1 lg:gap-2'>
+        {tags.map((tag) => (
+          <div className='w-fit mx-auto' key={tag.id}>
+            <ArticleTag tag={tag} />
+          </div>
+        ))}
+      </div>
 
       <div className='text-center text-xl w-11/12 md:w-5/6 lg:w-3/5 mx-auto rounded-md border border-slate-400 px-5 py-10 my-16'>
         <p className='text-slate-800'>
