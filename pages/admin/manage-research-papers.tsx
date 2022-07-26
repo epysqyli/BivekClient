@@ -13,6 +13,7 @@ import { PlusCircle } from "react-feather";
 import WorkingPaperElement from "../../components/admin/WorkingPaperElement";
 import { OverlayContext } from "../../hooks/OverlayContext";
 import DeleteConfirmation from "../../components/admin/DeleteConfirmation";
+import Head from "next/head";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -70,55 +71,57 @@ const ManageResearchPapers: NextPageLayout<Props> = ({ workingPaperProps }: Prop
   };
 
   return (
-    <div className='mx-auto w-11/12 md:w-4/6 lg:w-3/5 xl:w-1/2'>
-      <TopElement text='Manage research papers' />
-      {showForm ? (
-        <div className='my-10'>
-          <WorkingPaperForm addWorkingPaperToState={addWorkingPaperToState} hideForm={hideWpForm} />
-        </div>
-      ) : (
-        <div
-          onClick={showWpForm}
-          className='w-11/12 mx-auto py-2 rounded-md group cursor-pointer'
-        >
-          <PlusCircle
-            size={50}
-            fill="white"
-            strokeWidth={1.25}
-            className='w-fit mx-auto text-amber-600 transition-transform group-hover:scale-95 group-active:scale-90'
-            aria-label='add-working-paper'
-            role='button'
-          />
-        </div>
-      )}
+    <>
+      <Head>
+        <title>Manage research papers</title>
+      </Head>
+      <div className='mx-auto w-11/12 md:w-4/6 lg:w-3/5 xl:w-1/2'>
+        <TopElement text='Manage research papers' />
+        {showForm ? (
+          <div className='my-10'>
+            <WorkingPaperForm addWorkingPaperToState={addWorkingPaperToState} hideForm={hideWpForm} />
+          </div>
+        ) : (
+          <div onClick={showWpForm} className='w-11/12 mx-auto py-2 rounded-md group cursor-pointer'>
+            <PlusCircle
+              size={50}
+              fill='white'
+              strokeWidth={1.25}
+              className='w-fit mx-auto text-amber-600 transition-transform group-hover:scale-95 group-active:scale-90'
+              aria-label='add-working-paper'
+              role='button'
+            />
+          </div>
+        )}
 
-      {workingPapers
-        .sort((a, b) => (a.id > b.id ? -1 : 1))
-        .map((wp) => {
-          return (
-            <div
-              key={wp.id}
-              className='mx-auto my-10 p-2 border rounded-sm bg-white hover:bg-slate-50 hover:border-slate-300'
-            >
-              <WorkingPaperElement
-                workingPaper={wp}
-                setCurrentWorkingPaperId={setCurrentWorkingPaperId}
-                showDeleteConfirmation={showDeleteConfirmation}
-                replaceWorkingPapersInState={replaceWorkingPapersInState}
-              />
-            </div>
-          );
-        })}
+        {workingPapers
+          .sort((a, b) => (a.id > b.id ? -1 : 1))
+          .map((wp) => {
+            return (
+              <div
+                key={wp.id}
+                className='mx-auto my-10 p-2 border rounded-sm bg-white hover:bg-slate-50 hover:border-slate-300'
+              >
+                <WorkingPaperElement
+                  workingPaper={wp}
+                  setCurrentWorkingPaperId={setCurrentWorkingPaperId}
+                  showDeleteConfirmation={showDeleteConfirmation}
+                  replaceWorkingPapersInState={replaceWorkingPapersInState}
+                />
+              </div>
+            );
+          })}
 
-      <DeleteConfirmation
-        id={currentWorkingPaperId}
-        show={showDelete}
-        hideShow={hideDeleteConfirmation}
-        deleteItem={deleteWorkingPaper}
-        updateStateAfterDelete={removeWorkingPaperFromState}
-        resourceType='working paper'
-      />
-    </div>
+        <DeleteConfirmation
+          id={currentWorkingPaperId}
+          show={showDelete}
+          hideShow={hideDeleteConfirmation}
+          deleteItem={deleteWorkingPaper}
+          updateStateAfterDelete={removeWorkingPaperFromState}
+          resourceType='working paper'
+        />
+      </div>
+    </>
   );
 };
 

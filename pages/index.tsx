@@ -13,6 +13,7 @@ import Link from "next/link";
 import ITag from "../interfaces/models/ITag";
 import { getTags } from "../lib/TagRepo";
 import ArticleTag from "../components/guest/ArticleTag";
+import Head from "next/head";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const latestArticleResp = await getLatestArticle();
@@ -29,6 +30,9 @@ interface Props {
 const Home: NextPageLayout<Props> = ({ latestArticle, tags }: Props): ReactElement => {
   return (
     <>
+      <Head>
+        <title>Blog</title>
+      </Head>
       <div className='lg:my-10'>
         <SectionHeader resource='homepage' text='Blog title' />
       </div>
@@ -86,8 +90,8 @@ const Home: NextPageLayout<Props> = ({ latestArticle, tags }: Props): ReactEleme
         <p className='text-slate-800'>
           Barbara had been waiting at the table for twenty minutes. it had been twenty long and excruciating
           minutes. David had promised that he would be on time today. He never was, but he had promised this
-          one time. She had made him repeat the promise multiple times over the last week until she had believed
-          his promise. Now she was paying the price.
+          one time. She had made him repeat the promise multiple times over the last week until she had
+          believed his promise. Now she was paying the price.
         </p>
         <Link href='/about'>
           <span className='cursor-pointer mt-10 block underline underline-offset-2 text-slate-600 hover:text-slate-800 active:text-slate-300'>

@@ -7,6 +7,7 @@ import { getPublishedArticles } from "../../lib/ArticleRepo";
 import GuestLayout from "../../layouts/GuestLayout";
 import ArticleLink from "../../components/guest/ArticleLink";
 import SectionHeader from "../../components/SectionHeader";
+import Head from "next/head";
 
 interface ArticlePageProps {
   articles: Array<IArticle>;
@@ -22,6 +23,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
 const Articles: NextPageLayout<ArticlePageProps> = ({ articles }: ArticlePageProps): ReactElement => {
   return (
     <>
+      <Head>
+        <title>Articles</title>
+      </Head>
       <SectionHeader resource='article' text='Articles' />
       <div className='w-11/12 lg:w-2/3 mx-auto mt-10'>
         {articles.map((article) => (

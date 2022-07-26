@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import AdminLayout from "../../layouts/AdminLayout";
 import { login } from "../../lib/Auth";
+import Head from "next/head";
 
 interface IUserCredential {
   username: string;
@@ -39,6 +40,9 @@ const Login: NextPageLayout = (): ReactElement => {
 
   return (
     <>
+      <Head>
+        <title>Login</title>
+      </Head>
       <div className='w-full md:w-4/6 lg:w-3/6 2xl:w-1/3 mx-auto mt-10'>
         <h1 className='text-2xl text-center mb-16'>Login as admin</h1>
 

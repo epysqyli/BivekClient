@@ -16,6 +16,7 @@ import Image from "@tiptap/extension-image";
 import ArticleLink from "../../components/guest/ArticleLink";
 import { getFurtherReading } from "../../lib/ArticleMethods";
 import { AlignCenter, MoreHorizontal } from "react-feather";
+import Head from "next/head";
 
 interface Props {
   article: IArticle;
@@ -51,6 +52,9 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 const Article: NextPageLayout<Props> = ({ article, body, similarArticles }: Props): ReactElement => {
   return (
     <>
+      <Head>
+        <title>{article.title}</title>
+      </Head>
       <AlignCenter size={40} strokeWidth={1.5} className='w-min mx-auto mt-5 text-amber-700' />
       <h1 className='text-4xl font-semibold text-slate-700 text-center mt-8 mb-10'>{article.title}</h1>
       <h2 className='text-xl text-slate-600 text-center my-7'>{article.createdAt}</h2>

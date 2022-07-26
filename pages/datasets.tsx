@@ -7,6 +7,7 @@ import IDataCategory from "../interfaces/models/IDataCategory";
 import { getNonEmptyDataCategories } from "../lib/DataCategoryRepo";
 import DatasetCategoryElement from "../components/guest/DatasetCategoryElement";
 import SectionHeader from "../components/SectionHeader";
+import Head from "next/head";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const resp: AxiosResponse<Array<IDataCategory>> = await getNonEmptyDataCategories();
@@ -22,6 +23,9 @@ interface Props {
 const Datasets: NextPageLayout<Props> = ({ datasetCategories }: Props): ReactElement => {
   return (
     <>
+    <Head>
+      <title>Datasets</title>
+    </Head>
       <SectionHeader resource='dataset' text='Datasets' />
       <div className='lg:w-2/3 mx-auto mt-10'>
         {datasetCategories.map((dc) => (

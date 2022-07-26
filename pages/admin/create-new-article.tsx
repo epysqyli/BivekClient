@@ -18,6 +18,7 @@ import { isArticleValid } from "../../lib/ArticleEditMethods";
 import TopElement from "../../components/admin/TopElement";
 import { Eye, Save, Tag as TagIcon } from "react-feather";
 import IValidationError from "../../interfaces/IValidationError";
+import Head from "next/head";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -101,57 +102,62 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
   useEffect(() => setIsValid(isArticleValid(title, body)), [title, body]);
 
   return (
-    <div className='mx-auto lg:w-4/5 xl:w-2/3 2xl:w-1/2'>
-      <TopElement text='Create a new article' />
-      <div className='block w-5/6 mx-auto'>
-        <input
-          onChange={handleTitleChange}
-          type='text'
-          name='title'
-          id='title'
-          placeholder='Article title'
-          className={creationError.length === 0 ? baseTitleStyle : errorTytleStyle}
-        />
-      </div>
-      <div className='w-11/12 mx-auto rounded'>
-        <div className='p-1'>
-          <TipTap updateBody={updateBody} />
+    <>
+      <Head>
+        <title>Create new article</title>
+      </Head>
+      <div className='mx-auto lg:w-4/5 xl:w-2/3 2xl:w-1/2'>
+        <TopElement text='Create a new article' />
+        <div className='block w-5/6 mx-auto'>
+          <input
+            onChange={handleTitleChange}
+            type='text'
+            name='title'
+            id='title'
+            placeholder='Article title'
+            className={creationError.length === 0 ? baseTitleStyle : errorTytleStyle}
+          />
+        </div>
+        <div className='w-11/12 mx-auto rounded'>
+          <div className='p-1'>
+            <TipTap updateBody={updateBody} />
+          </div>
+        </div>
+
+        <div className='mt-10 py-2 flex'>
+          <CreateMenuBtn
+            text='tags'
+            isArticleValid={isValid}
+            handleClick={handleToggle}
+            icon={<TagIcon size={26} className={isValid ? activeIcon : disabledIcon} />}
+          />
+
+          <CreateMenuBtn
+            text='save for later'
+            isArticleValid={isValid}
+            handleClick={() => handleCreateArticle(false)}
+            icon={<Save size={26} className={isValid ? activeIcon : disabledIcon} />}
+          />
+          <CreateMenuBtn
+            text='publish'
+            isArticleValid={isValid}
+            handleClick={() => handleCreateArticle(true)}
+            icon={<Eye size={26} className={isValid ? activeIcon : disabledIcon} />}
+          />
+        </div>
+
+        <div>
+          {showTagsMenu ? (
+            <AssignTags
+              allTags={allTags}
+              currentTags={currentTags}
+              setCurrentTags={setCurrentTags}
+              articleId={id}
+            />
+          ) : null}
         </div>
       </div>
-
-      <div className='mt-10 py-2 flex'>
-        <CreateMenuBtn
-          text='tags'
-          isArticleValid={isValid}
-          handleClick={handleToggle}
-          icon={<TagIcon size={26} className={isValid ? activeIcon : disabledIcon} />}
-        />
-
-        <CreateMenuBtn
-          text='save for later'
-          isArticleValid={isValid}
-          handleClick={() => handleCreateArticle(false)}
-          icon={<Save size={26} className={isValid ? activeIcon : disabledIcon} />}
-        />
-        <CreateMenuBtn
-          text='publish'
-          isArticleValid={isValid}
-          handleClick={() => handleCreateArticle(true)}
-          icon={<Eye size={26} className={isValid ? activeIcon : disabledIcon} />}
-        />
-      </div>
-
-      <div>
-        {showTagsMenu ? (
-          <AssignTags
-            allTags={allTags}
-            currentTags={currentTags}
-            setCurrentTags={setCurrentTags}
-            articleId={id}
-          />
-        ) : null}
-      </div>
-    </div>
+    </>
   );
 };
 

@@ -8,6 +8,7 @@ import { checkLogin } from "../../../lib/Auth";
 import { getArticles } from "../../../lib/ArticleRepo";
 import EditArticleEntry from "../../../components/admin/EditArticleEntry";
 import TopElement from "../../../components/admin/TopElement";
+import Head from "next/head";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -33,6 +34,9 @@ interface Props {
 const EditIndex: NextPageLayout<Props> = ({ articles }: Props): ReactElement => {
   return (
     <>
+      <Head>
+        <title>Manage existing articles</title>
+      </Head>
       <TopElement text='Manage your articles' />
       <div className='mx-auto grid lg:grid-cols-2 gap-y-5 lg:gap-x-5 w-5/6 md:w-4/6 lg:w-5/6 xl:w-2/3'>
         {articles.map((article) => (

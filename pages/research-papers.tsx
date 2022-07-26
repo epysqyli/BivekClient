@@ -7,6 +7,7 @@ import IWorkingPaper from "../interfaces/models/IWorkingPaper";
 import { getWorkingPapers } from "../lib/WorkingPaperRepo";
 import WorkingPaperElement from "../components/guest/WorkingPaperElement";
 import SectionHeader from "../components/SectionHeader";
+import Head from "next/head";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const resp: AxiosResponse<Array<IWorkingPaper>> = await getWorkingPapers();
@@ -22,6 +23,9 @@ interface Props {
 const ResearchPapers: NextPageLayout<Props> = ({ workingPapers }: Props): ReactElement => {
   return (
     <>
+      <Head>
+        <title>Research papers</title>
+      </Head>
       <SectionHeader resource='research' text='Research papers' />
       <div className='lg:w-2/3 mx-auto mt-10'>
         {workingPapers.map((wp) => (

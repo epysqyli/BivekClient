@@ -13,6 +13,7 @@ import DeleteConfirmation from "../../components/admin/DeleteConfirmation";
 import { OverlayContext } from "../../hooks/OverlayContext";
 import TagItem from "../../components/admin/TagItem";
 import type IValidationError from "../../interfaces/IValidationError";
+import Head from "next/head";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -82,6 +83,9 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
 
   return (
     <>
+      <Head>
+        <title>Manage Tags</title>
+      </Head>
       <div className='mx-auto w-11/12 md:w-4/6 lg:w-3/5 xl:w-1/2'>
         <TopElement text='Manage tags' />
         <div className='flex items-end text-lg w-5/6 mx-auto rounded-md mt-10 mb-16'>

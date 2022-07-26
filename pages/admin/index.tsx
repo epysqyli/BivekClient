@@ -7,6 +7,7 @@ import { checkLogin } from "../../lib/Auth";
 import IndexLink from "../../components/admin/IndexLink";
 import { Database, Edit, Paperclip, Tag, PlusCircle } from "react-feather";
 import SectionHeader from "../../components/SectionHeader";
+import Head from "next/head";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -30,6 +31,9 @@ const AdminIndex: NextPageLayout = (): ReactElement => {
 
   return (
     <>
+      <Head>
+        <title>Manage blog</title>
+      </Head>
       <SectionHeader resource='admin' text='Manage blog resources' />
       <div className='my-20 mx-auto w-5/6 lg:w-3/5 xl:w-1/2 grid md:grid-cols-2 gap-y-5 md:gap-5'>
         <IndexLink
