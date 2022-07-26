@@ -14,7 +14,7 @@ import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import Image from "@tiptap/extension-image";
 import ArticleLink from "../../components/guest/ArticleLink";
-import { filterMaxArticles, getFurtherReading } from "../../lib/ArticleMethods";
+import { getFurtherReading } from "../../lib/ArticleMethods";
 import { AlignCenter, MoreHorizontal } from "react-feather";
 
 interface Props {
@@ -41,8 +41,10 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   ]);
   body = body.replaceAll("<p></p>", "<br />");
 
-  const similarArticlesResp = await getFurtherReading(articleResp.data.tags.map((tag) => tag.id));
-  const similarArticles = filterMaxArticles(similarArticlesResp.data, articleResp.data.id, 3);
+  const similarArticles = await getFurtherReading(
+    articleResp.data.tags.map((t) => t.id),
+    articleResp.data.id
+  );
   return { props: { article: articleResp.data, body: body, similarArticles: similarArticles } };
 };
 
