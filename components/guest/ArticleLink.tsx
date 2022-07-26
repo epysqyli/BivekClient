@@ -22,7 +22,7 @@ const ArticleLink = ({ article }: { article: IArticle }): ReactElement => {
             <ArticleTag tag={tag} key={tag.id} />
           ))}
         </div>
-        <div className='absolute bottom-0 right-0 w-fit text-neutral-600 bg-white border-t border-l border-r border-slate-400 border-opacity-75 text-sm p-1 group-hover:border-neutral-50 group-hover:bg-neutral-50 rounded-tl'>
+        <div className='absolute bottom-0 right-0 w-fit text-slate-500 text-sm p-1 group-hover:border-neutral-50 group-hover:bg-neutral-50 rounded-tl'>
           {article.createdAt}
         </div>
       </div>
