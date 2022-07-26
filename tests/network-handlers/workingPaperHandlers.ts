@@ -1,5 +1,6 @@
 import { rest } from "msw";
 import { setupServer } from "msw/node";
+import IWorkingPaper from "../../interfaces/models/IWorkingPaper";
 
 const handlers = [
   rest.get("http://localhost:5010/workingpapers/1", async (req, res, ctx) => {
@@ -17,14 +18,16 @@ const handlers = [
   }),
 
   rest.post("http://localhost:5010/workingpapers", async (req, res, ctx) => {
+    const { title, abstract, link, datasetLink } = req.body as IWorkingPaper;
+
     return res(
       ctx.status(201),
       ctx.json({
         id: 1,
-        title: "New working paper title",
-        abstract: "Abstract of the new working paper",
-        link: "link.com",
-        datasetLink: "dataset-link.com",
+        title: title,
+        abstract: abstract,
+        link: link,
+        datasetLink: datasetLink,
         createdAt: "09 July, 2022"
       })
     );

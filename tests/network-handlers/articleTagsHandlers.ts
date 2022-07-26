@@ -1,5 +1,6 @@
 import { rest } from "msw";
 import { setupServer } from "msw/node";
+import ITag from "../../interfaces/models/ITag";
 
 const handlers = [
   rest.get("http://localhost:5010/tags", async (req, res, ctx) => {
@@ -29,11 +30,13 @@ const handlers = [
   }),
 
   rest.post("http://localhost:5010/tags", async (req, res, ctx) => {
+    const { name } = req.body as ITag;
+
     return res(
       ctx.status(201),
       ctx.json({
         id: 3,
-        name: "new fake tag"
+        name: name
       })
     );
   }),
