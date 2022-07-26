@@ -32,6 +32,8 @@ const Home: NextPageLayout<Props> = ({ latestArticle, tags }: Props): ReactEleme
     <>
       <Head>
         <title>Blog</title>
+        <meta name='description' content='Personal blog' />
+        <link rel='icon' href='#' />
       </Head>
       <div className='lg:my-10'>
         <SectionHeader resource='homepage' text='Blog title' />
