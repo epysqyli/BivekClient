@@ -54,13 +54,13 @@ const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
     <>
       <header></header>
       {mainElement(children)}
-      <footer className='bg-slate-500 border-t border-amber-500 text-center z-10 text-sm py-5'>
+      <footer className='bg-slate-500 border-t border-amber-500 text-center z-10 text-sm py-5 text-slate-50'>
         <div>some random info</div>
         <div>link to other websites</div>
         <div>email address for contact</div>
         {isAdmin ? (
           <Link href='/admin'>
-            <span className='block underline underline-offset-2 text-slate-700 my-3 cursor-pointer w-fit mx-auto'>
+            <span className='block underline underline-offset-2 text-slate-100 my-3 cursor-pointer w-fit mx-auto'>
               admin section
             </span>
           </Link>
