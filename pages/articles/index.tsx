@@ -27,9 +27,11 @@ const Articles: NextPageLayout<ArticlePageProps> = ({ articles }: ArticlePagePro
         <title>Articles</title>
       </Head>
       <SectionHeader resource='article' text='Articles' />
-      <div className='w-11/12 lg:w-2/3 mx-auto mt-10'>
+      <div className='w-11/12 lg:w-2/3 mx-auto mt-16'>
         {articles.map((article) => (
-          <ArticleLink key={article.id} article={article} />
+          <div key={article.id} className="my-16 lg:my-20">
+            <ArticleLink article={article} />
+          </div>
         ))}
       </div>
     </>
