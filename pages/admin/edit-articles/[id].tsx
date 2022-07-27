@@ -32,9 +32,10 @@ import { isArticleValid } from "../../../lib/ArticleEditMethods";
 import CreateMenuBtn from "../../../components/admin/CreateMenuBtn";
 import TopElement from "../../../components/admin/TopElement";
 import DeleteConfirmation from "../../../components/admin/DeleteConfirmation";
-import { Trash2, Eye, EyeOff, Save, Tag as TagIcon } from "react-feather";
+import { Trash2, Eye, EyeOff, Save, Tag as TagIcon, ToggleLeft } from "react-feather";
 import { OverlayContext } from "../../../hooks/OverlayContext";
 import Head from "next/head";
+import ArticleEditConfirmation from "../../../components/admin/ArticleEditConfirmation";
 
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
@@ -112,6 +113,21 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
   const [showTagsMenu, setTagsMenu] = useState<boolean>(false);
   const [isPublished, setIsPublished] = useState<boolean>(article.published);
   const [showDelete, setShowDelete] = useState<boolean>(false);
+  const [currentChange, setCurrentChange] = useState<string>("");
+  const [showEditConfirmation, setShowEditConfirmation] = useState<boolean>(false);
+
+  const displayEditConfirmation = () => setShowEditConfirmation(true);
+  const hideEditConfirmation = () => setShowEditConfirmation(false);
+
+  const showEditAnimation = (text: string) => {
+    setCurrentChange(text);
+    showOverlay();
+    displayEditConfirmation();
+    setTimeout(() => {
+      hideEditConfirmation();
+      hideOverlay();
+    }, 2000);
+  };
 
   const handleTitleChange = (e: FormEvent<HTMLInputElement>) => {
     setTitlePatch({ ...titlePatch, value: e.currentTarget.value.trim() });
@@ -121,6 +137,7 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
 
   const handlePatchArticle = async (): Promise<void> => {
     await patchArticle(article.id, [titlePatch, bodyPatch]);
+    showEditAnimation("changes saved!");
   };
 
   const toggleAssignTags = (): void => (showTagsMenu ? setTagsMenu(false) : setTagsMenu(true));
@@ -130,9 +147,11 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
     if (isPublished) {
       const resp: AxiosResponse<IArticle> = await hideArticle(article.id);
       setIsPublished(resp.data.published);
+      showEditAnimation("article hidden");
     } else {
       const resp: AxiosResponse<IArticle> = await publishArticle(article.id);
       setIsPublished(resp.data.published);
+      showEditAnimation("article published!");
     }
   };
 
@@ -151,7 +170,9 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
 
   return (
     <>
-    <Head><title>Edit article</title></Head>
+      <Head>
+        <title>Edit article</title>
+      </Head>
       <div className='relative mx-auto lg:w-4/5 xl:w-2/3 2xl:w-1/2'>
         <TopElement text='Edit article' />
         <div className='block w-5/6 mx-auto'>
@@ -165,6 +186,7 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
             className='border-b border-gray-300 bg-transparent focus:border-slate-400 mx-auto text-center text-xl block w-full py-1 px-2 mb-2 focus:outline-none'
           />
         </div>
+
         <div className='w-11/12 mx-auto rounded'>
           <div className='p-1'>
             <TipTap updateBody={updateBody} existingContent={article.body} />
@@ -229,6 +251,8 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
           deleteItem={deleteArticle}
           redirectPath='/admin/edit-articles'
         />
+
+        <ArticleEditConfirmation show={showEditConfirmation} text={currentChange} />
       </div>
     </>
   );
