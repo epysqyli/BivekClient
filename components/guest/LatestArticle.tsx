@@ -13,7 +13,7 @@ interface Props extends ArticleLinkProps {
 const LatestArticle = ({ ArticleLink, article }: Props): ReactElement => {
   return (
     <>
-      <Activity className='text-amber-600 w-min mx-auto animate-pulse' size={40} />
+      <Activity className='text-amber-600 w-min mb-10 mx-auto animate-pulse' size={40} />
       <ArticleLink article={article} />
     </>
   );
