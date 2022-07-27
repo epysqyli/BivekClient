@@ -43,7 +43,7 @@ const Home: NextPageLayout<Props> = ({ latestArticle, tags }: Props): ReactEleme
       </div>
 
       <nav className='py-3 my-5 lg:my-16 lg:text-xl'>
-        <div className='flex items-center justify-around flex-wrap mx-auto gap-x-5 gap-y-5 md:gap-y-10 w-11/12 lg:w-2/3'>
+        <div className='flex items-center justify-center flex-wrap mx-auto md:gap-y-10 md:gap-x-5 w-11/12 lg:w-2/3'>
           <IndexLink pageLink='/articles' item='articles' icon={<Type size={32} className={iconStyle} />} />
           <IndexLink
             pageLink='/datasets'
@@ -59,14 +59,14 @@ const Home: NextPageLayout<Props> = ({ latestArticle, tags }: Props): ReactEleme
         </div>
       </nav>
 
-      <div className='my-20 md:w-5/6 mx-auto lg:w-2/3 xl:w-1/2 text-center'>
+      <div className='my-20 w-11/12 md:w-5/6 mx-auto lg:w-2/3 xl:w-1/2 text-center'>
         {latestArticle !== null ? <LatestArticle article={latestArticle} ArticleLink={ArticleLink} /> : null}
       </div>
 
       <Link href='/articles'>
         <div className='my-32 flex items-center justify-center md:justify-center gap-x-5 hover:gap-x-7 md:gap-x-10 md:hover:gap-x-12 lg:gap-x-16 lg:hover:gap-x-20 transition-all cursor-pointer mx-auto w-fit group'>
           <ChevronsLeft className='text-amber-700 group-hover:scale-125' />
-          <span className='text-xl lg:text-2xl hover:underline hover:underline-offset-2 text-amber-900'>
+          <span className='text-2xl hover:underline hover:underline-offset-2 text-amber-900'>
             Explore all articles
           </span>
           <ChevronsRight className='text-amber-700 group-hover:scale-125' />

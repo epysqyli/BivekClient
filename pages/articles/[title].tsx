@@ -61,7 +61,7 @@ const Article: NextPageLayout<Props> = ({ article, body, similarArticles }: Prop
       <div className='w-11/12 md:w-4/5 lg:w-3/4 xl:w-3/5 mx-auto'>
         <div className='ProseMirror pb-10' dangerouslySetInnerHTML={{ __html: body }}></div>
       </div>
-      <div className='text-justify w-11/12 lg:w-2/3 mx-auto mt-20'>
+      <div className='text-justify w-11/12 lg:w-2/3 mx-auto my-20'>
         <MoreHorizontal size={60} strokeWidth={1.5} className='w-min mx-auto mb-5 text-amber-700' />
         {similarArticles.map((article) => (
           <ArticleLink key={article.id} article={article} />
