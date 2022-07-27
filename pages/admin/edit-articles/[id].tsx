@@ -165,8 +165,8 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
     hideOverlay();
   };
 
-  const activeIcon = "w-min mx-auto my-2 text-slate-600";
-  const disabledIcon = "w-min mx-auto my-2 text-slate-300";
+  const activeIcon = "w-min mx-auto my-2 text-amber-800";
+  const disabledIcon = "w-min mx-auto my-2 text-amber-300";
 
   return (
     <>
