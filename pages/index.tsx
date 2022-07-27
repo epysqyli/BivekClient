@@ -28,6 +28,9 @@ interface Props {
 }
 
 const Home: NextPageLayout<Props> = ({ latestArticle, tags }: Props): ReactElement => {
+  const iconStyle =
+    "text-slate-100 w-min mx-auto group-hover:scale-95 transition-all group-active:scale-90 group-active:text-amber-500";
+
   return (
     <>
       <Head>
@@ -39,30 +42,20 @@ const Home: NextPageLayout<Props> = ({ latestArticle, tags }: Props): ReactEleme
         <SectionHeader resource='homepage' text='Blog title' />
       </div>
 
-      <nav className='py-3 bg-slate-500 text-slate-50 lg:text-xl'>
-        <div className='flex items-center justify-around flex-wrap mx-auto gap-x-2 w-11/12 lg:w-2/3'>
-          <IndexLink
-            pageLink='/articles'
-            item='articles'
-            icon={<Type size={32} className='text-slate-100 group-active:text-slate-500 w-min mx-auto' />}
-          />
+      <nav className='py-3 my-5 lg:my-16 lg:text-xl'>
+        <div className='flex items-center justify-around flex-wrap mx-auto gap-x-1 gap-y-5 md:gap-y-10 w-11/12 lg:w-2/3'>
+          <IndexLink pageLink='/articles' item='articles' icon={<Type size={32} className={iconStyle} />} />
           <IndexLink
             pageLink='/datasets'
             item='datasets'
-            icon={<Database size={32} className='text-slate-100 group-active:text-slate-500 w-min mx-auto' />}
+            icon={<Database size={32} className={iconStyle} />}
           />
           <IndexLink
             pageLink='/research-papers'
             item='papers'
-            icon={
-              <Paperclip size={32} className='text-slate-100 group-active:text-slate-500 w-min mx-auto' />
-            }
+            icon={<Paperclip size={32} className={iconStyle} />}
           />
-          <IndexLink
-            pageLink='/about'
-            item='About'
-            icon={<Info size={32} className='text-slate-100 group-active:text-slate-500 w-min mx-auto' />}
-          />
+          <IndexLink pageLink='/about' item='about' icon={<Info size={32} className={iconStyle} />} />
         </div>
       </nav>
 
