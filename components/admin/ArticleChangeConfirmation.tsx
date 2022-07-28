@@ -6,7 +6,7 @@ interface Props {
   show: boolean;
 }
 
-const ArticleEditConfirmation = ({ text, show }: Props): ReactElement => {
+const ArticleChangeConfirmation = ({ text, show }: Props): ReactElement => {
   return (
     <AnimatePresence>
       {show && (
@@ -24,4 +24,4 @@ const ArticleEditConfirmation = ({ text, show }: Props): ReactElement => {
   );
 };
 
-export default ArticleEditConfirmation;
+export default ArticleChangeConfirmation;

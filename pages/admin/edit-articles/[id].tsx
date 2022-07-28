@@ -35,7 +35,7 @@ import DeleteConfirmation from "../../../components/admin/DeleteConfirmation";
 import { Trash2, Eye, EyeOff, Save, Tag as TagIcon, ToggleLeft } from "react-feather";
 import { OverlayContext } from "../../../hooks/OverlayContext";
 import Head from "next/head";
-import ArticleEditConfirmation from "../../../components/admin/ArticleEditConfirmation";
+import ArticleChangeConfirmation from "../../../components/admin/ArticleChangeConfirmation";
 
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
@@ -114,17 +114,17 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
   const [isPublished, setIsPublished] = useState<boolean>(article.published);
   const [showDelete, setShowDelete] = useState<boolean>(false);
   const [currentChange, setCurrentChange] = useState<string>("");
-  const [showEditConfirmation, setShowEditConfirmation] = useState<boolean>(false);
+  const [showChangeConfirmation, setShowChangeConfirmation] = useState<boolean>(false);
 
-  const displayEditConfirmation = () => setShowEditConfirmation(true);
-  const hideEditConfirmation = () => setShowEditConfirmation(false);
+  const displayChangeConfirmation = () => setShowChangeConfirmation(true);
+  const hideChangeConfirmation = () => setShowChangeConfirmation(false);
 
   const showEditAnimation = (text: string) => {
     setCurrentChange(text);
     showOverlay();
-    displayEditConfirmation();
+    displayChangeConfirmation();
     setTimeout(() => {
-      hideEditConfirmation();
+      hideChangeConfirmation();
       hideOverlay();
     }, 2000);
   };
@@ -252,7 +252,7 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
           redirectPath='/admin/edit-articles'
         />
 
-        <ArticleEditConfirmation show={showEditConfirmation} text={currentChange} />
+        <ArticleChangeConfirmation show={showChangeConfirmation} text={currentChange} />
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import type { FormEvent, ReactElement } from "react";
+import { FormEvent, ReactElement, useContext } from "react";
 import type NextPageLayout from "../../types/NextPageLayout";
 import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult, Redirect } from "next";
 import type { AxiosError, AxiosResponse } from "axios";
@@ -19,6 +19,8 @@ import TopElement from "../../components/admin/TopElement";
 import { Eye, Save, Tag as TagIcon } from "react-feather";
 import IValidationError from "../../interfaces/IValidationError";
 import Head from "next/head";
+import { OverlayContext } from "../../hooks/OverlayContext";
+import ArticleChangeConfirmation from "../../components/admin/ArticleChangeConfirmation";
 
 export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
   context: GetServerSidePropsContext
@@ -54,6 +56,22 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
   });
   const [isValid, setIsValid] = useState<boolean>(false);
   const [creationError, setCreationError] = useState<string>("");
+  const [currentChange, setCurrentChange] = useState<string>("");
+  const [showChangeConfirmation, setShowChangeConfirmation] = useState<boolean>(false);
+
+  const displayChangeConfirmation = () => setShowChangeConfirmation(true);
+  const hideChangeConfirmation = () => setShowChangeConfirmation(false);
+  const { showOverlay, hideOverlay } = useContext(OverlayContext);
+
+  const showEditAnimation = (text: string) => {
+    setCurrentChange(text);
+    showOverlay();
+    displayChangeConfirmation();
+    setTimeout(() => {
+      hideChangeConfirmation();
+      hideOverlay();
+    }, 2000);
+  };
 
   const handleTitleChange = (e: FormEvent<HTMLInputElement>) => {
     setTitle(e.currentTarget.value.trim());
@@ -82,6 +100,7 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
         const resp: AxiosResponse<IArticle> = await createArticle(title, body, publish);
         setId(resp.data.id);
         setCreationError("");
+        publish ? showEditAnimation("article published!") : showEditAnimation("article saved!");
       } catch (error) {
         const errorWrapper = error as AxiosError;
         const errorData = errorWrapper.response!.data as IValidationError;
@@ -89,10 +108,11 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
       }
     } else {
       await patchArticle(id, [titlePatch, bodyPatch]);
+      showEditAnimation("article published!");
     }
   };
 
-  const activeIcon = "w-min mx-auto my-2 text-slate-600";
+  const activeIcon = "w-min mx-auto my-2 text-amber-800";
   const disabledIcon = "w-min mx-auto my-2 text-slate-300";
 
   const baseTitleStyle =
@@ -138,12 +158,21 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
             handleClick={() => handleCreateArticle(false)}
             icon={<Save size={26} className={isValid ? activeIcon : disabledIcon} />}
           />
-          <CreateMenuBtn
-            text='publish'
-            isArticleValid={isValid}
-            handleClick={() => handleCreateArticle(true)}
-            icon={<Eye size={26} className={isValid ? activeIcon : disabledIcon} />}
-          />
+          {id === 0 ? (
+            <CreateMenuBtn
+              text='publish'
+              isArticleValid={isValid}
+              handleClick={() => handleCreateArticle(true)}
+              icon={<Eye size={26} className={isValid ? activeIcon : disabledIcon} />}
+            />
+          ) : (
+            <CreateMenuBtn
+              text='publish'
+              isArticleValid={false}
+              handleClick={() => handleCreateArticle(true)}
+              icon={<Eye size={26} className={disabledIcon} />}
+            />
+          )}
         </div>
 
         <div>
@@ -157,6 +186,8 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
           ) : null}
         </div>
       </div>
+
+      <ArticleChangeConfirmation show={showChangeConfirmation} text={currentChange} />
     </>
   );
 };
