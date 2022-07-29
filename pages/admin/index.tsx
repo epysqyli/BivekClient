@@ -27,7 +27,7 @@ export const getServerSideProps: GetServerSideProps<{} | Redirect> = async (
 
 const AdminIndex: NextPageLayout = (): ReactElement => {
   const iconStyle: string =
-    "text-amber-800 group-hover:text-slate-50 group-hover:scale-95 group-active:scale-90 transition-transform mx-auto";
+    "text-slate-50 group-hover:scale-95 group-active:scale-90 transition-transform mx-auto";
 
   return (
     <>

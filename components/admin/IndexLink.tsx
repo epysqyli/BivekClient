@@ -10,9 +10,9 @@ interface Props {
 const IndexLink = ({ text, href, icon }: Props): ReactElement => {
   return (
     <Link href={href}>
-      <div className='border bg-white shadow-md shadow-slate-300 rounded-md hover:border-slate-50 hover:bg-slate-500 cursor-pointer transition-all group flex items-center justify-between px-10 py-6'>
+      <div className='border-2 border-amber-500 bg-slate-500 shadow-md shadow-slate-300 hover:shadow-slate-400 rounded-md hover:border-amber-700 cursor-pointer transition-all group flex items-center justify-between px-10 py-6'>
         <div>{icon}</div>
-        <div className='text-lg tracking-tight text-slate-800 group-hover:text-white text-right'>
+        <div className='text-lg tracking-tight text-slate-50 group-hover:text-white text-right'>
           {text}
         </div>
       </div>
