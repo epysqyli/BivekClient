@@ -38,9 +38,9 @@ const EditIndex: NextPageLayout<Props> = ({ articles }: Props): ReactElement => 
         <title>Manage existing articles</title>
       </Head>
       <TopElement text='Manage your articles' />
-      <div className='mx-auto grid lg:grid-cols-2 gap-y-5 lg:gap-x-5 w-5/6 md:w-4/6 lg:w-5/6 xl:w-2/3'>
+      <div className='mx-auto w-5/6 md:w-4/6 lg:w-2/3 xl:w-1/2'>
         {articles.map((article) => (
-          <div key={article.id}>
+          <div key={article.id} className='my-3'>
             <EditArticleEntry article={article} />
           </div>
         ))}
