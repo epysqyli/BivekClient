@@ -81,7 +81,7 @@ const Home: NextPageLayout<Props> = ({ latestArticle, tags }: Props): ReactEleme
         ))}
       </div>
 
-      <div className='text-center text-xl w-11/12 md:w-5/6 lg:w-3/5 mx-auto rounded-md border border-slate-400 px-5 py-10 my-16'>
+      <div className='text-center text-xl w-11/12 md:w-5/6 lg:w-3/5 mx-auto rounded bg-neutral-50 px-5 py-10 my-16'>
         <p className='text-slate-800'>
           Barbara had been waiting at the table for twenty minutes. it had been twenty long and excruciating
           minutes. David had promised that he would be on time today. He never was, but he had promised this
