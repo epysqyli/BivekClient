@@ -54,10 +54,14 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
     op: "replace",
     value: ""
   });
+  const [isPublished, setIsPublished] = useState(false);
   const [isValid, setIsValid] = useState<boolean>(false);
   const [creationError, setCreationError] = useState<string>("");
   const [currentChange, setCurrentChange] = useState<string>("");
   const [showChangeConfirmation, setShowChangeConfirmation] = useState<boolean>(false);
+  const [allTags] = useState<Array<ITag>>(tags);
+  const [currentTags, setCurrentTags] = useState<Array<ITag>>([]);
+  const [showTagsMenu, setTagsMenu] = useState<boolean>(false);
 
   const displayChangeConfirmation = () => setShowChangeConfirmation(true);
   const hideChangeConfirmation = () => setShowChangeConfirmation(false);
@@ -83,10 +87,6 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
     setBodyPatch({ ...bodyPatch, value: JSON.stringify(content) });
   };
 
-  const [allTags] = useState<Array<ITag>>(tags);
-  const [currentTags, setCurrentTags] = useState<Array<ITag>>([]);
-  const [showTagsMenu, setTagsMenu] = useState<boolean>(false);
-
   const toggleAssignTags = (): void => (showTagsMenu ? setTagsMenu(false) : setTagsMenu(true));
 
   const handleToggle = async (): Promise<void> => {
@@ -100,7 +100,12 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
         const resp: AxiosResponse<IArticle> = await createArticle(title, body, publish);
         setId(resp.data.id);
         setCreationError("");
-        publish ? showEditAnimation("article published!") : showEditAnimation("article saved!");
+        if (publish) {
+          showEditAnimation("article published!");
+          setIsPublished(true);
+        } else {
+          showEditAnimation("article saved!");
+        }
       } catch (error) {
         const errorWrapper = error as AxiosError;
         const errorData = errorWrapper.response!.data as IValidationError;
@@ -108,7 +113,7 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
       }
     } else {
       await patchArticle(id, [titlePatch, bodyPatch]);
-      showEditAnimation("article published!");
+      publish ? showEditAnimation("article published!") : showEditAnimation("article saved!");
     }
   };
 
@@ -138,13 +143,14 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
             className={creationError.length === 0 ? baseTitleStyle : errorTytleStyle}
           />
         </div>
+
         <div className='w-11/12 mx-auto rounded'>
           <div className='p-1'>
             <TipTap updateBody={updateBody} />
           </div>
         </div>
 
-        <div className='mt-10 py-2 flex'>
+        <div className='mt-10 lg:w-3/5 mx-auto py-2 flex'>
           <CreateMenuBtn
             text='tags'
             isArticleValid={isValid}
@@ -158,19 +164,19 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
             handleClick={() => handleCreateArticle(false)}
             icon={<Save size={26} className={isValid ? activeIcon : disabledIcon} />}
           />
-          {id === 0 ? (
-            <CreateMenuBtn
-              text='publish'
-              isArticleValid={isValid}
-              handleClick={() => handleCreateArticle(true)}
-              icon={<Eye size={26} className={isValid ? activeIcon : disabledIcon} />}
-            />
-          ) : (
+          {isPublished ? (
             <CreateMenuBtn
               text='publish'
               isArticleValid={false}
               handleClick={() => handleCreateArticle(true)}
               icon={<Eye size={26} className={disabledIcon} />}
+            />
+          ) : (
+            <CreateMenuBtn
+              text='publish'
+              isArticleValid={isValid}
+              handleClick={() => handleCreateArticle(true)}
+              icon={<Eye size={26} className={isValid ? activeIcon : disabledIcon} />}
             />
           )}
         </div>
