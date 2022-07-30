@@ -9,7 +9,7 @@ interface Props {
 
 const DatasetCategoryElement = ({ datasetCategory }: Props): ReactElement => {
   return (
-    <div className='my-10 py-5 px-2 mx-auto'>
+    <div className='my-10 pt-5 pb-10 px-2 mx-auto border-b border-slate-400'>
       <h2 className="text-3xl tracking-tighter text-center mb-12 font-medium text-slate-700">{datasetCategory.name}</h2>
       <div>
         {datasetCategory.datasets.map((dataset) => (
