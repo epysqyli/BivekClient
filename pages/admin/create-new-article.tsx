@@ -90,11 +90,11 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
   const toggleAssignTags = (): void => (showTagsMenu ? setTagsMenu(false) : setTagsMenu(true));
 
   const handleToggle = async (): Promise<void> => {
-    await handleCreateArticle(false);
+    await handleCreateArticle(false, showTagsMenu);
     toggleAssignTags();
   };
 
-  const handleCreateArticle = async (publish: boolean): Promise<void> => {
+  const handleCreateArticle = async (publish: boolean, closingTags?: boolean): Promise<void> => {
     if (id === 0) {
       try {
         const resp: AxiosResponse<IArticle> = await createArticle(title, body, publish);
@@ -104,7 +104,7 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
           showEditAnimation("article published!");
           setIsPublished(true);
         } else {
-          showEditAnimation("article saved!");
+          if (closingTags !== false) showEditAnimation("article saved!");
         }
       } catch (error) {
         const errorWrapper = error as AxiosError;
@@ -113,7 +113,14 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
       }
     } else {
       await patchArticle(id, [titlePatch, bodyPatch]);
-      publish ? showEditAnimation("article published!") : showEditAnimation("article saved!");
+      if (closingTags !== false) {
+        if (publish) {
+          showEditAnimation("article published!");
+          setIsPublished(true);
+        } else {
+          showEditAnimation("article saved!");
+        }
+      }
     }
   };
 
