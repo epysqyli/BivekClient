@@ -15,7 +15,7 @@ const ArticleLink = ({ article }: { article: IArticle }): ReactElement => {
         }
       }}
     >
-      <div className='relative px-5 py-3 lg:py-7 lg:px-5 border-b-2 border-slate-300 mx-auto hover:bg-slate-200 active:bg-slate-300 cursor-pointer group hover:rounded-tr hover:rounded-tl hover:rounded-bl'>
+      <div className='relative px-5 py-3 lg:py-7 lg:px-5 border-b-2 border-slate-300 mx-auto hover:bg-slate-300 active:bg-slate-400 cursor-pointer group hover:rounded-tr hover:rounded-tl hover:rounded-bl group'>
         <div className='text-3xl tracking-tighter text-left text-slate-600 font-bold mx-auto'>{article.title}</div>
         <div className='w-3/5 mt-3 py-5 flex items-center flex-wrap gap-x-4'>
           {article.tags.map((tag) => (

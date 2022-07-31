@@ -9,7 +9,7 @@ interface Props {
 
 const WorkingPaperElement = ({ workingPaper }: Props): ReactElement => {
   return (
-    <div className='my-10 py-6 px-2 mx-auto border-b border-slate-400 hover:bg-slate-200 active:bg-slate-300 hover:rounded hover:border-transparent'>
+    <div className='my-10 py-6 px-2 mx-auto border-b border-slate-400 hover:bg-slate-300 hover:rounded hover:border-transparent'>
       <h2 className='text-3xl tracking-tighter text-center mb-5 font-medium text-slate-700'>
         {workingPaper.title}
       </h2>
@@ -17,7 +17,7 @@ const WorkingPaperElement = ({ workingPaper }: Props): ReactElement => {
       <div className='text-slate-700 w-5/6 mx-auto text-justify'>{workingPaper.abstract}</div>
       <div className='my-12 w-5/6 mx-auto'>
         <Link href={workingPaper.link}>
-          <a className='flex items-center justify-between cursor-pointer my-5 py-2 px-2 rounded text-slate-600 group hover:bg-slate-300'>
+          <a className='flex items-center justify-between cursor-pointer my-5 py-2 px-2 rounded text-slate-600 group hover:bg-slate-100 active:bg-slate-200'>
             <div>Download paper</div>
             <Download
               size={28}
@@ -28,7 +28,7 @@ const WorkingPaperElement = ({ workingPaper }: Props): ReactElement => {
         </Link>
         {workingPaper.datasetLink ? (
           <Link href={workingPaper.link}>
-            <a className='flex items-center justify-between cursor-pointer my-5 py-2 px-2 rounded text-slate-600 group hover:bg-slate-300'>
+            <a className='flex items-center justify-between cursor-pointer my-5 py-2 px-2 rounded text-slate-600 group hover:bg-slate-100 active:bg-slate-200'>
               <div>Download dataset</div>
               <Download
                 size={28}
