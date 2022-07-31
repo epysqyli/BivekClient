@@ -2,7 +2,7 @@ import type NextPageLayout from "../../../types/NextPageLayout";
 import type IArticle from "../../../interfaces/models/IArticle";
 import type IPatch from "../../../interfaces/models/IPatch";
 import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult, Redirect } from "next";
-import type { AxiosResponse } from "axios";
+import type { AxiosError, AxiosResponse } from "axios";
 import type { JSONContent } from "@tiptap/react";
 import type { FormEvent } from "react";
 import { useContext, useState, useEffect } from "react";
@@ -36,6 +36,7 @@ import { Trash2, Eye, EyeOff, Save, Tag as TagIcon, ToggleLeft } from "react-fea
 import { OverlayContext } from "../../../hooks/OverlayContext";
 import Head from "next/head";
 import ArticleChangeConfirmation from "../../../components/admin/ArticleChangeConfirmation";
+import IPatchValidationError from "../../../interfaces/IPatchValidationError";
 
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
@@ -115,6 +116,7 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
   const [showDelete, setShowDelete] = useState<boolean>(false);
   const [currentChange, setCurrentChange] = useState<string>("");
   const [showChangeConfirmation, setShowChangeConfirmation] = useState<boolean>(false);
+  const [editError, setEditError] = useState<string>("");
 
   const displayChangeConfirmation = () => setShowChangeConfirmation(true);
   const hideChangeConfirmation = () => setShowChangeConfirmation(false);
@@ -136,8 +138,15 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
   const updateBody = (content: JSONContent) => setBodyPatch({ ...bodyPatch, value: JSON.stringify(content) });
 
   const handlePatchArticle = async (): Promise<void> => {
-    await patchArticle(article.id, [titlePatch, bodyPatch]);
-    showEditAnimation("changes saved!");
+    try {
+      await patchArticle(article.id, [titlePatch, bodyPatch]);
+      showEditAnimation("changes saved!");
+      setEditError("");
+    } catch (error) {
+      const errorWrapper = error as AxiosError;
+      const errorData = errorWrapper.response!.data as IPatchValidationError;
+      setEditError(errorData.Title![0]);
+    }
   };
 
   const toggleAssignTags = (): void => (showTagsMenu ? setTagsMenu(false) : setTagsMenu(true));
@@ -168,6 +177,10 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
   const activeIcon = "w-min mx-auto my-2 text-amber-800";
   const disabledIcon = "w-min mx-auto my-2 text-amber-300";
 
+  const baseTitleStyle =
+    "border-b border-gray-300 bg-transparent focus:border-slate-400 mx-auto text-center text-xl block w-full py-1 px-2 mb-2 focus:outline-none";
+  const errorTitleStyle = baseTitleStyle + " text-red-600 bg-red-100 border-red-400 animate-pulse";
+
   return (
     <>
       <Head>
@@ -183,7 +196,7 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
             name='title'
             id='title'
             placeholder='title required'
-            className='border-b border-gray-300 bg-transparent focus:border-slate-400 mx-auto text-center text-xl block w-full py-1 px-2 mb-2 focus:outline-none'
+            className={editError.length === 0 ? baseTitleStyle : errorTitleStyle}
           />
         </div>
 

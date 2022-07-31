@@ -129,7 +129,7 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
 
   const baseTitleStyle =
     "border-b border-gray-300 bg-transparent focus:border-slate-400 mx-auto text-center text-xl block w-full py-1 px-2 mb-2 focus:outline-none";
-  const errorTytleStyle = baseTitleStyle + " text-red-600 bg-red-100 border-red-400 animate-pulse";
+  const errorTitleStyle = baseTitleStyle + " text-red-600 bg-red-100 border-red-400 animate-pulse";
 
   useEffect(() => setIsValid(isArticleValid(title, body)), [title, body]);
 
@@ -147,7 +147,7 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
             name='title'
             id='title'
             placeholder='Article title'
-            className={creationError.length === 0 ? baseTitleStyle : errorTytleStyle}
+            className={creationError.length === 0 ? baseTitleStyle : errorTitleStyle}
           />
         </div>
 
