@@ -1,7 +1,7 @@
 .ProseMirror {
   ul {
     list-style-type: disc;
-    padding: 2rem;
+    padding: 2rem;;
   }
 
   ol {
@@ -25,11 +25,13 @@
   }
 
   pre {
-    background: #0d0d0d;
+    background: rgb(30 41 59);
     color: #fff;
     font-family: "JetBrainsMono", monospace;
     padding: 0.75rem 1rem;
     border-radius: 0.3rem;
+    border: rgb(217 119 6) 2px solid;
+    margin: 1rem 0 1rem 0;
     overflow-x: auto;
 
     code {
@@ -40,7 +42,7 @@
   blockquote {
     margin: 1rem 0;
     padding: 1rem 0 1rem 2rem;
-    border-left: 2px solid rgba(#0d0d0d, 0.1);
+    border-left: 2px solid rgba(217, 119, 6, 0.5);
     font-style: italic;
     color: rgb(30 41 59);
   }
