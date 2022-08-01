@@ -66,7 +66,7 @@ const Home: NextPageLayout<Props> = ({ latestArticle, tags }: Props): ReactEleme
       <Link href='/articles'>
         <div className='my-32 flex items-center justify-center md:justify-center gap-x-5 hover:gap-x-7 md:gap-x-10 md:hover:gap-x-12 lg:gap-x-16 lg:hover:gap-x-20 transition-all cursor-pointer mx-auto w-fit group'>
           <ChevronsLeft className='text-amber-700 group-hover:scale-125' />
-          <span className='text-2xl hover:underline hover:underline-offset-2 text-amber-900'>
+          <span className='text-2xl hover:underline hover:underline-offset-2 text-amber-900 dark:text-amber-500'>
             Explore all articles
           </span>
           <ChevronsRight className='text-amber-700 group-hover:scale-125' />
@@ -81,15 +81,15 @@ const Home: NextPageLayout<Props> = ({ latestArticle, tags }: Props): ReactEleme
         ))}
       </div>
 
-      <div className='text-center text-xl w-11/12 md:w-5/6 lg:w-3/5 mx-auto rounded bg-neutral-50 px-5 py-10 my-16'>
-        <p className='text-slate-800'>
+      <div className='text-center text-xl w-11/12 md:w-5/6 lg:w-3/5 mx-auto rounded bg-neutral-50 dark:bg-slate-500 px-5 py-10 my-16'>
+        <p className='text-slate-800 dark:text-slate-50'>
           Barbara had been waiting at the table for twenty minutes. it had been twenty long and excruciating
           minutes. David had promised that he would be on time today. He never was, but he had promised this
           one time. She had made him repeat the promise multiple times over the last week until she had
           believed his promise. Now she was paying the price.
         </p>
         <Link href='/about'>
-          <span className='cursor-pointer mt-10 block underline underline-offset-2 text-slate-600 hover:text-slate-800 active:text-slate-300'>
+          <span className='cursor-pointer mt-10 block underline underline-offset-2 text-slate-600 dark:text-white hover:text-slate-800 dark:hover:text-slate-200 dark:active:text-slate-300 active:text-slate-300'>
             Find more about me
           </span>
         </Link>
