@@ -178,8 +178,8 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
   const disabledIcon = "w-min mx-auto my-2 text-amber-300";
 
   const baseTitleStyle =
-    "border-b border-gray-300 bg-transparent focus:border-slate-400 mx-auto text-center text-xl block w-full py-1 px-2 mb-2 focus:outline-none";
-  const errorTitleStyle = baseTitleStyle + " text-red-600 bg-red-100 border-red-400 animate-pulse";
+    "border-b border-gray-300 bg-transparent focus:border-slate-400 mx-auto text-center text-xl block w-full py-1 px-2 mb-2 focus:outline-none dark:text-slate-100";
+  const errorTitleStyle = baseTitleStyle + " text-red-600 dark:text-amber-700 bg-red-100 border-red-400 animate-pulse";
 
   return (
     <>
