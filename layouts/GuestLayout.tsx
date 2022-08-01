@@ -54,7 +54,7 @@ const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
     <>
       <header></header>
       {mainElement(children)}
-      <footer className='bg-slate-500 border-t border-amber-500 text-center z-10 text-sm py-5 text-slate-50'>
+      <footer className='bg-slate-500 dark:bg-neutral-800 text-center z-10 text-sm py-10 text-slate-50'>
         <div>some random info</div>
         <div>link to other websites</div>
         <div>email address for contact</div>
