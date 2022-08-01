@@ -1,5 +1,5 @@
 import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult } from "next";
-import type { ReactElement } from "react";
+import { ReactElement, useContext } from "react";
 import type IArticle from "../../interfaces/models/IArticle";
 import type { AxiosResponse } from "axios";
 import type NextPageLayout from "../../types/NextPageLayout";
@@ -17,6 +17,7 @@ import ArticleLink from "../../components/guest/ArticleLink";
 import { getFurtherReading } from "../../lib/ArticleMethods";
 import { AlignCenter, MoreHorizontal } from "react-feather";
 import Head from "next/head";
+import { DarkModeContext } from "../../hooks/DarkModeContext";
 
 interface Props {
   article: IArticle;
@@ -50,17 +51,21 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 };
 
 const Article: NextPageLayout<Props> = ({ article, body, similarArticles }: Props): ReactElement => {
+  const { isDarkMode } = useContext(DarkModeContext);
+
   return (
     <>
       <Head>
         <title>{article.title}</title>
       </Head>
       <AlignCenter size={40} strokeWidth={1.5} className='w-min mx-auto text-amber-700' />
-      <h1 className='text-4xl font-semibold text-slate-700 dark:text-slate-100 text-center mt-8 mb-10'>{article.title}</h1>
+      <h1 className='text-4xl font-semibold text-slate-700 dark:text-slate-100 text-center mt-8 mb-10'>
+        {article.title}
+      </h1>
       <h2 className='text-xl text-slate-600 dark:text-slate-400 text-center my-7'>{article.createdAt}</h2>
       <div className='w-11/12 md:w-4/5 lg:w-3/4 xl:w-3/5 mx-auto'>
         <div className='ProseMirror pb-10'>
-          <div dangerouslySetInnerHTML={{ __html: body }} className='dark'></div>
+          <div dangerouslySetInnerHTML={{ __html: body }} className={isDarkMode() ? "dark" : "light"}></div>
         </div>
       </div>
       <div className='text-justify w-11/12 lg:w-2/3 mx-auto my-20'>
