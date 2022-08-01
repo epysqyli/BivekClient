@@ -118,7 +118,7 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
             .map((tag) => (
               <div
                 key={tag.id}
-                className='pl-2 shadow-sm bg-white shadow-slate-400 rounded-md flex items-center justify-between'
+                className='pl-2 shadow-sm bg-white dark:bg-slate-600 dark:shadow-none shadow-slate-400 rounded-md flex items-center justify-between'
               >
                 <TagItem
                   tag={tag}
