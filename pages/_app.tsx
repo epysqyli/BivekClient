@@ -4,6 +4,7 @@ import type { AppProps } from "next/app";
 import { ReactElement, ReactNode, useEffect, useState } from "react";
 import NextPageLayout from "../types/NextPageLayout";
 import { useRouter } from "next/router";
+import { DarkModeProvider } from "../hooks/DarkModeContext";
 import FullScreenLoader from "../components/FullScreenLoader";
 
 interface IAppPropsLayout extends AppProps {
@@ -12,6 +13,8 @@ interface IAppPropsLayout extends AppProps {
 
 const MyApp = ({ Component, pageProps }: IAppPropsLayout): ReactNode => {
   const [loading, setLoading] = useState<boolean>(false);
+  const [darkMode, setDarkMode] = useState<boolean>(false);
+  const toggleDarkMode = () => (darkMode ? setDarkMode(false) : setDarkMode(true));
   const router = useRouter();
 
   useEffect(() => {
@@ -26,12 +29,14 @@ const MyApp = ({ Component, pageProps }: IAppPropsLayout): ReactNode => {
   const getPage = pageWithLayout ?? pageWithoutLayout;
 
   return (
-    <div className='dark'>
-      <div className='main-wrapper bg-neutral-100 dark:bg-slate-800'>
-        {loading ? <FullScreenLoader /> : null}
-        {getPage(<Component {...pageProps} />)}
+    <DarkModeProvider value={{ toggleDarkMode }}>
+      <div className={darkMode ? "dark" : ""}>
+        <div className='main-wrapper bg-neutral-100 dark:bg-slate-800'>
+          {loading ? <FullScreenLoader /> : null}
+          {getPage(<Component {...pageProps} />)}
+        </div>
       </div>
-    </div>
+    </DarkModeProvider>
   );
 };
 

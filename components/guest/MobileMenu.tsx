@@ -1,7 +1,8 @@
-import { ReactElement } from "react";
+import { ReactElement, useContext } from "react";
 import SidebarLink from "./SidebarLink";
 import { AnimatePresence, motion } from "framer-motion";
 import { Database, Home, Info, Paperclip, Settings, Type } from "react-feather";
+import { DarkModeContext } from "../../hooks/DarkModeContext";
 
 interface Props {
   open: boolean;
@@ -10,6 +11,7 @@ interface Props {
 
 const MobileMenu = ({ open, isAdmin }: Props): ReactElement => {
   const iconStyle = "text-amber-700";
+  const { toggleDarkMode } = useContext(DarkModeContext);
 
   return (
     <AnimatePresence>
@@ -32,6 +34,7 @@ const MobileMenu = ({ open, isAdmin }: Props): ReactElement => {
           {isAdmin ? (
             <SidebarLink pageLink='/admin' item='admin section' icon={<Settings className={iconStyle} />} />
           ) : null}
+          <div onClick={() => toggleDarkMode()} className="text-center py-4">switch mode</div>
         </motion.div>
       )}
     </AnimatePresence>
