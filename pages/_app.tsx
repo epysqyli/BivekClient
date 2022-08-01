@@ -26,10 +26,12 @@ const MyApp = ({ Component, pageProps }: IAppPropsLayout): ReactNode => {
   const getPage = pageWithLayout ?? pageWithoutLayout;
 
   return (
-    <>
-      {loading ? <FullScreenLoader /> : null}
-      {getPage(<Component {...pageProps} />)}
-    </>
+    <div className='dark'>
+      <div className='main-wrapper bg-neutral-100 dark:bg-slate-800'>
+        {loading ? <FullScreenLoader /> : null}
+        {getPage(<Component {...pageProps} />)}
+      </div>
+    </div>
   );
 };
 

@@ -55,11 +55,13 @@ const Article: NextPageLayout<Props> = ({ article, body, similarArticles }: Prop
       <Head>
         <title>{article.title}</title>
       </Head>
-      <AlignCenter size={40} strokeWidth={1.5} className='w-min mx-auto mt-5 text-amber-700' />
-      <h1 className='text-4xl font-semibold text-slate-700 text-center mt-8 mb-10'>{article.title}</h1>
-      <h2 className='text-xl text-slate-600 text-center my-7'>{article.createdAt}</h2>
+      <AlignCenter size={40} strokeWidth={1.5} className='w-min mx-auto text-amber-700' />
+      <h1 className='text-4xl font-semibold text-slate-700 dark:text-slate-100 text-center mt-8 mb-10'>{article.title}</h1>
+      <h2 className='text-xl text-slate-600 dark:text-slate-400 text-center my-7'>{article.createdAt}</h2>
       <div className='w-11/12 md:w-4/5 lg:w-3/4 xl:w-3/5 mx-auto'>
-        <div className='ProseMirror pb-10' dangerouslySetInnerHTML={{ __html: body }}></div>
+        <div className='ProseMirror pb-10'>
+          <div dangerouslySetInnerHTML={{ __html: body }} className='dark'></div>
+        </div>
       </div>
       <div className='text-justify w-11/12 lg:w-2/3 mx-auto my-20'>
         <MoreHorizontal size={60} strokeWidth={1.5} className='w-min mx-auto mb-5 text-amber-700' />
