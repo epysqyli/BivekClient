@@ -68,7 +68,7 @@ const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
         ) : null}
 
         {router.pathname == "/" ? (
-          <div className='w-1/2 mx-auto'>
+          <div className='w-1/2 lg:w-1/5 mx-auto'>
             <DarkModeToggle />
           </div>
         ) : null}

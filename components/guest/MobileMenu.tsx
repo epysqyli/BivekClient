@@ -34,7 +34,7 @@ const MobileMenu = ({ open, isAdmin }: Props): ReactElement => {
             <SidebarLink pageLink='/admin' item='admin section' icon={<Settings className={iconStyle} />} />
           ) : null}
 
-          <DarkModeToggle />
+          <div className="mt-20 w-1/2 mx-auto"><DarkModeToggle /></div>
         </motion.div>
       )}
     </AnimatePresence>

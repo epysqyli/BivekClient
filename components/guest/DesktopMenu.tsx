@@ -22,7 +22,7 @@ const DesktopMenu = ({ isAdmin }: { isAdmin: boolean }): ReactElement => {
         {isAdmin ? (
           <SidebarLink pageLink='/admin' item='admin section' icon={<Settings className={iconStyle} />} />
         ) : null}
-        <DarkModeToggle />
+        <div className="mt-20 w-2/3 mx-auto"><DarkModeToggle /></div>
       </div>
     </div>
   );
