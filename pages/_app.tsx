@@ -13,8 +13,19 @@ interface IAppPropsLayout extends AppProps {
 
 const MyApp = ({ Component, pageProps }: IAppPropsLayout): ReactNode => {
   const [loading, setLoading] = useState<boolean>(false);
+  const darkModeSetting = () => (localStorage.getItem("darkMode") === "true" ? true : false);
   const [darkMode, setDarkMode] = useState<boolean>(false);
-  const toggleDarkMode = () => (darkMode ? setDarkMode(false) : setDarkMode(true));
+  const toggleDarkMode = () => {
+    if (darkMode === false) {
+      setDarkMode(true);
+      localStorage.setItem("darkMode", "true");
+    } else {
+      setDarkMode(false);
+      localStorage.setItem("darkMode", "false");
+    }
+  };
+  const isDarkMode = (): boolean => darkMode;
+
   const router = useRouter();
 
   useEffect(() => {
@@ -24,12 +35,14 @@ const MyApp = ({ Component, pageProps }: IAppPropsLayout): ReactNode => {
     return () => router.events.off("routeChangeComplete", () => {});
   }, [router.events]);
 
+  useEffect(() => setDarkMode(darkModeSetting()), []);
+
   const pageWithoutLayout = (page: ReactElement): ReactNode => page;
   const pageWithLayout = Component.getLayout;
   const getPage = pageWithLayout ?? pageWithoutLayout;
 
   return (
-    <DarkModeProvider value={{ toggleDarkMode }}>
+    <DarkModeProvider value={{ toggleDarkMode, isDarkMode }}>
       <div className={darkMode ? "dark" : ""}>
         <div className='main-wrapper bg-neutral-100 dark:bg-slate-800'>
           {loading ? <FullScreenLoader /> : null}

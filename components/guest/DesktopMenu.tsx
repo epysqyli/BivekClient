@@ -1,5 +1,6 @@
 import { ReactElement } from "react";
 import { Database, Home, Info, Paperclip, Settings, Type } from "react-feather";
+import DarkModeToggle from "../DarkModeToggle";
 import SidebarLink from "./SidebarLink";
 
 const DesktopMenu = ({ isAdmin }: { isAdmin: boolean }): ReactElement => {
@@ -21,6 +22,7 @@ const DesktopMenu = ({ isAdmin }: { isAdmin: boolean }): ReactElement => {
         {isAdmin ? (
           <SidebarLink pageLink='/admin' item='admin section' icon={<Settings className={iconStyle} />} />
         ) : null}
+        <DarkModeToggle />
       </div>
     </div>
   );

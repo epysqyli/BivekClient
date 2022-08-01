@@ -12,7 +12,7 @@ const SidebarLink = ({ pageLink, item, icon }: Props): ReactElement => {
     <Link href={pageLink}>
       <div className='flex items-center justify-between py-4 px-5 border-b border-dashed border-slate-400 lg:cursor-pointer lg:hover:bg-neutral-300 select-none group'>
         {icon}
-        <div className='text-right text-xl lg:text-lg text-slate-700 lg:text-white group-hover:text-amber-700'>{item}</div>
+        <div className='text-right text-xl lg:text-lg text-slate-700 dark:text-slate-50 lg:text-white group-hover:text-amber-700'>{item}</div>
       </div>
     </Link>
   );
