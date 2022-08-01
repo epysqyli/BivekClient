@@ -54,7 +54,7 @@ const Article: NextPageLayout<Props> = ({ article, body, similarArticles }: Prop
   const { isDarkMode } = useContext(DarkModeContext);
 
   return (
-    <>
+    <div className="mt-10">
       <Head>
         <title>{article.title}</title>
       </Head>
@@ -74,7 +74,7 @@ const Article: NextPageLayout<Props> = ({ article, body, similarArticles }: Prop
           <ArticleLink key={article.id} article={article} />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
