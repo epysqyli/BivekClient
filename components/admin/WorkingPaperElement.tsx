@@ -37,26 +37,26 @@ const WorkingPaperElement = ({
       ) : (
         <div className='relative ml-2'>
           <div className='text-sm w-5/6'>
-            <div className='text-gray-500'>title</div>
-            <div className='text-gray-900'>{workingPaper.title}</div>
+            <div className='text-gray-500 dark:text-slate-300'>title</div>
+            <div className='text-gray-900 dark:text-slate-100'>{workingPaper.title}</div>
           </div>
           <div className='mt-3 text-sm text-justify w-5/6'>
-            <div className='text-gray-500'>abstract</div>
-            <div className='text-gray-900'>{workingPaper.abstract}</div>
+            <div className='text-gray-500 dark:text-slate-300'>abstract</div>
+            <div className='text-gray-900 dark:text-slate-100'>{workingPaper.abstract}</div>
           </div>
           <div className='mt-3 text-sm w-5/6'>
-            <div className='text-gray-500'>link</div>
-            <div className='text-gray-900'>{workingPaper.link}</div>
+            <div className='text-gray-500 dark:text-slate-300'>link</div>
+            <div className='text-gray-900 dark:text-slate-100'>{workingPaper.link}</div>
           </div>
           {workingPaper.datasetLink ? (
             <div className='mt-3 text-sm w-5/6'>
-              <div className='text-gray-500'>dataset link</div>
-              <div className='text-gray-900'>{workingPaper.datasetLink}</div>
+              <div className='text-gray-500 dark:text-slate-300'>dataset link</div>
+              <div className='text-gray-900 dark:text-slate-100'>{workingPaper.datasetLink}</div>
             </div>
           ) : null}
           <div className='absolute top-1 right-1'>
             <Edit
-              className='text-gray-500 cursor-pointer transition-transform hover:scale-95 active:scale-90'
+              className='text-gray-500 dark:text-slate-100 cursor-pointer transition-transform hover:scale-95 active:scale-90'
               onClick={showForm}
               size={20}
               role='button'
@@ -65,7 +65,7 @@ const WorkingPaperElement = ({
             <Trash2
               onClick={handleClick}
               size={20}
-              className='text-gray-500 mt-3 cursor-pointer transition-transform hover:scale-95 active:scale-90'
+              className='text-gray-500 dark:text-slate-100 mt-3 cursor-pointer transition-transform hover:scale-95 active:scale-90'
               role='button'
               aria-label='show-delete-working-paper-button'
             />

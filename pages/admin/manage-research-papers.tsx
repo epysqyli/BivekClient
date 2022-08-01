@@ -100,7 +100,7 @@ const ManageResearchPapers: NextPageLayout<Props> = ({ workingPaperProps }: Prop
             return (
               <div
                 key={wp.id}
-                className='mx-auto my-10 p-2 border rounded-sm bg-white hover:bg-slate-50 hover:border-slate-300'
+                className='mx-auto my-10 p-2 border rounded-sm bg-white dark:bg-slate-600 hover:bg-slate-50 hover:border-slate-300'
               >
                 <WorkingPaperElement
                   workingPaper={wp}
