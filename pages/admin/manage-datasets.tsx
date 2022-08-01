@@ -110,7 +110,7 @@ const DatasetCategories: NextPageLayout<Props> = ({ datasetCategoriesProps }: Pr
             .sort((a, b) => (a.id > b.id ? -1 : 1))
             .map((dataCategory) => {
               return (
-                <div className='mx-auto border py-2 my-10 shadow-md rounded bg-white' key={dataCategory.id}>
+                <div className='mx-auto border py-2 my-10 shadow-md rounded bg-white dark:bg-slate-600 dark:shadow-none dark:border-amber-600' key={dataCategory.id}>
                   <DatasetCategoryElement
                     dataCategory={dataCategory}
                     setCurrentDataCategoryId={setCurrentDataCategoryId}

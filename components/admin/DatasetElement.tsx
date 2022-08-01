@@ -38,16 +38,16 @@ const DatasetElement = ({
       ) : (
         <>
           <div className='w-5/6'>
-            <div className='text-gray-500 text-sm'>title</div>
-            <div className='text-gray-900 text-sm'>{dataset.title}</div>
+            <div className='text-gray-500 dark:text-slate-300 text-sm'>title</div>
+            <div className='text-gray-900 dark:text-slate-100 text-sm'>{dataset.title}</div>
           </div>
           <div className='mt-2 w-5/6'>
-            <div className='text-gray-500 text-sm'>download link</div>
-            <div className='text-gray-900 text-sm'>{dataset.link}</div>
+            <div className='text-gray-500 dark:text-slate-300 text-sm'>download link</div>
+            <div className='text-gray-900 dark:text-slate-100 text-sm'>{dataset.link}</div>
           </div>
           <div className='absolute top-1 right-1'>
             <Edit
-              className='text-gray-500 cursor-pointer transition-transform hover:scale-95 active:scale-90'
+              className='text-gray-500 dark:text-slate-100 cursor-pointer transition-transform hover:scale-95 active:scale-90'
               onClick={showEditForm}
               size={20}
               aria-label='show-edit-dataset-form'
@@ -56,7 +56,7 @@ const DatasetElement = ({
             <Trash2
               onClick={handleClick}
               size={20}
-              className='text-gray-500 mt-3 cursor-pointer transition-transform hover:scale-95 active:scale-90'
+              className='text-gray-500 dark:text-slate-100 mt-3 cursor-pointer transition-transform hover:scale-95 active:scale-90'
               aria-label='delete-dataset'
               role='button'
             />
