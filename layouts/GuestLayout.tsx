@@ -8,6 +8,7 @@ import { useIsNarrow } from "../hooks/UseMediaQuery";
 import { Menu, X } from "react-feather";
 import { checkLoginClientSide } from "../lib/Auth";
 import Link from "next/link";
+import DarkModeToggle from "../components/DarkModeToggle";
 
 const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
   const [open, setOpen] = useState<boolean>(false);
@@ -64,6 +65,12 @@ const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
               admin section
             </span>
           </Link>
+        ) : null}
+
+        {router.pathname == "/" ? (
+          <div className='w-1/2 mx-auto'>
+            <DarkModeToggle />
+          </div>
         ) : null}
       </footer>
       <div className='lg:hidden'>
