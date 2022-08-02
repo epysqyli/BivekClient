@@ -44,7 +44,7 @@ const Login: NextPageLayout = (): ReactElement => {
         <title>Login</title>
       </Head>
       <div className='w-full md:w-4/6 lg:w-3/6 2xl:w-1/3 mx-auto mt-10'>
-        <h1 className='text-2xl text-center mb-16'>Login as admin</h1>
+        <h1 className='text-2xl text-center dark:text-slate-100 mb-16'>Login as admin</h1>
 
         <form onSubmit={handleSubmit}>
           <div className='w-5/6 mx-auto my-4'>
