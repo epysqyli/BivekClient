@@ -53,19 +53,19 @@ const DeleteConfirmation = ({
           transition={{ duration: 0.2 }}
           exit={{ opacity: [1, 0] }}
           style={{ position: "fixed", top: "33%", left: "50%", translateX: "-50%" }}
-          className='py-10 px-5 w-2/3 md:w-1/2 lg:w-1/3 xl:w-1/4 bg-white z-20 mx-auto text-center shadow-lg shadow-slate-500 rounded-md'
+          className='py-10 px-5 w-2/3 md:w-1/2 lg:w-1/3 xl:w-1/4 bg-white dark:bg-slate-600 z-20 mx-auto text-center shadow-lg shadow-slate-500 dark:shadow-slate-800 rounded-md'
         >
-          <div>Confirm below to permanently delete this {resourceType}</div>
+          <div className="dark:text-slate-50">Confirm below to permanently delete this {resourceType}</div>
           <div
             onClick={handleDelete}
-            className='bg-white text-amber-700 py-2 mt-5 w-4/5 mx-auto rounded border border-amber-700 cursor-pointer hover:text-white hover:bg-amber-700 active:bg-amber-900'
+            className='bg-white text-amber-700 dark:text-white dark:bg-amber-700 py-2 mt-5 w-4/5 mx-auto rounded border border-amber-700 cursor-pointer hover:text-white hover:bg-amber-700 dark:hover:bg-amber-800 active:bg-amber-900 dark:active:bg-amber-900'
           >
             delete
           </div>
           <XCircle
             strokeWidth={1.5}
             onClick={hideShow}
-            className='absolute top-0 right-0 m-2 text-slate-600 cursor-pointer hover:scale-95 active:scale-75'
+            className='absolute top-0 right-0 m-2 text-slate-600 dark:text-slate-50 cursor-pointer hover:scale-95 active:scale-75'
             role='button'
             aria-label='close-delete-button'
           />
