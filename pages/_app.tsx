@@ -13,7 +13,7 @@ interface IAppPropsLayout extends AppProps {
 
 const MyApp = ({ Component, pageProps }: IAppPropsLayout): ReactNode => {
   const [loading, setLoading] = useState<boolean>(false);
-  const darkModeSetting = () => (localStorage.getItem("darkMode") === "true" ? true : false);
+  const currentDarkModeStatus = () => (localStorage.getItem("darkMode") === "true" ? true : false);
   const [darkMode, setDarkMode] = useState<boolean>(false);
   const toggleDarkMode = () => {
     if (darkMode === false) {
@@ -35,7 +35,7 @@ const MyApp = ({ Component, pageProps }: IAppPropsLayout): ReactNode => {
     return () => router.events.off("routeChangeComplete", () => {});
   }, [router.events]);
 
-  useEffect(() => setDarkMode(darkModeSetting()), []);
+  useEffect(() => setDarkMode(currentDarkModeStatus()), []);
 
   const pageWithoutLayout = (page: ReactElement): ReactNode => page;
   const pageWithLayout = Component.getLayout;
