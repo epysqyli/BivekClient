@@ -45,8 +45,8 @@ const MyApp = ({ Component, pageProps }: IAppPropsLayout): ReactNode => {
     <DarkModeProvider value={{ toggleDarkMode, isDarkMode }}>
       <div className={darkMode ? "dark" : ""}>
         <div className='main-wrapper bg-neutral-100 dark:bg-slate-800'>
-          {loading ? <FullScreenLoader /> : null}
           {getPage(<Component {...pageProps} />)}
+          {loading ? <FullScreenLoader /> : null}
         </div>
       </div>
     </DarkModeProvider>
