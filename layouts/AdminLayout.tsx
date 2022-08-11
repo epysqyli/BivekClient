@@ -10,7 +10,6 @@ import DarkModeToggle from "../components/DarkModeToggle";
 
 const AdminLayout = ({ children }: ILayoutProps): ReactElement => {
   const [activeOverlay, setActiveOverlay] = useState(false);
-  const overlay = "h-full w-full bg-slate-500 opacity-75 fixed top-0 z-10";
   const showOverlay = () => setActiveOverlay(true);
   const hideOverlay = () => setActiveOverlay(false);
 
@@ -51,7 +50,7 @@ const AdminLayout = ({ children }: ILayoutProps): ReactElement => {
           </div>
         </div>
       </footer>
-      {activeOverlay ? <div className={overlay}></div> : null}
+      {activeOverlay ? <div className='h-full w-full bg-slate-500 opacity-75 fixed top-0 z-10'></div> : null}
     </OverlayProvider>
   );
 };
