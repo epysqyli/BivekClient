@@ -101,3 +101,5 @@ const Home: NextPageLayout<Props> = ({ latestArticle, tags }: Props): ReactEleme
 Home.getLayout = (page: ReactElement) => <GuestLayout>{page}</GuestLayout>;
 
 export default Home;
+
+// adding some useless stuff in here
