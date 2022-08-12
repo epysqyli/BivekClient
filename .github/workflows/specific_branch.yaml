@@ -1,0 +1,10 @@
+name: example 
+on:
+  push:
+    branches:
+      - 'feature**' 
+jobs:
+  print-branch-message:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This is coming from the new branch"
