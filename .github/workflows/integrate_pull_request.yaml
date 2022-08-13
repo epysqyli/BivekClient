@@ -1,12 +1,10 @@
-name: Integrate changes
+name: Integrate pull request
 
-on:
-  pull_request:
-    types: [opened]
+on: push
 
 jobs:
-  main:
-    name: Integrate changes
+  create-pull-request:
+    name: Create pull request
     runs-on: ubuntu-latest
 
     steps:
@@ -16,6 +14,18 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
+      - name: create pull request
+        uses: repo-sync/pull-request@v2.6.2
+        with:
+          destination_branch: "main"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+  integrate-changes:
+    name: Integrate changes
+    needs: create-pull-request
+    runs-on: ubuntu-latest
+
+    steps:
       - name: rebase feature branch onto main
         uses: cirrus-actions/rebase@1.7
         env:
