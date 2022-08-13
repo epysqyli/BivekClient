@@ -73,3 +73,5 @@ const AdminIndex: NextPageLayout = (): ReactElement => {
 AdminIndex.getLayout = (page: ReactElement) => <AdminLayout>{page}</AdminLayout>;
 
 export default AdminIndex;
+
+// adding some random comments on admin index
