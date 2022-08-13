@@ -1,0 +1,26 @@
+name: Rebase Pull Request
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  main:
+    name: rebase - test - merge
+    runs-on: ubuntu-latest
+    steps:
+      - name: git checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: automatic rebase
+        uses: cirrus-actions/rebase@1.7
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: test via jest
+        run: |
+          npm install
+          npx jest
