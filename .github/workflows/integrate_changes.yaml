@@ -2,10 +2,12 @@ name: Integrate changes
 
 on:
   pull_request:
-    types: [opened]
+    branches-ignore:
+      - main
+    types: [opened, synchronize]
 
 jobs:
-  main:
+  integrate-changes:
     name: Integrate changes
     runs-on: ubuntu-latest
 
@@ -14,7 +16,6 @@ jobs:
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0
 
       - name: rebase feature branch onto main
         uses: cirrus-actions/rebase@1.7
