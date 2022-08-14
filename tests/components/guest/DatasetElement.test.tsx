@@ -14,7 +14,7 @@ const datasetProps: IDataset = {
 describe("Guest DatasetElement", () => {
   test("should display dataset title", async () => {
     render(<DatasetElement dataset={datasetProps} />);
-    const datasetTitle = await screen.findByText("Dataset title");
+    const datasetTitle = await screen.findByText("asdasdasd");
     expect(datasetTitle.textContent).toBe(datasetProps.title);
   });
 });
