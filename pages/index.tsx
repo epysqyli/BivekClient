@@ -29,7 +29,7 @@ interface Props {
 
 const Home: NextPageLayout<Props> = ({ latestArticle, tags }: Props): ReactElement => {
   const iconStyle =
-    "text-slate-100 w-min mx-auto group-hover:scale-95 transition-all group-active:scale-90 group-active:text-amber-500";
+    "text-slate-100 w-min mx-auto mt-1 group-hover:scale-95 transition-all group-active:scale-90 group-active:text-amber-500";
 
   return (
     <>
