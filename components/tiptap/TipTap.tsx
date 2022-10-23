@@ -19,7 +19,7 @@ const TipTap = ({ updateBody, existingContent }: EditorProps) => {
 
   const editor = useEditor({
     editorProps: {
-      attributes: { class: "bg-white px-2 pt-5 pb-28 overflow-y-auto h-50vh focus:outline-none" }
+      attributes: { class: "bg-white dark:bg-slate-600 dark:text-slate-50 px-5 pt-5 pb-28 overflow-y-auto h-50vh focus:outline-none rounded-md shadow-md" }
     },
     injectCSS: false,
     extensions: [
@@ -49,7 +49,7 @@ const TipTap = ({ updateBody, existingContent }: EditorProps) => {
         <MenuBar editor={editor} showTableMenu={showTableMenu} showTable={showTable} hideTable={hideTable} />
       </div>
       <div className='mt-2 mb-5'>{showTableMenu ? <TableMenu editor={editor} /> : null}</div>
-      <div className='border-2 rounded'>
+      <div className='rounded-md light'>
         <EditorContent editor={editor} />
       </div>
     </>

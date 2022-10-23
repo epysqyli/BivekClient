@@ -15,8 +15,8 @@ import type { MenuProps, TableProps } from "../../interfaces/ITipTap";
 const MenuBar = ({ editor, showTableMenu, showTable, hideTable }: MenuProps & TableProps) => {
   if (!editor) return null;
 
-  const active = "text-white bg-slate-600 px-2 m-1 rounded text-sm";
-  const notActive = "bg-white border m-1 px-2 rounded text-sm";
+  const active = "text-white bg-slate-600 dark:bg-slate-900 px-2 m-1 rounded text-sm";
+  const notActive = "bg-white dark:bg-slate-600 dark:text-slate-50 m-1 px-2 rounded text-sm";
 
   const addImage = () => {
     const url = window.prompt("URL");
