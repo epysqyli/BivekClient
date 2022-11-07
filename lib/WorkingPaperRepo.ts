@@ -23,7 +23,7 @@ const createWorkingPaper = async (
   const { title, abstract, link, datasetLink } = workingPaper;
   return await axios({
     method: "POST",
-    url: `${process.env.BASE_URL}/workingpapers`,
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/workingpapers`,
     data: { title, abstract, link, datasetLink },
     withCredentials: true
   });
@@ -35,7 +35,7 @@ const patchWorkingPaper = async (
 ): Promise<AxiosResponse<IWorkingPaper>> => {
   return await axios({
     method: "PATCH",
-    url: `${process.env.BASE_URL}/workingpapers/${id}`,
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/workingpapers/${id}`,
     data: patches,
     withCredentials: true
   });
@@ -44,7 +44,7 @@ const patchWorkingPaper = async (
 const deleteWorkingPaper = async (id: number): Promise<AxiosResponse> => {
   return await axios({
     method: "DELETE",
-    url: `${process.env.BASE_URL}/workingpapers/${id}`,
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/workingpapers/${id}`,
     withCredentials: true
   });
 };

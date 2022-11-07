@@ -4,7 +4,7 @@ import { GetServerSidePropsContext } from "next";
 const login = async (username: string, password: string): Promise<boolean> => {
   const resp = await axios({
     method: "POST",
-    url: `${process.env.BASE_URL}/login`,
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/login`,
     data: { username: username, password: password },
     withCredentials: true
   });
@@ -29,7 +29,7 @@ const checkLoginClientSide = async (): Promise<boolean> => {
   try {
     const resp = await axios({
       method: "GET",
-      url: `${process.env.BASE_URL}/logged_in`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/logged_in`,
       withCredentials: true
     });
     return resp.status === 200 ? true : false;
@@ -41,7 +41,7 @@ const checkLoginClientSide = async (): Promise<boolean> => {
 const logout = async (): Promise<AxiosResponse> => {
   return await axios({
     method: "GET",
-    url: `${process.env.BASE_URL}/logout`,
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/logout`,
     withCredentials: true
   });
 };

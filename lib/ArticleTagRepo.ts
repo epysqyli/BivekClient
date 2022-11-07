@@ -12,7 +12,7 @@ const getArticlesByTagId = async (id: number): Promise<AxiosResponse<IArticle>> 
 const createArticleTagRelation = async (articleTag: IArticleTag): Promise<AxiosResponse<IArticleTag>> => {
   return await axios({
     method: "POST",
-    url: `${process.env.BASE_URL}/articletags`,
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/articletags`,
     data: { articleId: articleTag.articleId, tagId: articleTag.tagId },
     withCredentials: true
   });
@@ -21,7 +21,7 @@ const createArticleTagRelation = async (articleTag: IArticleTag): Promise<AxiosR
 const deleteArticleTag = async (articleTag: IArticleTag): Promise<AxiosResponse> => {
   return await axios({
     method: "DELETE",
-    url: `${process.env.BASE_URL}/articletags/${articleTag.articleId}-${articleTag.tagId}`,
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/articletags/${articleTag.articleId}-${articleTag.tagId}`,
     withCredentials: true
   });
 };
