@@ -5,14 +5,14 @@ import type IArticleTag from '../interfaces/models/IArticleTag';
 const getArticlesByTagId = async (id: number): Promise<AxiosResponse<IArticle>> => {
   return await axios({
     method: "GET",
-    url: `http://localhost:5010/articletags/${id}`
+    url: `${process.env.BASE_URL}/articletags/${id}`
   });
 };
 
 const createArticleTagRelation = async (articleTag: IArticleTag): Promise<AxiosResponse<IArticleTag>> => {
   return await axios({
     method: "POST",
-    url: "http://localhost:5010/articletags",
+    url: `${process.env.BASE_URL}/articletags`,
     data: { articleId: articleTag.articleId, tagId: articleTag.tagId },
     withCredentials: true
   });
@@ -21,7 +21,7 @@ const createArticleTagRelation = async (articleTag: IArticleTag): Promise<AxiosR
 const deleteArticleTag = async (articleTag: IArticleTag): Promise<AxiosResponse> => {
   return await axios({
     method: "DELETE",
-    url: `http://localhost:5010/articletags/${articleTag.articleId}-${articleTag.tagId}`,
+    url: `${process.env.BASE_URL}/articletags/${articleTag.articleId}-${articleTag.tagId}`,
     withCredentials: true
   });
 };
