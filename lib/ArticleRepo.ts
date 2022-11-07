@@ -6,7 +6,7 @@ import type { GetServerSidePropsContext } from "next";
 const getArticles = async (context: GetServerSidePropsContext): Promise<AxiosResponse<Array<IArticle>>> => {
   return await axios({
     method: "GET",
-    url: "http://localhost:5010/articles",
+    url: `${process.env.BASE_URL}/articles`,
     headers: context.req.headers.cookie ? { cookie: context.req.headers.cookie } : undefined
   });
 };
@@ -14,28 +14,28 @@ const getArticles = async (context: GetServerSidePropsContext): Promise<AxiosRes
 const getPublishedArticles = async (): Promise<AxiosResponse<Array<IArticle>>> => {
   return await axios({
     method: "GET",
-    url: "http://localhost:5010/articles/published"
+    url: `${process.env.BASE_URL}/articles/published`
   });
 };
 
 const getLatestArticle = async (): Promise<AxiosResponse<IArticle>> => {
   return await axios({
     method: "GET",
-    url: "http://localhost:5010/articles/latest"
+    url: `${process.env.BASE_URL}/articles/latest`
   });
 };
 
 const getArticleById = async (id: number): Promise<AxiosResponse<IArticle>> => {
   return await axios({
     method: "GET",
-    url: `http://localhost:5010/articles/${id}`
+    url: `${process.env.BASE_URL}/articles/${id}`
   });
 };
 
 const getArticleByTagIds = async (tagIds: Array<number>): Promise<AxiosResponse<Array<IArticle>>> => {
   return await axios({
     method: "GET",
-    url: `http://localhost:5010/articles/tags`,
+    url: `${process.env.BASE_URL}/articles/tags`,
     data: tagIds
   });
 };
@@ -47,7 +47,7 @@ const createArticle = async (
 ): Promise<AxiosResponse<IArticle>> => {
   return await axios({
     method: "POST",
-    url: "http://localhost:5010/articles",
+    url: `${process.env.BASE_URL}/articles`,
     data: { title: title, body: body, published: isPublished },
     withCredentials: true
   });
@@ -56,7 +56,7 @@ const createArticle = async (
 const patchArticle = async (id: number, patches: Array<IPatch>): Promise<AxiosResponse<IArticle>> => {
   return await axios({
     method: "PATCH",
-    url: `http://localhost:5010/articles/${id}`,
+    url: `${process.env.BASE_URL}/articles/${id}`,
     data: patches,
     withCredentials: true
   });
@@ -67,7 +67,7 @@ const publishArticle = async (id: number): Promise<AxiosResponse<IArticle>> => {
 
   return await axios({
     method: "PATCH",
-    url: `http://localhost:5010/articles/${id}`,
+    url: `${process.env.BASE_URL}/articles/${id}`,
     data: patchData,
     withCredentials: true
   });
@@ -78,7 +78,7 @@ const hideArticle = async (id: number): Promise<AxiosResponse<IArticle>> => {
 
   return await axios({
     method: "PATCH",
-    url: `http://localhost:5010/articles/${id}`,
+    url: `${process.env.BASE_URL}/articles/${id}`,
     data: patchData,
     withCredentials: true
   });
@@ -87,7 +87,7 @@ const hideArticle = async (id: number): Promise<AxiosResponse<IArticle>> => {
 const deleteArticle = async (id: number): Promise<AxiosResponse> => {
   return await axios({
     method: "DELETE",
-    url: `http://localhost:5010/articles/${id}`,
+    url: `${process.env.BASE_URL}/articles/${id}`,
     withCredentials: true
   });
 };

@@ -6,14 +6,14 @@ import type IPatch from "../interfaces/models/IPatch";
 const getDatasets = async (): Promise<AxiosResponse<Array<IDataset>>> => {
   return await axios({
     method: "GET",
-    url: "http://localhost:5010/datasets"
+    url: `${process.env.BASE_URL}/datasets`
   });
 };
 
 const getDatasetById = async (id: number): Promise<AxiosResponse<IDataset>> => {
   return await axios({
     method: "GET",
-    url: `http://localhost:5010/datasets/${id}`
+    url: `${process.env.BASE_URL}/datasets/${id}`
   });
 };
 
@@ -21,7 +21,7 @@ const createDataset = async (dataset: IDatasetCreate): Promise<AxiosResponse<IDa
   const {title, link, dataCategoryId} = dataset;  
   return await axios({
     method: "POST",
-    url: "http://localhost:5010/datasets",
+    url: `${process.env.BASE_URL}/datasets`,
     data: { title, link, dataCategoryId },
     withCredentials: true
   });
@@ -30,7 +30,7 @@ const createDataset = async (dataset: IDatasetCreate): Promise<AxiosResponse<IDa
 const patchDataset = async (id: number, patches: Array<IPatch>): Promise<AxiosResponse<IDataset>> => {
   return await axios({
     method: "PATCH",
-    url: `http://localhost:5010/datasets/${id}`,
+    url: `${process.env.BASE_URL}/datasets/${id}`,
     data: patches,
     withCredentials: true
   });
@@ -39,7 +39,7 @@ const patchDataset = async (id: number, patches: Array<IPatch>): Promise<AxiosRe
 const deleteDataset = async (id: number): Promise<AxiosResponse> => {
   return await axios({
     method: "DELETE",
-    url: `http://localhost:5010/datasets/${id}`,
+    url: `${process.env.BASE_URL}/datasets/${id}`,
     withCredentials: true
   });
 };
