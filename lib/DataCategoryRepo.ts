@@ -26,7 +26,7 @@ const getDataCategoryById = async (id: number): Promise<AxiosResponse<IDataCateg
 const createDataCategory = async (name: string): Promise<AxiosResponse<IDataCategory>> => {
   return await axios({
     method: "POST",
-    url: `${process.env.BASE_URL}/datacategories`,
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/datacategories`,
     data: { name },
     withCredentials: true
   });
@@ -38,7 +38,7 @@ const patchDataCategory = async (
 ): Promise<AxiosResponse<IDataCategory>> => {
   return await axios({
     method: "PATCH",
-    url: `${process.env.BASE_URL}/datacategories/${id}`,
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/datacategories/${id}`,
     data: patches,
     withCredentials: true
   });
@@ -47,7 +47,7 @@ const patchDataCategory = async (
 const deleteDataCategory = async (id: number): Promise<AxiosResponse> => {
   return await axios({
     method: "DELETE",
-    url: `${process.env.BASE_URL}/datacategories/${id}`,
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/datacategories/${id}`,
     withCredentials: true
   });
 };
