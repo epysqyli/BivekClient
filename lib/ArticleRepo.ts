@@ -47,7 +47,7 @@ const createArticle = async (
 ): Promise<AxiosResponse<IArticle>> => {
   return await axios({
     method: "POST",
-    url: `${process.env.BASE_URL}/articles`,
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/articles`,
     data: { title: title, body: body, published: isPublished },
     withCredentials: true
   });
@@ -56,7 +56,7 @@ const createArticle = async (
 const patchArticle = async (id: number, patches: Array<IPatch>): Promise<AxiosResponse<IArticle>> => {
   return await axios({
     method: "PATCH",
-    url: `${process.env.BASE_URL}/articles/${id}`,
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/articles/${id}`,
     data: patches,
     withCredentials: true
   });
@@ -67,7 +67,7 @@ const publishArticle = async (id: number): Promise<AxiosResponse<IArticle>> => {
 
   return await axios({
     method: "PATCH",
-    url: `${process.env.BASE_URL}/articles/${id}`,
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/articles/${id}`,
     data: patchData,
     withCredentials: true
   });
@@ -78,7 +78,7 @@ const hideArticle = async (id: number): Promise<AxiosResponse<IArticle>> => {
 
   return await axios({
     method: "PATCH",
-    url: `${process.env.BASE_URL}/articles/${id}`,
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/articles/${id}`,
     data: patchData,
     withCredentials: true
   });
@@ -87,7 +87,7 @@ const hideArticle = async (id: number): Promise<AxiosResponse<IArticle>> => {
 const deleteArticle = async (id: number): Promise<AxiosResponse> => {
   return await axios({
     method: "DELETE",
-    url: `${process.env.BASE_URL}/articles/${id}`,
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/articles/${id}`,
     withCredentials: true
   });
 };

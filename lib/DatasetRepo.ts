@@ -21,7 +21,7 @@ const createDataset = async (dataset: IDatasetCreate): Promise<AxiosResponse<IDa
   const {title, link, dataCategoryId} = dataset;  
   return await axios({
     method: "POST",
-    url: `${process.env.BASE_URL}/datasets`,
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/datasets`,
     data: { title, link, dataCategoryId },
     withCredentials: true
   });
@@ -30,7 +30,7 @@ const createDataset = async (dataset: IDatasetCreate): Promise<AxiosResponse<IDa
 const patchDataset = async (id: number, patches: Array<IPatch>): Promise<AxiosResponse<IDataset>> => {
   return await axios({
     method: "PATCH",
-    url: `${process.env.BASE_URL}/datasets/${id}`,
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/datasets/${id}`,
     data: patches,
     withCredentials: true
   });
@@ -39,7 +39,7 @@ const patchDataset = async (id: number, patches: Array<IPatch>): Promise<AxiosRe
 const deleteDataset = async (id: number): Promise<AxiosResponse> => {
   return await axios({
     method: "DELETE",
-    url: `${process.env.BASE_URL}/datasets/${id}`,
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/datasets/${id}`,
     withCredentials: true
   });
 };
