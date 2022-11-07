@@ -6,14 +6,14 @@ import IWorkingPaperCreate from "../interfaces/models/IWorkingPaperCreate";
 const getWorkingPapers = async (): Promise<AxiosResponse<Array<IWorkingPaper>>> => {
   return await axios({
     method: "GET",
-    url: "http://localhost:5010/workingpapers"
+    url: `${process.env.BASE_URL}/workingpapers`
   });
 };
 
 const getWorkingPaper = async (id: number): Promise<AxiosResponse<IWorkingPaper>> => {
   return await axios({
     method: "GET",
-    url: `http://localhost:5010/workingpapers/${id}`
+    url: `${process.env.BASE_URL}/workingpapers/${id}`
   });
 };
 
@@ -23,7 +23,7 @@ const createWorkingPaper = async (
   const { title, abstract, link, datasetLink } = workingPaper;
   return await axios({
     method: "POST",
-    url: "http://localhost:5010/workingpapers",
+    url: `${process.env.BASE_URL}/workingpapers`,
     data: { title, abstract, link, datasetLink },
     withCredentials: true
   });
@@ -35,7 +35,7 @@ const patchWorkingPaper = async (
 ): Promise<AxiosResponse<IWorkingPaper>> => {
   return await axios({
     method: "PATCH",
-    url: `http://localhost:5010/workingpapers/${id}`,
+    url: `${process.env.BASE_URL}/workingpapers/${id}`,
     data: patches,
     withCredentials: true
   });
@@ -44,7 +44,7 @@ const patchWorkingPaper = async (
 const deleteWorkingPaper = async (id: number): Promise<AxiosResponse> => {
   return await axios({
     method: "DELETE",
-    url: `http://localhost:5010/workingpapers/${id}`,
+    url: `${process.env.BASE_URL}/workingpapers/${id}`,
     withCredentials: true
   });
 };
