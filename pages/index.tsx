@@ -32,7 +32,7 @@ const Home: NextPageLayout<Props> = ({ latestArticle, tags }: Props): ReactEleme
     "text-slate-100 w-min mx-auto mt-1 group-hover:scale-95 transition-all group-active:scale-90 group-active:text-amber-500";
 
   return (
-    <div className="md:w-5/6 mx-auto lg:w-2/3 xl:w-1/2">
+    <div className="mx-auto lg:w-2/3 xl:w-1/2">
       <Head>
         <title>Blog</title>
         <meta name='description' content='Personal blog' />
@@ -43,7 +43,7 @@ const Home: NextPageLayout<Props> = ({ latestArticle, tags }: Props): ReactEleme
       </div>
 
       <nav className='py-3 my-5 lg:my-16 lg:text-xl'>
-        <div className='flex items-center justify-around flex-wrap mx-auto md:gap-y-10 md:gap-x-5 md:w-11/12 2xl:w-1/2'>
+        <div className='flex items-center justify-around flex-wrap mx-auto md:gap-y-10 md:gap-x-5 md:w-11/12 xl:w-4/5'>
           <IndexLink pageLink='/articles' item='articles' icon={<Type size={32} className={iconStyle} />} />
           <IndexLink
             pageLink='/datasets'
