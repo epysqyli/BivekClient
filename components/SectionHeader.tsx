@@ -7,7 +7,7 @@ interface Props {
 
 const SectionHeader = ({ resource, text }: Props): ReactElement => {
   const baseStyle =
-    "bg-cover bg-center shadow lg:w-4/5 2xl:w-2/3 lg:mt-5 lg:rounded-md border-b-2 border-white mx-auto lg:dark:border-amber-400 lg:shadow-xl";
+    "bg-cover bg-center shadow lg:w-4/5 lg:mt-5 lg:rounded-md border-b-2 border-white mx-auto lg:dark:border-amber-400 lg:shadow-xl";
 
   let completeStyle = "";
   switch (resource) {

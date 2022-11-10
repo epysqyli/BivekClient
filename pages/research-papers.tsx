@@ -22,17 +22,17 @@ interface Props {
 
 const ResearchPapers: NextPageLayout<Props> = ({ workingPapers }: Props): ReactElement => {
   return (
-    <>
+    <div className="w-11/12 md:w-4/5 lg:w-3/4 xl:w-3/5 2xl:w-1/2 mx-auto">
       <Head>
         <title>Research papers</title>
       </Head>
       <SectionHeader resource='research' text='Research papers' />
-      <div className='lg:w-2/3 mx-auto mt-10'>
+      <div className='mt-10'>
         {workingPapers.map((wp) => (
           <WorkingPaperElement workingPaper={wp} key={wp.id} />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
