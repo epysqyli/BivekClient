@@ -32,7 +32,7 @@ const Home: NextPageLayout<Props> = ({ latestArticle, tags }: Props): ReactEleme
     "text-slate-100 w-min mx-auto mt-1 group-hover:scale-95 transition-all group-active:scale-90 group-active:text-amber-500";
 
   return (
-    <div className="w-11/12 md:w-5/6 mx-auto lg:w-2/3 xl:w-1/2">
+    <div className="md:w-5/6 mx-auto lg:w-2/3 xl:w-1/2">
       <Head>
         <title>Blog</title>
         <meta name='description' content='Personal blog' />
@@ -73,7 +73,7 @@ const Home: NextPageLayout<Props> = ({ latestArticle, tags }: Props): ReactEleme
         </div>
       </Link>
 
-      <div className='my-16 flex flex-wrap'>
+      <div className='w-11/12 mx-auto my-16 flex flex-wrap'>
         {tags.map((tag) => (
           <div className='w-fit mx-auto' key={tag.id}>
             <ArticleTag tag={tag} />
@@ -81,7 +81,7 @@ const Home: NextPageLayout<Props> = ({ latestArticle, tags }: Props): ReactEleme
         ))}
       </div>
 
-      <div className='xl:w-2/3 mx-auto text-center text-xl rounded bg-neutral-50 dark:bg-slate-600 px-5 py-10 my-16'>
+      <div className='w-11/12 md:w-full xl:w-2/3 mx-auto text-center text-xl rounded bg-neutral-50 dark:bg-slate-600 px-5 py-10 my-16'>
         <p className='text-slate-800 dark:text-slate-50'>
           Barbara had been waiting at the table for twenty minutes. it had been twenty long and excruciating
           minutes. David had promised that he would be on time today. He never was, but he had promised this
