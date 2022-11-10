@@ -54,7 +54,7 @@ const Article: NextPageLayout<Props> = ({ article, body, similarArticles }: Prop
   const { isDarkMode } = useContext(DarkModeContext);
 
   return (
-    <div className="mt-10 lg:w-3/4 xl:w-3/5 2xl:w-1/2 mx-auto">
+    <div className="mt-10 w-11/12 lg:w-3/4 xl:w-3/5 2xl:w-1/2 mx-auto">
       <Head>
         <title>{article.title}</title>
       </Head>
