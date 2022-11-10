@@ -6,7 +6,7 @@ import Head from "next/head";
 
 const About: NextPageLayout = (): ReactElement => {
   return (
-    <div classname="lg:w-3/4 xl:w-3/5 2xl:w-1/2 mx-auto">
+    <div className="lg:w-3/4 xl:w-3/5 2xl:w-1/2 mx-auto">
       <Head>
         <title>About</title>
       </Head>
