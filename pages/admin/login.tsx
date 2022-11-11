@@ -53,7 +53,7 @@ const Login: NextPageLayout = (): ReactElement => {
               name='username'
               id='email'
               placeholder='email'
-              className='block mt-2 w-full border-b border-gray-400 p-3 focus:ring-0 outline-none'
+              className='block mt-2 w-full dark:bg-slate-600 dark:text-slate-50 dark:placeholder:text-slate-300 border-b border-gray-400 p-3 focus:ring-0 outline-none rounded'
               onChange={handleChange}
               required
             />
@@ -65,7 +65,7 @@ const Login: NextPageLayout = (): ReactElement => {
               name='password'
               id='password'
               placeholder='password'
-              className='block mt-2 w-full border-b border-gray-400 p-3 focus:ring-0 outline-none'
+              className='block mt-2 w-full dark:bg-slate-600 dark:text-slate-50 dark:placeholder:text-slate-300 border-b border-gray-400 p-3 focus:ring-0 outline-none rounded'
               onChange={handleChange}
               required
             />
