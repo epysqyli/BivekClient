@@ -74,8 +74,8 @@ const DatasetCategories: NextPageLayout<Props> = ({ datasetCategoriesProps }: Pr
   };
 
   const baseTitleStyle =
-    "border-b-2 border-gray-300 rounded-t block w-4/5 mx-auto py-2 pl-3 text-center focus:outline-none";
-  const errorTitleStyle = baseTitleStyle + " text-red-600 bg-red-100 border-red-400 animate-pulse";
+    "border-b-2 border-gray-300 rounded-t block w-4/5 mx-auto py-2 pl-3 text-center focus:outline-none rounded dark:bg-slate-600 dark:placeholder:text-slate-400 dark:text-slate-50";
+  const errorTitleStyle = baseTitleStyle + " text-red-600 dark:bg-amber-700 bg-red-100 border-red-400 animate-pulse";
 
   return (
     <>
