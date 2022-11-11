@@ -80,8 +80,8 @@ const WorkingPaperForm = ({
   };
 
   const baseInputStyle =
-    "block mt-2 w-full border-b border-gray-400 p-3 outline-none focus:shadow-md text-sm";
-  const errorInputStyle = baseInputStyle + " text-red-600 bg-red-100 border-red-400 animate-pulse";
+    "block mt-2 w-full border-b border-gray-400 p-3 outline-none focus:shadow-md text-sm dark:bg-slate-500 dark:placeholder:text-slate-300 dark:text-slate-50 rounded";
+  const errorInputStyle = baseInputStyle + " text-red-600 bg-red-100 dark:bg-amber-700 border-red-400 animate-pulse";
 
   return (
     <>
@@ -107,7 +107,7 @@ const WorkingPaperForm = ({
             aria-label='input-abstract'
             placeholder='abstract'
             rows={5}
-            className='block mt-2 w-full border-b border-gray-400 p-3 outline-none focus:shadow-md text-sm'
+            className='block mt-2 w-full border-b border-gray-400 p-3 outline-none focus:shadow-md text-sm dark:bg-slate-500 dark:placeholder:text-slate-300 dark:text-slate-50 rounded'
             onChange={handleChange}
             defaultValue={currentWorkingPaper?.abstract}
             required
@@ -121,7 +121,7 @@ const WorkingPaperForm = ({
             id='link'
             aria-label='input-link'
             placeholder='download link'
-            className='block mt-2 w-full border-b border-gray-400 p-3 outline-none focus:shadow-md text-sm'
+            className='block mt-2 w-full border-b border-gray-400 p-3 outline-none focus:shadow-md text-sm dark:bg-slate-500 dark:placeholder:text-slate-300 dark:text-slate-50 rounded'
             onChange={handleChange}
             defaultValue={currentWorkingPaper?.link}
             required
@@ -134,14 +134,14 @@ const WorkingPaperForm = ({
             id='datasetLink'
             aria-label='input-dataset-link'
             placeholder='dataset download link'
-            className='block mt-2 w-full border-b border-gray-400 p-3 outline-none focus:shadow-md text-sm'
+            className='block mt-2 w-full border-b border-gray-400 p-3 outline-none focus:shadow-md text-sm dark:bg-slate-500 dark:placeholder:text-slate-300 dark:text-slate-50 rounded'
             onChange={handleChange}
             defaultValue={currentWorkingPaper?.datasetLink}
           />
         </div>
         <button
           type='submit'
-          className='block mx-auto text-sm w-fit rounded-md p-2 bg-white mt-10 mb-5 hover:shadow-md active:shadow-inner'
+          className='block mx-auto text-sm w-fit rounded-md p-2 bg-white mt-10 mb-5 hover:shadow-md active:shadow-inner dark:bg-slate-400 dark:text-slate-50'
           aria-label='submit-form'
         >
           {currentWorkingPaper ? "edit paper" : "create working paper"}

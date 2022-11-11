@@ -61,7 +61,7 @@ const DatasetForm = ({
             id='title'
             placeholder='name for the new dataset'
             aria-label="input-title"
-            className='block mt-2 w-full border-b border-gray-400 p-3 outline-none focus:shadow-md text-sm'
+            className='block mt-2 w-full border-b border-gray-400 p-3 outline-none focus:shadow-md text-sm dark:bg-slate-500 dark:placeholder:text-slate-300 dark:text-slate-50 rounded'
             onChange={handleChange}
             defaultValue={currentDataset?.title}
             required
@@ -75,7 +75,7 @@ const DatasetForm = ({
             id='link'
             placeholder='download link'
             aria-label="input-link"
-            className='block mt-2 w-full border-b border-gray-400 p-3 outline-none focus:shadow-md text-sm'
+            className='block mt-2 w-full border-b border-gray-400 p-3 outline-none focus:shadow-md text-sm dark:bg-slate-500 dark:placeholder:text-slate-300 dark:text-slate-50 rounded'
             onChange={handleChange}
             defaultValue={currentDataset?.link}
             required
@@ -84,7 +84,7 @@ const DatasetForm = ({
 
         <button
           type='submit'
-          className='block mx-auto text-sm w-fit rounded-md p-2 bg-white mt-10 mb-5 hover:shadow-md active:shadow-inner'
+          className='block mx-auto text-sm w-fit rounded-md p-2 bg-white dark:bg-slate-400 dark:text-slate-50 mt-10 mb-5 hover:shadow-md active:shadow-inner'
         >
           {currentDataset ? "Confirm changes" : "Add dataset to category"}
         </button>
