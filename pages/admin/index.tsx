@@ -34,8 +34,10 @@ const AdminIndex: NextPageLayout = (): ReactElement => {
       <Head>
         <title>Manage blog</title>
       </Head>
-      <SectionHeader resource='admin' text='Manage blog' />
-      <div className='my-10 mx-auto w-5/6 md:w-4/6 lg:w-2/5 xl:w-1/3'>
+      <div className='lg:w-3/4 mx-auto'>
+        <SectionHeader resource='admin' text='Manage blog' />
+      </div>
+      <div className='my-10 xl:mt-24 grid lg:grid-cols-2 xl:grid-cols-3 w-5/6 md:w-3/5 lg:w-5/6 mx-auto gap-y-10 lg:gap-y-8 lg:gap-x-7 2xl:w-3/4'>
         <IndexLink
           text='Create a new article'
           href='/admin/create-new-article'
@@ -44,7 +46,7 @@ const AdminIndex: NextPageLayout = (): ReactElement => {
 
         <IndexLink
           href='/admin/edit-articles'
-          text='Manage existing articles'
+          text='Manage articles'
           icon={<Edit size={32} strokeWidth={1.5} className={iconStyle} />}
         />
 
