@@ -188,7 +188,7 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
         <Head>
           <title>Edit article</title>
         </Head>
-        <div className='relative mx-auto 2xl:w-1/3'>
+        <div className='mx-auto 2xl:w-1/3'>
           <TopElement text='Edit article' />
           <div className='block w-5/6 mx-auto'>
             <input
