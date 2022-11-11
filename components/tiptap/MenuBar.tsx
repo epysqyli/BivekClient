@@ -27,7 +27,7 @@ const MenuBar = ({ editor, showTableMenu, showTable, hideTable }: MenuProps & Ta
   };
 
   return (
-    <div className='flex items-center justify-center flex-wrap'>
+    <div className='flex items-center justify-center flex-wrap 2xl:w-4/5 mx-auto'>
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         className={editor.isActive("bold") ? active : notActive}
