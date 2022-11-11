@@ -135,7 +135,7 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
   useEffect(() => setIsValid(isArticleValid(title, body)), [title, body]);
 
   return (
-    <div className='2xl:flex justify-around 2xl:mt-16'>
+    <div className='2xl:flex justify-around mt-10 2xl:mt-16 w-11/12 md:w-4/5 xl:w-2/3 2xl:w-11/12 mx-auto'>
       <>
         <Head>
           <title>Create new article</title>
@@ -198,7 +198,7 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
 
         <ArticleChangeConfirmation show={showChangeConfirmation} text={currentChange} />
       </>
-      <div className='w-3/5'>
+      <div className='2xl:w-3/5 mx-auto'>
         <div className='p-1 2xl:px-20'>
           <TipTap updateBody={updateBody} />
         </div>

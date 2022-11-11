@@ -179,95 +179,97 @@ const EditArticle: NextPageLayout<Props> = ({ article, tags }: Props): ReactElem
 
   const baseTitleStyle =
     "border-b border-gray-300 bg-transparent focus:border-slate-400 mx-auto text-center text-xl block w-full py-1 px-2 mb-2 focus:outline-none dark:text-slate-100";
-  const errorTitleStyle = baseTitleStyle + " text-red-600 dark:text-amber-700 bg-red-100 border-red-400 animate-pulse";
+  const errorTitleStyle =
+    baseTitleStyle + " text-red-600 dark:text-amber-700 bg-red-100 border-red-400 animate-pulse";
 
   return (
-    <>
-      <Head>
-        <title>Edit article</title>
-      </Head>
-      <div className='relative mx-auto lg:w-4/5 xl:w-2/3 2xl:w-1/2'>
-        <TopElement text='Edit article' />
-        <div className='block w-5/6 mx-auto'>
-          <input
-            onChange={handleTitleChange}
-            defaultValue={article.title}
-            type='text'
-            name='title'
-            id='title'
-            placeholder='title required'
-            className={editError.length === 0 ? baseTitleStyle : errorTitleStyle}
-          />
-        </div>
-
-        <div className='w-11/12 mx-auto rounded'>
-          <div className='p-1'>
-            <TipTap updateBody={updateBody} existingContent={article.body} />
+    <div className='2xl:flex justify-around mt-10 2xl:mt-16 w-11/12 md:w-4/5 xl:w-2/3 2xl:w-11/12 mx-auto'>
+      <>
+        <Head>
+          <title>Edit article</title>
+        </Head>
+        <div className='relative mx-auto 2xl:w-1/3'>
+          <TopElement text='Edit article' />
+          <div className='block w-5/6 mx-auto'>
+            <input
+              onChange={handleTitleChange}
+              defaultValue={article.title}
+              type='text'
+              name='title'
+              id='title'
+              placeholder='title required'
+              className={editError.length === 0 ? baseTitleStyle : errorTitleStyle}
+            />
           </div>
-        </div>
 
-        <div className='mt-10 py-2 flex'>
-          <CreateMenuBtn
-            text='tags'
-            isArticleValid={isValid}
-            handleClick={handleToggle}
-            icon={<TagIcon size={26} className={isValid ? activeIcon : disabledIcon} />}
-          />
-
-          <CreateMenuBtn
-            text='save'
-            isArticleValid={isValid}
-            handleClick={handlePatchArticle}
-            icon={<Save size={26} className={isValid ? activeIcon : disabledIcon} />}
-          />
-
-          {isPublished ? (
+          <div className='mt-10 py-2 flex'>
             <CreateMenuBtn
-              text='hide'
+              text='tags'
               isArticleValid={isValid}
-              handleClick={togglePublishStatus}
-              icon={<EyeOff size={26} className={isValid ? activeIcon : disabledIcon} />}
+              handleClick={handleToggle}
+              icon={<TagIcon size={26} className={isValid ? activeIcon : disabledIcon} />}
             />
-          ) : (
+
             <CreateMenuBtn
-              text='publish'
+              text='save'
               isArticleValid={isValid}
-              handleClick={togglePublishStatus}
-              icon={<Eye size={26} className={isValid ? activeIcon : disabledIcon} />}
+              handleClick={handlePatchArticle}
+              icon={<Save size={26} className={isValid ? activeIcon : disabledIcon} />}
             />
-          )}
 
-          <CreateMenuBtn
-            text='delete'
-            isArticleValid={isValid}
-            handleClick={showDeleteConfirmation}
-            icon={<Trash2 size={26} className={isValid ? activeIcon : disabledIcon} />}
+            {isPublished ? (
+              <CreateMenuBtn
+                text='hide'
+                isArticleValid={isValid}
+                handleClick={togglePublishStatus}
+                icon={<EyeOff size={26} className={isValid ? activeIcon : disabledIcon} />}
+              />
+            ) : (
+              <CreateMenuBtn
+                text='publish'
+                isArticleValid={isValid}
+                handleClick={togglePublishStatus}
+                icon={<Eye size={26} className={isValid ? activeIcon : disabledIcon} />}
+              />
+            )}
+
+            <CreateMenuBtn
+              text='delete'
+              isArticleValid={isValid}
+              handleClick={showDeleteConfirmation}
+              icon={<Trash2 size={26} className={isValid ? activeIcon : disabledIcon} />}
+            />
+          </div>
+
+          <div className='mb-10'>
+            {showTagsMenu ? (
+              <AssignTags
+                allTags={allTags}
+                currentTags={currentTags}
+                setCurrentTags={setCurrentTags}
+                articleId={article.id}
+              />
+            ) : null}
+          </div>
+
+          <DeleteConfirmation
+            id={article.id}
+            show={showDelete}
+            resourceType='article'
+            hideShow={hideDeleteConfirmation}
+            deleteItem={deleteArticle}
+            redirectPath='/admin/edit-articles'
           />
+
+          <ArticleChangeConfirmation show={showChangeConfirmation} text={currentChange} />
         </div>
-
-        <div className='mb-10'>
-          {showTagsMenu ? (
-            <AssignTags
-              allTags={allTags}
-              currentTags={currentTags}
-              setCurrentTags={setCurrentTags}
-              articleId={article.id}
-            />
-          ) : null}
+      </>
+      <div className='2xl:w-3/5 mx-auto'>
+        <div className='p-1'>
+          <TipTap updateBody={updateBody} existingContent={article.body} />
         </div>
-
-        <DeleteConfirmation
-          id={article.id}
-          show={showDelete}
-          resourceType='article'
-          hideShow={hideDeleteConfirmation}
-          deleteItem={deleteArticle}
-          redirectPath='/admin/edit-articles'
-        />
-
-        <ArticleChangeConfirmation show={showChangeConfirmation} text={currentChange} />
       </div>
-    </>
+    </div>
   );
 };
 
