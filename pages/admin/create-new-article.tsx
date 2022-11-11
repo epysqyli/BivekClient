@@ -140,7 +140,7 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
         <Head>
           <title>Create new article</title>
         </Head>
-        <div className='mx-auto w-2/5'>
+        <div className='mx-auto 2xl:w-1/3'>
           <TopElement text='Create a new article' />
           <div className='block w-5/6 mx-auto'>
             <input
