@@ -128,80 +128,82 @@ const CreateNewArticle: NextPageLayout<PageProps> = ({ tags }: PageProps): React
   const disabledIcon = "w-min mx-auto my-2 text-slate-300 dark:text-slate-600";
 
   const baseTitleStyle =
-    "border-b border-gray-300 bg-transparent focus:border-slate-400 mx-auto text-center text-xl block w-full py-1 px-2 mb-2 focus:outline-none dark:text-slate-100";
-  const errorTitleStyle = baseTitleStyle + " text-red-600 dark:text-amber-700 bg-red-100 border-red-400 animate-pulse";
+    "border-b border-gray-300 bg-transparent focus:border-slate-400 mx-auto text-center text-xl block w-full py-1 2xl:py-5 px-2 mb-2 focus:outline-none dark:text-slate-100";
+  const errorTitleStyle =
+    baseTitleStyle + " text-red-600 dark:text-amber-700 bg-red-100 border-red-400 animate-pulse";
 
   useEffect(() => setIsValid(isArticleValid(title, body)), [title, body]);
 
   return (
-    <>
-      <Head>
-        <title>Create new article</title>
-      </Head>
-      <div className='mx-auto lg:w-4/5 xl:w-2/3 2xl:w-1/2'>
-        <TopElement text='Create a new article' />
-        <div className='block w-5/6 mx-auto'>
-          <input
-            onChange={handleTitleChange}
-            type='text'
-            name='title'
-            id='title'
-            placeholder='Article title'
-            className={creationError.length === 0 ? baseTitleStyle : errorTitleStyle}
-          />
-        </div>
+    <div className='2xl:flex justify-around mt-10 2xl:mt-16 w-11/12 md:w-4/5 xl:w-2/3 2xl:w-11/12 mx-auto'>
+      <>
+        <Head>
+          <title>Create new article</title>
+        </Head>
+        <div className='mx-auto w-2/5'>
+          <TopElement text='Create a new article' />
+          <div className='block w-5/6 mx-auto'>
+            <input
+              onChange={handleTitleChange}
+              type='text'
+              name='title'
+              id='title'
+              placeholder='Article title'
+              className={creationError.length === 0 ? baseTitleStyle : errorTitleStyle}
+            />
+          </div>
 
-        <div className='w-11/12 mx-auto rounded'>
-          <div className='p-1'>
-            <TipTap updateBody={updateBody} />
+          <div className='mt-10 lg:w-3/5 mx-auto py-2 flex'>
+            <CreateMenuBtn
+              text='tags'
+              isArticleValid={isValid}
+              handleClick={handleToggle}
+              icon={<TagIcon size={26} className={isValid ? activeIcon : disabledIcon} />}
+            />
+
+            <CreateMenuBtn
+              text='save for later'
+              isArticleValid={isValid}
+              handleClick={() => handleCreateArticle(false)}
+              icon={<Save size={26} className={isValid ? activeIcon : disabledIcon} />}
+            />
+            {isPublished ? (
+              <CreateMenuBtn
+                text='publish'
+                isArticleValid={false}
+                handleClick={() => handleCreateArticle(true)}
+                icon={<Eye size={26} className={disabledIcon} />}
+              />
+            ) : (
+              <CreateMenuBtn
+                text='publish'
+                isArticleValid={isValid}
+                handleClick={() => handleCreateArticle(true)}
+                icon={<Eye size={26} className={isValid ? activeIcon : disabledIcon} />}
+              />
+            )}
+          </div>
+
+          <div>
+            {showTagsMenu ? (
+              <AssignTags
+                allTags={allTags}
+                currentTags={currentTags}
+                setCurrentTags={setCurrentTags}
+                articleId={id}
+              />
+            ) : null}
           </div>
         </div>
 
-        <div className='mt-10 lg:w-3/5 mx-auto py-2 flex'>
-          <CreateMenuBtn
-            text='tags'
-            isArticleValid={isValid}
-            handleClick={handleToggle}
-            icon={<TagIcon size={26} className={isValid ? activeIcon : disabledIcon} />}
-          />
-
-          <CreateMenuBtn
-            text='save for later'
-            isArticleValid={isValid}
-            handleClick={() => handleCreateArticle(false)}
-            icon={<Save size={26} className={isValid ? activeIcon : disabledIcon} />}
-          />
-          {isPublished ? (
-            <CreateMenuBtn
-              text='publish'
-              isArticleValid={false}
-              handleClick={() => handleCreateArticle(true)}
-              icon={<Eye size={26} className={disabledIcon} />}
-            />
-          ) : (
-            <CreateMenuBtn
-              text='publish'
-              isArticleValid={isValid}
-              handleClick={() => handleCreateArticle(true)}
-              icon={<Eye size={26} className={isValid ? activeIcon : disabledIcon} />}
-            />
-          )}
-        </div>
-
-        <div>
-          {showTagsMenu ? (
-            <AssignTags
-              allTags={allTags}
-              currentTags={currentTags}
-              setCurrentTags={setCurrentTags}
-              articleId={id}
-            />
-          ) : null}
+        <ArticleChangeConfirmation show={showChangeConfirmation} text={currentChange} />
+      </>
+      <div className='2xl:w-3/5 mx-auto'>
+        <div className='p-1 2xl:px-20'>
+          <TipTap updateBody={updateBody} />
         </div>
       </div>
-
-      <ArticleChangeConfirmation show={showChangeConfirmation} text={currentChange} />
-    </>
+    </div>
   );
 };
 
