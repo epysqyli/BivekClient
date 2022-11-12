@@ -76,7 +76,9 @@ const ManageResearchPapers: NextPageLayout<Props> = ({ workingPaperProps }: Prop
         <title>Manage research papers</title>
       </Head>
       <div className='mx-auto w-11/12 md:w-4/6 lg:w-3/5 xl:w-1/2'>
-        <TopElement text='Manage research papers' />
+        <div className='mt-10'>
+          <TopElement text='Manage research papers' />
+        </div>
         {showForm ? (
           <div className='my-10'>
             <WorkingPaperForm addWorkingPaperToState={addWorkingPaperToState} hideForm={hideWpForm} />
