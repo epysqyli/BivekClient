@@ -5,7 +5,7 @@ import type { Redirect } from "next";
 import AdminLayout from "../../layouts/AdminLayout";
 import { checkLogin } from "../../lib/Auth";
 import IndexLink from "../../components/admin/IndexLink";
-import { Database, Edit, Paperclip, Tag, PlusCircle } from "react-feather";
+import { Database, Edit, Paperclip, Tag, PlusCircle, Globe } from "react-feather";
 import SectionHeader from "../../components/SectionHeader";
 import Head from "next/head";
 
@@ -66,6 +66,12 @@ const AdminIndex: NextPageLayout = (): ReactElement => {
           href='/admin/manage-research-papers'
           text='Research papers'
           icon={<Paperclip size={32} strokeWidth={1.5} className={iconStyle} />}
+        />
+
+        <IndexLink
+          href='/'
+          text='Back to homepage'
+          icon={<Globe size={32} strokeWidth={1.5} className={iconStyle} />}
         />
       </div>
     </>
