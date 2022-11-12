@@ -77,9 +77,11 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
     setCurrentTags(currentTags.filter((t) => t.id !== id));
   };
 
-  const baseInputStyle = "block w-4/5 mx-auto py-2 pl-3 border-b-2 text-center focus:outline-none rounded dark:bg-slate-600 dark:placeholder:text-slate-400 dark:text-slate-50";
+  const baseInputStyle =
+    "block w-4/5 mx-auto py-2 pl-3 border-b-2 text-center focus:outline-none rounded dark:bg-slate-600 dark:placeholder:text-slate-400 dark:text-slate-50";
   const successInputStyle = baseInputStyle + " border-gray-300";
-  const errorInputStyle = baseInputStyle + " text-red-600 bg-red-100 dark:bg-amber-700 border-red-400 animate-pulse";
+  const errorInputStyle =
+    baseInputStyle + " text-red-600 bg-red-100 dark:bg-amber-700 border-red-400 animate-pulse";
 
   return (
     <>
@@ -87,7 +89,9 @@ const ArticleTags: NextPageLayout<TagsProps> = ({ tags }: TagsProps): ReactEleme
         <title>Manage Tags</title>
       </Head>
       <div className='mx-auto w-11/12 md:w-4/6 lg:w-3/5 xl:w-1/2'>
-        <TopElement text='Manage tags' />
+        <div className='mt-10'>
+          <TopElement text='Manage datasets and data categories' />
+        </div>
         <div className='flex items-end text-lg w-5/6 mx-auto rounded-md mt-10 mb-16'>
           <div onClick={handleCreateTag} className='w-min mx-auto cursor-pointer group'>
             <PlusCircle
