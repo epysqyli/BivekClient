@@ -75,13 +75,18 @@ const DatasetCategories: NextPageLayout<Props> = ({ datasetCategoriesProps }: Pr
 
   const baseTitleStyle =
     "border-b-2 border-gray-300 rounded-t block w-4/5 mx-auto py-2 pl-3 text-center focus:outline-none rounded dark:bg-slate-600 dark:placeholder:text-slate-400 dark:text-slate-50";
-  const errorTitleStyle = baseTitleStyle + " text-red-600 dark:bg-amber-700 bg-red-100 border-red-400 animate-pulse";
+  const errorTitleStyle =
+    baseTitleStyle + " text-red-600 dark:bg-amber-700 bg-red-100 border-red-400 animate-pulse";
 
   return (
     <>
-    <Head><title>Manage datasets</title></Head>
+      <Head>
+        <title>Manage datasets</title>
+      </Head>
       <div className='mx-auto w-11/12 md:w-4/6 lg:w-3/5 xl:w-1/2'>
-        <TopElement text='Manage datasets and data categories' />
+        <div className='mt-10'>
+          <TopElement text='Manage datasets and data categories' />
+        </div>
         <div className='flex items-center text-lg mx-auto rounded-md mt-10 mb-16'>
           <div className='w-min mx-auto cursor-pointer group'>
             <PlusCircle
@@ -110,7 +115,10 @@ const DatasetCategories: NextPageLayout<Props> = ({ datasetCategoriesProps }: Pr
             .sort((a, b) => (a.id > b.id ? -1 : 1))
             .map((dataCategory) => {
               return (
-                <div className='mx-auto border py-2 my-10 shadow-md rounded bg-white dark:bg-slate-600 dark:shadow-none dark:border-amber-600' key={dataCategory.id}>
+                <div
+                  className='mx-auto border py-2 my-10 shadow-md rounded bg-white dark:bg-slate-600 dark:shadow-none dark:border-amber-600'
+                  key={dataCategory.id}
+                >
                   <DatasetCategoryElement
                     dataCategory={dataCategory}
                     setCurrentDataCategoryId={setCurrentDataCategoryId}
