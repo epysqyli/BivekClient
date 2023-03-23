@@ -21,4 +21,4 @@ jobs:
         uses: repo-sync/pull-request@v2.6.2
         with:
           destination_branch: "main"
-          github_token: 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
+          github_token: ${{ secrets.GITHUB_TOKEN }}
