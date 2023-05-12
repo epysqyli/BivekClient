@@ -83,10 +83,7 @@ const Home: NextPageLayout<Props> = ({ latestArticle, tags }: Props): ReactEleme
 
       <div className='w-11/12 md:w-full xl:w-2/3 mx-auto text-center text-xl rounded bg-neutral-50 dark:bg-slate-600 px-5 py-10 my-16'>
         <p className='text-slate-800 dark:text-slate-50'>
-          Barbara had been waiting at the table for twenty minutes. it had been twenty long and excruciating
-          minutes. David had promised that he would be on time today. He never was, but he had promised this
-          one time. She had made him repeat the promise multiple times over the last week until she had
-          believed his promise. Now she was paying the price.
+          .
         </p>
         <Link href='/about'>
           <span className='cursor-pointer mt-10 block underline underline-offset-2 text-slate-600 dark:text-white hover:text-slate-800 dark:hover:text-slate-200 dark:active:text-slate-300 active:text-slate-300'>
