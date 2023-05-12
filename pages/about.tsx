@@ -11,7 +11,7 @@ const About: NextPageLayout = (): ReactElement => {
         <title>About</title>
       </Head>
       <SectionHeader resource='about' text='About' />
-      <div className='my-16 text-white mx-auto w-4/5 text-justify'>
+      <div className='my-16 dark:text-white mx-auto w-4/5 text-justify'>
         <p className="my-5">
           Hi y&lsquo;sall. I am Bivek. When I had the idea of writing a blog, the Chatgpt was not around. So, I
           thought it would be a good idea to write about things I am interested in and if the luck strikes,
