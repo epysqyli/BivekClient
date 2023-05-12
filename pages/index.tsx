@@ -34,12 +34,12 @@ const Home: NextPageLayout<Props> = ({ latestArticle, tags }: Props): ReactEleme
   return (
     <div className="mx-auto lg:w-2/3 xl:w-1/2">
       <Head>
-        <title>Blog</title>
+        <title>SocratesCoachella</title>
         <meta name='description' content='Personal blog' />
         <link rel='icon' href='#' />
       </Head>
       <div className='lg:my-10'>
-        <SectionHeader resource='homepage' text='Blog title' />
+        <SectionHeader resource='homepage' text='SocratesCoachella' />
       </div>
 
       <nav className='py-3 my-5 lg:my-16 lg:text-xl'>
