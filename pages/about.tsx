@@ -13,7 +13,7 @@ const About: NextPageLayout = (): ReactElement => {
       <SectionHeader resource='about' text='About' />
       <div className='my-16 text-white mx-auto w-4/5 text-justify'>
         <p className="my-5">
-          Hi y'all. I am Bivek. When I had the idea of writing a blog, the Chatgpt was not around. So, I
+          Hi y&lsquo;sall. I am Bivek. When I had the idea of writing a blog, the Chatgpt was not around. So, I
           thought it would be a good idea to write about things I am interested in and if the luck strikes,
           some people might even read it. I guess I now have to revise my forecast about the latter part.
         </p>
@@ -25,17 +25,17 @@ const About: NextPageLayout = (): ReactElement => {
           nerds do talk about these things even when they are in a bar), I like to read and discuss philosophy
           (particularly the branch of political philosophy), Physics (or more so science in general),
           everything Data, Mathematics etc. Besides that, I am a beginner night sky watcher (Beginner
-          Astronomer sounds more fancy but that's too heavy title for me right now). Taking my telescope to
+          Astronomer sounds more fancy but that&lsquo;s too heavy title for me right now). Taking my telescope to
           the suburbs and watching the rings of Saturn is beyond satisfaction.
         </p>
         <p className="my-5">
           I am also a guitar player who has learned enough to noodle up and down the fretboard without making
-          any progress musically for the last 10 years. I guess that's enough of an introduction for now. My
+          any progress musically for the last 10 years. I guess that&lsquo;s enough of an introduction for now. My
           goals with this blog is to try to improve my own understanding of the things I know and more
           importantly, things I like to know about. I often hear writing is a good way of expressing your own
           opinions and perspective to yourself.
         </p>
-        <p className="my-5">Let's see if I am able to make the future me laugh.</p>
+        <p className="my-5">Let&lsquo;s see if I am able to make the future me laugh.</p>
       </div>
     </div>
   );
