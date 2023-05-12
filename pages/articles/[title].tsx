@@ -1,4 +1,4 @@
-import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import type { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { ReactElement, useContext } from "react";
 import type IArticle from "../../interfaces/models/IArticle";
 import type { AxiosResponse } from "axios";
@@ -27,6 +27,7 @@ interface Props {
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const id = Number(context.query.id);
+
   const articleResp: AxiosResponse<IArticle> = await getArticleById(id);
   let body: string = generateHTML(JSON.parse(articleResp.data.body), [
     StarterKit,
@@ -41,12 +42,14 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     TableCell,
     Image
   ]);
-  body = body.replaceAll("<p></p>", "<br />");
+
+  body = body.replaceAll(/<p[^>]*><\/p[^>]*>/g, "<br />");
 
   const similarArticles = await getFurtherReading(
     articleResp.data.tags.map((t) => t.id),
     articleResp.data.id
   );
+
   return { props: { article: articleResp.data, body: body, similarArticles: similarArticles } };
 };
 
