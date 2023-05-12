@@ -5,10 +5,11 @@ import MobileMenu from "../components/guest/MobileMenu";
 import DesktopMenu from "../components/guest/DesktopMenu";
 import { useRouter } from "next/router";
 import { useIsNarrow } from "../hooks/UseMediaQuery";
-import { Menu, X } from "react-feather";
+import { Instagram, Linkedin, Menu, X } from "react-feather";
 import { checkLoginClientSide } from "../lib/Auth";
 import Link from "next/link";
 import DarkModeToggle from "../components/DarkModeToggle";
+import { Mail } from "react-feather";
 
 const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
   const [open, setOpen] = useState<boolean>(false);
@@ -56,12 +57,24 @@ const GuestLayout = ({ children }: ILayoutProps): ReactElement => {
       <header></header>
       {mainElement(children)}
       <footer className='bg-slate-500 dark:bg-slate-900 text-center z-10 text-sm py-10 text-slate-50'>
-        <div>some random info</div>
-        <div>link to other websites</div>
-        <div>email address for contact</div>
+        <div className='mx-auto flex items-center justify-center gap-4'>
+          <div className='cursor-pointer'>
+            <Link href='https://www.linkedin.com/in/bivek-neupane-6478b9177/'>
+              <Linkedin />
+            </Link>
+          </div>
+          <div className='cursor-pointer'>
+            <Link href='https://www.instagram.com/bivineu/'>
+              <Instagram />
+            </Link>
+          </div>
+        </div>
+        <div className='my-5 w-min mx-auto flex gap-5'>
+          <Mail /> Bivek.Neupane@hsrw.org
+        </div>
         {isAdmin ? (
           <Link href='/admin'>
-            <span className='block underline underline-offset-2 text-slate-100 my-3 cursor-pointer w-fit mx-auto'>
+            <span className='block underline underline-offset-2 text-slate-100 my-10 cursor-pointer w-fit mx-auto'>
               admin section
             </span>
           </Link>
